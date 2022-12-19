@@ -1,0 +1,30 @@
+project:
+  type: book
+  output-dir: docs
+
+book:
+  title: "AccountingPy"
+  author: "Zane Dax (She/They)"
+  date: "12/19/2022"
+  chapters:
+    - index.qmd # preface
+    - intro.qmd
+    - chapter1.qmd
+    - summary.qmd
+    - references.qmd
+
+bibliography: references.bib
+
+format:
+  html:
+    theme: 
+      light: yeti
+      dark: slate
+        
+  # pdf:
+  #   documentclass: scrreprt
+  epub: 
+    cover-image: bookcover.png
+
+
+

@@ -1,0 +1,6 @@
+# Welcome {.unnumbered}
+
+This is a free online textbook on Accounting using Python.
+
+![](./bookcover.png)
+

@@ -1,0 +1,37 @@
+[
+  {
+    "objectID": "intro.html",
+    "href": "intro.html",
+    "title": "Introduction",
+    "section": "",
+    "text": "This is a book created from a variety of Accounting textbooks used in a University degree. The goal is to make this book an all in one resource on Accounting main concepts while teaching how to use the programming language of Python to make the various accounting calculations faster and iteratively.\nMany accounting calculations are repetitive and usually one calculation ties into another calculation, which makes it very suitable for using functions that use already calculated output. Typically the Accounting world uses Microsoft Excel or proprietary software such as SAS or SPSS or others, while Python is free to use and learning the Python language is very much a valuable skill.\nOften you have accounting information stored in .xlsx files or pdf files, none of which are reproducible when you pass to a colleague or classmate. Mistakes are easy to make when working with Excel sheets, one cell can have a function but that cell’s function is not obvious and errors can happen if that cell gets altered. In Python, you can take in a xlsx or pdf file, read the data from it and run your functions to make calculations and then make a dashboard, a presentation or a web app that anyone can just go to the url and use the app.\nBy learning Python you are learning how to be more efficient with your accounting, as you write one function to calculate cost of goods sold, then you can just use that same function a million times. That function can live in one file somewhere on your computer and you can call (import) it into the current running file and still get the output you want.\nThis book will show how to make use of Python’s data objects that store data and place these into function to make our calculations repeatable. This book is a companion to the YouTube channel AccountingPy."
+  },
+  {
+    "objectID": "chapter1.html",
+    "href": "chapter1.html",
+    "title": "1  Chapter 1",
+    "section": "",
+    "text": "hello world !"
+  },
+  {
+    "objectID": "summary.html",
+    "href": "summary.html",
+    "title": "2  Summary",
+    "section": "",
+    "text": "In summary, this book has no content whatsoever."
+  },
+  {
+    "objectID": "references.html",
+    "href": "references.html",
+    "title": "References",
+    "section": "",
+    "text": "Knuth, Donald E. 1984. “Literate Programming.” Comput.\nJ. 27 (2): 97–111. https://doi.org/10.1093/comjnl/27.2.97."
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "AccountingPy",
+    "section": "",
+    "text": "Welcome\nThis is a free online textbook on Accounting using Python."
+  }
+]
