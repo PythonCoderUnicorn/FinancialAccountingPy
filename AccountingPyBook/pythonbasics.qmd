@@ -1,0 +1,18 @@
+# Python Basics 
+
+Hello, welcome to the crash course on Python basics! 
+This section will get you very quickly introduced to Python in order for you to follow along with the book. 
+
+There are numerous Python tutorials that will help you fully understand the programming language. Some resources I personally have found very helpful (general python learning, various topics):
+
+- [Real Python tutorials. Very beginner friendly](https://realpython.com/)
+- [freecodecamp (YouTube, 4.5 hours long) - Python full tutorial](https://www.youtube.com/watch?v=rfscVS0vtbw)
+- [Tech with Tim (YouTube)](https://www.youtube.com/@TechWithTim)
+- [Patrick Loeber (YouTube)](https://www.youtube.com/@patloeber)
+
+
+None of the links above deal with accounting but will provide depth in explanations of the code you will see here.
+
+```{python}
+6+3
+```

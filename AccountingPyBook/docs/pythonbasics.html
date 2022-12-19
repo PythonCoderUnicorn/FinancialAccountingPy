@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>AccountingPy - Introduction</title>
+<title>AccountingPy - 1&nbsp; Python Basics</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -30,8 +30,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./pythonbasics.html" rel="next">
-<link href="./index.html" rel="prev">
+<link href="./chapter1.html" rel="next">
+<link href="./intro.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -72,7 +72,7 @@ ul.task-list li input[type="checkbox"] {
   <header id="quarto-header" class="headroom fixed-top">
   <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
     <div class="container-fluid d-flex justify-content-between">
-      <h1 class="quarto-secondary-nav-title">Introduction</h1>
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Python Basics</span></h1>
       <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
         <i class="bi bi-chevron-right"></i>
       </button>
@@ -105,12 +105,12 @@ ul.task-list li input[type="checkbox"] {
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./intro.html" class="sidebar-item-text sidebar-link active">Introduction</a>
+  <a href="./intro.html" class="sidebar-item-text sidebar-link">Introduction</a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./pythonbasics.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Python Basics</span></a>
+  <a href="./pythonbasics.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Python Basics</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -145,7 +145,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title d-none d-lg-block">Introduction</h1>
+<h1 class="title d-none d-lg-block"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Python Basics</span></h1>
 </div>
 
 
@@ -160,11 +160,15 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
-<p>This is a book created from a variety of Accounting textbooks used in a University degree. The goal is to make this book an all in one resource on Accounting main concepts while teaching how to use the programming language of Python to make the various accounting calculations faster and iteratively.</p>
-<p>Many accounting calculations are repetitive and usually one calculation ties into another calculation, which makes it very suitable for using functions that use already calculated output. Typically the Accounting world uses Microsoft Excel or proprietary software such as SAS or SPSS or others, while Python is free to use and learning the Python language is very much a valuable skill.</p>
-<p>Often you have accounting information stored in <code>.xlsx</code> files or <code>pdf</code> files, none of which are reproducible when you pass to a colleague or classmate. Mistakes are easy to make when working with Excel sheets, one cell can have a function but that cell’s function is not obvious and errors can happen if that cell gets altered. In Python, you can take in a <code>xlsx</code> or <code>pdf</code> file, read the data from it and run your functions to make calculations and then make a dashboard, a presentation or a web app that anyone can just go to the url and use the app.</p>
-<p>By learning Python you are learning how to be more efficient with your accounting, as you write one function to calculate cost of goods sold, then you can just use that same function a million times. That function can live in one file somewhere on your computer and you can call (import) it into the current running file and still get the output you want.</p>
-<p>This book will show how to make use of Python’s data objects that store data and place these into function to make our calculations repeatable. This book is a companion to the YouTube channel AccountingPy.</p>
+<p>Hello, welcome to the crash course on Python basics! This section will get you very quickly introduced to Python in order for you to follow along with the book.</p>
+<p>There are numerous Python tutorials that will help you fully understand the programming language. Some resources I personally have found very helpful (general python learning, various topics):</p>
+<ul>
+<li><a href="https://realpython.com/">Real Python tutorials. Very beginner friendly</a></li>
+<li><a href="https://www.youtube.com/watch?v=rfscVS0vtbw">freecodecamp (YouTube, 4.5 hours long) - Python full tutorial</a></li>
+<li><a href="https://www.youtube.com/@TechWithTim">Tech with Tim (YouTube)</a></li>
+<li><a href="https://www.youtube.com/@patloeber">Patrick Loeber (YouTube)</a></li>
+</ul>
+<p>None of the links above deal with accounting but will provide depth in explanations of the code you will see here.</p>
 
 
 
@@ -419,13 +423,13 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="./index.html" class="pagination-link">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Welcome</span>
+      <a href="./intro.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Introduction</span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./pythonbasics.html" class="pagination-link">
-        <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Python Basics</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./chapter1.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Financial Accounting</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

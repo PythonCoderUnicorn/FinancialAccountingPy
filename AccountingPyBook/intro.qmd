@@ -19,3 +19,4 @@ By learning Python you are learning how to be more efficient with your accountin
 
 
 This book will show how to make use of Python's data objects that store data and place these into function to make our calculations repeatable. This book is a companion to the YouTube channel AccountingPy.
+
