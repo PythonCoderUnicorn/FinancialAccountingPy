@@ -469,6 +469,206 @@ print("....", assets_2, '\n')
 
 
 
+## Conditionals 
+
+You are already familiar with conditionals in everyday life, if x then y. We a;ready used an if statement to check if "supplies" was in the data dictionary. Knowing conditional statements such as If-Else statements are a core part of programming.
+
+- Equals: `a == b`
+- not equal: `a != b`
+- less than: `a < b`
+- less than or equal to: `a <= b`
+- greater than: `a > b`
+- greater than or equal to: `a >= b`
+
+Note: If-Else statements are where indentation matters.
+
+```{python}
+revenue = 110
+expenses = 120
+
+if revenue > expenses:
+  print("you have money")
+else:
+  print("expenses !")
+```
+
+There is a way to add to this simple example, we can add  an `elif` which means else-if. The condition block of code will check if revenue is greater than expenses else if another condition is true do something, else neither conditions were true.
+
+Conditionals can be as long as needed, however using a bunch of `if` statements is not advised, as the computer will check only for the specific condition that makes it true and breaks out of the code block. Using an `If-Elif-Else` block ensures that all qualifying conditions are checked.
+
+```{python}
+revenue = 110
+expenses = 110
+
+if revenue > expenses:
+  print("you got money")
+elif revenue == expenses:
+  print("breakeven point")
+else:
+  print("those expenses!")
+```
+
+
+
+
+## Functions
+
+Functions are so important to know! Functions will help you be more efficient and more productive. 
+
+If you are doing a task more than 3 times, it is wise to make that task into a function. Accounting has so many mundane routine calculations that learning to make functions will make accounting faster.
+
+- In Python, a function starts with `def` followed by a function name you provide, `()` then a `:` and your code is indented underneath the '`def function_name():`'
+
+- Inside the `function_name( arguments )` . These arguments are what you pass into the function, you can pass in an array or a dictionary . You do not have to pass in anything.
+
+Note: _in many Python documentation guides you will see 'func' for naming a function, along with 'foo' and 'bar'_
+
+
+Let us create a simple function that prints out a message. 
+
+```{python}
+#-------------------- function block
+def my_function():
+  
+  print("Hi, my first function!")
+  
+#-------------------- 
+
+#- outside of the function block
+#- call your function by typing the name of it
+my_function()
+```
+
+Indentation matters when dealing with conditionals and functions, you will get errors if your code is not properly indented. 
+
+
+### Function with argument
+
+Once you get the handle of how functions work and how to call them, next is to pass in the function a _argument_, a data object or a string that is then used by the function. Just like in math textbooks `f(x)` you pass in x as a number then the "f" function makes a calculation.
+
+In this example we will pass in job in the function "()" where function arguments go.
+
+
+```{python}
+
+def my_function( job ):
+  print(f"your job is {job}")
+  
+
+# call the function and pass in a argument
+my_function("Accounting")
+```
+
+As the function exists you could pass in a number or another data type object, you will want to make your functions explicitly define what data type is expected for the argument as to avoid errors. 
+
+
+### function net income
+
+This function will be calculating the net income, but this time the arguments in the function will be explicitly defined as `int` meaning integer data types. Passing in a `float` would still work as it is type numeric.
+
+- you can enforce data types into your arguments so if you want _only_ numeric values and not strings to be entered into your function, use `arg_name : int` , `arg_name : float`. This helps reduce code errors.
+
+- if you type: net_income(expenses= "900", revenue=78)  == ERRORS
+
+
+```{python}
+def net_income(revenue: int, expenses: int):
+    # formula for net income
+    net = revenue - expenses
+    
+    print(f"Net (loss) income = $ {net}")
+    
+    
+#-- outside function block
+net_income(revenue= 187568, expenses= 167812)
+```
+
+
+When calling the function you do not have to type the argument, just the value it is expecting, however it is good to type what arguments you are using for a function. 
+
+
+
+### Function with a list
+
+We can make a function that will loop through the list and then print out when the item was checked.
+
+This example will have a list of common assets which will be passed in the function number_crunch as an argument. The for loop will start from length of list -1, as Python is zero indexed.
+
+```{python}
+def number_crunch( assets ):
+  
+  L = len(assets)
+  print(f"Number of assets = {L}\n")
+  
+  #--------------------------- for loop
+  for wealth in assets:
+    print(f" {wealth} ... checked")
+  #---------------------------
+  
+#--
+common_assets = ['investments','cash','yacht','cabin','vacation home']
+
+number_crunch( common_assets )
+    
+```
+
+
+### Function with a dictionary
+
+As mentioned in the dictionary section, dictionaries are very pliable data objects and are great as an option to store data. Data dictionaries are very similar to JSON data objects, so it is helpful to be used to working with them and passing them into functions.
+
+This book will heavily use data dictionaries for function arguments, these function will pull values from specified keys to be used in calculations. 
+
+In this example we will have a dictionary for assets which will be passed in the function the_count.
+
+```{python}
+assets = {
+    "cash": 300322.78,
+    "inventory": 7886.23,
+    "supplies": 56234.56,
+    'prepaid expenses': 14560
+} 
+
+
+def the_count( acc_dict ):
+    
+    #------ convert dictionary to a list
+    dict_list = list( acc_dict.values() )
+    #-- for loop of values
+    for num in dict_list:
+        print(num)
+    
+    # sum the assets
+    s = sum( dict_list )
+    print("sum of assets = $ {:,}".format(s))
+
+# use the assets dictionary from above 
+
+the_count( assets )
+
+```
+
+This function used a few tricks, the dictionary argument was converted to a list data object, which stores the dictionary values. Once the dictionary list was created and had all the values, a for loop was used to iterate over the list. The dictionary list was then summed using the sum() function and stored in a variable 's' and printed out.
+
+The conversion of a data dictionary to a list is needed for any future looping, you can't loop through a dictionary.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

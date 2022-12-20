@@ -222,6 +222,27 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <li><a href="#list-sorting" id="toc-list-sorting" class="nav-link" data-scroll-target="#list-sorting"><span class="toc-section-number">1.5.9</span>  List sorting</a></li>
   </ul></li>
   <li><a href="#tuples" id="toc-tuples" class="nav-link" data-scroll-target="#tuples"><span class="toc-section-number">1.6</span>  Tuples</a></li>
+  <li><a href="#sets" id="toc-sets" class="nav-link" data-scroll-target="#sets"><span class="toc-section-number">1.7</span>  Sets</a></li>
+  <li><a href="#dictionaries" id="toc-dictionaries" class="nav-link" data-scroll-target="#dictionaries"><span class="toc-section-number">1.8</span>  Dictionaries</a>
+  <ul class="collapse">
+  <li><a href="#select-key" id="toc-select-key" class="nav-link" data-scroll-target="#select-key"><span class="toc-section-number">1.8.1</span>  select key</a></li>
+  <li><a href="#dictionary-length" id="toc-dictionary-length" class="nav-link" data-scroll-target="#dictionary-length"><span class="toc-section-number">1.8.2</span>  dictionary length</a></li>
+  <li><a href="#all-items" id="toc-all-items" class="nav-link" data-scroll-target="#all-items"><span class="toc-section-number">1.8.3</span>  all items</a></li>
+  <li><a href="#dictionary-keys" id="toc-dictionary-keys" class="nav-link" data-scroll-target="#dictionary-keys"><span class="toc-section-number">1.8.4</span>  dictionary keys</a></li>
+  <li><a href="#modify-a-key" id="toc-modify-a-key" class="nav-link" data-scroll-target="#modify-a-key"><span class="toc-section-number">1.8.5</span>  modify a key</a></li>
+  <li><a href="#dictionary-values" id="toc-dictionary-values" class="nav-link" data-scroll-target="#dictionary-values"><span class="toc-section-number">1.8.6</span>  dictionary values</a></li>
+  <li><a href="#check-dictionary" id="toc-check-dictionary" class="nav-link" data-scroll-target="#check-dictionary"><span class="toc-section-number">1.8.7</span>  check dictionary</a></li>
+  <li><a href="#dictionary-for-loops" id="toc-dictionary-for-loops" class="nav-link" data-scroll-target="#dictionary-for-loops"><span class="toc-section-number">1.8.8</span>  dictionary for loops</a></li>
+  <li><a href="#dictionary-copy" id="toc-dictionary-copy" class="nav-link" data-scroll-target="#dictionary-copy"><span class="toc-section-number">1.8.9</span>  dictionary copy</a></li>
+  </ul></li>
+  <li><a href="#conditionals" id="toc-conditionals" class="nav-link" data-scroll-target="#conditionals"><span class="toc-section-number">1.9</span>  Conditionals</a></li>
+  <li><a href="#functions" id="toc-functions" class="nav-link" data-scroll-target="#functions"><span class="toc-section-number">1.10</span>  Functions</a>
+  <ul class="collapse">
+  <li><a href="#function-with-argument" id="toc-function-with-argument" class="nav-link" data-scroll-target="#function-with-argument"><span class="toc-section-number">1.10.1</span>  Function with argument</a></li>
+  <li><a href="#function-net-income" id="toc-function-net-income" class="nav-link" data-scroll-target="#function-net-income"><span class="toc-section-number">1.10.2</span>  function net income</a></li>
+  <li><a href="#function-with-a-list" id="toc-function-with-a-list" class="nav-link" data-scroll-target="#function-with-a-list"><span class="toc-section-number">1.10.3</span>  Function with a list</a></li>
+  <li><a href="#function-with-a-dictionary" id="toc-function-with-a-dictionary" class="nav-link" data-scroll-target="#function-with-a-dictionary"><span class="toc-section-number">1.10.4</span>  Function with a dictionary</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -490,19 +511,412 @@ Starbucks coffee gift card
 Apple iTunes gift card</code></pre>
 </div>
 </div>
+</section>
+<section id="sets" class="level2" data-number="1.7">
+<h2 data-number="1.7" class="anchored" data-anchor-id="sets"><span class="header-section-number">1.7</span> Sets</h2>
+<p>Sets and dictionaries both use { }, but sets are immutable, but elements can be added or dropped. Sets are unordered and not indexed. Sets do not allow duplicates to exist in the set.</p>
+<p>In this example we have taxes filed each year, then we append a year after we made our set.</p>
 <div class="cell" data-execution_count="3">
 <details>
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="dv">6</span><span class="op">+</span><span class="dv">8</span><span class="op">*</span><span class="dv">8</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>taxes_years <span class="op">=</span> {<span class="dv">2015</span>, <span class="dv">2016</span>, <span class="dv">2017</span>, <span class="dv">2018</span>}</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>taxes_years.add(<span class="dv">2009</span>)</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(taxes_years)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
-<div class="cell-output cell-output-display" data-execution_count="3">
-<pre><code>70</code></pre>
+<div class="cell-output cell-output-stdout">
+<pre><code>{2016, 2017, 2018, 2009, 2015}</code></pre>
 </div>
 </div>
-<pre><code></code></pre>
-<pre><code></code></pre>
+<p>to remove a tax year</p>
+<div class="cell" data-execution_count="4">
+<details>
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>taxes_years.remove(<span class="dv">2009</span>)</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>taxes_years</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="4">
+<pre><code>{2015, 2016, 2017, 2018}</code></pre>
+</div>
+</div>
+<p>we can loop through the set</p>
+<div class="cell" data-execution_count="5">
+<details>
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> year <span class="kw">in</span> taxes_years:</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="ss">f"finished with taxes for </span><span class="sc">{</span>year<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>finished with taxes for 2016
+finished with taxes for 2017
+finished with taxes for 2018
+finished with taxes for 2015</code></pre>
+</div>
+</div>
+</section>
+<section id="dictionaries" class="level2" data-number="1.8">
+<h2 data-number="1.8" class="anchored" data-anchor-id="dictionaries"><span class="header-section-number">1.8</span> Dictionaries</h2>
+<p>This book will use data dictionaries extensively, as they are very versatile, easy to use and modify. If you later want to make a data dictionary a dataframe, you can with the help of the <a href="https://pandas.pydata.org/docs/">Pandas library</a>. Once you have a dataframe created or converted from a data dictionary you can save it as a CSV or other formats.</p>
+<p>Data dictionaries are ordered, mutable and have <code>keys</code> and <code>value</code> pairs (‘key’ : ‘value’).</p>
+<ul>
+<li>dictionaries do not allow duplicates of keys</li>
+<li>dictionaries are not indexed, grab elements by key or value</li>
+<li>it is good practice to <code>Pascal_Case</code> or <code>CamelCase</code> your keys (also with everything) as it will help with tab-auto complete and grabbing the key you want</li>
+</ul>
+<p>In this example we have some financial information of assets.</p>
+<div class="cell" data-execution_count="6">
+<details>
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>all_assets <span class="op">=</span> {</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">"cash"</span>: <span class="fl">3098772.89</span>,</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">'inventory'</span>: <span class="fl">7886.23</span>,</span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">"supplies"</span>: <span class="fl">56234.56</span>,</span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">"prepaid_expenses"</span>: <span class="dv">14521</span></span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<section id="select-key" class="level3" data-number="1.8.1">
+<h3 data-number="1.8.1" class="anchored" data-anchor-id="select-key"><span class="header-section-number">1.8.1</span> select key</h3>
+<p>In this example we want to get the value for cash, so we slice the dictionary and use the key name to get the value.</p>
+<div class="cell" data-execution_count="7">
+<details>
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>all_assets[<span class="st">'cash'</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="7">
+<pre><code>3098772.89</code></pre>
+</div>
+</div>
+</section>
+<section id="dictionary-length" class="level3" data-number="1.8.2">
+<h3 data-number="1.8.2" class="anchored" data-anchor-id="dictionary-length"><span class="header-section-number">1.8.2</span> dictionary length</h3>
+<p>Find out how many elements are in a data dictionary</p>
+<div class="cell" data-execution_count="8">
+<details>
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="bu">len</span>(all_assets)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="8">
+<pre><code>4</code></pre>
+</div>
+</div>
+</section>
+<section id="all-items" class="level3" data-number="1.8.3">
+<h3 data-number="1.8.3" class="anchored" data-anchor-id="all-items"><span class="header-section-number">1.8.3</span> all items</h3>
+<p>If you wanted to print out all the items in a dictionary, use .items() function</p>
+<div class="cell" data-execution_count="9">
+<details>
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>all_assets.items()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="9">
+<pre><code>dict_items([('cash', 3098772.89), ('inventory', 7886.23), ('supplies', 56234.56), ('prepaid_expenses', 14521)])</code></pre>
+</div>
+</div>
+</section>
+<section id="dictionary-keys" class="level3" data-number="1.8.4">
+<h3 data-number="1.8.4" class="anchored" data-anchor-id="dictionary-keys"><span class="header-section-number">1.8.4</span> dictionary keys</h3>
+<p>If you want to know the keys for the dictionary in order to use them for a function, use the .keys() function.</p>
+<div class="cell" data-execution_count="10">
+<details>
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>all_assets.keys()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="10">
+<pre><code>dict_keys(['cash', 'inventory', 'supplies', 'prepaid_expenses'])</code></pre>
+</div>
+</div>
+</section>
+<section id="modify-a-key" class="level3" data-number="1.8.5">
+<h3 data-number="1.8.5" class="anchored" data-anchor-id="modify-a-key"><span class="header-section-number">1.8.5</span> modify a key</h3>
+<p>If the key has a value that needs to be changed, you can use the slice and key name method and assign a new value.</p>
+<p>In this example we will give a new value for the property key.</p>
+<div class="cell" data-execution_count="11">
+<details>
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>all_assets[<span class="st">'property'</span>] <span class="op">=</span> <span class="dv">788655</span></span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>all_assets.items()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="11">
+<pre><code>dict_items([('cash', 3098772.89), ('inventory', 7886.23), ('supplies', 56234.56), ('prepaid_expenses', 14521), ('property', 788655)])</code></pre>
+</div>
+</div>
+</section>
+<section id="dictionary-values" class="level3" data-number="1.8.6">
+<h3 data-number="1.8.6" class="anchored" data-anchor-id="dictionary-values"><span class="header-section-number">1.8.6</span> dictionary values</h3>
+<p>If you just wanted to see the values stored in a dictionary, use the .values() function.</p>
+<div class="cell" data-execution_count="12">
+<details>
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>all_assets.values()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="12">
+<pre><code>dict_values([3098772.89, 7886.23, 56234.56, 14521, 788655])</code></pre>
+</div>
+</div>
+</section>
+<section id="check-dictionary" class="level3" data-number="1.8.7">
+<h3 data-number="1.8.7" class="anchored" data-anchor-id="check-dictionary"><span class="header-section-number">1.8.7</span> check dictionary</h3>
+<p>If we had a large dictionary and quickly wanted to check if a specific key exists inside the dictionary, we can use a <code>if</code> statement with <code>in</code> dictionary_name.</p>
+<p>In this example we will search if “supplies” exists in the all_assets.</p>
+<div class="cell" data-execution_count="13">
+<details>
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="st">"supplies"</span> <span class="kw">in</span> all_assets:</span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">" 'supplies' was found in the dictionary"</span> )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code> 'supplies' was found in the dictionary</code></pre>
+</div>
+</div>
+</section>
+<section id="dictionary-for-loops" class="level3" data-number="1.8.8">
+<h3 data-number="1.8.8" class="anchored" data-anchor-id="dictionary-for-loops"><span class="header-section-number">1.8.8</span> dictionary for loops</h3>
+<p>As mentioned previously, for loops are very much part of programming, you want to iterate over a list or some data object and do some sort of action along the process. We can iterate over a data dictionary to see what a specific client has for assets and by type.</p>
+<p>In this example we will loop through all assets and show that the client is Dunder Mifflin’s assets by type of category.</p>
+<div class="cell" data-execution_count="14">
+<details>
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> DunderMifflin <span class="kw">in</span> all_assets:</span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="ss">f"Dunder Mifflin assets $ </span><span class="sc">{</span> all_assets[ DunderMifflin]<span class="sc">}</span><span class="ss"> [</span><span class="sc">{</span>DunderMifflin<span class="sc">}</span><span class="ss">]"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Dunder Mifflin assets $ 3098772.89 [cash]
+Dunder Mifflin assets $ 7886.23 [inventory]
+Dunder Mifflin assets $ 56234.56 [supplies]
+Dunder Mifflin assets $ 14521 [prepaid_expenses]
+Dunder Mifflin assets $ 788655 [property]</code></pre>
+</div>
+</div>
+</section>
+<section id="dictionary-copy" class="level3" data-number="1.8.9">
+<h3 data-number="1.8.9" class="anchored" data-anchor-id="dictionary-copy"><span class="header-section-number">1.8.9</span> dictionary copy</h3>
+<p>Once you have a data dictionary, you can make a copy as to make sure you have a safe copy from any deletions or whatever may be the case. You can make copies for a client each quarter and only need to modify a few items instead of starting from scratch. To make a copy of a dictionary, use the .copy() function.</p>
+<p>In this example we will make a copy of all_assets and with the new copy we will create a new element and append it to the dictionary.</p>
+<div class="cell" data-execution_count="15">
+<details>
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f" Original: </span><span class="sc">{</span>all_assets<span class="sc">}</span><span class="ch">\n</span><span class="ss">"</span>)</span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>assets_2 <span class="op">=</span> all_assets.copy()</span>
+<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-5"><a href="#cb45-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f" Copy: </span><span class="sc">{</span>assets_2<span class="sc">}</span><span class="ch">\n</span><span class="ss">"</span>)</span>
+<span id="cb45-6"><a href="#cb45-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-7"><a href="#cb45-7" aria-hidden="true" tabindex="-1"></a>assets_2[<span class="st">'yacht'</span>] <span class="op">=</span> <span class="dv">1086777</span></span>
+<span id="cb45-8"><a href="#cb45-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb45-9"><a href="#cb45-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"...."</span>, assets_2, <span class="st">'</span><span class="ch">\n</span><span class="st">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code> Original: {'cash': 3098772.89, 'inventory': 7886.23, 'supplies': 56234.56, 'prepaid_expenses': 14521, 'property': 788655}
+
+ Copy: {'cash': 3098772.89, 'inventory': 7886.23, 'supplies': 56234.56, 'prepaid_expenses': 14521, 'property': 788655}
+
+.... {'cash': 3098772.89, 'inventory': 7886.23, 'supplies': 56234.56, 'prepaid_expenses': 14521, 'property': 788655, 'yacht': 1086777} 
+</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="conditionals" class="level2" data-number="1.9">
+<h2 data-number="1.9" class="anchored" data-anchor-id="conditionals"><span class="header-section-number">1.9</span> Conditionals</h2>
+<p>You are already familiar with conditionals in everyday life, if x then y. We a;ready used an if statement to check if “supplies” was in the data dictionary. Knowing conditional statements such as If-Else statements are a core part of programming.</p>
+<ul>
+<li>Equals: <code>a == b</code></li>
+<li>not equal: <code>a != b</code></li>
+<li>less than: <code>a &lt; b</code></li>
+<li>less than or equal to: <code>a &lt;= b</code></li>
+<li>greater than: <code>a &gt; b</code></li>
+<li>greater than or equal to: <code>a &gt;= b</code></li>
+</ul>
+<p>Note: If-Else statements are where indentation matters.</p>
+<div class="cell" data-execution_count="16">
+<details>
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>revenue <span class="op">=</span> <span class="dv">110</span></span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>expenses <span class="op">=</span> <span class="dv">120</span></span>
+<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> revenue <span class="op">&gt;</span> expenses:</span>
+<span id="cb47-5"><a href="#cb47-5" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"you have money"</span>)</span>
+<span id="cb47-6"><a href="#cb47-6" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
+<span id="cb47-7"><a href="#cb47-7" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"expenses !"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>expenses !</code></pre>
+</div>
+</div>
+<p>There is a way to add to this simple example, we can add an <code>elif</code> which means else-if. The condition block of code will check if revenue is greater than expenses else if another condition is true do something, else neither conditions were true.</p>
+<p>Conditionals can be as long as needed, however using a bunch of <code>if</code> statements is not advised, as the computer will check only for the specific condition that makes it true and breaks out of the code block. Using an <code>If-Elif-Else</code> block ensures that all qualifying conditions are checked.</p>
+<div class="cell" data-execution_count="17">
+<details>
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a>revenue <span class="op">=</span> <span class="dv">110</span></span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a>expenses <span class="op">=</span> <span class="dv">110</span></span>
+<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-4"><a href="#cb49-4" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> revenue <span class="op">&gt;</span> expenses:</span>
+<span id="cb49-5"><a href="#cb49-5" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"you got money"</span>)</span>
+<span id="cb49-6"><a href="#cb49-6" aria-hidden="true" tabindex="-1"></a><span class="cf">elif</span> revenue <span class="op">==</span> expenses:</span>
+<span id="cb49-7"><a href="#cb49-7" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"breakeven point"</span>)</span>
+<span id="cb49-8"><a href="#cb49-8" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
+<span id="cb49-9"><a href="#cb49-9" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"those expenses!"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>breakeven point</code></pre>
+</div>
+</div>
+</section>
+<section id="functions" class="level2" data-number="1.10">
+<h2 data-number="1.10" class="anchored" data-anchor-id="functions"><span class="header-section-number">1.10</span> Functions</h2>
+<p>Functions are so important to know! Functions will help you be more efficient and more productive.</p>
+<p>If you are doing a task more than 3 times, it is wise to make that task into a function. Accounting has so many mundane routine calculations that learning to make functions will make accounting faster.</p>
+<ul>
+<li><p>In Python, a function starts with <code>def</code> followed by a function name you provide, <code>()</code> then a <code>:</code> and your code is indented underneath the ‘<code>def function_name():</code>’</p></li>
+<li><p>Inside the <code>function_name( arguments )</code> . These arguments are what you pass into the function, you can pass in an array or a dictionary . You do not have to pass in anything.</p></li>
+</ul>
+<p>Note: <em>in many Python documentation guides you will see ‘func’ for naming a function, along with ‘foo’ and ‘bar’</em></p>
+<p>Let us create a simple function that prints out a message.</p>
+<div class="cell" data-execution_count="18">
+<details>
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="co">#-------------------- function block</span></span>
+<span id="cb51-2"><a href="#cb51-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> my_function():</span>
+<span id="cb51-3"><a href="#cb51-3" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb51-4"><a href="#cb51-4" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Hi, my first function!"</span>)</span>
+<span id="cb51-5"><a href="#cb51-5" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb51-6"><a href="#cb51-6" aria-hidden="true" tabindex="-1"></a><span class="co">#-------------------- </span></span>
+<span id="cb51-7"><a href="#cb51-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb51-8"><a href="#cb51-8" aria-hidden="true" tabindex="-1"></a><span class="co">#- outside of the function block</span></span>
+<span id="cb51-9"><a href="#cb51-9" aria-hidden="true" tabindex="-1"></a><span class="co">#- call your function by typing the name of it</span></span>
+<span id="cb51-10"><a href="#cb51-10" aria-hidden="true" tabindex="-1"></a>my_function()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Hi, my first function!</code></pre>
+</div>
+</div>
+<p>Indentation matters when dealing with conditionals and functions, you will get errors if your code is not properly indented.</p>
+<section id="function-with-argument" class="level3" data-number="1.10.1">
+<h3 data-number="1.10.1" class="anchored" data-anchor-id="function-with-argument"><span class="header-section-number">1.10.1</span> Function with argument</h3>
+<p>Once you get the handle of how functions work and how to call them, next is to pass in the function a <em>argument</em>, a data object or a string that is then used by the function. Just like in math textbooks <code>f(x)</code> you pass in x as a number then the “f” function makes a calculation.</p>
+<p>In this example we will pass in job in the function “()” where function arguments go.</p>
+<div class="cell" data-execution_count="19">
+<details>
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> my_function( job ):</span>
+<span id="cb53-2"><a href="#cb53-2" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="ss">f"your job is </span><span class="sc">{</span>job<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb53-3"><a href="#cb53-3" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb53-4"><a href="#cb53-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb53-5"><a href="#cb53-5" aria-hidden="true" tabindex="-1"></a><span class="co"># call the function and pass in a argument</span></span>
+<span id="cb53-6"><a href="#cb53-6" aria-hidden="true" tabindex="-1"></a>my_function(<span class="st">"Accounting"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>your job is Accounting</code></pre>
+</div>
+</div>
+<p>As the function exists you could pass in a number or another data type object, you will want to make your functions explicitly define what data type is expected for the argument as to avoid errors.</p>
+</section>
+<section id="function-net-income" class="level3" data-number="1.10.2">
+<h3 data-number="1.10.2" class="anchored" data-anchor-id="function-net-income"><span class="header-section-number">1.10.2</span> function net income</h3>
+<p>This function will be calculating the net income, but this time the arguments in the function will be explicitly defined as <code>int</code> meaning integer data types. Passing in a <code>float</code> would still work as it is type numeric.</p>
+<ul>
+<li><p>you can enforce data types into your arguments so if you want <em>only</em> numeric values and not strings to be entered into your function, use <code>arg_name : int</code> , <code>arg_name : float</code>. This helps reduce code errors.</p></li>
+<li><p>if you type: net_income(expenses= “900”, revenue=78) == ERRORS</p></li>
+</ul>
+<div class="cell" data-execution_count="20">
+<details>
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> net_income(revenue: <span class="bu">int</span>, expenses: <span class="bu">int</span>):</span>
+<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a>    <span class="co"># formula for net income</span></span>
+<span id="cb55-3"><a href="#cb55-3" aria-hidden="true" tabindex="-1"></a>    net <span class="op">=</span> revenue <span class="op">-</span> expenses</span>
+<span id="cb55-4"><a href="#cb55-4" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb55-5"><a href="#cb55-5" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"Net (loss) income = $ </span><span class="sc">{</span>net<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb55-6"><a href="#cb55-6" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb55-7"><a href="#cb55-7" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb55-8"><a href="#cb55-8" aria-hidden="true" tabindex="-1"></a><span class="co">#-- outside function block</span></span>
+<span id="cb55-9"><a href="#cb55-9" aria-hidden="true" tabindex="-1"></a>net_income(revenue<span class="op">=</span> <span class="dv">187568</span>, expenses<span class="op">=</span> <span class="dv">167812</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Net (loss) income = $ 19756</code></pre>
+</div>
+</div>
+<p>When calling the function you do not have to type the argument, just the value it is expecting, however it is good to type what arguments you are using for a function.</p>
+</section>
+<section id="function-with-a-list" class="level3" data-number="1.10.3">
+<h3 data-number="1.10.3" class="anchored" data-anchor-id="function-with-a-list"><span class="header-section-number">1.10.3</span> Function with a list</h3>
+<p>We can make a function that will loop through the list and then print out when the item was checked.</p>
+<p>This example will have a list of common assets which will be passed in the function number_crunch as an argument. The for loop will start from length of list -1, as Python is zero indexed.</p>
+<div class="cell" data-execution_count="21">
+<details>
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> number_crunch( assets ):</span>
+<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb57-3"><a href="#cb57-3" aria-hidden="true" tabindex="-1"></a>  L <span class="op">=</span> <span class="bu">len</span>(assets)</span>
+<span id="cb57-4"><a href="#cb57-4" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="ss">f"Number of assets = </span><span class="sc">{</span>L<span class="sc">}</span><span class="ch">\n</span><span class="ss">"</span>)</span>
+<span id="cb57-5"><a href="#cb57-5" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb57-6"><a href="#cb57-6" aria-hidden="true" tabindex="-1"></a>  <span class="co">#--------------------------- for loop</span></span>
+<span id="cb57-7"><a href="#cb57-7" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> wealth <span class="kw">in</span> assets:</span>
+<span id="cb57-8"><a href="#cb57-8" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f" </span><span class="sc">{</span>wealth<span class="sc">}</span><span class="ss"> ... checked"</span>)</span>
+<span id="cb57-9"><a href="#cb57-9" aria-hidden="true" tabindex="-1"></a>  <span class="co">#---------------------------</span></span>
+<span id="cb57-10"><a href="#cb57-10" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb57-11"><a href="#cb57-11" aria-hidden="true" tabindex="-1"></a><span class="co">#--</span></span>
+<span id="cb57-12"><a href="#cb57-12" aria-hidden="true" tabindex="-1"></a>common_assets <span class="op">=</span> [<span class="st">'investments'</span>,<span class="st">'cash'</span>,<span class="st">'yacht'</span>,<span class="st">'cabin'</span>,<span class="st">'vacation home'</span>]</span>
+<span id="cb57-13"><a href="#cb57-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb57-14"><a href="#cb57-14" aria-hidden="true" tabindex="-1"></a>number_crunch( common_assets )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Number of assets = 5
+
+ investments ... checked
+ cash ... checked
+ yacht ... checked
+ cabin ... checked
+ vacation home ... checked</code></pre>
+</div>
+</div>
+</section>
+<section id="function-with-a-dictionary" class="level3" data-number="1.10.4">
+<h3 data-number="1.10.4" class="anchored" data-anchor-id="function-with-a-dictionary"><span class="header-section-number">1.10.4</span> Function with a dictionary</h3>
+<p>As mentioned in the dictionary section, dictionaries are very pliable data objects and are great as an option to store data. Data dictionaries are very similar to JSON data objects, so it is helpful to be used to working with them and passing them into functions.</p>
+<p>This book will heavily use data dictionaries for function arguments, these function will pull values from specified keys to be used in calculations.</p>
+<p>In this example we will have a dictionary for assets which will be passed in the function the_count.</p>
+<div class="cell" data-execution_count="22">
+<details>
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a>assets <span class="op">=</span> {</span>
+<span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">"cash"</span>: <span class="fl">300322.78</span>,</span>
+<span id="cb59-3"><a href="#cb59-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"inventory"</span>: <span class="fl">7886.23</span>,</span>
+<span id="cb59-4"><a href="#cb59-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"supplies"</span>: <span class="fl">56234.56</span>,</span>
+<span id="cb59-5"><a href="#cb59-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">'prepaid expenses'</span>: <span class="dv">14560</span></span>
+<span id="cb59-6"><a href="#cb59-6" aria-hidden="true" tabindex="-1"></a>} </span>
+<span id="cb59-7"><a href="#cb59-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb59-8"><a href="#cb59-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb59-9"><a href="#cb59-9" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> the_count( acc_dict ):</span>
+<span id="cb59-10"><a href="#cb59-10" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb59-11"><a href="#cb59-11" aria-hidden="true" tabindex="-1"></a>    <span class="co">#------ convert dictionary to a list</span></span>
+<span id="cb59-12"><a href="#cb59-12" aria-hidden="true" tabindex="-1"></a>    dict_list <span class="op">=</span> <span class="bu">list</span>( acc_dict.values() )</span>
+<span id="cb59-13"><a href="#cb59-13" aria-hidden="true" tabindex="-1"></a>    <span class="co">#-- for loop of values</span></span>
+<span id="cb59-14"><a href="#cb59-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> num <span class="kw">in</span> dict_list:</span>
+<span id="cb59-15"><a href="#cb59-15" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(num)</span>
+<span id="cb59-16"><a href="#cb59-16" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb59-17"><a href="#cb59-17" aria-hidden="true" tabindex="-1"></a>    <span class="co"># sum the assets</span></span>
+<span id="cb59-18"><a href="#cb59-18" aria-hidden="true" tabindex="-1"></a>    s <span class="op">=</span> <span class="bu">sum</span>( dict_list )</span>
+<span id="cb59-19"><a href="#cb59-19" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"sum of assets = $ {:,}"</span>.<span class="bu">format</span>(s))</span>
+<span id="cb59-20"><a href="#cb59-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb59-21"><a href="#cb59-21" aria-hidden="true" tabindex="-1"></a><span class="co"># use the assets dictionary from above </span></span>
+<span id="cb59-22"><a href="#cb59-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb59-23"><a href="#cb59-23" aria-hidden="true" tabindex="-1"></a>the_count( assets )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>300322.78
+7886.23
+56234.56
+14560
+sum of assets = $ 379,003.57</code></pre>
+</div>
+</div>
+<p>This function used a few tricks, the dictionary argument was converted to a list data object, which stores the dictionary values. Once the dictionary list was created and had all the values, a for loop was used to iterate over the list. The dictionary list was then summed using the sum() function and stored in a variable ‘s’ and printed out.</p>
+<p>The conversion of a data dictionary to a list is needed for any future looping, you can’t loop through a dictionary.</p>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
