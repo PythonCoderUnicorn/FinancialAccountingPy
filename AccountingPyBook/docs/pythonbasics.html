@@ -20,6 +20,69 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1.6em;
   vertical-align: middle;
 }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 
@@ -138,7 +201,29 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#variables" id="toc-variables" class="nav-link active" data-scroll-target="#variables"><span class="toc-section-number">1.1</span>  Variables</a></li>
+  <li><a href="#strings" id="toc-strings" class="nav-link" data-scroll-target="#strings"><span class="toc-section-number">1.2</span>  Strings</a></li>
+  <li><a href="#numbers-int-and-float" id="toc-numbers-int-and-float" class="nav-link" data-scroll-target="#numbers-int-and-float"><span class="toc-section-number">1.3</span>  Numbers (int and float)</a></li>
+  <li><a href="#string-formatting" id="toc-string-formatting" class="nav-link" data-scroll-target="#string-formatting"><span class="toc-section-number">1.4</span>  String formatting</a></li>
+  <li><a href="#lists" id="toc-lists" class="nav-link" data-scroll-target="#lists"><span class="toc-section-number">1.5</span>  Lists</a>
+  <ul class="collapse">
+  <li><a href="#array-slicing" id="toc-array-slicing" class="nav-link" data-scroll-target="#array-slicing"><span class="toc-section-number">1.5.1</span>  Array slicing</a></li>
+  <li><a href="#change-element-in-list" id="toc-change-element-in-list" class="nav-link" data-scroll-target="#change-element-in-list"><span class="toc-section-number">1.5.2</span>  Change element in list</a></li>
+  <li><a href="#get-more-than-1-element" id="toc-get-more-than-1-element" class="nav-link" data-scroll-target="#get-more-than-1-element"><span class="toc-section-number">1.5.3</span>  Get more than 1 element</a></li>
+  <li><a href="#list-length" id="toc-list-length" class="nav-link" data-scroll-target="#list-length"><span class="toc-section-number">1.5.4</span>  List length</a></li>
+  <li><a href="#add-elements-to-list" id="toc-add-elements-to-list" class="nav-link" data-scroll-target="#add-elements-to-list"><span class="toc-section-number">1.5.5</span>  Add elements to list</a></li>
+  <li><a href="#join-lists" id="toc-join-lists" class="nav-link" data-scroll-target="#join-lists"><span class="toc-section-number">1.5.6</span>  Join lists</a></li>
+  <li><a href="#delete-element" id="toc-delete-element" class="nav-link" data-scroll-target="#delete-element"><span class="toc-section-number">1.5.7</span>  Delete element</a></li>
+  <li><a href="#list-for-loops" id="toc-list-for-loops" class="nav-link" data-scroll-target="#list-for-loops"><span class="toc-section-number">1.5.8</span>  List for loops</a></li>
+  <li><a href="#list-sorting" id="toc-list-sorting" class="nav-link" data-scroll-target="#list-sorting"><span class="toc-section-number">1.5.9</span>  List sorting</a></li>
+  </ul></li>
+  <li><a href="#tuples" id="toc-tuples" class="nav-link" data-scroll-target="#tuples"><span class="toc-section-number">1.6</span>  Tuples</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -169,8 +254,256 @@ ul.task-list li input[type="checkbox"] {
 <li><a href="https://www.youtube.com/@patloeber">Patrick Loeber (YouTube)</a></li>
 </ul>
 <p>None of the links above deal with accounting but will provide depth in explanations of the code you will see here.</p>
+<section id="variables" class="level2" data-number="1.1">
+<h2 data-number="1.1" class="anchored" data-anchor-id="variables"><span class="header-section-number">1.1</span> Variables</h2>
+<p>Variables are names to store data. If you have a long variable name, use underscores (_) to keep the words together. For long numbers you can use the underscore to act like a comma, but do not use a comma like you would in Excel.</p>
+<p>Some simple rules for variable names:</p>
+<ul>
+<li>variables can’t start with a dot or have a dot in the name (.)</li>
+<li>variables can’t start with a number or special character</li>
+</ul>
+<pre><code>variable_one = "variable string"
+
+variable_1 = 1
+variable1 = 1
+</code></pre>
+<p>Variables are essential in programming, you make a variable in order for you to use again and again. Variables are limited in where they can be accessed (used) in a program based on the function scope (<a href="https://en.wikipedia.org/wiki/Scope_(computer_science)">scope ?</a>) but allows for reprodicibility within your program.</p>
+</section>
+<section id="strings" class="level2" data-number="1.2">
+<h2 data-number="1.2" class="anchored" data-anchor-id="strings"><span class="header-section-number">1.2</span> Strings</h2>
+<p>Strings are typically letters but anything can be a string, as a string is <em>anything</em> inside ” ” or ’ ’ quotation marks. Strings are stored inside a <code>variable</code> which you get to name whatever you want. Note: <em>some words are reserved and cannot be used; while, if, break, else, etc</em>. If you use a reserved word you get an error and will not be able to run your code.</p>
+<pre><code>stringy = "pasta noodles"
+
+chartered_accountant = "Jane Doe"
+
+string_number = "899"</code></pre>
+<p>Everything that is inside ” ” is considered a data type of string, this is important to remember as you can get errors or get output you are not expecting if you call (use) some functions on a string data type variable meant for a numerical data type.</p>
+<pre><code>a = "5"
+b = "10"
+
+y = a + b</code></pre>
+<p>The output for y is not 15, as that is numerical addition, instead you will get concatenation of strings a and b, resulting in “510”.</p>
+</section>
+<section id="numbers-int-and-float" class="level2" data-number="1.3">
+<h2 data-number="1.3" class="anchored" data-anchor-id="numbers-int-and-float"><span class="header-section-number">1.3</span> Numbers (int and float)</h2>
+<p>Accounting mainly deals with numbers with decimals, known as floats (floating point decimal numbers) and integers (numbers without decimals). Using these data types is easy to do, just create a variable and store the numerical value to that variable.</p>
+<pre><code>x = 6754
+y = 122.78
+
+z = x + y 
+</code></pre>
+<p>The value of z is 6876.78. In a Python file (.py) you will need to use the <code>print()</code> function to see the answer, but using a Jupyter Notebook, you can simply add x and y and get the output printed.</p>
+</section>
+<section id="string-formatting" class="level2" data-number="1.4">
+<h2 data-number="1.4" class="anchored" data-anchor-id="string-formatting"><span class="header-section-number">1.4</span> String formatting</h2>
+<p>To print out the variables and calculations, you need to use the <code>print()</code> function. String formatting allows for reusable code and simpler code to write. Learning it now will help build the skill. Formatting uses the syntax <code>f" "</code> inside a print function with <code>{ }</code> to store the variable name.</p>
+<p>For rounding numbers when you want to only show numeric values that have limited decimal places you use the <code>.format()</code> function without using the f”” inside the print function.</p>
+<ul>
+<li>inside the {:.2f} means 2 decimal places format, the number can be 1 or more</li>
+<li>for output numberical values that are long, you can use {:,} which means to add commas to the numbers</li>
+</ul>
+<pre><code>accountant_name = "Jane Doe"
+office_expenses = 105_900.7688128
+
+print(f" Hello Python Accountant {accountant_name} ")
+print(" The office budget is ${:.2f}".format( office_expenses ))
+print(" The office budget is ${:,}".format( office_expenses ))
 
 
+# output
+Hello Python Accountant Jane
+The office budget is $105900.77
+The office budget is $105,900.768</code></pre>
+</section>
+<section id="lists" class="level2" data-number="1.5">
+<h2 data-number="1.5" class="anchored" data-anchor-id="lists"><span class="header-section-number">1.5</span> Lists</h2>
+<p>Python lists are very useful and are also known as arrays (when using the NumPy library).</p>
+<ul>
+<li><p>can store various data items, duplicates are allowed which is important to know.</p></li>
+<li><p>Lists can be empty and the values can be changed (mutable).</p></li>
+</ul>
+<p>IMPORTANT TO KNOW :</p>
+<ul>
+<li>every list, dictionary, set and string all start at 0 zero not 1, start counting at 0 or use <code>n - 1</code> to get the correct index value.</li>
+</ul>
+<pre><code>accounting_list = ['shareholders equity',233, True,"liabilities", 99]
+
+print( accounting_list )
+
+# output
+['shareholders equity', 233, True, 'liabilities', 99]</code></pre>
+<section id="array-slicing" class="level3" data-number="1.5.1">
+<h3 data-number="1.5.1" class="anchored" data-anchor-id="array-slicing"><span class="header-section-number">1.5.1</span> Array slicing</h3>
+<p>To get specific elements in the array list you can use slicing. To get the 2nd item (element) from the list, remember n - 1 for index number.</p>
+<pre><code>accounting_list[1]
+
+# output
+233</code></pre>
+<p>To get the last element in the array list, you can use -1, which means the 1st one from the end. If you wanted the second last element, -2, and so forth.</p>
+<pre><code>accounting_list[-1]
+# output
+99</code></pre>
+</section>
+<section id="change-element-in-list" class="level3" data-number="1.5.2">
+<h3 data-number="1.5.2" class="anchored" data-anchor-id="change-element-in-list"><span class="header-section-number">1.5.2</span> Change element in list</h3>
+<p>Say we want to change ‘liabilities’ to ‘purchases’, we use the index of element we want to change and assign the new variable.</p>
+<pre><code>accounting_list[3] = "purchases"
+accounting_list
+
+# output
+['shareholders equity', 233, True, 'purchases', 99]</code></pre>
+</section>
+<section id="get-more-than-1-element" class="level3" data-number="1.5.3">
+<h3 data-number="1.5.3" class="anchored" data-anchor-id="get-more-than-1-element"><span class="header-section-number">1.5.3</span> Get more than 1 element</h3>
+<p>If you are interested in only a few or specific elements in a list you can specify the indexes of the elements of the list. In this example, we want the first to the second elements.</p>
+<pre><code>accounting_list[0:3]
+
+# output
+['shareholders equity', 233, True]</code></pre>
+</section>
+<section id="list-length" class="level3" data-number="1.5.4">
+<h3 data-number="1.5.4" class="anchored" data-anchor-id="list-length"><span class="header-section-number">1.5.4</span> List length</h3>
+<p>Knowing how long a list is, how many elements that are inside the list object is very useful to know for using in <code>for loops</code>.</p>
+<pre><code>len( accounting_list )
+
+# output
+5</code></pre>
+</section>
+<section id="add-elements-to-list" class="level3" data-number="1.5.5">
+<h3 data-number="1.5.5" class="anchored" data-anchor-id="add-elements-to-list"><span class="header-section-number">1.5.5</span> Add elements to list</h3>
+<p>Python lists can be modified by adding to the list array. Since we store all of the elements into a variable we can use the name of the list and call functions on that variable such as <code>.append()</code> to add to an existing list.</p>
+<p>In this example we just want to add ‘income_sheets’ to the list. Note: <em>if you call this function more than once, Python will keep adding this one variable to the list</em>.</p>
+<pre><code>accounting_list.append("income_sheets")
+accounting_list
+
+# output
+['shareholders equity', 233, True, 'purchases', 99, 'income sheets']</code></pre>
+</section>
+<section id="join-lists" class="level3" data-number="1.5.6">
+<h3 data-number="1.5.6" class="anchored" data-anchor-id="join-lists"><span class="header-section-number">1.5.6</span> Join lists</h3>
+<p>If you have one list array and want to join or merge them together, you can use <code>.extend()</code> function.</p>
+<pre><code>sheet1 = ["Accounts payable","debts receivable","credit payable"]
+sheet2 = ["balance sheet","assets &amp; liabilities"]
+
+sheet1.extend(sheet2)
+
+print( sheet1 )
+
+# output
+['Accounts payable', 'debts receivable', 'credit payable', 'balance sheet', 'assets &amp; liabilities']</code></pre>
+</section>
+<section id="delete-element" class="level3" data-number="1.5.7">
+<h3 data-number="1.5.7" class="anchored" data-anchor-id="delete-element"><span class="header-section-number">1.5.7</span> Delete element</h3>
+<p>You can delete an element from a list array, using the <code>pop()</code> function which by default removes the very last element in an array, but if you provide the index number it will remove that element.</p>
+<p>In this example we will remove the element “True” from index 2. Note: <em>Python will keep deleting elements from your list if this function is called repeatedly</em>.</p>
+<pre><code>accounting_list.pop(2)
+accounting_list
+
+# output
+['shareholders equity', 233, 'purchases']</code></pre>
+</section>
+<section id="list-for-loops" class="level3" data-number="1.5.8">
+<h3 data-number="1.5.8" class="anchored" data-anchor-id="list-for-loops"><span class="header-section-number">1.5.8</span> List for loops</h3>
+<p><em><code>for loops</code></em> are functions that will iterate over a Python object such as a list or dictionary, dataframe or even a string. For loops are important to know and are essential for becoming efficient in programming.</p>
+<p>If you have a list of assets and quickly want to print them out to see what they are or perform a math function for loops are what to use.</p>
+<p>In this example we want to loop through the numbers 0 to 4, and print out each number. The <code>range()</code> by default understands what the start and end of the range is but could be explicitly defined. If you wanted 1 to 5, range(1,6).</p>
+<ul>
+<li>Note: “for x in something”, the x can be named just about anything (just not a reserved word in Python).</li>
+</ul>
+<pre><code>for x in range(5):
+    print(x)
+
+# output
+0
+1
+2
+3
+4</code></pre>
+<p>Say we have a list of a client’s assets, and we want it <em>iterate</em> through the list and print them. We want to know the length of the list in order to tell the for loop to stop at the end of the list, this serves 2 purposes: 1) you can modify the list (add or delete elements) and the for loop will keep working, and 2) by knowing the length of the list prevents errors when looping through a list and tries to find an element index that does not exist.</p>
+<ul>
+<li>range( len( list_name ))</li>
+<li>index of the loop is needed, hence client_assets[items] which goes through the list array and prints the index location value</li>
+</ul>
+<pre><code>client_assets = ['boat','house','fancy car','comic book collection','stocks']
+
+for items in range( len( client_assets )):
+    print( client_assets[items] )
+
+# output
+boat
+house
+fancy car
+comic book collection
+stocks</code></pre>
+<p>Using for loops is going to be something you will need to understand and get comfortable with in order to make your accounting more efficient.</p>
+<p>While loops will be purposefully ignored as they are very easy to mess up and crash your program. You may wish to learn them on your own but I caution you not to unless you have experience coding in Python.</p>
+</section>
+<section id="list-sorting" class="level3" data-number="1.5.9">
+<h3 data-number="1.5.9" class="anchored" data-anchor-id="list-sorting"><span class="header-section-number">1.5.9</span> List sorting</h3>
+<p>You can sort or reverse a list, simply by calling <code>.sort()</code> function and <code>.reverse()</code> on the list variable name.</p>
+<pre><code>common_assets = ['z item','investments','cash','inventory','supplies']
+
+dividends_paid = [100,1001.1,1020,101,300,301,90,9]
+
+common_assets.sort()
+dividends_paid.sort()
+
+print( common_assets )
+print( dividends_paid )
+
+# output
+['cash', 'inventory', 'investments', 'supplies', 'z item']
+[9, 90, 100, 101, 300, 301, 1001.1, 1020]
+
+# reverse
+dividends_paid.reverse()
+print( dividends_paid )
+
+# output
+[1020, 1001.1, 301, 300, 101, 100, 90, 9]</code></pre>
+</section>
+</section>
+<section id="tuples" class="level2" data-number="1.6">
+<h2 data-number="1.6" class="anchored" data-anchor-id="tuples"><span class="header-section-number">1.6</span> Tuples</h2>
+<p>Tuples store data but are immutable and tuples index each element. Say we want to store 3 holiday gift ideas for the office.</p>
+<div class="cell" data-execution_count="1">
+<details>
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>gifts <span class="op">=</span> (<span class="st">'Subway sandwich gift card'</span>,<span class="st">"Starbucks coffee gift card"</span>, <span class="st">"Apple iTunes gift card"</span>)</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>( gifts[<span class="dv">2</span>:<span class="dv">3</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>('Apple iTunes gift card',)</code></pre>
+</div>
+</div>
+<p>and to loop through the tuple</p>
+<div class="cell" data-execution_count="2">
+<details>
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> xmas <span class="kw">in</span> gifts:</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(xmas)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Subway sandwich gift card
+Starbucks coffee gift card
+Apple iTunes gift card</code></pre>
+</div>
+</div>
+<div class="cell" data-execution_count="3">
+<details>
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="dv">6</span><span class="op">+</span><span class="dv">8</span><span class="op">*</span><span class="dv">8</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="3">
+<pre><code>70</code></pre>
+</div>
+</div>
+<pre><code></code></pre>
+<pre><code></code></pre>
+
+
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

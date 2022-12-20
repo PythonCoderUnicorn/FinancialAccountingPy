@@ -13,6 +13,328 @@ There are numerous Python tutorials that will help you fully understand the prog
 
 None of the links above deal with accounting but will provide depth in explanations of the code you will see here.
 
+
+## Variables
+
+Variables are names to store data. If you have a long variable name, use underscores (_) to keep the words together. For long numbers you can use the underscore to act like a comma, but do not use a comma like you would in Excel.
+
+Some simple rules for variable names:
+
+- variables can't start with a dot or have a dot in the name (.)
+- variables can't start with a number or special character
+
+```{}
+variable_one = "variable string"
+
+variable_1 = 1
+variable1 = 1
+
+```
+
+Variables are essential in programming, you make a variable in order for you to use again and again. Variables are limited in where they can be accessed (used) in a program based on the function scope ([scope ?](https://en.wikipedia.org/wiki/Scope_(computer_science))) but allows for reprodicibility within your program.
+
+## Strings
+
+Strings are typically letters but anything can be a string, as a string is _anything_ inside " " or ' ' quotation marks. Strings are stored inside a `variable` which you get to name whatever you want. Note: _some words are reserved and cannot be used; while, if, break, else, etc_. If you use a reserved word you get an error and will not be able to run your code.
+
+```{}
+stringy = "pasta noodles"
+
+chartered_accountant = "Jane Doe"
+
+string_number = "899"
+```
+
+Everything that is inside " " is considered a data type of string, this is important to remember as you can get errors or get output you are not expecting if you call (use) some functions on a string data type variable meant for a numerical data type. 
+
+```{}
+a = "5"
+b = "10"
+
+y = a + b
+```
+
+The output for y is not 15, as that is numerical addition, instead you will get concatenation of strings a and b, resulting in "510".
+
+## Numbers (int and float)
+
+Accounting mainly deals with numbers with decimals, known as floats (floating point decimal numbers) and integers (numbers without decimals). Using these data types is easy to do, just create a variable and store the numerical value to that variable. 
+
+```{}
+x = 6754
+y = 122.78
+
+z = x + y 
+
+```
+
+The value of z is 6876.78. In a Python file (.py) you will need to use the `print()` function to see the answer, but using a Jupyter Notebook, you can simply add x and y and get the output printed. 
+
+
+## String formatting
+
+To print out the variables and calculations, you need to use the `print()` function. String formatting allows for reusable code and simpler code to write. Learning it now will help build the skill. Formatting uses the syntax `f" "` inside a print function with `{ }` to store the variable name. 
+
+For rounding numbers when you want to only show numeric values that have limited decimal places you use the `.format()` function without using the f"" inside the print function.
+
+- inside the {:.2f} means 2 decimal places format, the number can be 1 or more
+- for output numberical values that are long, you can use {:,} which means to add commas to the numbers
+
+```{}
+accountant_name = "Jane Doe"
+office_expenses = 105_900.7688128
+
+print(f" Hello Python Accountant {accountant_name} ")
+print(" The office budget is ${:.2f}".format( office_expenses ))
+print(" The office budget is ${:,}".format( office_expenses ))
+
+
+# output
+Hello Python Accountant Jane
+The office budget is $105900.77
+The office budget is $105,900.768
+```
+
+
+
+
+## Lists
+
+Python lists are very useful and are also known as arrays (when using the NumPy library). 
+
+- can store various data items, duplicates are allowed which is important to know. 
+
+- Lists can be empty and the values can be changed (mutable).
+
+IMPORTANT TO KNOW : 
+
+- every list, dictionary, set and string all start at 0 zero not 1, start counting at 0 or use `n - 1` to get the correct index value.
+
+```{}
+accounting_list = ['shareholders equity',233, True,"liabilities", 99]
+
+print( accounting_list )
+
+# output
+['shareholders equity', 233, True, 'liabilities', 99]
+```
+
+###  Array slicing
+
+To get specific elements in the array list you can use slicing.
+To get the 2nd item (element) from the list, remember n - 1 for index number.
+
+```{}
+accounting_list[1]
+
+# output
+233
+```
+
+To get the last element in the array list, you can use -1, which means the 1st one from the end. If you wanted the second last element, -2, and so forth.
+
+```{}
+accounting_list[-1]
+# output
+99
+```
+
+### Change element in list
+
+Say we want to change 'liabilities' to 'purchases', we use the index of element we want to change and assign the new variable.
+
+```{}
+accounting_list[3] = "purchases"
+accounting_list
+
+# output
+['shareholders equity', 233, True, 'purchases', 99]
+```
+
+### Get more than 1 element
+
+If you are interested in only a few or specific elements in a list you can specify the indexes of the elements of the list.
+In this example, we want the first to the second elements.
+
+```{}
+accounting_list[0:3]
+
+# output
+['shareholders equity', 233, True]
+```
+
+### List length
+
+Knowing how long a list is, how many elements that are inside the list object is very useful to know for using in `for loops`. 
+
+```{}
+len( accounting_list )
+
+# output
+5
+```
+
+### Add elements to list
+
+Python lists can be modified by adding to the list array. Since we store all of the elements into a variable we can use the name of the list and call functions on that variable such as `.append()` to add to an existing list.
+
+In this example we just want to add 'income_sheets' to the list. Note: _if you call this function more than once, Python will keep adding this one variable to the list_. 
+
+```{}
+accounting_list.append("income_sheets")
+accounting_list
+
+# output
+['shareholders equity', 233, True, 'purchases', 99, 'income sheets']
+```
+
+### Join lists
+
+If you have one list array and want to join or merge them together, you can use `.extend()` function. 
+
+```{}
+sheet1 = ["Accounts payable","debts receivable","credit payable"]
+sheet2 = ["balance sheet","assets & liabilities"]
+
+sheet1.extend(sheet2)
+
+print( sheet1 )
+
+# output
+['Accounts payable', 'debts receivable', 'credit payable', 'balance sheet', 'assets & liabilities']
+```
+
+
+### Delete element
+
+You can delete an element from a list array, using the `pop()` function which by default removes the very last element in an array, but if you provide the index number it will remove that element.
+
+In this example we will remove the element "True" from index 2.
+Note: _Python will keep deleting elements from your list if this function is called repeatedly_.
+
+```{}
+accounting_list.pop(2)
+accounting_list
+
+# output
+['shareholders equity', 233, 'purchases']
+```
+
+
+### List for loops
+
+_`for loops`_ are functions that will iterate over a Python object such as a list or dictionary, dataframe or even a string. For loops are important to know and are essential for becoming efficient in programming. 
+
+If you have a list of assets and quickly want to print them out to see what they are or perform a math function for loops are what to use.
+
+In this example we want to loop through the numbers 0 to 4, and print out each number. The `range()` by default understands what the start and end of the range is but could be explicitly defined. If you wanted 1 to 5, range(1,6).
+
+- Note: "for x in something", the x can be named just about anything (just not a reserved word in Python). 
+
+```{}
+for x in range(5):
+    print(x)
+
+# output
+0
+1
+2
+3
+4
+```
+
+Say we have a list of a client's assets, and we want it _iterate_ through the list and print them. We want to know the length of the list in order to tell the for loop to stop at the end of the list, this serves 2 purposes: 1) you can modify the list (add or delete elements) and the for loop will keep working, and 2) by knowing the length of the list prevents errors when looping through a list and tries to find an element index that does not exist.
+
+- range( len( list_name ))
+- index of the loop is needed, hence client_assets[items] which goes through the list array and prints the index location value
+
+
+
+```{}
+client_assets = ['boat','house','fancy car','comic book collection','stocks']
+
+for items in range( len( client_assets )):
+    print( client_assets[items] )
+
+# output
+boat
+house
+fancy car
+comic book collection
+stocks
+```
+
+Using for loops is going to be something you will need to understand and get comfortable with in order to make your accounting more efficient. 
+
+
+While loops will be purposefully ignored as they are very easy to mess up and crash your program. You may wish to learn them on your own but I caution you not to unless you have experience coding in Python.
+
+
+### List sorting
+
+You can sort or reverse a list, simply by calling `.sort()` function and `.reverse()` on the list variable name.
+
+```{}
+common_assets = ['z item','investments','cash','inventory','supplies']
+
+dividends_paid = [100,1001.1,1020,101,300,301,90,9]
+
+common_assets.sort()
+dividends_paid.sort()
+
+print( common_assets )
+print( dividends_paid )
+
+# output
+['cash', 'inventory', 'investments', 'supplies', 'z item']
+[9, 90, 100, 101, 300, 301, 1001.1, 1020]
+
+# reverse
+dividends_paid.reverse()
+print( dividends_paid )
+
+# output
+[1020, 1001.1, 301, 300, 101, 100, 90, 9]
+```
+
+
+
+
+
+
+
+## Tuples
+
+Tuples store data but are immutable and tuples index each element. Say we want 
+to store 3 holiday gift ideas for the office.
+
 ```{python}
-6+3
+gifts = ('Subway sandwich gift card',"Starbucks coffee gift card", "Apple iTunes gift card")
+
+print( gifts[2:3])
+```
+
+and to loop through the tuple
+
+```{python}
+for xmas in gifts:
+  print(xmas)
+```
+
+
+
+
+
+
+
+```{python}
+6+8*8
+```
+
+```{}
+
+```
+
+```{}
+
 ```
