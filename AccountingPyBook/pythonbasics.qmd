@@ -322,19 +322,161 @@ for xmas in gifts:
 ```
 
 
+## Sets
 
+Sets and dictionaries both use { }, but sets are immutable, but elements can be added or dropped. Sets are unordered and not indexed. Sets do not allow duplicates to exist in the set. 
 
-
-
+In this example we have taxes filed each year, then we append a year after we made our set.
 
 ```{python}
-6+8*8
+taxes_years = {2015, 2016, 2017, 2018}
+
+taxes_years.add(2009)
+print(taxes_years)
 ```
 
-```{}
+to remove a tax year
+
+```{python}
+taxes_years.remove(2009)
+taxes_years
+
+```
+we can loop through the set
+
+```{python}
+for year in taxes_years:
+  print(f"finished with taxes for {year}")
+```
+
+
+
+## Dictionaries
+
+This book will use data dictionaries extensively, as they are very versatile, easy to use and modify. If you later want to make a data dictionary a dataframe, you can with the help of the [Pandas library](https://pandas.pydata.org/docs/). Once you have a dataframe created or converted from a data dictionary you can save it as a CSV or other formats.
+
+Data dictionaries are ordered, mutable and have `keys` and `value` pairs ('key' : 'value'). 
+
+- dictionaries do not allow duplicates of keys
+- dictionaries are not indexed, grab elements by key or value
+- it is good practice to `Pascal_Case` or `CamelCase` your keys (also with everything) as it will help with tab-auto complete and grabbing the key you want
+
+In this example we have some financial information of assets.
+
+```{python}
+all_assets = {
+  "cash": 3098772.89,
+  'inventory': 7886.23,
+  "supplies": 56234.56,
+  "prepaid_expenses": 14521
+}
 
 ```
 
-```{}
+### select key 
 
+In this example we want to get the value for cash, so we slice the dictionary and use the key name to get the value.
+
+```{python}
+all_assets['cash']
 ```
+
+### dictionary length
+
+Find out how many elements are in a data dictionary
+
+```{python}
+len(all_assets)
+```
+
+### all items
+
+If you wanted to print out all the items in a dictionary, use .items() function
+
+```{python}
+all_assets.items()
+```
+
+### dictionary keys
+
+If you want to know the keys for the dictionary in order to use them for a function, use the .keys() function.
+
+```{python}
+all_assets.keys()
+```
+
+### modify a key
+
+If the key has a value that needs to be changed, you can use the slice and key name method and assign a new value.
+
+In this example we will give a new value for the property key.
+
+```{python}
+all_assets['property'] = 788655
+all_assets.items()
+```
+
+
+### dictionary values
+
+If you just wanted to see the values stored in a dictionary, use the .values() function.
+
+```{python}
+all_assets.values()
+```
+
+### check dictionary 
+
+If we had a large dictionary and quickly wanted to check if a specific key exists inside the dictionary, we can use a `if` statement with `in` dictionary_name.
+
+In this example we will search if "supplies" exists in the all_assets.
+
+```{python}
+if "supplies" in all_assets:
+  print(" 'supplies' was found in the dictionary" )
+```
+
+
+### dictionary for loops
+
+As mentioned previously, for loops are very much part of programming, you want to iterate over a list or some data object and do some sort of action along the process. 
+We can iterate over a data dictionary to see what a specific client has for assets and by type.
+
+In this example we will loop through all assets and show that the client is Dunder Mifflin's assets by type of category.
+
+```{python}
+for DunderMifflin in all_assets:
+  print(f"Dunder Mifflin assets $ { all_assets[ DunderMifflin]} [{DunderMifflin}]")
+```
+
+### dictionary copy
+
+Once you have a data dictionary, you can make a copy as to make sure you have a safe copy from any deletions or whatever may be the case. You can make copies for a client each quarter and only need to modify a few items instead of starting from scratch. To make a copy of a dictionary, use the .copy() function.
+
+In this example we will make a copy of all_assets and with the new copy we will create a new element and append it to the dictionary.
+
+```{python}
+print(f" Original: {all_assets}\n")
+
+assets_2 = all_assets.copy()
+
+print(f" Copy: {assets_2}\n")
+
+assets_2['yacht'] = 1086777
+
+print("....", assets_2, '\n')
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
