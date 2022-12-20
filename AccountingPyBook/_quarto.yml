@@ -21,8 +21,8 @@ format:
   html:
     toc: true
     theme: 
-      light: yeti
-      dark: slate
+      light: pulse  #united  # lumen
+      dark: slate #cyborg
       
     code-fold: true
     code-summary: "Show the code"

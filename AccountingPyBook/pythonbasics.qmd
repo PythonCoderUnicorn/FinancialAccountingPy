@@ -23,7 +23,7 @@ Some simple rules for variable names:
 - variables can't start with a dot or have a dot in the name (.)
 - variables can't start with a number or special character
 
-```{}
+```{python}
 variable_one = "variable string"
 
 variable_1 = 1
@@ -37,7 +37,7 @@ Variables are essential in programming, you make a variable in order for you to 
 
 Strings are typically letters but anything can be a string, as a string is _anything_ inside " " or ' ' quotation marks. Strings are stored inside a `variable` which you get to name whatever you want. Note: _some words are reserved and cannot be used; while, if, break, else, etc_. If you use a reserved word you get an error and will not be able to run your code.
 
-```{}
+```{python}
 stringy = "pasta noodles"
 
 chartered_accountant = "Jane Doe"
@@ -47,7 +47,7 @@ string_number = "899"
 
 Everything that is inside " " is considered a data type of string, this is important to remember as you can get errors or get output you are not expecting if you call (use) some functions on a string data type variable meant for a numerical data type. 
 
-```{}
+```{python}
 a = "5"
 b = "10"
 
@@ -60,12 +60,12 @@ The output for y is not 15, as that is numerical addition, instead you will get 
 
 Accounting mainly deals with numbers with decimals, known as floats (floating point decimal numbers) and integers (numbers without decimals). Using these data types is easy to do, just create a variable and store the numerical value to that variable. 
 
-```{}
+```{python}
 x = 6754
 y = 122.78
 
 z = x + y 
-
+z
 ```
 
 The value of z is 6876.78. In a Python file (.py) you will need to use the `print()` function to see the answer, but using a Jupyter Notebook, you can simply add x and y and get the output printed. 
@@ -80,7 +80,7 @@ For rounding numbers when you want to only show numeric values that have limited
 - inside the {:.2f} means 2 decimal places format, the number can be 1 or more
 - for output numberical values that are long, you can use {:,} which means to add commas to the numbers
 
-```{}
+```{python}
 accountant_name = "Jane Doe"
 office_expenses = 105_900.7688128
 
@@ -88,11 +88,6 @@ print(f" Hello Python Accountant {accountant_name} ")
 print(" The office budget is ${:.2f}".format( office_expenses ))
 print(" The office budget is ${:,}".format( office_expenses ))
 
-
-# output
-Hello Python Accountant Jane
-The office budget is $105900.77
-The office budget is $105,900.768
 ```
 
 
@@ -110,68 +105,60 @@ IMPORTANT TO KNOW :
 
 - every list, dictionary, set and string all start at 0 zero not 1, start counting at 0 or use `n - 1` to get the correct index value.
 
-```{}
+```{python}
 accounting_list = ['shareholders equity',233, True,"liabilities", 99]
 
 print( accounting_list )
 
-# output
-['shareholders equity', 233, True, 'liabilities', 99]
 ```
+
+
 
 ###  Array slicing
 
 To get specific elements in the array list you can use slicing.
 To get the 2nd item (element) from the list, remember n - 1 for index number.
 
-```{}
+```{python}
 accounting_list[1]
 
-# output
-233
 ```
 
 To get the last element in the array list, you can use -1, which means the 1st one from the end. If you wanted the second last element, -2, and so forth.
 
-```{}
+```{python}
 accounting_list[-1]
-# output
-99
+
 ```
 
 ### Change element in list
 
 Say we want to change 'liabilities' to 'purchases', we use the index of element we want to change and assign the new variable.
 
-```{}
+```{python}
 accounting_list[3] = "purchases"
 accounting_list
 
-# output
-['shareholders equity', 233, True, 'purchases', 99]
 ```
+
 
 ### Get more than 1 element
 
 If you are interested in only a few or specific elements in a list you can specify the indexes of the elements of the list.
 In this example, we want the first to the second elements.
 
-```{}
+```{python}
 accounting_list[0:3]
 
-# output
-['shareholders equity', 233, True]
 ```
 
 ### List length
 
 Knowing how long a list is, how many elements that are inside the list object is very useful to know for using in `for loops`. 
 
-```{}
+```{python}
 len( accounting_list )
 
-# output
-5
 ```
 
 ### Add elements to list
@@ -180,19 +167,17 @@ Python lists can be modified by adding to the list array. Since we store all of 
 
 In this example we just want to add 'income_sheets' to the list. Note: _if you call this function more than once, Python will keep adding this one variable to the list_. 
 
-```{}
+```{python}
 accounting_list.append("income_sheets")
 accounting_list
 
-# output
-['shareholders equity', 233, True, 'purchases', 99, 'income sheets']
 ```
 
 ### Join lists
 
 If you have one list array and want to join or merge them together, you can use `.extend()` function. 
 
-```{}
+```{python}
 sheet1 = ["Accounts payable","debts receivable","credit payable"]
 sheet2 = ["balance sheet","assets & liabilities"]
 
@@ -200,8 +185,6 @@ sheet1.extend(sheet2)
 
 print( sheet1 )
 
-# output
-['Accounts payable', 'debts receivable', 'credit payable', 'balance sheet', 'assets & liabilities']
 ```
 
 
@@ -212,12 +195,10 @@ You can delete an element from a list array, using the `pop()` function which by
 In this example we will remove the element "True" from index 2.
 Note: _Python will keep deleting elements from your list if this function is called repeatedly_.
 
-```{}
+```{python}
 accounting_list.pop(2)
 accounting_list
 
-# output
-['shareholders equity', 233, 'purchases']
 ```
 
 
@@ -231,16 +212,10 @@ In this example we want to loop through the numbers 0 to 4, and print out each n
 
 - Note: "for x in something", the x can be named just about anything (just not a reserved word in Python). 
 
-```{}
+```{python}
 for x in range(5):
     print(x)
 
-# output
-0
-1
-2
-3
-4
 ```
 
 Say we have a list of a client's assets, and we want it _iterate_ through the list and print them. We want to know the length of the list in order to tell the for loop to stop at the end of the list, this serves 2 purposes: 1) you can modify the list (add or delete elements) and the for loop will keep working, and 2) by knowing the length of the list prevents errors when looping through a list and tries to find an element index that does not exist.
@@ -250,18 +225,13 @@ Say we have a list of a client's assets, and we want it _iterate_ through the li
 
 
 
-```{}
+```{python}
 client_assets = ['boat','house','fancy car','comic book collection','stocks']
 
 for items in range( len( client_assets )):
     print( client_assets[items] )
 
-# output
-boat
-house
-fancy car
-comic book collection
-stocks
+
 ```
 
 Using for loops is going to be something you will need to understand and get comfortable with in order to make your accounting more efficient. 
@@ -274,7 +244,7 @@ While loops will be purposefully ignored as they are very easy to mess up and cr
 
 You can sort or reverse a list, simply by calling `.sort()` function and `.reverse()` on the list variable name.
 
-```{}
+```{python}
 common_assets = ['z item','investments','cash','inventory','supplies']
 
 dividends_paid = [100,1001.1,1020,101,300,301,90,9]
@@ -285,16 +255,12 @@ dividends_paid.sort()
 print( common_assets )
 print( dividends_paid )
 
-# output
-['cash', 'inventory', 'investments', 'supplies', 'z item']
-[9, 90, 100, 101, 300, 301, 1001.1, 1020]
 
 # reverse
 dividends_paid.reverse()
 print( dividends_paid )
 
-# output
-[1020, 1001.1, 301, 300, 101, 100, 90, 9]
+
 ```
 
 
@@ -651,6 +617,61 @@ the_count( assets )
 This function used a few tricks, the dictionary argument was converted to a list data object, which stores the dictionary values. Once the dictionary list was created and had all the values, a for loop was used to iterate over the list. The dictionary list was then summed using the sum() function and stored in a variable 's' and printed out.
 
 The conversion of a data dictionary to a list is needed for any future looping, you can't loop through a dictionary.
+
+
+
+## Python Classes
+
+Python classes are not considered a basic level topic, it is complicated and easy to get confused. I include it as a means of showing that you can bundle all of the functions in one file and then extract the specific functions you need. You need to understand how functions work and be comfortable with them before you attempt to work with classes. A class object has inheritance, it can store a data object(s), have multiple functions (which are called methods inside a class) and can be imported to another file. 
+
+
+Class objects start with a capital letter, this is convention and is to signify that this is a class and not a regular function. I will show what a simple class object looks like, but will let you learn more about them on your own.
+
+
+```{python}
+class Simple_class:
+  def __init__(self, name, age): # class self referencing arguments
+        self.name = name
+        self.age = age    # self.name = name  declares the argument 
+        
+  # class property
+  class_property = "simple_class: property value"
+    
+  #-- class method
+  def number(self):
+    x= 1898
+    print(x)
+    
+    
+# ----- important
+# similar to calling functions but this is called INSTANTIATE or 
+# creating an OBJECT INSTANCE of the class
+
+obj = Simple_class("Python", 28) # pass in values for class arguments
+
+# now that there is an object we can get properties from the class
+obj.class_property
+```
+
+Call the class method number() to get a number
+
+```{python}
+obj.number()
+```
+
+
+To aid in understanding, Python has a library called Math (comes with Python installation) and it has many math functions that you would typically want to use. When you want to square root a number you need to use `Math.sqrt()`, the square root function is inside the class called Math. In order to have access to this math function or any other you need to import the library into your python file.  The "obj.number()"  is same type of code used to get the math function from the class Math.
+
+
+Class inheritance is the next thing to learn when learning about class objects, which is not the focus of this book. As shown, class objects are very helpful for storing multiple or doing multiple things at once. 
+
+
+
+---
+
+
+
+
 
 
 
