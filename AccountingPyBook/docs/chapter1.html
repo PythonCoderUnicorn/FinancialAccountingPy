@@ -210,6 +210,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
   <li><a href="#manufacturing-costs" id="toc-manufacturing-costs" class="nav-link" data-scroll-target="#manufacturing-costs"><span class="toc-section-number">2.1.1</span>  Manufacturing Costs</a></li>
   <li><a href="#cost-example" id="toc-cost-example" class="nav-link" data-scroll-target="#cost-example"><span class="toc-section-number">2.1.2</span>  Cost example</a></li>
   </ul></li>
+  <li><a href="#cost-behavior-analysis" id="toc-cost-behavior-analysis" class="nav-link" data-scroll-target="#cost-behavior-analysis"><span class="toc-section-number">2.2</span>  Cost Behavior Analysis</a>
+  <ul class="collapse">
+  <li><a href="#fixed-costs" id="toc-fixed-costs" class="nav-link" data-scroll-target="#fixed-costs"><span class="toc-section-number">2.2.1</span>  Fixed costs</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -292,23 +296,104 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="cell" data-execution_count="2">
 <details>
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> manufacturing_costs( <span class="bu">dict</span>, num_boards: <span class="bu">int</span> ):</span>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> manufacturing_costs(<span class="bu">dict</span> , num_boards: <span class="bu">int</span> ):</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  manuf_costs <span class="op">=</span> (<span class="bu">dict</span>[<span class="st">'material_cost'</span>] <span class="op">*</span> num_boards) <span class="op">+</span> (<span class="bu">dict</span>[<span class="st">'labor_cost'</span>] <span class="op">*</span> num_boards) <span class="op">+</span> <span class="op">\</span></span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>                 <span class="bu">dict</span>[<span class="st">'depreciation_equipment'</span>] <span class="op">+</span> <span class="bu">dict</span>[<span class="st">'property_tax_bldg'</span>] <span class="op">+</span> <span class="op">\</span></span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>                 <span class="bu">dict</span>[<span class="st">'maint_salaries'</span>] <span class="op">+</span> <span class="bu">dict</span>[<span class="st">'salary_plant_manager'</span>]</span>
 <span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>                 </span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">Total manufacturing costs = ${:,}"</span>.<span class="bu">format</span>(manuf_costs))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  cost_per_unit <span class="op">=</span> manuf_costs <span class="op">/</span> num_boards</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>                 </span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">Total manufacturing costs = ${:,}"</span>.<span class="bu">format</span>(manuf_costs))</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"</span><span class="ch">\t</span><span class="st">cost per unit is = $</span><span class="sc">{:.2f}</span><span class="st">"</span>.<span class="bu">format</span>(cost_per_unit))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <p>Now we call our function and say as that there were 10,000 hoverboards made.</p>
 <div class="cell" data-execution_count="3">
 <details>
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>manufacturing_costs( hoverboards, num_boards<span class="op">=</span> <span class="fl">10e3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>manufacturing_costs(hoverboards, num_boards<span class="op">=</span> <span class="fl">10e3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>
-Total manufacturing costs = $846,000.0</code></pre>
+Total manufacturing costs = $846,000.0
+    cost per unit is = $84.60</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="cost-behavior-analysis" class="level2" data-number="2.2">
+<h2 data-number="2.2" class="anchored" data-anchor-id="cost-behavior-analysis"><span class="header-section-number">2.2</span> Cost Behavior Analysis</h2>
+<p>The <code>cost behavior analysis</code> is the study of how specific costs respond to changes in the level of business activity. Start from determining the key business activities such as:</p>
+<ul>
+<li>sales in dollars</li>
+<li>kilometers or miles driven</li>
+<li>quantity of service or product sold</li>
+</ul>
+<p>Activity level changes or volume of activity should be correlated with changes in costs. <code>Activity Index</code> is the activity that causes changes in the behavior costs.</p>
+<ul>
+<li><p><code>variable costs</code> = costs that vary in total, directly and proportionally with changes in the activity level. A variable cost is also defined as a cost that remains the same per unit at every level of activity. Variable costs include:</p>
+<ul>
+<li>direct materials</li>
+<li>direct labor for a manufacturer</li>
+<li>costs of goods sold</li>
+<li>sales commissions</li>
+<li>freight shipping</li>
+<li>gasoline for vehicles or planes</li>
+</ul></li>
+</ul>
+<pre><code>if level increases by 10% :
+   total variable costs increases by 10%
+   
+if level of activity decrease by 25%:
+   total variable costs decrease by 25%</code></pre>
+<p>For example, a company’s variable cost is $10 for a camera inside the device. The activity index is the number of devices produced, say 2,000 are made. As each device is made, the total cost of each device increases by $10.</p>
+<div class="cell" data-execution_count="4">
+<details>
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>variable_cost <span class="op">=</span> <span class="dv">10</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>activity_index <span class="op">=</span> <span class="dv">2000</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> total_variable_cost(var_cost, act_index):</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  total_var_cost <span class="op">=</span> var_cost <span class="op">*</span> act_index</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Total variable costs = ${:,}"</span>.<span class="bu">format</span>(total_var_cost))</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>total_variable_cost(variable_cost, activity_index)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Total variable costs = $20,000</code></pre>
+</div>
+</div>
+<section id="fixed-costs" class="level3" data-number="2.2.1">
+<h3 data-number="2.2.1" class="anchored" data-anchor-id="fixed-costs"><span class="header-section-number">2.2.1</span> Fixed costs</h3>
+<p><code>Fixed costs</code> are costs that remain the same in total within the relevant range, regardless of activity level. These include:</p>
+<ul>
+<li>property taxes</li>
+<li>insurance</li>
+<li>rent</li>
+<li>supervisory salaries</li>
+<li>depreciation on buildings</li>
+<li>equipment</li>
+</ul>
+<pre><code>if volume increases:
+  unit cost declines
+  
+if volume decreases:
+  unit cost increases</code></pre>
+<p>A company leases its production facility at a cost of $10,000 per month the total fixed costs of the facility will stay constant at every level of activity. Let us make a function to calculate the unit costs.</p>
+<div class="cell" data-execution_count="5">
+<details>
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>activity_index <span class="op">=</span> <span class="dv">2000</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>lease_cost <span class="op">=</span> <span class="fl">10e3</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> unit_costs( act_index: <span class="bu">int</span>, lease_cost:<span class="bu">int</span>):</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  unit_cost <span class="op">=</span> lease_cost <span class="op">/</span> act_index </span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"unit costs = $</span><span class="sc">{:.2f}</span><span class="st">"</span>.<span class="bu">format</span>(unit_cost))</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>unit_costs(activity_index, lease_cost)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>unit costs = $5.00</code></pre>
 </div>
 </div>
 

@@ -96,10 +96,92 @@ manufacturing_costs(hoverboards, num_boards= 10e3)
 ```
 
 
+## Cost Behavior Analysis
+
+The `cost behavior analysis` is the study of how specific costs respond to changes in the level of business activity.
+Start from determining the key business activities such as:
+
+- sales in dollars
+- kilometers or miles driven 
+- quantity of service or product sold
+
+Activity level changes or volume of activity should be correlated with changes in costs. 
+`Activity Index` is the activity that causes changes in the behavior costs.
+
+- `variable costs` = costs that vary in total, directly and proportionally with changes in the activity level. 
+A variable cost is also defined as a cost that remains the same per unit at every level of activity.
+Variable costs include: 
+
+  - direct materials 
+  - direct labor for a manufacturer 
+  - costs of goods sold
+  - sales commissions 
+  - freight shipping 
+  - gasoline for vehicles or planes
 
 
+```{}
+if level increases by 10% :
+   total variable costs increases by 10%
+   
+if level of activity decrease by 25%:
+   total variable costs decrease by 25%
+```
 
 
+For example, a company's variable cost is $10 for a camera inside the device.
+The activity index is the number of devices produced, say 2,000 are made.
+As each device is made, the total cost of each device increases by $10. 
+
+```{python}
+variable_cost = 10
+activity_index = 2000
+
+def total_variable_cost(var_cost, act_index):
+  total_var_cost = var_cost * act_index
+  print("Total variable costs = ${:,}".format(total_var_cost))
+  
+total_variable_cost(variable_cost, activity_index)
+```
+
+
+### Fixed costs
+
+`Fixed costs` are costs that remain the same in total within the relevant range, regardless of activity level. These include:
+
+- property taxes
+- insurance
+- rent
+- supervisory salaries
+- depreciation on buildings
+- equipment
+
+
+```{}
+if volume increases:
+  unit cost declines
+  
+if volume decreases:
+  unit cost increases
+```
+
+A company leases its production facility at a cost of $10,000 per month
+the total fixed costs of the facility will stay constant at every level of activity. 
+Let us make a function to calculate the unit costs.
+
+```{python}
+activity_index = 2000
+lease_cost = 10e3
+
+def unit_costs( act_index: int, lease_cost:int):
+  unit_cost = lease_cost / act_index 
+  print("unit costs = ${:.2f}".format(unit_cost))
+  
+unit_costs(activity_index, lease_cost)
+```
+
+
+### Relevant range
 
 
 
