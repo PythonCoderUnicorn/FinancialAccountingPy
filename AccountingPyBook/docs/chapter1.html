@@ -20,6 +20,69 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1.6em;
   vertical-align: middle;
 }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 
@@ -142,7 +205,11 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">Table of contents</h2>
    
   <ul>
-  <li><a href="#the-purpose-use-of-financial-statements" id="toc-the-purpose-use-of-financial-statements" class="nav-link active" data-scroll-target="#the-purpose-use-of-financial-statements"><span class="toc-section-number">2.1</span>  The Purpose &amp; Use of Financial Statements</a></li>
+  <li><a href="#cost-concepts" id="toc-cost-concepts" class="nav-link active" data-scroll-target="#cost-concepts"><span class="toc-section-number">2.1</span>  Cost Concepts</a>
+  <ul class="collapse">
+  <li><a href="#manufacturing-costs" id="toc-manufacturing-costs" class="nav-link" data-scroll-target="#manufacturing-costs"><span class="toc-section-number">2.1.1</span>  Manufacturing Costs</a></li>
+  <li><a href="#cost-example" id="toc-cost-example" class="nav-link" data-scroll-target="#cost-example"><span class="toc-section-number">2.1.2</span>  Cost example</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -168,13 +235,85 @@ ul.task-list li input[type="checkbox"] {
 
 <p>Welcome to the series of using Python for Financial Accounting. This series will use the information from <em>Financial Accounting - Tools for Business Decision Making, 7th Canadian Edition. Wiley.</em> to form our AccountingPy knowledge.</p>
 <p>This series will be brief in descriptions and explanations, as the focus in this book is joining your existing accounting knowledge with new Python knowledge. There will be a glossary for terms as a reference. This book ideally should be used with accounting classes as this does not go in depth of concepts, just how to use Python for specific calculations.</p>
-<section id="the-purpose-use-of-financial-statements" class="level2" data-number="2.1">
-<h2 data-number="2.1" class="anchored" data-anchor-id="the-purpose-use-of-financial-statements"><span class="header-section-number">2.1</span> The Purpose &amp; Use of Financial Statements</h2>
-<p>Financial Statements provide the means of communicating the economic events of an organization and sharing with a variety of interested users.</p>
-<p>One important function to calculate is the net income, using Python we can make a function to calculate this so in the future we can simply pass in the data required then get the output.</p>
-<p>`</p>
+<section id="cost-concepts" class="level2" data-number="2.1">
+<h2 data-number="2.1" class="anchored" data-anchor-id="cost-concepts"><span class="header-section-number">2.1</span> Cost Concepts</h2>
+<p>Managerial cost concepts and behavior analysis has 3 main components; managerial cost concepts, cost behavior analysis and manufacturing costs in financial statements.</p>
+<section id="manufacturing-costs" class="level3" data-number="2.1.1">
+<h3 data-number="2.1.1" class="anchored" data-anchor-id="manufacturing-costs"><span class="header-section-number">2.1.1</span> Manufacturing Costs</h3>
+<p>To manage costs, a manager needs to have information in order to plan, direct and control operations.</p>
+<ul>
+<li><code>Manufacturing</code> is activities that convert raw materials into finished goods.</li>
+</ul>
+<p>The manufacturing process:</p>
+<ol type="1">
+<li><p>direct materials - raw materials, basic materials parts used in the manufacturing process.</p></li>
+<li><p>indirect material - materials that do not physically become part of the finished product and they can’t be easily traced because physical association with the finished product is too small in terms of cost (accounted under manufacturing overhead).</p></li>
+<li><p>direct labor - the employees that are physically and directly involved in the conversion of raw materials into finished goods.</p></li>
+<li><p>indirect labor - work that is indirect is work that has no physical association with the finished product and is work is too cumbersome to trace back to the cost of goods made.</p></li>
+<li><p>manufacturing overhead - costs that are indirectly associated with the finished product, these specific costs can’t be classified as direct materials or labor.</p></li>
+</ol>
+<ul>
+<li><code>prime cost</code> = sum of all the direct material and labor costs</li>
+<li><code>conversion costs</code> = the sum of all direct labor and manufacturing overhead costs</li>
+<li><code>product costs</code> - the sum of all necessary costs in producing the finished product</li>
+<li><code>period costs</code> - costs that match the revenue of a specific time period instead of the cost of a salable product (non-manufacturing costs), selling and administrative expenses are period costs.</li>
+</ul>
+</section>
+<section id="cost-example" class="level3" data-number="2.1.2">
+<h3 data-number="2.1.2" class="anchored" data-anchor-id="cost-example"><span class="header-section-number">2.1.2</span> Cost example</h3>
+<p>This section will go through an example of cost. Say there is a company that makes hoverboards (like the ones in <em>Back to the Future</em> movie series), the following is the manufacturing costs.</p>
+<ul>
+<li>material cost ($30) per board</li>
+<li>labor costs ($40) per board</li>
+<li>depreciation on factory equipment ($25,000 per year)</li>
+<li>property taxes on factory building ($6,000 per year)</li>
+<li>advertising costs ($30,000 per year)</li>
+<li>maintenance salaries ($45,000 per year)</li>
+<li>salary of plant manager ($70,000)</li>
+<li>cost of shipping boards ($18 per board)</li>
+</ul>
+<p>We will use a data dictionary for storing the values from above. Then, let us make a function to calculate all of the costs.</p>
+<div class="cell" data-execution_count="1">
+<details>
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>hoverboards <span class="op">=</span> {</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">'material_cost'</span> : <span class="dv">30</span>,</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">'labor_cost'</span> : <span class="dv">40</span>,</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">'depreciation_equipment'</span>: <span class="fl">25e3</span>, <span class="co"># 25,000</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">'property_tax_bldg'</span>: <span class="fl">6e3</span>,       <span class="co"># 6,000</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="st">'advertising_cost'</span>: <span class="fl">30e3</span>,</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="st">'maint_salaries'</span>: <span class="fl">45e3</span>,</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="st">'salary_plant_manager'</span>: <span class="fl">70e3</span>,</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  <span class="st">'shipping_cost'</span>: <span class="dv">18</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>Make a function to calculate the total manufacturing costs. This function’s argument will use the data type dictionary as input for our calculations. The second thing we want to know is <em>how many hoverboards were made</em>? We can get user input for a number, as this makes the function flexible for future use.</p>
+<div class="cell" data-execution_count="2">
+<details>
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> manufacturing_costs( <span class="bu">dict</span>, num_boards: <span class="bu">int</span> ):</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  manuf_costs <span class="op">=</span> (<span class="bu">dict</span>[<span class="st">'material_cost'</span>] <span class="op">*</span> num_boards) <span class="op">+</span> (<span class="bu">dict</span>[<span class="st">'labor_cost'</span>] <span class="op">*</span> num_boards) <span class="op">+</span> <span class="op">\</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>                 <span class="bu">dict</span>[<span class="st">'depreciation_equipment'</span>] <span class="op">+</span> <span class="bu">dict</span>[<span class="st">'property_tax_bldg'</span>] <span class="op">+</span> <span class="op">\</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>                 <span class="bu">dict</span>[<span class="st">'maint_salaries'</span>] <span class="op">+</span> <span class="bu">dict</span>[<span class="st">'salary_plant_manager'</span>]</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>                 </span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">Total manufacturing costs = ${:,}"</span>.<span class="bu">format</span>(manuf_costs))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>Now we call our function and say as that there were 10,000 hoverboards made.</p>
+<div class="cell" data-execution_count="3">
+<details>
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>manufacturing_costs( hoverboards, num_boards<span class="op">=</span> <span class="fl">10e3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Total manufacturing costs = $846,000.0</code></pre>
+</div>
+</div>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->

@@ -9,11 +9,130 @@ This series will be brief in descriptions and explanations, as the focus in this
 
 
 
-## The Purpose & Use of Financial Statements
+## Cost Concepts
 
-Financial Statements provide the means of communicating the economic events of an organization and sharing with a variety of interested users.
-
-One important function to calculate is the net income, using Python we can make a function to calculate this so in the future we can simply pass in the data required then get the output.
+Managerial cost concepts and behavior analysis has 3 main components; managerial cost concepts, cost behavior analysis and manufacturing costs in financial statements.
 
 
-`
+### Manufacturing Costs
+
+To manage costs, a manager needs to have information in order to plan, 
+direct and control operations. 
+
+- `Manufacturing` is activities that convert raw materials into finished goods.
+
+The manufacturing process:
+
+1. direct materials - raw materials, basic materials parts used in the manufacturing process.
+
+
+2. indirect material - materials that do not physically become part of the finished product and they can't be easily traced because physical association with the finished product is too small in terms of cost (accounted under manufacturing overhead).
+
+
+3. direct labor - the employees that are physically and directly involved in the conversion of raw materials into finished goods.
+
+
+4. indirect labor - work that is indirect is work that has no physical association with the finished product and is work is too cumbersome to trace back to the cost of goods made.
+
+
+5. manufacturing overhead - costs that are indirectly associated with the finished product, these specific costs can't be classified as direct materials or labor. 
+
+
+- `prime cost` = sum of all the direct material and labor costs
+- `conversion costs` = the sum of all direct labor and manufacturing overhead costs
+- `product costs` - the sum of all necessary costs in producing the finished product
+- `period costs` - costs that match the revenue of a specific time period instead of the cost of a salable product (non-manufacturing costs), selling and administrative expenses are period costs.
+
+
+
+### Cost example
+
+This section will go through an example of cost. 
+Say there is a company that makes hoverboards (like the ones in _Back to the Future_ movie series), 
+the following is the manufacturing costs.
+
+- material cost ($30) per board
+- labor costs ($40) per board
+- depreciation on factory equipment ($25,000 per year)
+- property taxes on factory building ($6,000 per year)
+- advertising costs ($30,000 per year)
+- maintenance salaries ($45,000 per year)
+- salary of plant manager ($70,000)
+- cost of shipping boards ($18 per board)
+
+We will use a data dictionary for storing the values from above. Then, let us make a function to calculate all of the costs.
+
+```{python}
+hoverboards = {
+  'material_cost' : 30,
+  'labor_cost' : 40,
+  'depreciation_equipment': 25e3, # 25,000
+  'property_tax_bldg': 6e3,       # 6,000
+  'advertising_cost': 30e3,
+  'maint_salaries': 45e3,
+  'salary_plant_manager': 70e3,
+  'shipping_cost': 18
+}
+```
+
+Make a function to calculate the total manufacturing costs. This function's argument will use the data type dictionary as input for our calculations. The second thing we want to know is _how many hoverboards were made_? We can get user input for a number, as this makes the function flexible for future use.
+
+```{python}
+def manufacturing_costs(dict , num_boards: int ):
+  manuf_costs = (dict['material_cost'] * num_boards) + (dict['labor_cost'] * num_boards) + \
+                 dict['depreciation_equipment'] + dict['property_tax_bldg'] + \
+                 dict['maint_salaries'] + dict['salary_plant_manager']
+                 
+  cost_per_unit = manuf_costs / num_boards
+                 
+  print("\nTotal manufacturing costs = ${:,}".format(manuf_costs))
+  print("\tcost per unit is = ${:.2f}".format(cost_per_unit))
+```
+
+Now we call our function and say as that there were 10,000 hoverboards made.
+
+```{python}
+manufacturing_costs(hoverboards, num_boards= 10e3)
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
