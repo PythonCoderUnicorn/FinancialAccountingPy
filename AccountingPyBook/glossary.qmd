@@ -1,7 +1,23 @@
 # Glossary {.unnumbered}
 
 
+
 **Accounting** - the information system that identifies and records the economic events of an organization and then communicates them to a wide variety of interested users.
+
+**Activity index** - the activity that causes changes in the behavior of costs
+
+**Conversion costs** - the sum of direct manufacturing labor costs and manufacturing overhead costs
+
+**Cost** - an economic resource given up to accomplish a particular objective
+
+**Cost behavior analysis** - the study of how specific costs respond to changes in the level of business activity
+
+**Cost object** - anything for which cost information is measured and accumulated
+
+
+
+
+
 
 **accounts receivable** - the operation of receiving money in the future from customers. This is an asset as they represent an economic resource (cash) and will be eventually collected.
 

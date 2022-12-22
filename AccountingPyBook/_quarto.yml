@@ -11,6 +11,7 @@ book:
     - intro.qmd
     - pythonbasics.qmd
     - chapter1.qmd
+    - chapter2.qmd 
     - glossary.qmd
     - summary.qmd
     - references.qmd

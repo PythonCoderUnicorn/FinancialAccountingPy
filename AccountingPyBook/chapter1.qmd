@@ -181,25 +181,224 @@ unit_costs(activity_index, lease_cost)
 ```
 
 
-### Relevant range
+### Mixed costs
+
+`Mixed costs` are costs that have both a variable element and a fixed element, semi-variable costs.
+Mixed costs change in total but not proportionally with changes in the activity level.
+
+vehicle rental company has mixed cost, assume a 5 m truck rented, plus the insurance is 
+$50 per day, then an additional 25 cents per km.
+
+- fixed cost = $50
+- variable cost = 0.25
+
+
+Using a for loop you can see what the starting mixed costs are, starting with the $50 rental and 0 kilometers, to 600 kilometers. 
+
+```{python}
+fixed_cost = 50
+variable_cost = 0.25
+kms_driven = range(600)
+total = []
+
+for x in kms_driven :
+  c = (x * variable_cost ) + fixed_cost
+  total.append(c)
+
+print(f"Start of total costs = $ {total[1:5]}")
+print(f"End of total costs = $ {total[-5:-1]}")
+```
+
+The variable cost rises as the kilometers increase, but the fixed cost stays the same.
 
 
 
 
 
+### Classifying costs
+
+Mixed costs need to be classified into their respective fixed and variable elements. 
+The standard method is to determine the variable cost and fixed cost of the total cost 
+at the end of a time period. By using past experience to inform the future in cost classifications.
+One approach is called high-low method, but other approaches are scatter plots and least squares analysis.
+
+
+The `High-Low method` uses costs incurred at the high and low activity levels, 
+the difference in costs between the high and low is the variable costs.
+
+
+- `variable cost per unit` = $\Delta$ in total costs / $\Delta$ in activity levels
+
+
+
+Using a transportation company, data on its buses as an example :
+
+| month     | kms driven    | total cost $  |
+|-----------|---------------|---------------|
+| Jan       | 40,000        | 30,000        |
+| Feb       | 80,000        | 48,000        |
+| Mar       | 70,000        | 49,000        |
+| April     | 100,000       | 63,000        |
+
+
+```{python}
+
+transport_co = {
+  'costs_high' : 63e3,
+  'costs_low' : 30e3,
+  'high_level': 100e3,
+  'low_level' : 40e3
+}
+
+
+def var_CostPerUnit( dict ):
+  
+  delta_costs = dict['costs_high'] - dict['costs_low']
+  delta_activity = dict['high_level'] - dict['low_level']
+  
+  vcpu = delta_costs / delta_activity
+  print("Total variable cost per unit = ${:.2}".format(vcpu))
+  
+  tot_fix_cost_h = dict['costs_high'] - (dict['high_level'] * vcpu)
+  tot_fix_cost_l = dict['costs_low'] - (dict['low_level'] * vcpu)
+  
+  print("\n----- Maintenance costs ------")
+  print("Total fixed cost (high activity) = ${:.2f} + ${:.2f} per km".format(tot_fix_cost_h, vcpu))
+  print("Total fixed cost (low activity) = ${:.2f} +  ${:.2f} per km\n".format(tot_fix_cost_l, vcpu))
+  
+
+var_CostPerUnit( transport_co )
+
+```
 
 
 
 
+## Manufacturing Costs
+
+Manufacturing costs in financial statements have 2 sections that differ between all companies, the cost of goods (income statement) and the current assets (balance sheet). The income statement for a merchandiser and a manufacturer will be different in the cost of goods sold (COGS).
+
+- merchandiser: cost of goods sold = beginning merchandise inventory to cost of goods purchased - ending merchandise inventory
+- manufacturer: cost of goods = beginning finished goods inventory + cost of goods manufactured - ending finished goods inventory
 
 
 
+### COGS Manufactured
+
+A company starts production of microchips on Jan 1 (beginning work in process inventory).
+The costs the company assigns to beginning work in process inventory is based on manufacturing costs incurred in the prior period. The `total manufacturing cost` is the sum of direct materials costs, direct labor costs, manufacturing overhead incurred in the current year. At the end of the year, part of the total production is complete, the costs of these units become the cost of the ending work in process inventory. Cost of goods manufactured is determined by subtracting incomplete microchip costs from the total cost of work in process.
+
+- total cost of work in process = beginning work in process inventory + total manufacturing cost
+- cost of goods manufactured = total cost of work in process - ending work in process inventory
+
+Partial income statements for a merchandising and a manufacturing company. For the data dictionary we can use the key 'cost of goods purchased' to also be 'cost of goods manufactured' for manufacturing income statement, and the formula holds.
+
+```{python}
+merch_co = {
+  'merchandise_inventory_jan_1' : 90e3,
+  'cost_of_goods_purchased': 370e3, # or manufactured
+  'merchandise_inventory_dec_31' : 80e3
+}
+
+def cost_of_goods_sold( dict):
+  cogs_available = dict["merchandise_inventory_jan_1"] + dict["cost_of_goods_purchased"]
+  cogs = cogs_available - dict["merchandise_inventory_dec_31"]
+  
+  print("Cost of goods sold = ${:,}".format(cogs))
+  
+  
+cost_of_goods_sold( merch_co )
+
+```
+
+
+### Balance sheet
+
+The balance sheet for merchandising company is focused on inventory, the balance sheet for a manufacturer may have various inventory accounts.
+
+
+Partial Balance sheets for merchandise company and a manufacturer.
+
+```{python}
+merch_co = {
+  'cash' : 100e3,
+  'net_receivables': 210e3, 
+  'merchandise_inventory' : 400e3,
+  'Prepaid_expenses': 22e3
+}
+
+manuf_co = {
+  'cash': 180e3,
+  'net_receivables': 210e3,
+  'finished_goods': 80e3,
+  'work_in_progress': 25200,
+  'raw_materials': 22800 ,
+  'prepaid_expenses': 18e3
+}
 
 
 
+def current_assets( dict):
+  
+  assets = list( dict.values() ) 
+  tot_assets = sum(assets)
+  print("Total current assets = ${:,}".format(tot_assets))
+  
+  
+current_assets( merch_co )
+current_assets( manuf_co )
+```
+
+#### COGS Example
+
+This example will be calculating the cost of goods manufactured with data on raw materials and labor. Cost of goods manufactured schedule for one month. This example is a bicycle manufacturer, and we will use 1,000 has the number for quantity produced.
 
 
+```{python}
+manufacturer = {
+  'rent_manuf_equipment' : 2e3,
+  'bldg_insurance': 750,
+  'raw_materials': 80,
+  'manufacturing_utilities': 1000,
+  'labor' : 30,
+  'misc_materials': 1.20,
+  'property_tax_bldg_year': 2400, # per year
+  'supervisor_salary': 3000,
+  'bldg_depreciation' : 1500
+}
+```
 
+
+```{python}
+
+def manufacturing_cost( dict, num_produced: int):
+  
+  base_costs = dict['rent_manuf_equipment'] + \
+               dict['bldg_insurance'] + \
+               dict['manufacturing_utilities'] +\
+               (dict['property_tax_bldg_year'] / 12) +\
+               dict['supervisor_salary'] + \
+               dict['bldg_depreciation']
+  # print(base_costs)
+  
+  manuf_costs = (dict['raw_materials'] * num_produced) +\
+                (dict['labor'] * num_produced) + \
+                (dict['misc_materials'] * num_produced)
+  # print(manuf_costs)
+                 
+  tot_manuf_costs = base_costs + manuf_costs
+  
+  cost_per_unit = manuf_costs / num_produced
+                 
+  print("\nTotal manufacturing costs = ${:,}".format(tot_manuf_costs))
+  print("\tcost per unit is = ${:.2f}".format(cost_per_unit))
+  
+
+
+manufacturing_cost( manufacturer, 1000 )
+```
+
+This function is very similar to the one at the start of the chapter, calculating the costs for hoverboards. 
 
 
 
