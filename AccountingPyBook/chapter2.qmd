@@ -1,3 +1,210 @@
 
 # Job Cost Accounting
 
+Job cost accounting is important to know for companies that make bids for contract work. By knowing the costs of each job you can determine if previous contract work was profitable.
+Job order cost accounting has various components:
+
+- cost accounting system - job cost and process cost systems
+- accumulating manufacturing costs
+- manufacturing costs, raw materials, factory labor
+- manufacturing overhead costs
+- jobs completed & sold, finished costs, cost of goods sold, job costing for service companies, summary of job cost flows, and the pros and cons of job costing
+- reporting job cost data
+
+
+## Cost Accounting Systems
+
+`Cost accounting` involves the measuring, recording and reporting of product costs. Using this data companies can determine the total cost and the unit cost per product. This information determines the quantity of products to produce and what price to charge. `Cost ccounting system` contains the accounts for various manufacturing costs, part of this system is the perpetual inventory system (updated data). 
+
+Types of cost accounting systems:
+
+- `job-order cost system` - costs are assigned to each job to each group of goods
+- `process cost system` - costing accumulates product-related costs for a period of time, instead of costs assigned to specific products or job orders
+- `job-order cost flow` - tracks the direct materials, direct labor and manufacturing overhead. Accumulating the manufacturing costs incurred and assigning the accumulated costs to work done
+
+
+Raw materials cost, the cost of materials received after purchase and is now in inventory, this cost is debited for invoice cost and freight costs that are charged to purchaser. This example shows a purchase order for 2000 items, the cost for the order ($10,000) then the cost per unit is calculated. This process is the same for another purchase order and all of the data is stored in a list array.
+
+```{python}
+item_quantity = [2000, 800]
+order_cost = [10e3, 32e3]
+
+cost_per_unit = order_cost[0] / item_quantity[0]
+print(f"The cost per unit = ${cost_per_unit} (item 1)")
+
+cost_per_unit_2 = order_cost[1] / item_quantity[1]
+print(f"The cost per unit = ${cost_per_unit_2} (item 2)")
+
+total_costs = sum(order_cost)
+print(f"Total costs for raw materials = ${total_costs}")
+
+```
+
+For more real world examples you would use a dataframe and/or a for loop to divide the cost by quantity to determine the cost per unit. 
+
+
+Factory labor costs:
+
+- the gross earnings of factory workers
+- employer payroll taxes on earnings
+- _fringe benefits_ such as sick pay, vacation pay, etc.
+
+Labor cost example, a company incurs $32,000 labor costs, subtract 27,000 for wages payable, and subtract 5,000 for payroll taxes on some day in January.
+
+
+Work in process inventory example
+
+| cost                | job 1       | job _n_  |
+|---------------------|-------------|----------|
+| direct materials    | $6000       | 3600     |
+| direct labor        | $4000       | 2000     |
+| manuf. overhead     | $5000       | 2500     |
+
+```{python}
+raw_materials = sum([6000,3600])
+factory_labor = sum([4000,2000])
+manuf_overhead = sum([5000,2500])
+
+print("\t           -- Debit - | -- Credit --")
+print(f"Raw materials ...... {raw_materials} | {raw_materials}")
+print(f"Factory labor ...... {factory_labor} | {factory_labor}")
+print(f"Manufact. overhead   {manuf_overhead} | {manuf_overhead}")
+```
+
+
+### Manufacturing overhead costs
+
+Manufacturing overhead costs
+- these costs can be accounted for daily or periodically
+- may aggregate the indirect materials and indirect labor
+
+A summary table records the property taxes, depreciation and insurance periodically.
+Debits are made to _work in process inventory_ and credits are made to raw materials inventory, factory labor and manufacturing overhead. 
+
+- `actual activity base used x predetermined overhead rate` => assign to work in process 
+
+- `predetermined overhead rate = estimated annual overhead costs / expected annual operating activity`. 
+The relationship between the estimated annual overhead costs
+and the expected annual operating activity (activity base).  
+
+- actual costing system is where the overhead rate is made after a year to get the full and actual cost
+
+Using the direct labor cost as activity base, divide the expected overhead costs by direct labor to get the overhead rate.
+
+```{python}
+annual_overhead_costs = 280e3
+direct_labor_costs = 350e3
+overhead_rate = annual_overhead_costs /direct_labor_costs
+print("Overhead rate = {:.2f}%".format(overhead_rate *100))
+print(f"... for every $1 of direct labor, {overhead_rate*100} cents will go to the assigned job")
+```
+
+
+`Normal costing system` is tracking the direct costs (material and labor) to a cost object by using _actual_ cost data during the accounting period. The result is assigning indirect costs (overhead) based on the predetermined rate times the actual quantity of activity base used.
+
+
+
+### Costing Example
+
+A door manufacturer uses a job cost system and applies overhead to production on
+basis of direct labor cost. The predetermined overhead rate for 2016 
+was estimated at $24 million, and direct labor costs to be 20 million dollars.
+
+| costs               | amount      |
+|---------------------|-------------|
+| direct materials    | $30,000,000 |
+| direct labor cost   | $21,000,000 |
+| factory insurance   | $500,000    |
+| indirect labor      | $7,500,000  |
+| maintenance         | $1,000,000  |
+| building rent       | $11,000,000 |
+| depreciation, equipment | $2,000,000 |
+
+
+Balance sheet
+
+| manufacturing status | Jan 1, 2016 | Dec 31, 2016 |
+|----------------------|-------------|--------------|
+| work in process      | 5,000,000   | 4,000,000    |
+| finished goods       | 13,000,000  | 11,000,000   |
+
+
+- during 2016, the cost sheet showed a total cost of $100,000, company prices its product at 50% above its cost
+
+```{python}
+annual_costs=24e6 
+direct_labor_costs=20e6
+
+overhead_rate = annual_overhead_costs /direct_labor_costs
+
+job_cost = 100e3
+markup_percentage = 0.5
+profit = job_cost * markup_percentage
+
+manufacture = {
+  "direct_materials" : 30e6,
+  "direct_labor_cost": 21e6,
+  "factory_insurance": 500e3,
+  "indirect_labor" : 7_500_000,
+  "maintenance": 1e6,
+  "building_rent" : 11e6,
+  "depreciation_equipment": 2e6
+}
+
+work_in_process = [5e6, 4e6]
+finished_goods = [13e6, 11e6]
+
+actual_manuf_overhead = manufacture['factory_insurance']+ \
+                        manufacture['indirect_labor']+ \
+                        manufacture['maintenance'] +\
+                        manufacture['building_rent'] +\
+                        manufacture['depreciation_equipment']
+                        
+applied_overhead_cost = manufacture['direct_labor_cost'] * overhead_rate
+over_applied_overhead= actual_manuf_overhead - applied_overhead_cost
+
+total_manuf_costs = manufacture['direct_materials'] + manufacture['direct_labor_cost'] + applied_overhead_cost
+
+tot_cost_process = total_manuf_costs + work_in_process[0]
+cogsm = tot_cost_process - work_in_process[1]
+
+cogs_avail_4sale = finished_goods[0] + cogsm 
+cogsun = cogs_avail_4sale - finished_goods[1]
+cogs = cogsun + over_applied_overhead
+```
+
+
+The printed output. 
+```{}
+------- Cost Accounting --------
+Overhead rate = 120.00%
+Actual manufacturing overhead .. $22,000,000.0
+Applied overhead cost .......... $25,200,000.0
+Over applied overhead .......... $-3,200,000.0
+Total manufacturing costs ........... $76,200,000.0
+Total cost of work in process ....... $81,200,000.0
+Cost of goods manufactured .......... $77,200,000.0
+Cost of goods available for sale ............ $90,200,000.0
+Cost of goods sold (unadjusted) ............. $79,200,000.0
+Cost of goods sold .......................... $76,000,000.0
+
+Price to customer = $150,000.0 (Profit: $50,000.0)
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

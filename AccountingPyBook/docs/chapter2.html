@@ -20,6 +20,69 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1.6em;
   vertical-align: middle;
 }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
 
 
@@ -143,7 +206,17 @@ ul.task-list li input[type="checkbox"] {
 </nav>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#cost-accounting-systems" id="toc-cost-accounting-systems" class="nav-link active" data-scroll-target="#cost-accounting-systems"><span class="toc-section-number">3.1</span>  Cost Accounting Systems</a>
+  <ul class="collapse">
+  <li><a href="#manufacturing-overhead-costs" id="toc-manufacturing-overhead-costs" class="nav-link" data-scroll-target="#manufacturing-overhead-costs"><span class="toc-section-number">3.1.1</span>  Manufacturing overhead costs</a></li>
+  <li><a href="#costing-example" id="toc-costing-example" class="nav-link" data-scroll-target="#costing-example"><span class="toc-section-number">3.1.2</span>  Costing Example</a></li>
+  </ul></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -165,8 +238,255 @@ ul.task-list li input[type="checkbox"] {
 
 </header>
 
+<p>Job cost accounting is important to know for companies that make bids for contract work. By knowing the costs of each job you can determine if previous contract work was profitable. Job order cost accounting has various components:</p>
+<ul>
+<li>cost accounting system - job cost and process cost systems</li>
+<li>accumulating manufacturing costs</li>
+<li>manufacturing costs, raw materials, factory labor</li>
+<li>manufacturing overhead costs</li>
+<li>jobs completed &amp; sold, finished costs, cost of goods sold, job costing for service companies, summary of job cost flows, and the pros and cons of job costing</li>
+<li>reporting job cost data</li>
+</ul>
+<section id="cost-accounting-systems" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="cost-accounting-systems"><span class="header-section-number">3.1</span> Cost Accounting Systems</h2>
+<p><code>Cost accounting</code> involves the measuring, recording and reporting of product costs. Using this data companies can determine the total cost and the unit cost per product. This information determines the quantity of products to produce and what price to charge. <code>Cost ccounting system</code> contains the accounts for various manufacturing costs, part of this system is the perpetual inventory system (updated data).</p>
+<p>Types of cost accounting systems:</p>
+<ul>
+<li><code>job-order cost system</code> - costs are assigned to each job to each group of goods</li>
+<li><code>process cost system</code> - costing accumulates product-related costs for a period of time, instead of costs assigned to specific products or job orders</li>
+<li><code>job-order cost flow</code> - tracks the direct materials, direct labor and manufacturing overhead. Accumulating the manufacturing costs incurred and assigning the accumulated costs to work done</li>
+</ul>
+<p>Raw materials cost, the cost of materials received after purchase and is now in inventory, this cost is debited for invoice cost and freight costs that are charged to purchaser. This example shows a purchase order for 2000 items, the cost for the order ($10,000) then the cost per unit is calculated. This process is the same for another purchase order and all of the data is stored in a list array.</p>
+<div class="cell" data-execution_count="1">
+<details>
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>item_quantity <span class="op">=</span> [<span class="dv">2000</span>, <span class="dv">800</span>]</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>order_cost <span class="op">=</span> [<span class="fl">10e3</span>, <span class="fl">32e3</span>]</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>cost_per_unit <span class="op">=</span> order_cost[<span class="dv">0</span>] <span class="op">/</span> item_quantity[<span class="dv">0</span>]</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"The cost per unit = $</span><span class="sc">{</span>cost_per_unit<span class="sc">}</span><span class="ss"> (item 1)"</span>)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>cost_per_unit_2 <span class="op">=</span> order_cost[<span class="dv">1</span>] <span class="op">/</span> item_quantity[<span class="dv">1</span>]</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"The cost per unit = $</span><span class="sc">{</span>cost_per_unit_2<span class="sc">}</span><span class="ss"> (item 2)"</span>)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>total_costs <span class="op">=</span> <span class="bu">sum</span>(order_cost)</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Total costs for raw materials = $</span><span class="sc">{</span>total_costs<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>The cost per unit = $5.0 (item 1)
+The cost per unit = $40.0 (item 2)
+Total costs for raw materials = $42000.0</code></pre>
+</div>
+</div>
+<p>For more real world examples you would use a dataframe and/or a for loop to divide the cost by quantity to determine the cost per unit.</p>
+<p>Factory labor costs:</p>
+<ul>
+<li>the gross earnings of factory workers</li>
+<li>employer payroll taxes on earnings</li>
+<li><em>fringe benefits</em> such as sick pay, vacation pay, etc.</li>
+</ul>
+<p>Labor cost example, a company incurs $32,000 labor costs, subtract 27,000 for wages payable, and subtract 5,000 for payroll taxes on some day in January.</p>
+<p>Work in process inventory example</p>
+<table class="table">
+<thead>
+<tr class="header">
+<th>cost</th>
+<th>job 1</th>
+<th>job <em>n</em></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>direct materials</td>
+<td>$6000</td>
+<td>3600</td>
+</tr>
+<tr class="even">
+<td>direct labor</td>
+<td>$4000</td>
+<td>2000</td>
+</tr>
+<tr class="odd">
+<td>manuf. overhead</td>
+<td>$5000</td>
+<td>2500</td>
+</tr>
+</tbody>
+</table>
+<div class="cell" data-execution_count="2">
+<details>
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>raw_materials <span class="op">=</span> <span class="bu">sum</span>([<span class="dv">6000</span>,<span class="dv">3600</span>])</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>factory_labor <span class="op">=</span> <span class="bu">sum</span>([<span class="dv">4000</span>,<span class="dv">2000</span>])</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>manuf_overhead <span class="op">=</span> <span class="bu">sum</span>([<span class="dv">5000</span>,<span class="dv">2500</span>])</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\t</span><span class="st">           -- Debit - | -- Credit --"</span>)</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Raw materials ...... </span><span class="sc">{</span>raw_materials<span class="sc">}</span><span class="ss"> | </span><span class="sc">{</span>raw_materials<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Factory labor ...... </span><span class="sc">{</span>factory_labor<span class="sc">}</span><span class="ss"> | </span><span class="sc">{</span>factory_labor<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Manufact. overhead   </span><span class="sc">{</span>manuf_overhead<span class="sc">}</span><span class="ss"> | </span><span class="sc">{</span>manuf_overhead<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>               -- Debit - | -- Credit --
+Raw materials ...... 9600 | 9600
+Factory labor ...... 6000 | 6000
+Manufact. overhead   7500 | 7500</code></pre>
+</div>
+</div>
+<section id="manufacturing-overhead-costs" class="level3" data-number="3.1.1">
+<h3 data-number="3.1.1" class="anchored" data-anchor-id="manufacturing-overhead-costs"><span class="header-section-number">3.1.1</span> Manufacturing overhead costs</h3>
+<p>Manufacturing overhead costs - these costs can be accounted for daily or periodically - may aggregate the indirect materials and indirect labor</p>
+<p>A summary table records the property taxes, depreciation and insurance periodically. Debits are made to <em>work in process inventory</em> and credits are made to raw materials inventory, factory labor and manufacturing overhead.</p>
+<ul>
+<li><p><code>actual activity base used x predetermined overhead rate</code> =&gt; assign to work in process</p></li>
+<li><p><code>predetermined overhead rate = estimated annual overhead costs / expected annual operating activity</code>. The relationship between the estimated annual overhead costs and the expected annual operating activity (activity base).</p></li>
+<li><p>actual costing system is where the overhead rate is made after a year to get the full and actual cost</p></li>
+</ul>
+<p>Using the direct labor cost as activity base, divide the expected overhead costs by direct labor to get the overhead rate.</p>
+<div class="cell" data-execution_count="3">
+<details>
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>annual_overhead_costs <span class="op">=</span> <span class="fl">280e3</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>direct_labor_costs <span class="op">=</span> <span class="fl">350e3</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>overhead_rate <span class="op">=</span> annual_overhead_costs <span class="op">/</span>direct_labor_costs</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Overhead rate = </span><span class="sc">{:.2f}</span><span class="st">%"</span>.<span class="bu">format</span>(overhead_rate <span class="op">*</span><span class="dv">100</span>))</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"... for every $1 of direct labor, </span><span class="sc">{</span>overhead_rate<span class="op">*</span><span class="dv">100</span><span class="sc">}</span><span class="ss"> cents will go to the assigned job"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Overhead rate = 80.00%
+... for every $1 of direct labor, 80.0 cents will go to the assigned job</code></pre>
+</div>
+</div>
+<p><code>Normal costing system</code> is tracking the direct costs (material and labor) to a cost object by using <em>actual</em> cost data during the accounting period. The result is assigning indirect costs (overhead) based on the predetermined rate times the actual quantity of activity base used.</p>
+</section>
+<section id="costing-example" class="level3" data-number="3.1.2">
+<h3 data-number="3.1.2" class="anchored" data-anchor-id="costing-example"><span class="header-section-number">3.1.2</span> Costing Example</h3>
+<p>A door manufacturer uses a job cost system and applies overhead to production on basis of direct labor cost. The predetermined overhead rate for 2016 was estimated at $24 million, and direct labor costs to be 20 million dollars.</p>
+<table class="table">
+<thead>
+<tr class="header">
+<th>costs</th>
+<th>amount</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>direct materials</td>
+<td>$30,000,000</td>
+</tr>
+<tr class="even">
+<td>direct labor cost</td>
+<td>$21,000,000</td>
+</tr>
+<tr class="odd">
+<td>factory insurance</td>
+<td>$500,000</td>
+</tr>
+<tr class="even">
+<td>indirect labor</td>
+<td>$7,500,000</td>
+</tr>
+<tr class="odd">
+<td>maintenance</td>
+<td>$1,000,000</td>
+</tr>
+<tr class="even">
+<td>building rent</td>
+<td>$11,000,000</td>
+</tr>
+<tr class="odd">
+<td>depreciation, equipment</td>
+<td>$2,000,000</td>
+</tr>
+</tbody>
+</table>
+<p>Balance sheet</p>
+<table class="table">
+<thead>
+<tr class="header">
+<th>manufacturing status</th>
+<th>Jan 1, 2016</th>
+<th>Dec 31, 2016</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>work in process</td>
+<td>5,000,000</td>
+<td>4,000,000</td>
+</tr>
+<tr class="even">
+<td>finished goods</td>
+<td>13,000,000</td>
+<td>11,000,000</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>during 2016, the cost sheet showed a total cost of $100,000, company prices its product at 50% above its cost</li>
+</ul>
+<div class="cell" data-execution_count="4">
+<details>
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>annual_costs<span class="op">=</span><span class="fl">24e6</span> </span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>direct_labor_costs<span class="op">=</span><span class="fl">20e6</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>overhead_rate <span class="op">=</span> annual_overhead_costs <span class="op">/</span>direct_labor_costs</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>job_cost <span class="op">=</span> <span class="fl">100e3</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>markup_percentage <span class="op">=</span> <span class="fl">0.5</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>profit <span class="op">=</span> job_cost <span class="op">*</span> markup_percentage</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>manufacture <span class="op">=</span> {</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>  <span class="st">"direct_materials"</span> : <span class="fl">30e6</span>,</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>  <span class="st">"direct_labor_cost"</span>: <span class="fl">21e6</span>,</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>  <span class="st">"factory_insurance"</span>: <span class="fl">500e3</span>,</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>  <span class="st">"indirect_labor"</span> : <span class="dv">7_500_000</span>,</span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>  <span class="st">"maintenance"</span>: <span class="fl">1e6</span>,</span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>  <span class="st">"building_rent"</span> : <span class="fl">11e6</span>,</span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>  <span class="st">"depreciation_equipment"</span>: <span class="fl">2e6</span></span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>work_in_process <span class="op">=</span> [<span class="fl">5e6</span>, <span class="fl">4e6</span>]</span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>finished_goods <span class="op">=</span> [<span class="fl">13e6</span>, <span class="fl">11e6</span>]</span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>actual_manuf_overhead <span class="op">=</span> manufacture[<span class="st">'factory_insurance'</span>]<span class="op">+</span> <span class="op">\</span></span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a>                        manufacture[<span class="st">'indirect_labor'</span>]<span class="op">+</span> <span class="op">\</span></span>
+<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a>                        manufacture[<span class="st">'maintenance'</span>] <span class="op">+\</span></span>
+<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a>                        manufacture[<span class="st">'building_rent'</span>] <span class="op">+\</span></span>
+<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a>                        manufacture[<span class="st">'depreciation_equipment'</span>]</span>
+<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a>                        </span>
+<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a>applied_overhead_cost <span class="op">=</span> manufacture[<span class="st">'direct_labor_cost'</span>] <span class="op">*</span> overhead_rate</span>
+<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a>over_applied_overhead<span class="op">=</span> actual_manuf_overhead <span class="op">-</span> applied_overhead_cost</span>
+<span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-32"><a href="#cb7-32" aria-hidden="true" tabindex="-1"></a>total_manuf_costs <span class="op">=</span> manufacture[<span class="st">'direct_materials'</span>] <span class="op">+</span> manufacture[<span class="st">'direct_labor_cost'</span>] <span class="op">+</span> applied_overhead_cost</span>
+<span id="cb7-33"><a href="#cb7-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-34"><a href="#cb7-34" aria-hidden="true" tabindex="-1"></a>tot_cost_process <span class="op">=</span> total_manuf_costs <span class="op">+</span> work_in_process[<span class="dv">0</span>]</span>
+<span id="cb7-35"><a href="#cb7-35" aria-hidden="true" tabindex="-1"></a>cogsm <span class="op">=</span> tot_cost_process <span class="op">-</span> work_in_process[<span class="dv">1</span>]</span>
+<span id="cb7-36"><a href="#cb7-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-37"><a href="#cb7-37" aria-hidden="true" tabindex="-1"></a>cogs_avail_4sale <span class="op">=</span> finished_goods[<span class="dv">0</span>] <span class="op">+</span> cogsm </span>
+<span id="cb7-38"><a href="#cb7-38" aria-hidden="true" tabindex="-1"></a>cogsun <span class="op">=</span> cogs_avail_4sale <span class="op">-</span> finished_goods[<span class="dv">1</span>]</span>
+<span id="cb7-39"><a href="#cb7-39" aria-hidden="true" tabindex="-1"></a>cogs <span class="op">=</span> cogsun <span class="op">+</span> over_applied_overhead</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>The printed output.</p>
+<pre><code>------- Cost Accounting --------
+Overhead rate = 120.00%
+Actual manufacturing overhead .. $22,000,000.0
+Applied overhead cost .......... $25,200,000.0
+Over applied overhead .......... $-3,200,000.0
+Total manufacturing costs ........... $76,200,000.0
+Total cost of work in process ....... $81,200,000.0
+Cost of goods manufactured .......... $77,200,000.0
+Cost of goods available for sale ............ $90,200,000.0
+Cost of goods sold (unadjusted) ............. $79,200,000.0
+Cost of goods sold .......................... $76,000,000.0
+
+Price to customer = $150,000.0 (Profit: $50,000.0)
+</code></pre>
 
 
+</section>
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
