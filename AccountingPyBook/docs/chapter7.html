@@ -1,0 +1,1129 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.269">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>AccountingPy - 8&nbsp; Alt Inventory Costing Methods</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./chapter8.html" rel="next">
+<link href="./chapter6.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Alt Inventory Costing Methods</span></h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">AccountingPy</a> 
+        <div class="sidebar-tools-main">
+  <a href="" class="quarto-color-scheme-toggle sidebar-tool" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+    </div>
+      </div>
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">Welcome</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./intro.html" class="sidebar-item-text sidebar-link">Introduction</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./pythonbasics.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Python Basics</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter1.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Financial Accounting</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter2.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Job Cost Accounting</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter3.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Process Cost Accounting</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter4.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Activity Based Costing</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter5.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Decision Making: Cost Volume Profit</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter6.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Incremental Analysis</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter7.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Alt Inventory Costing Methods</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter8.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Pricing</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./glossary.html" class="sidebar-item-text sidebar-link">Glossary</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./summary.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Summary</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">References</a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#inventory-costing-methods" id="toc-inventory-costing-methods" class="nav-link active" data-scroll-target="#inventory-costing-methods"><span class="toc-section-number">8.1</span>  Inventory Costing Methods</a>
+  <ul class="collapse">
+  <li><a href="#absorption-costing-example" id="toc-absorption-costing-example" class="nav-link" data-scroll-target="#absorption-costing-example"><span class="toc-section-number">8.1.1</span>  Absorption Costing Example</a></li>
+  <li><a href="#variable-costing-example" id="toc-variable-costing-example" class="nav-link" data-scroll-target="#variable-costing-example"><span class="toc-section-number">8.1.2</span>  Variable Costing Example</a></li>
+  </ul></li>
+  <li><a href="#normal-costing" id="toc-normal-costing" class="nav-link" data-scroll-target="#normal-costing"><span class="toc-section-number">8.2</span>  Normal Costing</a></li>
+  <li><a href="#throughput-costing" id="toc-throughput-costing" class="nav-link" data-scroll-target="#throughput-costing"><span class="toc-section-number">8.3</span>  Throughput costing</a>
+  <ul class="collapse">
+  <li><a href="#throughput-function" id="toc-throughput-function" class="nav-link" data-scroll-target="#throughput-function"><span class="toc-section-number">8.3.1</span>  Throughput function</a></li>
+  <li><a href="#variable-costing" id="toc-variable-costing" class="nav-link" data-scroll-target="#variable-costing"><span class="toc-section-number">8.3.2</span>  Variable costing</a></li>
+  <li><a href="#throughput-costing-summary" id="toc-throughput-costing-summary" class="nav-link" data-scroll-target="#throughput-costing-summary"><span class="toc-section-number">8.3.3</span>  Throughput Costing Summary</a></li>
+  <li><a href="#throughput-example" id="toc-throughput-example" class="nav-link" data-scroll-target="#throughput-example"><span class="toc-section-number">8.3.4</span>  Throughput Example</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title d-none d-lg-block"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Alt Inventory Costing Methods</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<p>Alternative inventory costing methods for decision making. Fixed and variable costs are determinant in a company’s profitability, where fixed costs impact net income. Some companies focus on the variable costs and its role in profitability. Alternative inventory costing methods (AICM) includes:</p>
+<ul>
+<li>comparing absorption costing and variable costing</li>
+<li>net income effects</li>
+<li>performance evaluation</li>
+<li>potential advantage of variable costing</li>
+<li>normal costing</li>
+<li>throughput costing</li>
+</ul>
+<section id="inventory-costing-methods" class="level2" data-number="8.1">
+<h2 data-number="8.1" class="anchored" data-anchor-id="inventory-costing-methods"><span class="header-section-number">8.1</span> Inventory Costing Methods</h2>
+<blockquote class="blockquote">
+<p>Previously variable and fixed manufacturing costs were classified as product costs.</p>
+</blockquote>
+<ul>
+<li><p>job order costing = costs of direct materials, direct labor and both variable and fixed manufacturing overhead</p></li>
+<li><p><code>Full absorption costing</code> is all manufacturing costs are charged to or absorbed by the product.</p></li>
+</ul>
+<p>Example company cost data</p>
+<div class="cell" data-execution_count="1">
+<details>
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>cost_data <span class="op">=</span> {</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">'selling_price'</span>: <span class="dv">20</span>,</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">'units_produced'</span>: <span class="fl">30e3</span>,</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">'units_sold'</span>: <span class="fl">20e3</span>,</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">'begin_inventory'</span>: <span class="dv">0</span>,</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="st">'variable_costs'</span>: {</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">'manufacturing'</span>: <span class="dv">9</span>,</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">'direct_materials'</span>:<span class="dv">5</span>,</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">'direct_labor'</span>: <span class="dv">3</span>,</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">'var_overhead'</span>: <span class="dv">1</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    },</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  <span class="st">'selling_admin_costs'</span>: <span class="dv">2</span>,</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>  <span class="st">'fixed_costs'</span>: {</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>      <span class="st">'manuf_overhead'</span>: <span class="fl">120e3</span>,</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>      <span class="st">'selling_admin_expenses'</span>: <span class="fl">15e3</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>per unit manufacturing cost using each costing approach</p>
+<div class="cell" data-execution_count="2">
+<details>
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> absorption_costing_compare(cost_data: <span class="bu">dict</span>):</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># absorption costing</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  fixed_manuf_overhead <span class="op">=</span> cost_data[<span class="st">'fixed_costs'</span>][<span class="st">'manuf_overhead'</span>] <span class="op">/</span> cost_data[<span class="st">'units_produced'</span>]</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  abs_cost <span class="op">=</span> <span class="bu">sum</span>( <span class="bu">list</span>( cost_data[<span class="st">'variable_costs'</span>].values()  )[<span class="dv">1</span>:] ) <span class="op">+</span> fixed_manuf_overhead</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  var_cost <span class="op">=</span> <span class="bu">sum</span>( <span class="bu">list</span>( cost_data[<span class="st">'variable_costs'</span>].values()  )[<span class="dv">1</span>:] )</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  diff <span class="op">=</span> abs_cost <span class="op">-</span> var_cost</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">" - Absorption vs Variable costing -"</span>)</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Absorption costing : manufacturing cost per unit ..... ${:,}"</span>.<span class="bu">format</span>(abs_cost))</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Variable costing :   manufacturing cost per unit ..... ${:,}"</span>.<span class="bu">format</span>(var_cost))</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st"> difference in manufacturing cost per unit is $"</span>, diff)</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>  <span class="co">#----------- income statements</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>  sales <span class="op">=</span> cost_data[<span class="st">'units_sold'</span>] <span class="op">*</span> cost_data[<span class="st">'selling_price'</span>]</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>  cogsm <span class="op">=</span> cost_data[<span class="st">'units_produced'</span>] <span class="op">*</span> abs_cost</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>  <span class="co">#                  10,0000</span></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>  end_inventory <span class="op">=</span> (sales <span class="op">-</span> cogsm) <span class="op">*</span> abs_cost</span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>  cog_sold <span class="op">=</span> cost_data[<span class="st">'units_sold'</span>] <span class="op">*</span> abs_cost</span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>  gross_profit <span class="op">=</span> sales <span class="op">-</span> cog_sold</span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>  var_admin_expense <span class="op">=</span> (sales <span class="op">-</span> cogsm) <span class="op">*</span> diff</span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>  fixed_admin_expense <span class="op">=</span> cost_data[<span class="st">'fixed_costs'</span>][<span class="st">'selling_admin_expenses'</span>]</span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>  net_income <span class="op">=</span> gross_profit <span class="op">-</span> var_admin_expense <span class="op">-</span> fixed_admin_expense </span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st"> === Income Statement ==="</span>)</span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Absorption cost</span><span class="ch">\n</span><span class="st"> Cost of Goods Sold"</span>)</span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">" Sales ..... ${:,}"</span>.<span class="bu">format</span>(sales))</span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">" Cost of goods manufactured ............ ${:,}"</span>.<span class="bu">format</span>(cogsm))</span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">" end of inventory ...................... ${:,}"</span>.<span class="bu">format</span>(end_inventory))</span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">" cost of goods sold .................... ${:,}"</span>.<span class="bu">format</span>(cog_sold))</span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">" gross profit .......................... ${:,}"</span>.<span class="bu">format</span>(gross_profit))</span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">" variable selling &amp; admin expenses ..... ${:,}"</span>.<span class="bu">format</span>(var_admin_expense))</span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">" fixed selling &amp; admin expenses ........ ${:,}"</span>.<span class="bu">format</span>(fixed_admin_expense))</span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">" Net income ........................................... ${:,}"</span>.<span class="bu">format</span>(net_income))</span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a>  <span class="co">#---- var costing</span></span>
+<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a>  var_sales <span class="op">=</span> cost_data[<span class="st">'units_sold'</span>] <span class="op">*</span> cost_data[<span class="st">'selling_price'</span>]</span>
+<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a>  var_manuf_costs <span class="op">=</span> cost_data[<span class="st">'units_produced'</span>] <span class="op">*</span> var_cost</span>
+<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a>  end_inventory <span class="op">=</span> (sales <span class="op">-</span> cogsm) <span class="op">*</span> var_cost</span>
+<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a>  var_cog_sold <span class="op">=</span> var_manuf_costs <span class="op">-</span> end_inventory</span>
+<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a>  var_sell_admin_expense <span class="op">=</span> cost_data[<span class="st">'units_sold'</span>] <span class="op">*</span> cost_data[<span class="st">'selling_admin_costs'</span>]</span>
+<span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a>  contrib_margin <span class="op">=</span> var_sales <span class="op">-</span> (var_cog_sold <span class="op">+</span> var_sell_admin_expense )</span>
+<span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a>  var_fixed_manuf_overhead <span class="op">=</span> cost_data[<span class="st">'fixed_costs'</span>][<span class="st">'manuf_overhead'</span>]</span>
+<span id="cb2-50"><a href="#cb2-50" aria-hidden="true" tabindex="-1"></a>  var_fixed_sell_admin <span class="op">=</span> cost_data[<span class="st">'fixed_costs'</span>][<span class="st">'selling_admin_expenses'</span>]</span>
+<span id="cb2-51"><a href="#cb2-51" aria-hidden="true" tabindex="-1"></a>  var_net_income <span class="op">=</span> contrib_margin <span class="op">-</span> var_fixed_manuf_overhead <span class="op">-</span> var_fixed_sell_admin </span>
+<span id="cb2-52"><a href="#cb2-52" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb2-53"><a href="#cb2-53" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb2-54"><a href="#cb2-54" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st"> === Income Statement ==="</span>)</span>
+<span id="cb2-55"><a href="#cb2-55" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Variable cost</span><span class="ch">\n</span><span class="st"> Cost of Goods Sold"</span>)</span>
+<span id="cb2-56"><a href="#cb2-56" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">" Sales ...... ${:,}"</span>.<span class="bu">format</span>(var_sales))</span>
+<span id="cb2-57"><a href="#cb2-57" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">" variable manufacturing costs .......... ${:,}"</span>.<span class="bu">format</span>(var_manuf_costs))</span>
+<span id="cb2-58"><a href="#cb2-58" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">" end inventory ......................... ${:,}"</span>.<span class="bu">format</span>(end_inventory))</span>
+<span id="cb2-59"><a href="#cb2-59" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">" variable cost of goods sold ........... ${:,}"</span>.<span class="bu">format</span>(var_cog_sold))</span>
+<span id="cb2-60"><a href="#cb2-60" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">" variable selling &amp; admin expenses ..... ${:,}"</span>.<span class="bu">format</span>(var_sell_admin_expense))</span>
+<span id="cb2-61"><a href="#cb2-61" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">" contribution margin ................... ${:,}"</span>.<span class="bu">format</span>(contrib_margin))</span>
+<span id="cb2-62"><a href="#cb2-62" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">" fixed manufacturing overhead  ......... ${:,}"</span>.<span class="bu">format</span>(var_fixed_manuf_overhead))</span>
+<span id="cb2-63"><a href="#cb2-63" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">" fixed selling &amp; admin expenses ........ ${:,}"</span>.<span class="bu">format</span>(var_fixed_sell_admin))</span>
+<span id="cb2-64"><a href="#cb2-64" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">" Net income ........................................... ${:,}"</span>.<span class="bu">format</span>( var_net_income))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>call the function</p>
+<div class="cell" data-execution_count="3">
+<details>
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>absorption_costing_compare( cost_data )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code> - Absorption vs Variable costing -
+Absorption costing : manufacturing cost per unit ..... $13.0
+Variable costing :   manufacturing cost per unit ..... $9
+
+ difference in manufacturing cost per unit is $ 4.0
+
+ === Income Statement ===
+Absorption cost
+ Cost of Goods Sold
+ Sales ..... $400,000.0
+ Cost of goods manufactured ............ $390,000.0
+ end of inventory ...................... $130,000.0
+ cost of goods sold .................... $260,000.0
+ gross profit .......................... $140,000.0
+ variable selling &amp; admin expenses ..... $40,000.0
+ fixed selling &amp; admin expenses ........ $15,000.0
+ Net income ........................................... $85,000.0
+
+ === Income Statement ===
+Variable cost
+ Cost of Goods Sold
+ Sales ...... $400,000.0
+ variable manufacturing costs .......... $270,000.0
+ end inventory ......................... $90,000.0
+ variable cost of goods sold ........... $180,000.0
+ variable selling &amp; admin expenses ..... $40,000.0
+ contribution margin ................... $180,000.0
+ fixed manufacturing overhead  ......... $120,000.0
+ fixed selling &amp; admin expenses ........ $15,000.0
+ Net income ........................................... $45,000.0</code></pre>
+</div>
+</div>
+<p>Absorption costing, both variable and fixed selling &amp; admin expenses are treated as period costs. Under variable costing the fixed manufacturing overhead is charged as an expense.</p>
+<ul>
+<li>When there are more units produced than sold, income via absorption costing is higher</li>
+<li>When there are fewer units produced than sold, income via absorption costing is lower</li>
+</ul>
+<section id="absorption-costing-example" class="level3" data-number="8.1.1">
+<h3 data-number="8.1.1" class="anchored" data-anchor-id="absorption-costing-example"><span class="header-section-number">8.1.1</span> Absorption Costing Example</h3>
+<p>Company makes sport balls, the company data is in a data dictionary.</p>
+<div class="cell" data-execution_count="4">
+<details>
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>sport_co <span class="op">=</span> {</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">'variable_costs'</span>: {</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>      <span class="st">'direct_materials'</span>: <span class="fl">0.10</span>,</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>      <span class="st">'direct_labor'</span>: <span class="fl">0.05</span>,</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>      <span class="st">'var_manuf_overhead'</span>: <span class="fl">0.08</span>, <span class="co"># manufacturing overhead</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>      <span class="st">'var_sell_admin_expense'</span>: <span class="fl">0.02</span> },</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">'fixed_costs'</span>: {</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>      <span class="st">'fixed_manuf_overhead'</span>: <span class="fl">500e3</span>, </span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>      <span class="st">'sell_admin_expense'</span>: <span class="fl">100e3</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>    },</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>  <span class="st">'begin_inventory'</span>: <span class="dv">0</span>,</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>  <span class="st">'units_sold'</span>: <span class="fl">7.5e6</span>,</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>  <span class="st">'units_produced'</span>: <span class="fl">8e6</span>,</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>  <span class="st">'selling_price'</span>: <span class="fl">0.5</span></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>A function to calculate the cost of 1 unit of product using the absorption costing method</p>
+<div class="cell" data-execution_count="5">
+<details>
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> absorption_costing( company: <span class="bu">dict</span>):</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  fixed_manuf_overhead <span class="op">=</span> sport_co[<span class="st">'fixed_costs'</span>][<span class="st">'fixed_manuf_overhead'</span>] <span class="op">/</span> sport_co[<span class="st">'units_produced'</span>]</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  cpu_abs <span class="op">=</span>  <span class="bu">sum</span>( <span class="bu">list</span>( sport_co[<span class="st">'variable_costs'</span>].values() )[<span class="dv">0</span>:<span class="op">-</span><span class="dv">1</span>]) <span class="op">+</span> fixed_manuf_overhead</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="co"># print(cpu_abs)</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  sales <span class="op">=</span> sport_co[<span class="st">'units_sold'</span>] <span class="op">*</span> sport_co[<span class="st">'selling_price'</span>]</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>  cog_sold <span class="op">=</span> <span class="bu">round</span>( sport_co[<span class="st">'units_sold'</span>] <span class="op">*</span> cpu_abs, <span class="dv">2</span>)</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>  gross_margin <span class="op">=</span> sales <span class="op">-</span> cog_sold </span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>  var_sell_admin_expense <span class="op">=</span> sport_co[<span class="st">'units_sold'</span>] <span class="op">*</span> sport_co[<span class="st">'variable_costs'</span>][<span class="st">'var_sell_admin_expense'</span>]</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>  fixed_sell_admin_expense <span class="op">=</span> sport_co[<span class="st">'fixed_costs'</span>][<span class="st">'sell_admin_expense'</span>]</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>  net_income <span class="op">=</span> gross_margin <span class="op">-</span> (var_sell_admin_expense <span class="op">+</span> fixed_sell_admin_expense)</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">" - Absorption Costing -"</span> )</span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">" sales ................ ${:,}"</span>.<span class="bu">format</span>(sales))</span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">" cost of goods sold ............................... ${:,}"</span>.<span class="bu">format</span>(cog_sold))</span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">" gross margin ..................................... ${:,}"</span>.<span class="bu">format</span>(gross_margin))</span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">" variable selling &amp; admin expenses ................ ${:,}"</span>.<span class="bu">format</span>(var_sell_admin_expense))</span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">" fixed selling &amp; admin expenses ................... ${:,}"</span>.<span class="bu">format</span>(fixed_sell_admin_expense))</span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">" net income .................................................... ${:,}"</span>.<span class="bu">format</span>(net_income))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>Call the function</p>
+<div class="cell" data-execution_count="6">
+<details>
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>absorption_costing( sport_co )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code> - Absorption Costing -
+ sales ................ $3,750,000.0
+ cost of goods sold ............................... $2,193,750.0
+ gross margin ..................................... $1,556,250.0
+ variable selling &amp; admin expenses ................ $150,000.0
+ fixed selling &amp; admin expenses ................... $100,000.0
+ net income .................................................... $1,306,250.0</code></pre>
+</div>
+</div>
+</section>
+<section id="variable-costing-example" class="level3" data-number="8.1.2">
+<h3 data-number="8.1.2" class="anchored" data-anchor-id="variable-costing-example"><span class="header-section-number">8.1.2</span> Variable Costing Example</h3>
+<p>Using the same sport company data for variable costing function</p>
+<div class="cell" data-execution_count="7">
+<details>
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> variable_costing( company: <span class="bu">dict</span>):</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  cpu_abs <span class="op">=</span>  <span class="bu">sum</span>( <span class="bu">list</span>( sport_co[<span class="st">'variable_costs'</span>].values() )[<span class="dv">0</span>:<span class="op">-</span><span class="dv">1</span>]) </span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># print(cpu_abs)</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  sales <span class="op">=</span> sport_co[<span class="st">'units_sold'</span>] <span class="op">*</span> sport_co[<span class="st">'selling_price'</span>]</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>  cog_sold <span class="op">=</span> <span class="bu">round</span>( sport_co[<span class="st">'units_sold'</span>] <span class="op">*</span> cpu_abs, <span class="dv">2</span>)</span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>  gross_margin <span class="op">=</span> sales <span class="op">-</span> cog_sold</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>  var_sell_admin_expense <span class="op">=</span> sport_co[<span class="st">'units_sold'</span>] <span class="op">*</span> sport_co[<span class="st">'variable_costs'</span>][<span class="st">'var_sell_admin_expense'</span>]</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>  contrib_margin <span class="op">=</span> cog_sold <span class="op">+</span> var_sell_admin_expense </span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>  fixed_manuf_overhead <span class="op">=</span> sport_co[<span class="st">'fixed_costs'</span>][<span class="st">'fixed_manuf_overhead'</span>]</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>  fixed_sell_admin_expense <span class="op">=</span> sport_co[<span class="st">'fixed_costs'</span>][<span class="st">'sell_admin_expense'</span>] </span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>  net_income <span class="op">=</span> sales <span class="op">-</span> contrib_margin <span class="op">-</span> (fixed_manuf_overhead <span class="op">+</span> fixed_sell_admin_expense )</span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">" - Variable Costing -"</span> )</span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">" sales ................ ${:,}"</span>.<span class="bu">format</span>(sales))</span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">" variable cost of goods sold ...................... ${:,}"</span>.<span class="bu">format</span>(cog_sold))</span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">" variable selling &amp; admin expenses ................ ${:,}"</span>.<span class="bu">format</span>(var_sell_admin_expense))</span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">" contribution margin .............................. ${:,}"</span>.<span class="bu">format</span>(contrib_margin))</span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">" fixed manufacturing overhead ..................... ${:,}"</span>.<span class="bu">format</span>(fixed_manuf_overhead))</span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">" fixed selling &amp; admin expenses ................... ${:,}"</span>.<span class="bu">format</span>(fixed_sell_admin_expense))</span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">" net income .................................................... ${:,}"</span>.<span class="bu">format</span>(net_income))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>call variable costing function</p>
+<div class="cell" data-execution_count="8">
+<details>
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>variable_costing( sport_co )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code> - Variable Costing -
+ sales ................ $3,750,000.0
+ variable cost of goods sold ...................... $1,725,000.0
+ variable selling &amp; admin expenses ................ $150,000.0
+ contribution margin .............................. $1,875,000.0
+ fixed manufacturing overhead ..................... $500,000.0
+ fixed selling &amp; admin expenses ................... $100,000.0
+ net income .................................................... $1,275,000.0</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="normal-costing" class="level2" data-number="8.2">
+<h2 data-number="8.2" class="anchored" data-anchor-id="normal-costing"><span class="header-section-number">8.2</span> Normal Costing</h2>
+<p>Using the <code>sports_co</code> dictionary used previously to calculate the normal costing</p>
+<div class="cell" data-execution_count="9">
+<details>
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>sport_co[<span class="st">'fixed_costs'</span>][<span class="st">'fixed_manuf_overhead'</span>] <span class="op">/</span> <span class="fl">10e6</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="9">
+<pre><code>0.05</code></pre>
+</div>
+</div>
+<p>Normal costing function</p>
+<div class="cell" data-execution_count="10">
+<details>
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> normal_costing( company: <span class="bu">dict</span>):</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  fixed_manuf_overhead <span class="op">=</span> sport_co[<span class="st">'fixed_costs'</span>][<span class="st">'fixed_manuf_overhead'</span>] <span class="op">/</span> <span class="fl">10e6</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  cpu_abs <span class="op">=</span>  <span class="bu">sum</span>( <span class="bu">list</span>( sport_co[<span class="st">'variable_costs'</span>].values() )[<span class="dv">0</span>:<span class="op">-</span><span class="dv">1</span>]) <span class="op">+</span> fixed_manuf_overhead</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>  <span class="co"># print(cpu_abs)</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>  sales <span class="op">=</span> sport_co[<span class="st">'units_sold'</span>] <span class="op">*</span> sport_co[<span class="st">'selling_price'</span>]</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>  cog_sold <span class="op">=</span> <span class="bu">round</span>( sport_co[<span class="st">'units_sold'</span>] <span class="op">*</span> cpu_abs, <span class="dv">2</span>)</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>  var_sell_admin_expense <span class="op">=</span> sport_co[<span class="st">'units_sold'</span>] <span class="op">*</span> sport_co[<span class="st">'variable_costs'</span>][<span class="st">'var_sell_admin_expense'</span>]</span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>  contrib_margin <span class="op">=</span> cog_sold <span class="op">+</span> var_sell_admin_expense </span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>  fixed_manuf_overhead <span class="op">=</span> sport_co[<span class="st">'fixed_costs'</span>][<span class="st">'fixed_manuf_overhead'</span>]</span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>  fixed_sell_admin_expense <span class="op">=</span> sport_co[<span class="st">'fixed_costs'</span>][<span class="st">'sell_admin_expense'</span>] </span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>  var_sell_admin_expense <span class="op">=</span> sport_co[<span class="st">'variable_costs'</span>][<span class="st">'var_sell_admin_expense'</span>] <span class="op">*</span> sport_co[<span class="st">'units_sold'</span>]</span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a>  <span class="co"># -----</span></span>
+<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a>  unfav_vol_var <span class="op">=</span> sport_co[<span class="st">'fixed_costs'</span>][<span class="st">'fixed_manuf_overhead'</span>] <span class="op">-</span> (sport_co[<span class="st">'fixed_costs'</span>][<span class="st">'fixed_manuf_overhead'</span>] <span class="op">-</span> sport_co[<span class="st">'fixed_costs'</span>][<span class="st">'sell_admin_expense'</span>])</span>
+<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a>  gross_margin <span class="op">=</span> sales <span class="op">-</span> cog_sold <span class="op">-</span> unfav_vol_var</span>
+<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb14-22"><a href="#cb14-22" aria-hidden="true" tabindex="-1"></a>  expenses <span class="op">=</span> [cog_sold, unfav_vol_var , var_sell_admin_expense , fixed_sell_admin_expense]</span>
+<span id="cb14-23"><a href="#cb14-23" aria-hidden="true" tabindex="-1"></a>  net_income <span class="op">=</span> sales <span class="op">-</span> <span class="bu">sum</span>(expenses)</span>
+<span id="cb14-24"><a href="#cb14-24" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb14-25"><a href="#cb14-25" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">" - Normal Costing -"</span> )</span>
+<span id="cb14-26"><a href="#cb14-26" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">" sales ....................... ${:,}"</span>.<span class="bu">format</span>(sales))</span>
+<span id="cb14-27"><a href="#cb14-27" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">" variable cost of goods sold ...................... ${:,}"</span>.<span class="bu">format</span>(cog_sold))</span>
+<span id="cb14-28"><a href="#cb14-28" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">" unfavorable volume variance ...................... ${:,}"</span>.<span class="bu">format</span>(unfav_vol_var))</span>
+<span id="cb14-29"><a href="#cb14-29" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">" gross margin ..................................... ${:,}"</span>.<span class="bu">format</span>(gross_margin))</span>
+<span id="cb14-30"><a href="#cb14-30" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">" variable selling &amp; admin expenses ................ ${:,}"</span>.<span class="bu">format</span>(var_sell_admin_expense))</span>
+<span id="cb14-31"><a href="#cb14-31" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">" fixed selling &amp; admin expenses ................... ${:,}"</span>.<span class="bu">format</span>(fixed_sell_admin_expense))</span>
+<span id="cb14-32"><a href="#cb14-32" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">" net income .................................................... ${:,}"</span>.<span class="bu">format</span>(net_income))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>Call the normal costing function</p>
+<div class="cell" data-execution_count="11">
+<details>
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>normal_costing(sport_co)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code> - Normal Costing -
+ sales ....................... $3,750,000.0
+ variable cost of goods sold ...................... $2,100,000.0
+ unfavorable volume variance ...................... $100,000.0
+ gross margin ..................................... $1,550,000.0
+ variable selling &amp; admin expenses ................ $150,000.0
+ fixed selling &amp; admin expenses ................... $100,000.0
+ net income .................................................... $1,300,000.0</code></pre>
+</div>
+</div>
+</section>
+<section id="throughput-costing" class="level2" data-number="8.3">
+<h2 data-number="8.3" class="anchored" data-anchor-id="throughput-costing"><span class="header-section-number">8.3</span> Throughput costing</h2>
+<p><code>Throughput costing</code> (<em>super variable costing</em>) treats all costs as period expenses <em>except</em> for direct materials {much like variable costing system}.Product costs are only direct material costs, inventory is valued using only direct material costs and manufacturing costs are labelled as expenses in the accounting period when they occur. There are two criteria that should be met before using throughput costing:</p>
+<ul>
+<li>companies that engage in a manufacturing process where conversion costs (direct labor and manufacturing overhead) are fixed costs, meaning no variance during units of production</li>
+<li>management uses cost accounting information in order to make decisions such as accepting or rejecting an offer</li>
+</ul>
+<p>Using the cost data from previous section</p>
+<div class="cell" data-execution_count="12">
+<details>
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>cost_data</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="12">
+<pre><code>{'selling_price': 20,
+ 'units_produced': 30000.0,
+ 'units_sold': 20000.0,
+ 'begin_inventory': 0,
+ 'variable_costs': {'manufacturing': 9,
+  'direct_materials': 5,
+  'direct_labor': 3,
+  'var_overhead': 1},
+ 'selling_admin_costs': 2,
+ 'fixed_costs': {'manuf_overhead': 120000.0,
+  'selling_admin_expenses': 15000.0}}</code></pre>
+</div>
+</div>
+<p>Throughput costing and variable costing for manufacturing cost per unit</p>
+<div class="cell" data-execution_count="13">
+<details>
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>thru_cpu <span class="op">=</span> cost_data[<span class="st">'variable_costs'</span>][<span class="st">'direct_materials'</span>]</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>var_cpu <span class="op">=</span> <span class="bu">sum</span>( <span class="bu">list</span>( cost_data[<span class="st">'variable_costs'</span>].values())[<span class="dv">1</span>:] )</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Throughput costing: direct materials = ${:,}"</span>.<span class="bu">format</span>(thru_cpu))</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Variable costing: direct materials = ${:,}"</span>.<span class="bu">format</span>(var_cpu))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Throughput costing: direct materials = $5
+Variable costing: direct materials = $9</code></pre>
+</div>
+</div>
+<section id="throughput-function" class="level3" data-number="8.3.1">
+<h3 data-number="8.3.1" class="anchored" data-anchor-id="throughput-function"><span class="header-section-number">8.3.1</span> Throughput function</h3>
+<div class="cell" data-execution_count="14">
+<details>
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> throughput_costing( company: <span class="bu">dict</span>):</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>  sales <span class="op">=</span> company[<span class="st">'units_sold'</span>] <span class="op">*</span> company[<span class="st">'selling_price'</span>]</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>  direct_material_costs <span class="op">=</span> company[<span class="st">'units_produced'</span>] <span class="op">*</span> company[<span class="st">'variable_costs'</span>][<span class="st">'direct_materials'</span>]</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>  start_inventory <span class="op">=</span> company[<span class="st">'begin_inventory'</span>]</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>  cog_sale <span class="op">=</span> direct_material_costs <span class="op">-</span> start_inventory </span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>  <span class="co"># print(cog_sale)</span></span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>  end_inventory <span class="op">=</span> (company[<span class="st">'units_produced'</span>] <span class="op">-</span> company[<span class="st">'units_sold'</span>]) <span class="op">*</span> company[<span class="st">'variable_costs'</span>][<span class="st">'direct_materials'</span>]</span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a>  var_cog_sold <span class="op">=</span> direct_material_costs <span class="op">-</span> end_inventory</span>
+<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a>  thru_contrib_margin <span class="op">=</span> sales <span class="op">-</span> var_cog_sold</span>
+<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a>  direct_labor_costs <span class="op">=</span> company[<span class="st">'units_produced'</span>] <span class="op">*</span> company[<span class="st">'variable_costs'</span>][<span class="st">'direct_labor'</span>]</span>
+<span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a>  var_overhead_costs <span class="op">=</span> company[<span class="st">'units_produced'</span>] <span class="op">*</span> company[<span class="st">'variable_costs'</span>][<span class="st">'var_overhead'</span>]</span>
+<span id="cb21-16"><a href="#cb21-16" aria-hidden="true" tabindex="-1"></a>  var_sell_admin_expense <span class="op">=</span> company[<span class="st">'units_sold'</span>] <span class="op">*</span> company[<span class="st">'selling_admin_costs'</span>]</span>
+<span id="cb21-17"><a href="#cb21-17" aria-hidden="true" tabindex="-1"></a>  fixed_manuf_overhead <span class="op">=</span> company[<span class="st">'fixed_costs'</span>][<span class="st">'manuf_overhead'</span>]</span>
+<span id="cb21-18"><a href="#cb21-18" aria-hidden="true" tabindex="-1"></a>  fixed_sell_admin <span class="op">=</span> company[<span class="st">'fixed_costs'</span>][<span class="st">'selling_admin_expenses'</span>]</span>
+<span id="cb21-19"><a href="#cb21-19" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb21-20"><a href="#cb21-20" aria-hidden="true" tabindex="-1"></a>  expenses <span class="op">=</span> [direct_labor_costs, var_overhead_costs, var_sell_admin_expense, fixed_manuf_overhead, fixed_sell_admin]</span>
+<span id="cb21-21"><a href="#cb21-21" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb21-22"><a href="#cb21-22" aria-hidden="true" tabindex="-1"></a>  total_other_op_costs <span class="op">=</span> <span class="bu">sum</span>(expenses)</span>
+<span id="cb21-23"><a href="#cb21-23" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb21-24"><a href="#cb21-24" aria-hidden="true" tabindex="-1"></a>  net_income <span class="op">=</span> thru_contrib_margin <span class="op">-</span> total_other_op_costs</span>
+<span id="cb21-25"><a href="#cb21-25" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb21-26"><a href="#cb21-26" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">" - Throughput Costing -"</span> )</span>
+<span id="cb21-27"><a href="#cb21-27" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">" sales ....................... ${:,}"</span>.<span class="bu">format</span>(sales))</span>
+<span id="cb21-28"><a href="#cb21-28" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">" direct material costs ....................... ${:,}"</span>.<span class="bu">format</span>(direct_material_costs))</span>
+<span id="cb21-29"><a href="#cb21-29" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">" ending inventory ............................ ${:,}"</span>.<span class="bu">format</span>(end_inventory))</span>
+<span id="cb21-30"><a href="#cb21-30" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">" throughput contribution margin .............. ${:,}"</span>.<span class="bu">format</span>(thru_contrib_margin))</span>
+<span id="cb21-31"><a href="#cb21-31" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"</span><span class="ch">\t</span><span class="st"> direct labor costs .......................... ${:,}"</span>.<span class="bu">format</span>(direct_labor_costs))</span>
+<span id="cb21-32"><a href="#cb21-32" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"</span><span class="ch">\t</span><span class="st"> variable overhead costs ..................... ${:,}"</span>.<span class="bu">format</span>(var_overhead_costs))</span>
+<span id="cb21-33"><a href="#cb21-33" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"</span><span class="ch">\t</span><span class="st"> variable sell &amp; admin costs ................. ${:,}"</span>.<span class="bu">format</span>(var_sell_admin_expense))</span>
+<span id="cb21-34"><a href="#cb21-34" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"</span><span class="ch">\t</span><span class="st"> fixed manufacturing overhead ................ ${:,}"</span>.<span class="bu">format</span>(fixed_manuf_overhead))</span>
+<span id="cb21-35"><a href="#cb21-35" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"</span><span class="ch">\t</span><span class="st"> fixed sell &amp; admin expenses  ................ ${:,}"</span>.<span class="bu">format</span>(fixed_sell_admin))</span>
+<span id="cb21-36"><a href="#cb21-36" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"</span><span class="ch">\t</span><span class="st"> total other operating costs  .................... ${:,}"</span>.<span class="bu">format</span>(total_other_op_costs))</span>
+<span id="cb21-37"><a href="#cb21-37" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb21-38"><a href="#cb21-38" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">" net income ....................................................... ${:,}"</span>.<span class="bu">format</span>(net_income))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>Call the function</p>
+<div class="cell" data-execution_count="15">
+<details>
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>throughput_costing(cost_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code> - Throughput Costing -
+ sales ....................... $400,000.0
+ direct material costs ....................... $150,000.0
+ ending inventory ............................ $50,000.0
+ throughput contribution margin .............. $300,000.0
+     direct labor costs .......................... $90,000.0
+     variable overhead costs ..................... $30,000.0
+     variable sell &amp; admin costs ................. $40,000.0
+     fixed manufacturing overhead ................ $120,000.0
+     fixed sell &amp; admin expenses  ................ $15,000.0
+     total other operating costs  .................... $295,000.0
+ net income ....................................................... $5,000.0</code></pre>
+</div>
+</div>
+</section>
+<section id="variable-costing" class="level3" data-number="8.3.2">
+<h3 data-number="8.3.2" class="anchored" data-anchor-id="variable-costing"><span class="header-section-number">8.3.2</span> Variable costing</h3>
+<p>this is a second version of the variable costing function</p>
+<div class="cell" data-execution_count="16">
+<details>
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> variable_costing2( company: <span class="bu">dict</span>):</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>  sales <span class="op">=</span> cost_data[<span class="st">'units_sold'</span>] <span class="op">*</span> cost_data[<span class="st">'selling_price'</span>]</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>  direct_material_costs <span class="op">=</span> cost_data[<span class="st">'units_produced'</span>] <span class="op">*</span> cost_data[<span class="st">'variable_costs'</span>][<span class="st">'manufacturing'</span>]</span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>  start_inventory <span class="op">=</span> cost_data[<span class="st">'begin_inventory'</span>]</span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>  cog_sale <span class="op">=</span> direct_material_costs <span class="op">-</span> start_inventory  </span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>  end_inventory <span class="op">=</span> (cost_data[<span class="st">'units_produced'</span>] <span class="op">-</span> cost_data[<span class="st">'units_sold'</span>]) <span class="op">*</span> cost_data[<span class="st">'variable_costs'</span>][<span class="st">'manufacturing'</span>]</span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a>  var_manuf_costs <span class="op">=</span> cost_data[<span class="st">'units_produced'</span>] <span class="op">*</span> cost_data[<span class="st">'variable_costs'</span>][<span class="st">'manufacturing'</span>]</span>
+<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a>  var_cogs_sold <span class="op">=</span> cog_sale <span class="op">-</span> end_inventory</span>
+<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a>  var_sell_admin_expense <span class="op">=</span> cost_data[<span class="st">'units_sold'</span>] <span class="op">*</span> cost_data[<span class="st">'selling_admin_costs'</span>]</span>
+<span id="cb24-15"><a href="#cb24-15" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb24-16"><a href="#cb24-16" aria-hidden="true" tabindex="-1"></a>  contrib_margin <span class="op">=</span> sales <span class="op">-</span> (var_sell_admin_expense <span class="op">+</span>var_cogs_sold )</span>
+<span id="cb24-17"><a href="#cb24-17" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb24-18"><a href="#cb24-18" aria-hidden="true" tabindex="-1"></a>  fixed_manuf_overhead <span class="op">=</span> cost_data[<span class="st">'fixed_costs'</span>][<span class="st">'manuf_overhead'</span>]</span>
+<span id="cb24-19"><a href="#cb24-19" aria-hidden="true" tabindex="-1"></a>  fixed_sell_admin <span class="op">=</span> cost_data[<span class="st">'fixed_costs'</span>][<span class="st">'selling_admin_expenses'</span>]</span>
+<span id="cb24-20"><a href="#cb24-20" aria-hidden="true" tabindex="-1"></a>  net_income <span class="op">=</span> contrib_margin <span class="op">-</span>fixed_manuf_overhead <span class="op">-</span> fixed_sell_admin</span>
+<span id="cb24-21"><a href="#cb24-21" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb24-22"><a href="#cb24-22" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb24-23"><a href="#cb24-23" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb24-24"><a href="#cb24-24" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">" - Variable Costing -"</span> )</span>
+<span id="cb24-25"><a href="#cb24-25" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">" sales ........................... ${:,}"</span>.<span class="bu">format</span>(sales))</span>
+<span id="cb24-26"><a href="#cb24-26" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">" variable manufacturing costs ...................... ${:,}"</span>.<span class="bu">format</span>(var_manuf_costs))</span>
+<span id="cb24-27"><a href="#cb24-27" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">" cost of goods available for sale  ................. ${:,}"</span>.<span class="bu">format</span>(cog_sale))</span>
+<span id="cb24-28"><a href="#cb24-28" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">" variable cost of goods sold  ...................... ${:,}"</span>.<span class="bu">format</span>(var_cogs_sold))</span>
+<span id="cb24-29"><a href="#cb24-29" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">" variable selling &amp; admin expenses ................. ${:,}"</span>.<span class="bu">format</span>(var_sell_admin_expense))</span>
+<span id="cb24-30"><a href="#cb24-30" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">" contribution margin ............................... ${:,}"</span>.<span class="bu">format</span>(contrib_margin))</span>
+<span id="cb24-31"><a href="#cb24-31" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">" fixed manufacturing overhead ...................... ${:,}"</span>.<span class="bu">format</span>(fixed_manuf_overhead))</span>
+<span id="cb24-32"><a href="#cb24-32" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">" fixed selling &amp; admin expenses .................... ${:,}"</span>.<span class="bu">format</span>(fixed_sell_admin))</span>
+<span id="cb24-33"><a href="#cb24-33" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">" net income .................................................... ${:,}"</span>.<span class="bu">format</span>(net_income))</span>
+<span id="cb24-34"><a href="#cb24-34" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb24-35"><a href="#cb24-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb24-36"><a href="#cb24-36" aria-hidden="true" tabindex="-1"></a>variable_costing2(cost_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code> - Variable Costing -
+ sales ........................... $400,000.0
+ variable manufacturing costs ...................... $270,000.0
+ cost of goods available for sale  ................. $270,000.0
+ variable cost of goods sold  ...................... $180,000.0
+ variable selling &amp; admin expenses ................. $40,000.0
+ contribution margin ............................... $180,000.0
+ fixed manufacturing overhead ...................... $120,000.0
+ fixed selling &amp; admin expenses .................... $15,000.0
+ net income .................................................... $45,000.0</code></pre>
+</div>
+</div>
+</section>
+<section id="throughput-costing-summary" class="level3" data-number="8.3.3">
+<h3 data-number="8.3.3" class="anchored" data-anchor-id="throughput-costing-summary"><span class="header-section-number">8.3.3</span> Throughput Costing Summary</h3>
+<pre><code>if (units produced) == units sold:
+  variable costing = throughput costing
+
+if (units produced) &gt; units sold:
+  variable costing &gt; throughput costing
+  
+if (units produced) &lt; units sold:
+  variable costing &lt; throughput costing</code></pre>
+</section>
+<section id="throughput-example" class="level3" data-number="8.3.4">
+<h3 data-number="8.3.4" class="anchored" data-anchor-id="throughput-example"><span class="header-section-number">8.3.4</span> Throughput Example</h3>
+<p>Using the sport company data dictionary using a revised version of the throughput function</p>
+<div class="cell" data-execution_count="17">
+<details>
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> throughput_costing2( company: <span class="bu">dict</span>):</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>  sales <span class="op">=</span> company[<span class="st">'units_sold'</span>] <span class="op">*</span> company[<span class="st">'selling_price'</span>]</span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>  direct_material_costs <span class="op">=</span> company[<span class="st">'units_produced'</span>] <span class="op">*</span> company[<span class="st">'variable_costs'</span>][<span class="st">'direct_materials'</span>]</span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>  start_inventory <span class="op">=</span> company[<span class="st">'begin_inventory'</span>]</span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>  cog_sale <span class="op">=</span> direct_material_costs <span class="op">-</span> start_inventory </span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>  <span class="co"># print(cog_sale)</span></span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>  end_inventory <span class="op">=</span> (company[<span class="st">'units_produced'</span>] <span class="op">-</span> company[<span class="st">'units_sold'</span>]) <span class="op">*</span> company[<span class="st">'variable_costs'</span>][<span class="st">'direct_materials'</span>]</span>
+<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a>  var_cog_sold <span class="op">=</span> direct_material_costs <span class="op">-</span> end_inventory</span>
+<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a>  thru_contrib_margin <span class="op">=</span> sales <span class="op">-</span> var_cog_sold</span>
+<span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb27-14"><a href="#cb27-14" aria-hidden="true" tabindex="-1"></a>  direct_labor_costs <span class="op">=</span> company[<span class="st">'units_produced'</span>] <span class="op">*</span> company[<span class="st">'variable_costs'</span>][<span class="st">'direct_labor'</span>]</span>
+<span id="cb27-15"><a href="#cb27-15" aria-hidden="true" tabindex="-1"></a>  var_overhead_costs <span class="op">=</span> company[<span class="st">'units_produced'</span>] <span class="op">*</span> company[<span class="st">'variable_costs'</span>][<span class="st">'var_manuf_overhead'</span>]</span>
+<span id="cb27-16"><a href="#cb27-16" aria-hidden="true" tabindex="-1"></a>  var_sell_admin_expense <span class="op">=</span> company[<span class="st">'units_sold'</span>] <span class="op">*</span> company[<span class="st">'variable_costs'</span>][<span class="st">'var_sell_admin_expense'</span>]</span>
+<span id="cb27-17"><a href="#cb27-17" aria-hidden="true" tabindex="-1"></a>  fixed_manuf_overhead <span class="op">=</span> company[<span class="st">'fixed_costs'</span>][<span class="st">'fixed_manuf_overhead'</span>]</span>
+<span id="cb27-18"><a href="#cb27-18" aria-hidden="true" tabindex="-1"></a>  fixed_sell_admin <span class="op">=</span> company[<span class="st">'fixed_costs'</span>][<span class="st">'sell_admin_expense'</span>]</span>
+<span id="cb27-19"><a href="#cb27-19" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb27-20"><a href="#cb27-20" aria-hidden="true" tabindex="-1"></a>  expenses <span class="op">=</span> [direct_labor_costs, var_overhead_costs, var_sell_admin_expense, fixed_manuf_overhead, fixed_sell_admin]</span>
+<span id="cb27-21"><a href="#cb27-21" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb27-22"><a href="#cb27-22" aria-hidden="true" tabindex="-1"></a>  total_other_op_costs <span class="op">=</span> <span class="bu">sum</span>(expenses)</span>
+<span id="cb27-23"><a href="#cb27-23" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb27-24"><a href="#cb27-24" aria-hidden="true" tabindex="-1"></a>  net_income <span class="op">=</span> thru_contrib_margin <span class="op">-</span> total_other_op_costs</span>
+<span id="cb27-25"><a href="#cb27-25" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb27-26"><a href="#cb27-26" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">" - Throughput Costing -"</span> )</span>
+<span id="cb27-27"><a href="#cb27-27" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">" sales ....................... ${:,}"</span>.<span class="bu">format</span>(sales))</span>
+<span id="cb27-28"><a href="#cb27-28" aria-hidden="true" tabindex="-1"></a>  <span class="co"># print(" direct material costs ....................... ${:,}".format(direct_material_costs))</span></span>
+<span id="cb27-29"><a href="#cb27-29" aria-hidden="true" tabindex="-1"></a>  <span class="co"># print(" ending inventory ............................ ${:,}".format(end_inventory))</span></span>
+<span id="cb27-30"><a href="#cb27-30" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">" throughput contribution margin .............. ${:,}"</span>.<span class="bu">format</span>(thru_contrib_margin))</span>
+<span id="cb27-31"><a href="#cb27-31" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"</span><span class="ch">\t</span><span class="st"> direct labor costs .......................... ${:,}"</span>.<span class="bu">format</span>(direct_labor_costs))</span>
+<span id="cb27-32"><a href="#cb27-32" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"</span><span class="ch">\t</span><span class="st"> variable overhead costs ..................... ${:,}"</span>.<span class="bu">format</span>(var_overhead_costs))</span>
+<span id="cb27-33"><a href="#cb27-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-34"><a href="#cb27-34" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"</span><span class="ch">\t</span><span class="st"> fixed manufacturing overhead ................ ${:,}"</span>.<span class="bu">format</span>(fixed_manuf_overhead))</span>
+<span id="cb27-35"><a href="#cb27-35" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"</span><span class="ch">\t</span><span class="st"> fixed sell &amp; admin expenses  ................ ${:,}"</span>.<span class="bu">format</span>(fixed_sell_admin))</span>
+<span id="cb27-36"><a href="#cb27-36" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"</span><span class="ch">\t</span><span class="st"> variable sell &amp; admin costs ................. ${:,}"</span>.<span class="bu">format</span>(var_sell_admin_expense))</span>
+<span id="cb27-37"><a href="#cb27-37" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"</span><span class="ch">\t</span><span class="st"> total other operating costs  .................... ${:,}"</span>.<span class="bu">format</span>(total_other_op_costs))</span>
+<span id="cb27-38"><a href="#cb27-38" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb27-39"><a href="#cb27-39" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">" net income ....................................................... ${:,}"</span>.<span class="bu">format</span>(net_income))</span>
+<span id="cb27-40"><a href="#cb27-40" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb27-41"><a href="#cb27-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-42"><a href="#cb27-42" aria-hidden="true" tabindex="-1"></a>throughput_costing2(sport_co)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code> - Throughput Costing -
+ sales ....................... $3,750,000.0
+ throughput contribution margin .............. $3,000,000.0
+     direct labor costs .......................... $400,000.0
+     variable overhead costs ..................... $640,000.0
+     fixed manufacturing overhead ................ $500,000.0
+     fixed sell &amp; admin expenses  ................ $100,000.0
+     variable sell &amp; admin costs ................. $150,000.0
+     total other operating costs  .................... $1,790,000.0
+ net income ....................................................... $1,210,000.0</code></pre>
+</div>
+</div>
+<hr>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  let localAlternateSentinel = 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./chapter6.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Incremental Analysis</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./chapter8.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Pricing</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+</body></html>

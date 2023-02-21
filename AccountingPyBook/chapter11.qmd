@@ -1,0 +1,357 @@
+# Standard Costs
+
+In managerial accounting `standard costs` are predetermined unit costs that are used as measures of performance. To establish the standard cost of producing a product, it is essential to create standards for each manufacturing cost element (direct materials, direct labor, manufacturing overhead). Each element is determined from the standard orice to be paid and the standard quantity to be used.
+
+A company example, Company X makes concentrated caffeinated syrups to be sold and used by beverage serving retail shops.
+
+-   `direct materials price standard` is the cost per unit of direct materials that should be incurred. This standard is based on purchasing department's best estimate of the cost of raw materials {current purchase price} + {receiving costs, storing costs, handling costs}.
+
+-   `direct materials quantity standard` is the quantity of direct materials that should be used per unit of finished goods, expressed in units of kg, barrels or liters. The standard should allow for extra amounts of waste or spoilage.
+
+-   `standard direct materials cost per unit` is standard direct materials price times the standard direct materials quantity
+
+-   `direct labor price standard` is the rate per hour that should be incurred for direct labor (based on current wages, payroll taxes, benefits). In Canada there is cost of living adjustment [COLA](https://www.investopedia.com/terms/c/cola.asp).
+
+-   `direct labor quantity standard` is the time that should be required to make one item unit of the product. Allowances should be made for rest periods, cleanup, machine setup and machine downtime.
+
+-   `standard direct labor cost per unit` is the direct labor rate times the direct labor hours
+
+Company X direct material data is in a dictionary. Direct materials price and quantity dictionaries are separate here but can easily be placed inside one data dictionary.
+
+```{python}
+
+# --- price standard
+materials_price = {
+  'purchase_price': 2.70,
+  'freight': 0.20,
+  'receiving_handling': 0.10
+}
+
+standard_price = sum(materials_price.values())
+print("Standard direct materials price per liter : ${:.2f}".format(standard_price))
+
+# --- quantity standard
+materials_quantity = {
+  'required_materials': 3.5,
+  'waste_allowance': 0.4, # allowance for waste
+  'spoilage_waste': 0.1
+}
+
+standard_quantity = sum(materials_quantity.values())
+print("Standard direct materials quantity per unit : ${:.2f}".format(standard_quantity))
+
+
+# standard dm cost per unit
+sdm_cpu = standard_price * standard_quantity
+print("Standard direct materials cost per unit : ${:.2f} (liter)".format(sdm_cpu))
+
+
+# --- standard labor
+labor = {
+  'hourly_wage_rate': 12.5,
+  'COLA': 0.25, # cost of living adjustments
+  'payroll_taxes': 0.75,
+  'benefits': 1.50
+}
+
+standard_labor = sum(labor.values())
+print("Standard direct labor rate per hour : ${:.2f}".format(standard_labor))
+
+
+# --- labor quantity
+labor_quant = {
+  'actual_production_time_hrs': 1.5,
+  'rest_periods_cleanup_hrs': 0.2,
+  'setup_downtime_hrs': 0.3
+}
+standard_labor_quantity = sum(labor_quant.values())
+print("Standard direct labor hours per unit : {:.2f} (hours)".format(standard_labor_quantity))
+
+
+# -- labor cost per unit
+labor_cpu = standard_labor * standard_labor_quantity
+print("Standard direct labor cost per unit : ${:.2f}".format(labor_cpu))
+```
+
+- Manufacturing overhead `standard predetermined overhead rate` is used in setting the standard. The rate is determined by dividing the budgeted overhead cost by the expected standard activity index {labor hours and standard machine hours}. Activity Based Costing (ABC) can be used to allocate the overhead costs.
+
+- `normal capacity` is the average activity output that a company should experience over the long run.
+
+- `standard manufacturing overhead rate per unit` is predeteremined overhead rate times the activity index quantity standard
+
+
+- `total standard cost per unit` is the sum of the standard costs of direct materials , labor, manufacturing overhead 
+
+
+
+Company X uses standard direct labor for it's activity index, and expects to produce 13,200 liters through the year at normal capacity.
+
+```{python}
+# expected number for production
+expected_prod = 13200
+standard_direct_labour_hrs = standard_labor_quantity * expected_prod
+
+budgeted_overhead = {'variable_costs': 79200, 'fixed_costs': 52800}
+
+overhead = list(budgeted_overhead.values())
+total_bugeted_overhead = sum(overhead)
+
+# overhead rate per direct labor hour
+var_rphr = overhead[0] / standard_direct_labour_hrs
+fixed_rphr = overhead[1] / standard_direct_labour_hrs
+total_rphr = var_rphr + fixed_rphr
+
+standard_manuf_rpu = total_rphr * standard_labor_quantity
+
+
+print("Standard direct labor hours ...... {:,}".format(standard_direct_labour_hrs))
+print("Total budgeted overhead costs .... ${:,}".format(total_bugeted_overhead))
+print("Variable: overhead rate per labor hour .... ${:,}".format(var_rphr))
+print("Fixed: overhead rate per labor hour .... ${:,}".format(fixed_rphr))
+print("Total overhead rate per labor hour .... ${:,}".format(total_rphr))
+print("Standard manufacturing overhead rate per unit .... ${:,}".format(standard_manuf_rpu))
+```
+
+Total standard cost per unit 
+
+```{python}
+total_standard = (standard_price * standard_quantity) +\
+                (standard_labor * standard_labor_quantity) + \
+                (total_rphr * standard_labor_quantity)
+                
+print("Total standard cost per unit ...... ${:,}".format(total_standard))
+```
+
+
+
+### Standard Costs
+
+A company's data is in a data dictionary
+
+```{python}
+company_costs = {
+  'materials_per_unit': {'weight_kg': 1.5, 'cost_per_kg': 4 },
+  'labor_per_unit': {'hours': 0.25, 'cost_per_hr': 13},
+  'manufacturing_overhead': {'predetermined_rate': 1.20}
+}
+```
+
+
+function 
+
+```{python}
+def standard_costs( dict ):
+  direct_materials = list(dict['materials_per_unit'].values())
+  dm_std_costs = direct_materials[0] * direct_materials[1]
+  direct_labor = list(dict['labor_per_unit'].values())
+  lab_std_costs = direct_labor[0] * direct_labor[1]
+  manuf_overh = (list(dict['manufacturing_overhead'].values())[0]) * lab_std_costs
+  
+  total = dm_std_costs + lab_std_costs + manuf_overh
+  
+  print("- Standard Costs -")
+  print("Direct Materials Standard Cost ................ ${:,}".format(dm_std_costs))
+  print("Direct Labor Standard Cost .................... ${:,}".format(lab_std_costs))
+  print("Manufacturing overhead Standard Cost .......... ${:,}".format(manuf_overh))
+  print("Total standard cost .................................. ${:,}".format(total))
+  
+standard_costs( company_costs )
+```
+
+
+## Direct Materials Variance
+
+The `total direct materials budget variance (TDMBV)` is the calculation between the amount 
+paid (actual quantity times the actual price) and the amount that should have been paid based on standards (standard quantity times standard price of materials).
+
+- `total variance` = material variance + labor variance + overhead variance
+- `actual_quantity_price` = total actual quantities (`TAQ`) x actual price (`AP`)
+- `standard_quantity_price` = total standard quantities allowed (`TQSA`) x standard price (`SP`)
+- `TDMBV` = ( actual_quantity_price ) - ( standard_quantity_price )
+- `total materials variance` = materials price variance + materials quantity variance
+- `materials price variance (MPV)` = (TAQ x SP) - (TQSA x SP)
+
+
+A company X data is in a data dictionary for direct materials variances 
+
+```{python}
+company_std = {
+  'units': 2,
+  'direct_materials_1':{'cpu': 8, 'units_produced': 22e3},
+  'direct_materials_2': {'cpu': 7.5, 'units_produced': 10e3}
+}
+```
+
+function 
+
+```{python}
+def direct_materials_variance( dict ):
+  TAQ = list(dict['direct_materials_1'].values())[1]
+  SP = list(dict['direct_materials_1'].values())[0]
+  AP = list(dict['direct_materials_2'].values())[0]
+  TSQ = list(dict['direct_materials_2'].values())[1] * dict['units']
+  
+  total_materials_var = (TAQ * AP) - (TSQ * SP)
+  materials_price_var = (TAQ * AP) - (TAQ * SP)
+  materials_quant_var = (TAQ * SP) - (TSQ * SP)
+  
+  # print(SP, TAQ, AP, units)
+  print("Total materials variance ..... ${:,}".format(total_materials_var))
+  print("Materials price variance ..... ${:,}".format(materials_price_var))
+  print("Materials quantity variance ..... ${:,}".format(materials_quant_var))
+  
+
+direct_materials_variance( company_std )
+```
+
+
+## Direct Labor & Manufacturing Variance
+
+The total labor variance is the difference between the amount actually paid for labor versus the amount that should have been paid. The `total direct labor budget variance (TDLBV)` is the difference between
+the amount actually paid for labor (actual hours times actual rate) and the amount that should have been paid (standard hours times standard rate for labor).
+
+- `TAH` total actual hours
+- `AH` actual hours 
+- `TSHA` total standard hours allowed
+- `SR` standard rate
+- `TDLBV = (TAH * AH) - (TSHA * SR)`
+
+`Total labor variance` is caused by differences in the labor rate or differences in labor hours.
+
+- `total labor variance = labor price variance + labor quantity variance`
+- `AR` actual rate
+- `Labor Price Variance (LPV) = (TAH * AR) - (TAH * SR)` or use: LPV = AH x (AR - SR)
+- `Labor Quantity Variance (LQV)`
+- `LQV = (TAH * SR) - (TSHA * SR)` or use: LQV = SR x (AH - SH)
+
+
+## Total Overhead Variance 
+
+`Total overhead variance` is the difference between the actual overhead costs and overhead costs applied based on standard hours allowed for the amount of goods produced. To find the total overhead variance
+in a standard costing system, determine the overhead costs applied based on standard hours allowed.
+`Total standard hours allowed` are the hours that should have been worked for the units produced. 
+
+- `Total overhead variance (TOHV)`
+- `TOHV = (actual overhead) - (TSHA * SR)`
+- `Total variable overhead budget vaiance (TVOHBV)`
+- `TVOHBV = (actual variable overhead) - (TSHA * SR)`
+- `Variable overhead spending price variance (VOHSPV)`
+- `VOHSPV = (actual variable overhead) - (TAH * SR)`
+- `Variable overhead efficiency variance (VOHEV)`
+- `VOHEV = (TAH * SR) - (TSHA * SR)`  or use: VOHEV = SR * (AH - SH)
+
+## Total Fixed Overhead Variance
+
+The `total fixed overhead variance` is the difference between the actual fixed overhead and the total standard hours allowed multiplied by the fixed overhead rate. The `fixed overhead spending budget variance` shows whether spending on fixed costs was under or over the budgeted fixed costs for the year.
+
+- `total fixed overhead variance (TFOHV)`
+- `TFOHV = (actual fixed overhead) - (TSHA * SR)`
+- `fixed overhead spending variance (FOHSV)`
+- normal capacity hours at standard fixed overhead rate (NCH)
+- `FOHSV = (actual fixed overhead costs) - (NCH * SR)`
+
+The `fixed overhead volume variance` is for the question of did the company use fixed capacity effectively. 
+
+- `fixed overhead volume variance = (NCH * SR) - (TSHA * SR)`
+
+
+Labor and manufacturing overhead variance example 
+
+```{python}
+lmov = {
+  'std_cost_labor_hrs': 3,
+  'std_cost_labor_per_hr' : 12,
+  'predetermined_overhead_rate_per_hr': 20,
+  'incurred_labor_hours': 3500,
+  'avg_rate_per_hr': 12.4,
+  'manufacturing_overhead_costs': 71300,
+  'units_produced': 1200
+}
+```
+
+function for labor and manufacturing overhead variance
+
+```{python}
+def LMOV( dict ):
+  
+  TAH = dict['incurred_labor_hours']
+  AR = dict['avg_rate_per_hr']
+  SR = dict['std_cost_labor_per_hr']
+  TSHA = dict['units_produced'] * dict['std_cost_labor_hrs']
+  actual_overhead = dict['manufacturing_overhead_costs']
+  overhead_applied = TSHA * dict['predetermined_overhead_rate_per_hr']
+  
+  # total direct labor budget var = ( TAH * AR ) - ( TSHA * SR )
+  tdlbv = (TAH * AR) - (TSHA * SR)
+  # labor price var = (TAH * AR ) - (TAH * SR)
+  lpv = (TAH * AR) - (TAH * SR)
+  # labor quantity var = (TAH * SR) - (TSHA * SR)
+  lqv = (TAH * SR) - (TSHA * SR)
+  # total overhead var = actual overhead - overhead applied
+  tov = actual_overhead - overhead_applied
+  
+  print("-- Labor & Manufacturing Overhead Variance -")
+  print("Total labor variance .......... ${:,}".format(tdlbv))
+  print("Labor price variance .......... ${:,}".format(lpv))
+  print("Labor quantity variance ....... ${:,}".format(lqv))
+  print("Total overhead variance ....... ${:,}".format(tov))
+
+  
+LMOV( lmov )
+```
+
+
+## Reporting Variances 
+
+A company X data is in the data dictionary 
+
+```{python}
+variances = {
+  'materials_price': 250,
+  'materials_quantity': 1100,
+  'labor_price': 700,
+  'labor_quantity': 300,
+  'overhead': 800,
+  'sales_revenue': 102700,
+  'cost_of_goods_sold': 61900
+}
+```
+
+
+
+function for reporting variances, in this example labor price of $700 is labelled as unfavorable and is omitted from the usual list and summation.
+
+```{python}
+def report_variance( dict ):
+  std_gross_profit = dict['sales_revenue'] - dict['cost_of_goods_sold']
+  tot_vars = sum(list(dict.values())[:-2])
+  
+  # -- 700 is element 2 in the list array and for this example subtracted
+  a = list(dict.values())[:-2]
+  b = a[0:2]
+  c = a[3:5]
+  fav_var = sum(b+c) - a[2]
+  gross_profit_actual = std_gross_profit + fav_var
+  
+  print("- Report on Variance -")
+  print("Standard gross profit ................. ${:,}".format(std_gross_profit))
+  print("total variance  ....................... ${:,}".format(tot_vars))
+  print("total variance favorable  ............. ${:,}".format(fav_var))
+  print("Gross profit (actual)  ................ ${:,}".format(gross_profit_actual))
+  
+
+report_variance( variances )
+```
+
+---
+
+
+
+
+
+
+
+
+
+
+

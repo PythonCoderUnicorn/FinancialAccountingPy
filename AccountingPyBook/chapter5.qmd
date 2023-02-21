@@ -1,0 +1,377 @@
+
+# Decision Making: Cost Volume Profit
+
+Many businesses need to manage the changes in sales volume which affect costs, 
+specifically how costs and revenues affect profits. This chapter is about the cost volume profit (CVP)
+analysis and contribution margin analysis. The CVP analysis involves:
+
+- CVP income statement & contribution margin
+- CVP contribution margin per unit
+- CVP margin ratio 
+- Break even analysis
+- contribution margin technique
+- Target operating income & margin of safety
+- Target operating income before/ after tax
+- Sales mix: Break even sales in units & dollars
+- Cost structure & operating leverage
+- Effect on: contribution margin ratio, break even point, margin of safety ratio and operating leverage
+
+## The CVP
+
+`Cost volume profit` (CVP) is the study of effects that change in costs and volume have on a company's profits.
+Knowing CVP analysis informs decisions of selling prices, determining product mix and maximizing the use of production facilities. 
+
+
+The CVP analysis has some assumptions, such as:
+
+- both costs and revenues are linear throughout the activity
+- all costs can be classified with reasonable accuracy as either variable or fixed
+- changes in activity are the only factors that affect costs
+- inventory levels stay constant  (all units made are sold)
+- If products sold are > 1, Then the sales mix stays constant. (percentage of total sales for each product will stay the same)
+
+
+> These assumptions need to all be true in order to get an accurate CVP analysis 
+
+
+## CVP: Income Statement
+
+`Cost volume profit income statement` classifies costs as variable or fixed and calculates a contribution margin. A `contribution margin (CM)` is the amount of revenue that remains after variable costs have been deducted (stated as _total amount_ and _per-unit basis_). 
+This chapter example business is a video production company, the cost data is in a data dictionary.
+
+
+### CVP Break Even
+
+The `break even point` is when the volume of sales matches the quantity of total costs, both variable and fixed, resulting in no income and no loss. Before deciding on introducing a new product or modifying the sales price, it is wise to know the break even analysis. Contribution margin per unit (cmpu).
+
+- selling price, variable costs, fixed costs
+- `break_even = fixed_costs / ( price - variable_costs)`
+- `cmpu = price - variable costs`
+
+
+### Target Operating Income
+
+Management typically has a set objective for each other product lines, thus `target operating income (toi)`.
+
+- `required_sales_units = (total_fixed_exp + toi) / cmpu`
+- `required_sales_dollars = (total_fixed_exp + toi) / cmr`
+- target operating income (before tax)
+
+### Target Income after tax
+
+- operating income after tax = target income before tax x (1 - tax rate)
+
+### Contribution margin
+
+- required sales in units = (fixed costs + target income before tax) / contribution margin per unit
+- required sales in dollars = (fixed costs + target income before tax) / contribution margin ratio
+
+
+### Margin of Safety
+
+The `margin of safety` is the difference between actual or expected sales and sales at the break even point, expressed as dollars, units or a ratio. The safety being that even if expected sales fail to be met, the break even range allows for management to have some neutral news. Sales are either actual or expected/
+
+- margin of safety in dollars = sales - break even sales
+- margin of safety ratio = (margin of safety in dollars) / sales
+
+### Sales Mix
+
+The `sales mix` is the relative proportion in which each product is 
+sold when a company sells more than 1 product. For example a company sells
+printers 80% of the time and 20% is for computers, making the sales mix 80 : 20.
+To find out the break even sales for a sales mix, the weighted average unit contribution margin of all products needs to be calculated. 
+
+- a company sells 2 items: item 1 sales = 1500, item 2 sales = 500
+- item 1 break even = 1500 / (1500 + 500) == 75%
+- item 2 break even = 500 / (1500 + 500) == 25%
+- sales mix is 75 : 25.
+
+
+weighted average unit contribution margin (`waucm`) 
+
+- item 1 margin percent = (unit contribution margin x sales mix percentage)
+- item 2 margin percent = (unit contribution margin x sales mix percentage)
+- `waucm` ($) =  (item 1 margin percent ) + (item 2 margin percent )
+
+- break even point (units) = fixed costs / waucm
+
+
+Any level of units sold, operating income will be greater if higher contribution margin units are sold, rather than lower contribution margin units.
+
+### Break even sales
+
+For large companies it is best to calculate the break even point in terms of sales dollars and not the number of units sold, using data from the product lines (not individual products). 
+
+Company has 2 divisions: division 1 and division 2, each division has hundreds of different products items.
+
+- division 1 = (contribution margin ratio x sales mix percentage)
+- division 2 = (contribution margin ratio x sales mix percentage)
+- ``waucm` ratio = division 1 + division 2
+- break even ($) = fixed costs / waucm 
+
+based on the break even point
+
+- sales mix: division 1 `%` : division 2 `%`
+- total break even sales `k`
+- division 1 total break even = (division 1 `% x sales k`)
+- division 2 total break even = (division 2 `% x sales k`)
+
+If higher percentage were to occur in one division opposed to another, this would result in higher weighted average contribution margin ratio and a lower break even point. 
+
+
+
+## CVP Function
+
+This section will have the cost volume profit analysis in one function, and the function will
+take a cost data dictionary as an argument.
+
+```{python}
+cost_data = {
+  'units_sold': 1600,
+  'sales_Q1': 800e3,
+  'variable_costs': {
+    'cost_goods_sold': 400e3,
+    'selling_expenses': 60e3,
+    'admin_expenses': 20e3
+    },
+  'fixed_costs': {
+    'cost_goods_sold': 120e3,
+    'selling_expenses': 40e3,
+    'admin_expenses': 40e3
+    },
+    'company_1': {
+      'sales': 800e3 ,
+      'variable_costs': 480e3,
+      'fixed_costs': 200e3
+    },
+    'company_2': {
+      'sales': 800e3 ,
+      'variable_costs': 160e3,
+      'fixed_costs': 520e3
+    }
+}
+```
+
+
+
+
+This function is so far is the biggest one, but all of the CVP analysis calculations are under one function. The company cost structure comparison is included, even though this operation could be done separately, it is included just for demonstration. 
+
+```{python}
+def cvp_income_statement( cost_data: dict, target_income: int, tax_rate_percent: float):
+  
+  sales = cost_data['sales_Q1']
+  units = cost_data['units_sold']
+  price = sales / units
+  
+  total_var_exp = sum( cost_data['variable_costs'].values() )
+  total_fixed_exp = sum( cost_data['fixed_costs'].values() ) 
+  operating_income = 0
+  
+  # contribution margin per unit = selling price - unit var costs
+  cmpu = (cost_data['sales_Q1'] / cost_data['units_sold'] ) - (total_var_exp / units)
+  
+  # contribution margin
+  contrib_margin = sales - total_var_exp
+  
+  # operating income
+  op_income = contrib_margin - total_fixed_exp
+  
+  # contribution margin ratio
+  cmr = (cmpu / (sales/units) )
+  
+  print("\n --- CVP Income Statement ---")
+  print("Sales ","."*10,"{:,} units".format(units) )
+  print("Sales total ","."*10,"${:,}".format(sales) )
+  print(".... ${:,} per unit".format(price))
+  print("Total variable expenses ","."*10,"${:,}".format(total_var_exp))
+  print("Contribution margin per unit = ${:,}".format(cmpu))
+  print("Contribution margin ","."*10, "${:,}".format(contrib_margin))
+  print("Contribution margin ratio = {:,}%".format(cmr * 100))
+  print("  (${:.2f} of every $1 can go to fixed costs & operating income)".format(cmr))
+  print("Total fixed expenses ","."*10,"${:,}".format(total_fixed_exp))
+  print("Operating income ","."*30,"${:,}".format(op_income))
+  
+  
+  # ------ BREAK EVEN POINT
+  break_even_units = total_fixed_exp / cmpu
+  break_even_dollars = total_fixed_exp / cmr
+    
+  print("\nBreak even point = {:,} units or ${:,}".format(break_even_units, break_even_dollars))
+
+  #------- target operating income (before tax) (toi)
+  toi = target_income
+  required_sales_units = (total_fixed_exp + toi) / cmpu
+  required_sales_dollars = (total_fixed_exp + toi) / cmr
+  
+  print("\n--- Target Operating Income ----")
+  print("Required sales (units) = {:,}".format(required_sales_units))
+  print("Required sales = ${:,}".format(required_sales_dollars))
+  
+  tax_rate = tax_rate_percent/100
+  op_income_post_tax = total_fixed_exp + toi / (1 - tax_rate)
+  req_sales_post_tax_units = op_income_post_tax / cmpu
+  req_sales_post_tax_dollars = op_income_post_tax / tax_rate
+  print("Target operating income after taxes = ${:,}".format(op_income_post_tax ))
+  print("Required sales after taxes = {:,} units".format(req_sales_post_tax_units))
+  print("Required sales after taxes = ${:,} ".format(req_sales_post_tax_dollars))
+
+  # --- margin of safety (mos)
+  mos_dollars = sales - break_even_dollars
+  mos_ratio = (mos_dollars) / sales
+  print("\n--- Margin of Safety ---")
+  print("Margin of safety = ${:,}".format(mos_dollars))
+  print("Margin of safety ratio = {:,}%".format(mos_ratio *100))
+
+
+
+
+  print("\n ====== Company Cost Structure - Comparison ======")
+  contrib_margin_1 = cost_data['company_1']['sales'] - cost_data['company_1']['variable_costs']
+  contrib_margin_2 = cost_data['company_2']['sales'] - cost_data['company_2']['variable_costs']
+  print("contribution margin (company 1) = ${:,}".format( contrib_margin_1))
+  print("contribution margin (company 2) = ${:,}".format( contrib_margin_2))
+  
+  contrib_margin_ratio_1 = contrib_margin_1 / cost_data['company_1']['sales']
+  contrib_margin_ratio_2 = contrib_margin_2 / cost_data['company_2']['sales']
+  print("contribution margin ratio (company 1) = {:,}".format( contrib_margin_ratio_1))
+  print("contribution margin ratio (company 2) = {:,}".format( contrib_margin_ratio_2))
+  
+  be_company1 = cost_data['company_1']['fixed_costs'] / contrib_margin_ratio_1
+  be_company2 = cost_data['company_2']['fixed_costs'] / contrib_margin_ratio_2
+  print("Break even point (company 1) = ${:,}".format( be_company1))
+  print("Break even point (company 2) = ${:,}".format( be_company2))
+  
+  # margin of safety (mos)
+  mos_ratio_1 = (cost_data['company_1']['sales'] - be_company1) / cost_data['company_1']['sales']
+  mos_ratio_2 = (cost_data['company_2']['sales'] - be_company2) / cost_data['company_2']['sales']
+  print("Margin of safety ratio (company 1) = {:,}".format( mos_ratio_1))
+  print("Margin of safety ratio (company 2) = {:,}".format( mos_ratio_2))
+  
+  op_income_1 = contrib_margin_1  - cost_data['company_1']['fixed_costs']
+  op_income_2 = contrib_margin_2  - cost_data['company_2']['fixed_costs']
+  
+  operating_leverage_1 = contrib_margin_1 / op_income_1
+  operating_leverage_2 = contrib_margin_2 / op_income_2
+  print("Degree of operating leverage (company 1) = {:.2f}".format( operating_leverage_1))
+  print("Degree of operating leverage (company 2) = {:.2f}".format( operating_leverage_2))
+  
+# ---------------
+
+```
+
+
+Now call the CVP income statement function. The function's arguments are the data dictionary,
+the target operation income and the tax rate as a percentage.
+
+```{python}
+cvp_income_statement( cost_data, target_income= 120e3, tax_rate_percent= 40)
+```
+
+
+
+
+
+
+
+
+
+
+## Cost Structure
+
+`Cost structure` is the relative proportion of fixed verses variable costs that a company incurs, which has an impact on profits. 
+
+Compare two companies 
+
+```{python}
+companies = {
+  'company1':{
+    'sales':800e3,
+    'variable_costs': 480e3,
+    'contribution_margin': 320e3,
+    'fixed_costs': 200e3,
+    'operating_income': 120e3
+    },
+  'company2':{
+    'sales':800e3,
+    'variable_costs': 160e3,
+    'contribution_margin': 640e3,
+    'fixed_costs': 520e3,
+    'operating_income': 120e3
+    }
+}
+```
+
+
+### Effect of CMR
+
+- `operating leverage` is the level a company's operating income reacts to a given change in sales. 
+
+```{python}
+cmr_company1 = companies['company1']['contribution_margin'] / companies['company1']['sales']
+cmr_company2 = companies['company2']['contribution_margin'] / companies['company2']['sales']
+
+print("\nContribution margin ratio (company 1) = ",cmr_company1)
+print("Contribution margin ratio (company 2) = ",cmr_company2)
+
+# break even point
+be_company1 = companies['company1']['fixed_costs'] / cmr_company1
+be_company2 = companies['company2']['fixed_costs'] / cmr_company2
+
+print("\nBreak even point (company 1) = ${:,}".format(be_company1))
+print("Break even point (company 2) = ${:,}".format(be_company2))
+
+# margin of safety
+magin_safe_1 = (companies['company1']['sales'] - be_company1) / companies['company1']['sales']
+magin_safe_2 = (companies['company2']['sales'] - be_company2) / companies['company2']['sales']
+
+print("\nMargin of safety ratio (company 1) = ", magin_safe_1)
+print("Margin of safety ratio (company 2) = ", magin_safe_2)
+
+
+# operating leverage
+op_lev_1 = companies['company1']['contribution_margin'] / companies['company1']['operating_income']
+op_lev_2 = companies['company2']['contribution_margin'] / companies['company2']['operating_income']
+
+print("\nDegree of operating leverage (company 1) = {:.2f}".format(op_lev_1))
+print("Degree of operating leverage (company 2) = {:.2f}".format(op_lev_2))
+```
+
+- For every 1 dollar of sales, company 2 makes 80 cents 
+to contribution margin (added to operating income)
+- company 2 makes more in sales than company 1 (650,000 - 500,000 = 150,000)
+- the difference in margin of safety is that company 1 could manage a sales decline of 38% before seeing a operating loss, while the company 2 could only manage a 19% decline in sales before operating at a loss.
+- company 2 can lose or gain twice the sales than company 1 (5.33 / 2.67 = 2)
+
+
+If both companies see a decrease, say 10% drop in sales, then company 1 would see 26.7% (2.67  x 10) and company 2 would see 53.3% (5.33 x 10). 
+
+---
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

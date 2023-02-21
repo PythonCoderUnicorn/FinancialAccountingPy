@@ -1,0 +1,993 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.269">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>AccountingPy - 5&nbsp; Activity Based Costing</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./chapter5.html" rel="next">
+<link href="./chapter3.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Activity Based Costing</span></h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">AccountingPy</a> 
+        <div class="sidebar-tools-main">
+  <a href="" class="quarto-color-scheme-toggle sidebar-tool" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+    </div>
+      </div>
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">Welcome</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./intro.html" class="sidebar-item-text sidebar-link">Introduction</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./pythonbasics.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Python Basics</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter1.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Financial Accounting</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter2.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Job Cost Accounting</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter3.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Process Cost Accounting</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter4.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Activity Based Costing</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter5.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Decision Making: Cost Volume Profit</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./glossary.html" class="sidebar-item-text sidebar-link">Glossary</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./summary.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Summary</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">References</a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#the-abc-system" id="toc-the-abc-system" class="nav-link active" data-scroll-target="#the-abc-system"><span class="toc-section-number">5.1</span>  The ABC system</a>
+  <ul class="collapse">
+  <li><a href="#abc-example" id="toc-abc-example" class="nav-link" data-scroll-target="#abc-example"><span class="toc-section-number">5.1.1</span>  ABC example</a></li>
+  <li><a href="#abc-step-1" id="toc-abc-step-1" class="nav-link" data-scroll-target="#abc-step-1"><span class="toc-section-number">5.1.2</span>  ABC step 1</a></li>
+  <li><a href="#abc-step-2" id="toc-abc-step-2" class="nav-link" data-scroll-target="#abc-step-2"><span class="toc-section-number">5.1.3</span>  ABC step 2</a></li>
+  <li><a href="#abc-step-3" id="toc-abc-step-3" class="nav-link" data-scroll-target="#abc-step-3"><span class="toc-section-number">5.1.4</span>  ABC step 3</a></li>
+  <li><a href="#abc-step-4" id="toc-abc-step-4" class="nav-link" data-scroll-target="#abc-step-4"><span class="toc-section-number">5.1.5</span>  ABC step 4</a></li>
+  <li><a href="#abc-unit-cost-comparison" id="toc-abc-unit-cost-comparison" class="nav-link" data-scroll-target="#abc-unit-cost-comparison"><span class="toc-section-number">5.1.6</span>  ABC unit cost comparison</a></li>
+  <li><a href="#abc-example-1" id="toc-abc-example-1" class="nav-link" data-scroll-target="#abc-example-1"><span class="toc-section-number">5.1.7</span>  ABC example</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title d-none d-lg-block"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Activity Based Costing</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<p>Companies use Activity Based Costing (ABC) for more accurate data for better decision making. Activity based costing includes:</p>
+<ul>
+<li>ABC system:
+<ul>
+<li>identify and classify activities and allocate overhead to cost pools (step 1)</li>
+<li>identify cost drivers (step 2)</li>
+<li>calculate overhead rates (step 3)</li>
+<li>assign overhead costs to products (step 4)</li>
+<li>unit cost comparison</li>
+</ul></li>
+</ul>
+<section id="the-abc-system" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="the-abc-system"><span class="header-section-number">5.1</span> The ABC system</h2>
+<p>The amount of direct labor used in industries has changed with decreased, and the total overhead costs such as: depreciation on equipment, machinery, utilities, repairs and maintenance has increased. The ABC system uses machine hours as foundation for determining overhead costs, but this may not be precise enough for accurate costing for some industries where the manufacturing process is complicated, thus there is <em>activity based costing</em>. The ABC is a method for allocating overhead costs for specific activities then assigns these costs to products and services using costing drivers.</p>
+<ul>
+<li><code>activity</code> is any event, transaction or work sequence that incurs a cost during production</li>
+<li><code>activity cost pool</code> is a unique activity like ordering materials or machinery setting up</li>
+<li><code>cost driver</code> any activity that has a direct cause-effect relationship with resources consumed</li>
+</ul>
+<blockquote class="blockquote">
+<p>If there is no or little correlation between changes in the cost driver and the consumption of the overhead cost, then inaccurate product costs will result</p>
+</blockquote>
+<section id="abc-example" class="level3" data-number="5.1.1">
+<h3 data-number="5.1.1" class="anchored" data-anchor-id="abc-example"><span class="header-section-number">5.1.1</span> ABC example</h3>
+<p>A company produces two items, item 1 is a high volume item totalling 25,000 units annually. The second item is a low volume item totalling only 5,000 units per year. Each product requires 1 hour of direct labor to complete. Expected annual manufacturing overhead costs are $900,000.</p>
+<div class="cell" data-execution_count="1">
+<details>
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>high_vol_item <span class="op">=</span> <span class="fl">25e3</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>low_vol_item <span class="op">=</span> <span class="fl">5e3</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>expect_overhead <span class="op">=</span> <span class="fl">900e3</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>total_annual_direct_labor <span class="op">=</span> high_vol_item <span class="op">+</span> low_vol_item</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>pred_overhead_rate <span class="op">=</span> expect_overhead <span class="op">/</span> total_annual_direct_labor</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Total annual direct labor hours = {:,}"</span>.<span class="bu">format</span>(total_annual_direct_labor))</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Predetermined overhead rate </span><span class="ch">\n</span><span class="st">(traditional costing) = ${:,} per labor hr"</span>.<span class="bu">format</span>(pred_overhead_rate))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Total annual direct labor hours = 30,000.0
+Predetermined overhead rate 
+(traditional costing) = $30.0 per labor hr</code></pre>
+</div>
+</div>
+</section>
+<section id="abc-step-1" class="level3" data-number="5.1.2">
+<h3 data-number="5.1.2" class="anchored" data-anchor-id="abc-step-1"><span class="header-section-number">5.1.2</span> ABC step 1</h3>
+<p>This example company has three activity cost pools: setting p machine, machining and inspecting. All overhead costs directly associated with machine setting up (salaries, supplies and depreciation) are assigned to machine set-up cost pool.</p>
+<table class="table">
+<thead>
+<tr class="header">
+<th>cost pool</th>
+<th>estimated overhead</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>machines set up</td>
+<td>$300,000</td>
+</tr>
+<tr class="even">
+<td>machining</td>
+<td>$500,000</td>
+</tr>
+<tr class="odd">
+<td>inspecting</td>
+<td>$100,000</td>
+</tr>
+</tbody>
+</table>
+<div class="cell" data-execution_count="2">
+<details>
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>abc_costs <span class="op">=</span> {</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">'setting_up_machines'</span>: <span class="fl">300e3</span>,</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">'machining'</span>: <span class="fl">500e3</span>,</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">'inspecting'</span>: <span class="fl">100e3</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co"># make a list variable that stores the dictionary values</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>dict_list <span class="op">=</span> <span class="bu">list</span>( abc_costs.values() )</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="co"># loop through the dictionary values then sum the values and store in variable s</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> num <span class="kw">in</span> dict_list:</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>  s <span class="op">=</span> <span class="bu">sum</span>( dict_list )</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Activity cost pool total = $ {:,}"</span>.<span class="bu">format</span>(s))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Activity cost pool total = $ 900,000.0</code></pre>
+</div>
+</div>
+</section>
+<section id="abc-step-2" class="level3" data-number="5.1.3">
+<h3 data-number="5.1.3" class="anchored" data-anchor-id="abc-step-2"><span class="header-section-number">5.1.3</span> ABC step 2</h3>
+<p>Now the task is to identify the cost drivers for each cost pool. The cost driver must accurately measure the actual consumption of the activity by the various products. To get accurate costing, there needs to be a high degree of correlation between cost driver and consumption of the overhead costs.</p>
+<ul>
+<li><code>activity cost pool</code> - Setting up machines, Machining, Inspecting</li>
+<li><code>cost drivers</code> - number of machines set up, machine hours, number of inspection</li>
+<li><code>expected use: cost driver</code> - 1,500 machine set ups, 50,000 machine hours and 2,000 inpsections</li>
+</ul>
+</section>
+<section id="abc-step-3" class="level3" data-number="5.1.4">
+<h3 data-number="5.1.4" class="anchored" data-anchor-id="abc-step-3"><span class="header-section-number">5.1.4</span> ABC step 3</h3>
+<p>Calculate the <code>activity based overhead rate</code> per cost driver by dividing the estimated overhead per activity by the number of cost drivers by the number of cost drivers expected to be used.</p>
+<div class="cell" data-execution_count="3">
+<details>
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># make a copy of the abc costs</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>cost_drivers <span class="op">=</span> abc_costs.copy()</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co"># add new dictionary keys and values to cost drivers dictionary</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>cost_drivers.update( {<span class="st">'expected_machine_setups'</span>: <span class="dv">1500</span>} )</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>cost_drivers.update( {<span class="st">'expected_machine_hours'</span>: <span class="fl">50e3</span>} )</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>cost_drivers.update( {<span class="st">'expected_inspections'</span>: <span class="dv">2000</span>} )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>Make a function to calculate the activity based overhead rates.</p>
+<div class="cell" data-execution_count="4">
+<details>
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create a function to calculate the overhead rates</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> activity_overhead_rates(costing_data: <span class="bu">dict</span>):</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  overhead_rates_1 <span class="op">=</span> cost_drivers[<span class="st">'setting_up_machines'</span>] <span class="op">/</span> cost_drivers[<span class="st">'expected_machine_setups'</span>]</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  overhead_rates_2 <span class="op">=</span> cost_drivers[<span class="st">'machining'</span>] <span class="op">/</span> cost_drivers[<span class="st">'expected_machine_hours'</span>]</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  overhead_rates_3 <span class="op">=</span> cost_drivers[<span class="st">'inspecting'</span>] <span class="op">/</span> cost_drivers[<span class="st">'expected_inspections'</span>]</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st"> --- Activity Based Overhead Rates --"</span>)</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"per machine set up"</span>,<span class="st">"."</span><span class="op">*</span><span class="dv">8</span>,<span class="st">"$</span><span class="sc">{:.2f}</span><span class="st">"</span>.<span class="bu">format</span>( overhead_rates_1))</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"per machine hours"</span>,<span class="st">"."</span><span class="op">*</span><span class="dv">10</span>,<span class="st">"$</span><span class="sc">{:.2f}</span><span class="st">"</span>.<span class="bu">format</span>( overhead_rates_2))</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"per machine inpections"</span>,<span class="st">"."</span><span class="op">*</span><span class="dv">5</span>,<span class="st">"$</span><span class="sc">{:.2f}</span><span class="st">"</span>.<span class="bu">format</span>( overhead_rates_3))</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>activity_overhead_rates( cost_drivers)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+ --- Activity Based Overhead Rates --
+per machine set up ........ $200.00
+per machine hours .......... $10.00
+per machine inpections ..... $50.00</code></pre>
+</div>
+</div>
+</section>
+<section id="abc-step-4" class="level3" data-number="5.1.5">
+<h3 data-number="5.1.5" class="anchored" data-anchor-id="abc-step-4"><span class="header-section-number">5.1.5</span> ABC step 4</h3>
+<p>This step is about assigning overhead costs, necessary to know the overhead cost driver for each product. This example company has two items, one item takes longer for set up and inspections.</p>
+<ul>
+<li>expected use of cost driver per product</li>
+<li>item 1 = 500, 30,000, 500</li>
+<li>item 2 = 1,000, 20,000 and 1,500</li>
+</ul>
+<p>Update the dictionary</p>
+<div class="cell" data-execution_count="5">
+<details>
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>cost_drivers.update({<span class="st">'item_1'</span>: {<span class="st">'exp_cost_machine_setups'</span>:<span class="dv">500</span>, <span class="st">'exp_cost_machining'</span>:<span class="fl">30e3</span>, <span class="st">'exp_cost_inpsecting'</span>: <span class="dv">500</span>} })</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>cost_drivers.update( {<span class="st">'item_2'</span>: {<span class="st">'exp_cost_machine_setups'</span>:<span class="dv">1000</span>, <span class="st">'exp_cost_machining'</span>:<span class="fl">20e3</span>, <span class="st">'exp_cost_inpsecting'</span>: <span class="dv">1500</span>} })</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co"># add the number of units produced, stated in the beginining of section</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>cost_drivers.update({<span class="st">'units_produced_item1'</span>: <span class="fl">25e3</span>})</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>cost_drivers.update({<span class="st">'units_produced_item2'</span>: <span class="fl">5e3</span>})</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="co"># cost_drivers</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>Make a function to calculate the product overhead costs.</p>
+<div class="cell" data-execution_count="6">
+<details>
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> product_overhead_costs( costing_data: <span class="bu">dict</span> ):</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># need rate for calculation</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>  overhead_rates_1 <span class="op">=</span> cost_drivers[<span class="st">'setting_up_machines'</span>] <span class="op">/</span> cost_drivers[<span class="st">'expected_machine_setups'</span>] <span class="co"># $200</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  overhead_rates_2 <span class="op">=</span> cost_drivers[<span class="st">'machining'</span>] <span class="op">/</span> cost_drivers[<span class="st">'expected_machine_hours'</span>]            <span class="co"># $10</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  overhead_rates_3 <span class="op">=</span> cost_drivers[<span class="st">'inspecting'</span>] <span class="op">/</span> cost_drivers[<span class="st">'expected_inspections'</span>]             <span class="co"># $50</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>  <span class="co"># -- item 1</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>  mach_setup_cost_1 <span class="op">=</span> cost_drivers[<span class="st">'item_1'</span>][<span class="st">'exp_cost_machine_setups'</span>] <span class="op">*</span> overhead_rates_1</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>  machine_cost_1 <span class="op">=</span> cost_drivers[<span class="st">'item_1'</span>][<span class="st">'exp_cost_machining'</span>] <span class="op">*</span> overhead_rates_2</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>  inspect_cost_1 <span class="op">=</span> cost_drivers[<span class="st">'item_1'</span>][<span class="st">'exp_cost_inpsecting'</span>] <span class="op">*</span> overhead_rates_3</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>  total_assigned_costs_1 <span class="op">=</span> mach_setup_cost_1 <span class="op">+</span> machine_cost_1 <span class="op">+</span> inspect_cost_1</span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a>  overhead_cpu_1 <span class="op">=</span> total_assigned_costs_1 <span class="op">/</span> cost_drivers[<span class="st">'units_produced_item1'</span>]</span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a>  <span class="co">#-- item 2</span></span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a>  mach_setup_cost_2 <span class="op">=</span> cost_drivers[<span class="st">'item_2'</span>][<span class="st">'exp_cost_machine_setups'</span>] <span class="op">*</span> overhead_rates_1</span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a>  machine_cost_2 <span class="op">=</span> cost_drivers[<span class="st">'item_2'</span>][<span class="st">'exp_cost_machining'</span>] <span class="op">*</span> overhead_rates_2</span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a>  inspect_cost_2 <span class="op">=</span> cost_drivers[<span class="st">'item_2'</span>][<span class="st">'exp_cost_inpsecting'</span>] <span class="op">*</span> overhead_rates_3</span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a>  total_assigned_costs_2 <span class="op">=</span> mach_setup_cost_2 <span class="op">+</span> machine_cost_2 <span class="op">+</span> inspect_cost_2</span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a>  overhead_cpu_2 <span class="op">=</span> total_assigned_costs_2 <span class="op">/</span> cost_drivers[<span class="st">'units_produced_item2'</span>]</span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st"> --- Product Overhead Costs ---"</span>)</span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"item 1"</span>)</span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Cost assigned: machine set up "</span>, <span class="st">"."</span><span class="op">*</span><span class="dv">5</span>,<span class="st">"${:,}"</span>.<span class="bu">format</span>(mach_setup_cost_1))</span>
+<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Cost assigned: machine costs "</span>, <span class="st">"."</span><span class="op">*</span><span class="dv">6</span>,<span class="st">"${:,}"</span>.<span class="bu">format</span>(machine_cost_1))</span>
+<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Cost assigned: machine costs "</span>, <span class="st">"."</span><span class="op">*</span><span class="dv">6</span>,<span class="st">"${:,}"</span>.<span class="bu">format</span>(inspect_cost_1))</span>
+<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Total costs assigned"</span>,<span class="st">"."</span><span class="op">*</span><span class="dv">20</span>,<span class="st">"${:,}"</span>.<span class="bu">format</span>(total_assigned_costs_1))</span>
+<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Overhead cost per unit"</span>,<span class="st">"."</span><span class="op">*</span><span class="dv">18</span>,<span class="st">"${:,}"</span>.<span class="bu">format</span>(overhead_cpu_1))</span>
+<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"item 2"</span>)</span>
+<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Cost assigned: machine set up "</span>, <span class="st">"."</span><span class="op">*</span><span class="dv">5</span>,<span class="st">"${:,}"</span>.<span class="bu">format</span>(mach_setup_cost_2))</span>
+<span id="cb9-31"><a href="#cb9-31" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Cost assigned: machine costs "</span>, <span class="st">"."</span><span class="op">*</span><span class="dv">6</span>,<span class="st">"${:,}"</span>.<span class="bu">format</span>(machine_cost_2))</span>
+<span id="cb9-32"><a href="#cb9-32" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Cost assigned: machine costs "</span>, <span class="st">"."</span><span class="op">*</span><span class="dv">6</span>,<span class="st">"${:,}"</span>.<span class="bu">format</span>(inspect_cost_2))</span>
+<span id="cb9-33"><a href="#cb9-33" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Total costs assigned"</span>,<span class="st">"."</span><span class="op">*</span><span class="dv">20</span>,<span class="st">"${:,}"</span>.<span class="bu">format</span>(total_assigned_costs_2))</span>
+<span id="cb9-34"><a href="#cb9-34" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Overhead cost per unit"</span>,<span class="st">"."</span><span class="op">*</span><span class="dv">18</span>,<span class="st">"${:,}"</span>.<span class="bu">format</span>(overhead_cpu_2))</span>
+<span id="cb9-35"><a href="#cb9-35" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb9-36"><a href="#cb9-36" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb9-37"><a href="#cb9-37" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-38"><a href="#cb9-38" aria-hidden="true" tabindex="-1"></a>product_overhead_costs( cost_drivers )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+ --- Product Overhead Costs ---
+item 1
+Cost assigned: machine set up  ..... $100,000.0
+Cost assigned: machine costs  ...... $300,000.0
+Cost assigned: machine costs  ...... $25,000.0
+Total costs assigned .................... $425,000.0
+Overhead cost per unit .................. $17.0
+item 2
+Cost assigned: machine set up  ..... $200,000.0
+Cost assigned: machine costs  ...... $200,000.0
+Cost assigned: machine costs  ...... $75,000.0
+Total costs assigned .................... $475,000.0
+Overhead cost per unit .................. $95.0</code></pre>
+</div>
+</div>
+</section>
+<section id="abc-unit-cost-comparison" class="level3" data-number="5.1.6">
+<h3 data-number="5.1.6" class="anchored" data-anchor-id="abc-unit-cost-comparison"><span class="header-section-number">5.1.6</span> ABC unit cost comparison</h3>
+<p>Looking at the manufacturing costs for this example company, comparison of unit costs of the two items produced.</p>
+<ul>
+<li>direct materials costs = (item 1) 40, (item 2) 30</li>
+<li>direct labor costs = 12</li>
+<li>overhead = (predetermined overhead rate * 1 hr) 30</li>
+</ul>
+<div class="cell" data-execution_count="7">
+<details>
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># -- info from start of section 5.1</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>high_vol_item <span class="op">=</span> <span class="fl">25e3</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>low_vol_item <span class="op">=</span> <span class="fl">5e3</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>expect_overhead <span class="op">=</span> <span class="fl">900e3</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>hours <span class="op">=</span> <span class="dv">1</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="co"># ------</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>total_annual_direct_labor <span class="op">=</span> high_vol_item <span class="op">+</span> low_vol_item</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>pred_overhead_rate <span class="op">=</span> expect_overhead <span class="op">/</span> total_annual_direct_labor</span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Predetermined overhead rate = $"</span>,pred_overhead_rate <span class="op">*</span> hours)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Predetermined overhead rate = $ 30.0</code></pre>
+</div>
+</div>
+<p>Make a manufacturing costs data dictionary to use for unit cost comparisons.</p>
+<div class="cell" data-execution_count="8">
+<details>
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>manuf_costs <span class="op">=</span> {</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">'item_1'</span>: {<span class="st">'direct_material'</span>: <span class="dv">40</span>, <span class="st">'direct_labor'</span>: <span class="dv">12</span>, <span class="st">'overhead_rate'</span>: <span class="dv">30</span>},</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">'item_2'</span>: {<span class="st">'direct_material'</span>: <span class="dv">30</span>, <span class="st">'direct_labor'</span>: <span class="dv">12</span>, <span class="st">'overhead_rate'</span>: <span class="dv">30</span>}</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>A function for unit cost comparison between traditional costs and the ABC method. We use the information from <a href="###abc-step-4">ABC step 4 product cost overhead</a>.</p>
+<div class="cell" data-execution_count="9">
+<details>
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> unit_comparison( manufacturing_data: <span class="bu">dict</span>,  item_1_cpu: <span class="bu">int</span>, item_2_cpu: <span class="bu">int</span>):</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># convert the dictionary into a list</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  m <span class="op">=</span> <span class="bu">list</span>( manuf_costs )</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>  <span class="co"># create an empty array to loop through the values and sum them</span></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>  ml <span class="op">=</span> []</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> x <span class="kw">in</span> m:</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>    sx <span class="op">=</span> <span class="bu">sum</span>( manuf_costs[x].values() )</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>    ml.append(sx)  <span class="co"># append the summed values to the array</span></span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Tradional costing"</span>)</span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"</span><span class="ch">\t</span><span class="st">item 1 product total unit cost = $"</span>, ml[<span class="dv">0</span>])</span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"</span><span class="ch">\t</span><span class="st">item 2 product total unit cost = $"</span>, ml[<span class="dv">1</span>])</span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a>  <span class="co"># item 1 overhead cost per unit</span></span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a>  <span class="co"># item_1_cpu = 17</span></span>
+<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a>  <span class="co"># item_2_cpu = 95</span></span>
+<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a>  abc_1 <span class="op">=</span> (manuf_costs[<span class="st">'item_1'</span>][<span class="st">'direct_material'</span>] <span class="op">+</span> manuf_costs[<span class="st">'item_1'</span>][<span class="st">'direct_labor'</span>] <span class="op">+</span> item_1_cpu)</span>
+<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a>  abc_2 <span class="op">=</span> (manuf_costs[<span class="st">'item_2'</span>][<span class="st">'direct_material'</span>] <span class="op">+</span> manuf_costs[<span class="st">'item_2'</span>][<span class="st">'direct_labor'</span>] <span class="op">+</span> item_2_cpu)</span>
+<span id="cb14-22"><a href="#cb14-22" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb14-23"><a href="#cb14-23" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"ABC method"</span>)</span>
+<span id="cb14-24"><a href="#cb14-24" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"</span><span class="ch">\t</span><span class="st">item 1 product total unit cost = $"</span>, abc_1 )</span>
+<span id="cb14-25"><a href="#cb14-25" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"</span><span class="ch">\t</span><span class="st">item 2 product total unit cost = $"</span>, abc_2)</span>
+<span id="cb14-26"><a href="#cb14-26" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb14-27"><a href="#cb14-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-28"><a href="#cb14-28" aria-hidden="true" tabindex="-1"></a><span class="co"># ----</span></span>
+<span id="cb14-29"><a href="#cb14-29" aria-hidden="true" tabindex="-1"></a>unit_comparison(manuf_costs, <span class="dv">17</span>, <span class="dv">95</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Tradional costing
+    item 1 product total unit cost = $ 82
+    item 2 product total unit cost = $ 72
+ABC method
+    item 1 product total unit cost = $ 69
+    item 2 product total unit cost = $ 137</code></pre>
+</div>
+</div>
+<p>By comparing the costing systems, item 1 was over costed (82 vs the 69) and for item 2 the cost was under the more accurate cost of $137.</p>
+</section>
+<section id="abc-example-1" class="level3" data-number="5.1.7">
+<h3 data-number="5.1.7" class="anchored" data-anchor-id="abc-example-1"><span class="header-section-number">5.1.7</span> ABC example</h3>
+<p>In this ABC system example, a company has 7 cost pools and 2 products. The expected units produced are: item 1 = 200,000 units and item 2 = 80,000 units. This company has annual overhead data available for calculations.</p>
+<p>This example section uses the library <a href="https://numpy.org/">NumPy</a> to do multiple calculations of array vectors (lists) which you have already used in previous sections. This is new information and is not explained, but the use in this section is simply converting a python list into a NumPy array which allows for mathematical operations. So far the functions have been very simple and one by one calculation and this section does all of the math in one step, much like you would using Excel. Python lists cannot do math operations for what we want to do, so knowing and understanding NumPy is important to know for this section alone <em>(NumPy is a huge library for various math operations using array vectors, so just see if you can follow along here)</em>.</p>
+<p>The company overhead data is stored in a data dictionary.</p>
+<div class="cell" data-execution_count="10">
+<details>
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>overhead_data <span class="op">=</span> {</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">'activity_cost_pools'</span>: [<span class="st">'ordering_receiving'</span>,<span class="st">'machine_setup'</span>, <span class="st">'machining'</span>,<span class="st">'assembling'</span>,<span class="st">'inspecting_testing'</span>],</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">'expected_units'</span>: {<span class="st">'item_1'</span>: <span class="fl">200e3</span>, <span class="st">'item_2'</span>: <span class="fl">80e3</span>},</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>  <span class="st">'cost_drivers'</span>:{</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">'purchase_orders'</span>: <span class="fl">200e3</span>,</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">'set_up'</span>: <span class="fl">600e3</span>,</span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">'machine_hours'</span>: <span class="fl">2e6</span>,</span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">'parts'</span>: <span class="fl">1.8e6</span>,</span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">'tests'</span>: <span class="fl">700e3</span></span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>    },</span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a>    <span class="st">'expected_use_cost_drivers'</span>: {</span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a>      <span class="st">'orders'</span>: <span class="dv">2500</span>,</span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a>      <span class="st">'set_ups'</span>: <span class="dv">1200</span>,</span>
+<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a>      <span class="st">'hours'</span>: <span class="fl">800e3</span>,</span>
+<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a>      <span class="st">'parts'</span>: <span class="fl">3e6</span>,</span>
+<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a>      <span class="st">'tests'</span>: <span class="fl">35e3</span></span>
+<span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a>      },</span>
+<span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb16-22"><a href="#cb16-22" aria-hidden="true" tabindex="-1"></a>     <span class="st">'exp_use_item_1'</span>: {</span>
+<span id="cb16-23"><a href="#cb16-23" aria-hidden="true" tabindex="-1"></a>      <span class="st">'orders'</span>: <span class="dv">1000</span>,</span>
+<span id="cb16-24"><a href="#cb16-24" aria-hidden="true" tabindex="-1"></a>      <span class="st">'set_ups'</span>: <span class="dv">500</span>,</span>
+<span id="cb16-25"><a href="#cb16-25" aria-hidden="true" tabindex="-1"></a>      <span class="st">'hours'</span>: <span class="fl">300e3</span>,</span>
+<span id="cb16-26"><a href="#cb16-26" aria-hidden="true" tabindex="-1"></a>      <span class="st">'parts'</span>: <span class="fl">1.8e6</span>,</span>
+<span id="cb16-27"><a href="#cb16-27" aria-hidden="true" tabindex="-1"></a>      <span class="st">'tests'</span>: <span class="fl">20e3</span></span>
+<span id="cb16-28"><a href="#cb16-28" aria-hidden="true" tabindex="-1"></a>      },</span>
+<span id="cb16-29"><a href="#cb16-29" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb16-30"><a href="#cb16-30" aria-hidden="true" tabindex="-1"></a>      <span class="st">'exp_use_item_2'</span>: {</span>
+<span id="cb16-31"><a href="#cb16-31" aria-hidden="true" tabindex="-1"></a>      <span class="st">'orders'</span>: <span class="dv">1500</span>,</span>
+<span id="cb16-32"><a href="#cb16-32" aria-hidden="true" tabindex="-1"></a>      <span class="st">'set_ups'</span>: <span class="dv">700</span>,</span>
+<span id="cb16-33"><a href="#cb16-33" aria-hidden="true" tabindex="-1"></a>      <span class="st">'hours'</span>: <span class="fl">500e3</span>,</span>
+<span id="cb16-34"><a href="#cb16-34" aria-hidden="true" tabindex="-1"></a>      <span class="st">'parts'</span>: <span class="fl">1.2e6</span>,</span>
+<span id="cb16-35"><a href="#cb16-35" aria-hidden="true" tabindex="-1"></a>      <span class="st">'tests'</span>: <span class="fl">15e3</span></span>
+<span id="cb16-36"><a href="#cb16-36" aria-hidden="true" tabindex="-1"></a>      }</span>
+<span id="cb16-37"><a href="#cb16-37" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>A function that does all of the ABC steps in one step, including the unit cost comparison between the items. The library NumPy comes installed with the Anaconda download and is also easily installed in the terminal. Import NumPy inside the function as outside of the function it will not be accessible (function scope). This function takes the data dictionary as a function argument and prints out the calculations.</p>
+<div class="cell" data-execution_count="11">
+<details>
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> abc_method( costing_data: <span class="bu">dict</span> ):</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># import the NumPy library in order to do math of arrays </span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"--- ABC method ---"</span>)</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>  <span class="co"># sum the values in the cost drivers</span></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>  total_estimated_overhead <span class="op">=</span> <span class="bu">sum</span>( overhead_data[<span class="st">'cost_drivers'</span>].values() )</span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Total activity costs, estimated overhead = ${:,}"</span>.<span class="bu">format</span>(total_estimated_overhead))</span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>  <span class="co"># convert the dictionary values into a list</span></span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>  estimated_overhead <span class="op">=</span> <span class="bu">list</span>( overhead_data[<span class="st">'cost_drivers'</span>].values() )</span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a>  exp_use_cost_drivers <span class="op">=</span> <span class="bu">list</span>( overhead_data[<span class="st">'expected_use_cost_drivers'</span>].values() )</span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a>  <span class="co"># ---- convert the python lists into NumPy arrays, needed for calculations</span></span>
+<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a>  act_overhead_rates <span class="op">=</span> np.array(estimated_overhead) <span class="op">/</span> np.array(exp_use_cost_drivers)</span>
+<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb17-18"><a href="#cb17-18" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">Activity based overhead rates"</span>)</span>
+<span id="cb17-19"><a href="#cb17-19" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb17-20"><a href="#cb17-20" aria-hidden="true" tabindex="-1"></a>  <span class="co"># loop through the NumPy array and print it</span></span>
+<span id="cb17-21"><a href="#cb17-21" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> x <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(act_overhead_rates)):</span>
+<span id="cb17-22"><a href="#cb17-22" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"."</span><span class="op">*</span><span class="dv">5</span>,<span class="st">'$'</span>, act_overhead_rates[x], <span class="st">" per "</span>,overhead_data[<span class="st">'activity_cost_pools'</span>][x] )</span>
+<span id="cb17-23"><a href="#cb17-23" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb17-24"><a href="#cb17-24" aria-hidden="true" tabindex="-1"></a>  <span class="co"># convert list into a NumPy array from the list conversion of data dictionary values</span></span>
+<span id="cb17-25"><a href="#cb17-25" aria-hidden="true" tabindex="-1"></a>  item_1_exp_cost_driver <span class="op">=</span> np.array( <span class="bu">list</span>( overhead_data[<span class="st">'exp_use_item_1'</span>].values() ) )</span>
+<span id="cb17-26"><a href="#cb17-26" aria-hidden="true" tabindex="-1"></a>  item_1_costs_assigned <span class="op">=</span> item_1_exp_cost_driver <span class="op">*</span> act_overhead_rates</span>
+<span id="cb17-27"><a href="#cb17-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-28"><a href="#cb17-28" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">item 1"</span>)</span>
+<span id="cb17-29"><a href="#cb17-29" aria-hidden="true" tabindex="-1"></a>  <span class="co"># convert the costs assigned into a list</span></span>
+<span id="cb17-30"><a href="#cb17-30" aria-hidden="true" tabindex="-1"></a>  <span class="co"># using range from 0 to the length of the array</span></span>
+<span id="cb17-31"><a href="#cb17-31" aria-hidden="true" tabindex="-1"></a>  item1_costs_assigned <span class="op">=</span> <span class="bu">list</span>( <span class="bu">range</span>(<span class="bu">len</span>(item_1_costs_assigned)) )</span>
+<span id="cb17-32"><a href="#cb17-32" aria-hidden="true" tabindex="-1"></a>  cost_list <span class="op">=</span> [] <span class="co"># create empty array to store values</span></span>
+<span id="cb17-33"><a href="#cb17-33" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb17-34"><a href="#cb17-34" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> x <span class="kw">in</span>  item1_costs_assigned:</span>
+<span id="cb17-35"><a href="#cb17-35" aria-hidden="true" tabindex="-1"></a>    cost_items_1 <span class="op">=</span> item_1_costs_assigned[x]</span>
+<span id="cb17-36"><a href="#cb17-36" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Cost assigned"</span>,<span class="st">'${:,}'</span>.<span class="bu">format</span>( cost_items_1,<span class="st">" per unit"</span> ) )</span>
+<span id="cb17-37"><a href="#cb17-37" aria-hidden="true" tabindex="-1"></a>    cost_list.append(cost_items_1) <span class="co"># add each looped item to array to be summed</span></span>
+<span id="cb17-38"><a href="#cb17-38" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb17-39"><a href="#cb17-39" aria-hidden="true" tabindex="-1"></a>  total_assigned_costs <span class="op">=</span> <span class="bu">sum</span>(cost_list )</span>
+<span id="cb17-40"><a href="#cb17-40" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Total assigned costs = ${:,}"</span>.<span class="bu">format</span>(total_assigned_costs))</span>
+<span id="cb17-41"><a href="#cb17-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-42"><a href="#cb17-42" aria-hidden="true" tabindex="-1"></a>  <span class="co">#-- repeat same process for second item</span></span>
+<span id="cb17-43"><a href="#cb17-43" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-44"><a href="#cb17-44" aria-hidden="true" tabindex="-1"></a>  item_2_exp_cost_driver <span class="op">=</span> np.array( <span class="bu">list</span>( overhead_data[<span class="st">'exp_use_item_2'</span>].values() ) )</span>
+<span id="cb17-45"><a href="#cb17-45" aria-hidden="true" tabindex="-1"></a>  item_2_costs_assigned <span class="op">=</span> item_2_exp_cost_driver <span class="op">*</span> act_overhead_rates</span>
+<span id="cb17-46"><a href="#cb17-46" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">item 2"</span>)</span>
+<span id="cb17-47"><a href="#cb17-47" aria-hidden="true" tabindex="-1"></a>  item1_costs_assigned <span class="op">=</span> <span class="bu">list</span>( <span class="bu">range</span>(<span class="bu">len</span>(item_2_costs_assigned)) )</span>
+<span id="cb17-48"><a href="#cb17-48" aria-hidden="true" tabindex="-1"></a>  cost_list_2 <span class="op">=</span> []</span>
+<span id="cb17-49"><a href="#cb17-49" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> x <span class="kw">in</span>  item1_costs_assigned:</span>
+<span id="cb17-50"><a href="#cb17-50" aria-hidden="true" tabindex="-1"></a>    cost_items_2 <span class="op">=</span> item_2_costs_assigned[x]</span>
+<span id="cb17-51"><a href="#cb17-51" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Cost assigned"</span>,<span class="st">'${:,}'</span>.<span class="bu">format</span>( cost_items_2,<span class="st">" per unit"</span> ) )</span>
+<span id="cb17-52"><a href="#cb17-52" aria-hidden="true" tabindex="-1"></a>    cost_list_2.append(cost_items_2)</span>
+<span id="cb17-53"><a href="#cb17-53" aria-hidden="true" tabindex="-1"></a>   </span>
+<span id="cb17-54"><a href="#cb17-54" aria-hidden="true" tabindex="-1"></a>  total_assigned_costs_2 <span class="op">=</span> <span class="bu">sum</span>(cost_list_2 )</span>
+<span id="cb17-55"><a href="#cb17-55" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Total assigned costs = ${:,}"</span>.<span class="bu">format</span>(total_assigned_costs_2))</span>
+<span id="cb17-56"><a href="#cb17-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb17-57"><a href="#cb17-57" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb17-58"><a href="#cb17-58" aria-hidden="true" tabindex="-1"></a>  item1_overhead_cpu <span class="op">=</span>   total_assigned_costs <span class="op">/</span> overhead_data[<span class="st">'expected_units'</span>][<span class="st">'item_1'</span>]</span>
+<span id="cb17-59"><a href="#cb17-59" aria-hidden="true" tabindex="-1"></a>  item2_overhead_cpu <span class="op">=</span> total_assigned_costs_2 <span class="op">/</span> overhead_data[<span class="st">'expected_units'</span>][<span class="st">'item_2'</span>]</span>
+<span id="cb17-60"><a href="#cb17-60" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb17-61"><a href="#cb17-61" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">Overhead cost per unit (item 1) = ${:,}"</span>.<span class="bu">format</span>(item1_overhead_cpu))</span>
+<span id="cb17-62"><a href="#cb17-62" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Overhead cost per unit (item 2) = ${:,}"</span>.<span class="bu">format</span>(item2_overhead_cpu))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>Call the function</p>
+<div class="cell" data-execution_count="12">
+<details>
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>abc_method( overhead_data )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>--- ABC method ---
+Total activity costs, estimated overhead = $5,300,000.0
+
+Activity based overhead rates
+..... $ 80.0  per  ordering_receiving
+..... $ 500.0  per  machine_setup
+..... $ 2.5  per  machining
+..... $ 0.6  per  assembling
+..... $ 20.0  per  inspecting_testing
+
+item 1
+Cost assigned $80,000.0
+Cost assigned $250,000.0
+Cost assigned $750,000.0
+Cost assigned $1,080,000.0
+Cost assigned $400,000.0
+Total assigned costs = $2,560,000.0
+
+item 2
+Cost assigned $120,000.0
+Cost assigned $350,000.0
+Cost assigned $1,250,000.0
+Cost assigned $720,000.0
+Cost assigned $300,000.0
+Total assigned costs = $2,740,000.0
+
+Overhead cost per unit (item 1) = $12.8
+Overhead cost per unit (item 2) = $34.25</code></pre>
+</div>
+</div>
+<p>As mentioned before, building functions does take some time and effort, but once you have it, you can use it again and again.</p>
+<hr>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  let localAlternateSentinel = 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./chapter3.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Process Cost Accounting</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./chapter5.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Decision Making: Cost Volume Profit</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+</body></html>

@@ -1,0 +1,1467 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.269">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>AccountingPy - 10&nbsp; Budgetary Planning</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./glossary.html" rel="next">
+<link href="./chapter8.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Budgetary Planning</span></h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">AccountingPy</a> 
+        <div class="sidebar-tools-main">
+  <a href="" class="quarto-color-scheme-toggle sidebar-tool" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+    </div>
+      </div>
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">Welcome</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./intro.html" class="sidebar-item-text sidebar-link">Introduction</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./pythonbasics.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Python Basics</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter1.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Financial Accounting</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter2.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Job Cost Accounting</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter3.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Process Cost Accounting</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter4.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Activity Based Costing</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter5.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Decision Making: Cost Volume Profit</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter6.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Incremental Analysis</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter7.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Alt Inventory Costing Methods</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter8.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Pricing</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter9.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Budgetary Planning</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./glossary.html" class="sidebar-item-text sidebar-link">Glossary</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./summary.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Summary</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">References</a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#master-budget" id="toc-master-budget" class="nav-link active" data-scroll-target="#master-budget"><span class="toc-section-number">10.1</span>  Master Budget</a></li>
+  <li><a href="#sales-budget" id="toc-sales-budget" class="nav-link" data-scroll-target="#sales-budget"><span class="toc-section-number">10.2</span>  Sales Budget</a></li>
+  <li><a href="#production-budget" id="toc-production-budget" class="nav-link" data-scroll-target="#production-budget"><span class="toc-section-number">10.3</span>  Production Budget</a></li>
+  <li><a href="#direct-materials-budget" id="toc-direct-materials-budget" class="nav-link" data-scroll-target="#direct-materials-budget"><span class="toc-section-number">10.4</span>  Direct Materials Budget</a></li>
+  <li><a href="#direct-labor-budget" id="toc-direct-labor-budget" class="nav-link" data-scroll-target="#direct-labor-budget"><span class="toc-section-number">10.5</span>  Direct Labor Budget</a></li>
+  <li><a href="#manufacturing-overhead-budget" id="toc-manufacturing-overhead-budget" class="nav-link" data-scroll-target="#manufacturing-overhead-budget"><span class="toc-section-number">10.6</span>  Manufacturing Overhead Budget</a></li>
+  <li><a href="#selling-admin-budget" id="toc-selling-admin-budget" class="nav-link" data-scroll-target="#selling-admin-budget"><span class="toc-section-number">10.7</span>  Selling &amp; Admin Budget</a></li>
+  <li><a href="#budgeted-income-statement" id="toc-budgeted-income-statement" class="nav-link" data-scroll-target="#budgeted-income-statement"><span class="toc-section-number">10.8</span>  Budgeted Income Statement</a></li>
+  <li><a href="#cash-budget" id="toc-cash-budget" class="nav-link" data-scroll-target="#cash-budget"><span class="toc-section-number">10.9</span>  Cash Budget</a></li>
+  <li><a href="#non-manufacture-budgets" id="toc-non-manufacture-budgets" class="nav-link" data-scroll-target="#non-manufacture-budgets"><span class="toc-section-number">10.10</span>  Non-Manufacture Budgets</a></li>
+  <li><a href="#service-enterprises" id="toc-service-enterprises" class="nav-link" data-scroll-target="#service-enterprises"><span class="toc-section-number">10.11</span>  Service Enterprises</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title d-none d-lg-block"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Budgetary Planning</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<p>Every manager and person deals with a budget at some time in their lives, every business needs to use planning tools for their budgets. By knowing the budget allows for ample cash to pay for materials, employees, production, and so forth.</p>
+<p>A <code>budget</code> is a formal written statement in financial terms of management’s plan for a specified future time period. Budgetary planning involves:</p>
+<ul>
+<li>Budgeting Basics &amp; master budget</li>
+<li>preparing the sales, production &amp; direct materials budgets</li>
+<li>preparing direct labor, manufacturing, expense budgets</li>
+<li>preparing the financial budgets</li>
+<li>budgeting in non-manufacturing companies</li>
+</ul>
+<p>The list above is a general overview of each section.</p>
+<p>Benefits of budgets:</p>
+<ul>
+<li>all management levels use to plan ahead &amp; form goals</li>
+<li>gives objectives for evaluation</li>
+<li>clear communication for coordinated activities</li>
+</ul>
+<blockquote class="blockquote">
+<p>The budget period is not set in stone, it is not mandatory to be 1 year, it can be any period of time</p>
+</blockquote>
+<p>A sales forecast is part of the budgeting process:</p>
+<ul>
+<li>shows expected sales (industry) &amp; company’s expected share of sales</li>
+<li>general economic conditions</li>
+<li>industry trends</li>
+<li>market research studies</li>
+<li>anticipated advertising &amp; promotion</li>
+<li>market share</li>
+<li>changes in prices</li>
+<li>technology developments</li>
+</ul>
+<section id="master-budget" class="level2" data-number="10.1">
+<h2 data-number="10.1" class="anchored" data-anchor-id="master-budget"><span class="header-section-number">10.1</span> Master Budget</h2>
+<p>A <em>master budget</em> is several budget documents combined. Using a Python function to illustrate the part of a master budget, as it shows how to make nested functions and is main overview of all the functions.</p>
+<div class="cell" data-execution_count="1">
+<details>
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> master_budget():</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="kw">def</span> sales_budget():</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">pass</span> </span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="kw">def</span> production_budget():</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>    <span class="cf">pass</span> </span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  <span class="co"># --- operating budgets</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="kw">def</span> direct_materials_budget():</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">pass</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>  <span class="kw">def</span> direct_labor_budget():</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">pass</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>  <span class="kw">def</span> manufacturing_overhead_budget():</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>    <span class="cf">pass</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>  <span class="co"># ----</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>  <span class="kw">def</span> selling_admin_budget():</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>    <span class="cf">pass</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>  <span class="kw">def</span> income_statement_budget():</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>    <span class="cf">pass</span></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>  <span class="co"># --- financial budgets</span></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>  <span class="kw">def</span> capital_expenditure_budget():</span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>    <span class="cf">pass</span></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>  <span class="kw">def</span> cash_budget():</span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>    <span class="cf">pass</span></span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>  <span class="kw">def</span> budgeted_balance_sheet():</span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>    <span class="cf">pass</span></span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>  <span class="co"># --------</span></span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>master_budget()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</section>
+<section id="sales-budget" class="level2" data-number="10.2">
+<h2 data-number="10.2" class="anchored" data-anchor-id="sales-budget"><span class="header-section-number">10.2</span> Sales Budget</h2>
+<p>The sales budget is the first budget, which represents management’s best estimate of sales revenue for the budgeted period. Inaccurate sales budget can affect net income.</p>
+<ul>
+<li><code>sales budget</code> = expected sales units x anticipated selling price per unit</li>
+</ul>
+<p>Sales data in a data dictionary.</p>
+<div class="cell" data-execution_count="2">
+<details>
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>sales <span class="op">=</span> {</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">'quarter'</span>: [<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>],</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">'expected_sales'</span>: [<span class="dv">3000</span>, <span class="dv">3500</span>, <span class="dv">4000</span>, <span class="dv">4500</span>],</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">'unit_selling_price'</span>: <span class="dv">60</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>Sales budget function</p>
+<div class="cell" data-execution_count="3">
+<details>
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> sales_budget( <span class="bu">dict</span> ):</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  price <span class="op">=</span> <span class="bu">dict</span>[<span class="st">'unit_selling_price'</span>]</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  expected_sales  <span class="op">=</span> <span class="bu">dict</span>[<span class="st">'expected_sales'</span>] </span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  dL <span class="op">=</span> <span class="bu">len</span>( <span class="bu">dict</span>[<span class="st">'expected_sales'</span>] ) <span class="co"># length of dictionary array</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  quarter <span class="op">=</span> <span class="bu">dict</span>[<span class="st">'quarter'</span>] <span class="co"># get each quarter</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  sales <span class="op">=</span> []</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  q <span class="op">=</span>[]</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"-- Sales Budget --"</span>)</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> x <span class="kw">in</span> <span class="bu">range</span>(dL):</span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>    quarters <span class="op">=</span> quarter[x]</span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>    q.append(quarters)</span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>    s <span class="op">=</span> expected_sales[x] <span class="op">*</span> price</span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>    sales.append(s)</span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"total sales ${:,} Quarter: {:,}"</span>.<span class="bu">format</span>(sales[x], q[x]))</span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Total sales for year ..... ${:,}"</span>.<span class="bu">format</span>( <span class="bu">sum</span>(sales)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>Call the function</p>
+<div class="cell" data-execution_count="4">
+<details>
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>sales_budget( sales ) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>-- Sales Budget --
+total sales $180,000 Quarter: 1
+total sales $210,000 Quarter: 2
+total sales $240,000 Quarter: 3
+total sales $270,000 Quarter: 4
+Total sales for year ..... $900,000</code></pre>
+</div>
+</div>
+</section>
+<section id="production-budget" class="level2" data-number="10.3">
+<h2 data-number="10.3" class="anchored" data-anchor-id="production-budget"><span class="header-section-number">10.3</span> Production Budget</h2>
+<p>The production budget shows the units that must be produced to meet expected sales, production requirements have a formula.</p>
+<ul>
+<li>budgeted sales units (<code>bsu</code>)</li>
+<li>ending finished goods units (<code>efgu</code>), {desired units}</li>
+<li>beginning finished goods units (<code>bfgu</code>)</li>
+<li><code>required production units</code> = bsu + efgu - bfgu</li>
+</ul>
+<p>production data is in a data dictionary, the ending finished goods unit values are based on the next quarter’s sales times 20%.</p>
+<div class="cell" data-execution_count="5">
+<details>
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>production <span class="op">=</span> {</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">'quarter'</span>: [<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>],</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">'expected_sales'</span>: [<span class="dv">3000</span>, <span class="dv">3500</span>, <span class="dv">4000</span>, <span class="dv">4500</span>],</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># ending finished goods units</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">'efgu'</span>: [<span class="dv">700</span>,<span class="dv">800</span>,<span class="dv">900</span>, <span class="dv">1000</span>],</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="co"># beginning finished goods units</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  <span class="st">'bfgu'</span>: [<span class="dv">600</span>,<span class="dv">700</span>,<span class="dv">800</span>,<span class="dv">900</span>]</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>function</p>
+<div class="cell" data-execution_count="6">
+<details>
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> production_budget( <span class="bu">dict</span> ):</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  quarter <span class="op">=</span> <span class="bu">dict</span>[<span class="st">'quarter'</span>] <span class="co"># get each quarter</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  expected_sales  <span class="op">=</span> <span class="bu">dict</span>[<span class="st">'expected_sales'</span>] </span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  dL <span class="op">=</span> <span class="bu">len</span>( expected_sales ) </span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  efgu <span class="op">=</span> <span class="bu">dict</span>[<span class="st">'efgu'</span>]</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  bfgu <span class="op">=</span> <span class="bu">dict</span>[<span class="st">'bfgu'</span>]</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>  prod <span class="op">=</span> []</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>  prod2 <span class="op">=</span> []</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>  q <span class="op">=</span>[]</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"-- Production Budget --"</span>)</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> x <span class="kw">in</span> <span class="bu">range</span>( dL ):</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>    quarters <span class="op">=</span> quarter[x]</span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>    q.append(quarters)</span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>    p <span class="op">=</span> expected_sales[x] <span class="op">+</span> efgu[x] </span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>    prod.append(p)</span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>    p2 <span class="op">=</span> p <span class="op">-</span> bfgu[x]</span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>    prod2.append(p2)</span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Total required units : {:,} Quarter: {:,}"</span>.<span class="bu">format</span>(prod[x], q[x]))</span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Required production units : {:,} Quarter: {:,}</span><span class="ch">\n</span><span class="st">"</span>.<span class="bu">format</span>(prod2[x], q[x]))</span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Total production units for year ..... {:,}"</span>.<span class="bu">format</span>( <span class="bu">sum</span>(prod2)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>call function</p>
+<div class="cell" data-execution_count="7">
+<details>
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>production_budget( production )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>-- Production Budget --
+Total required units : 3,700 Quarter: 1
+Required production units : 3,100 Quarter: 1
+
+Total required units : 4,300 Quarter: 2
+Required production units : 3,600 Quarter: 2
+
+Total required units : 4,900 Quarter: 3
+Required production units : 4,100 Quarter: 3
+
+Total required units : 5,500 Quarter: 4
+Required production units : 4,600 Quarter: 4
+
+Total production units for year ..... 15,400</code></pre>
+</div>
+</div>
+</section>
+<section id="direct-materials-budget" class="level2" data-number="10.4">
+<h2 data-number="10.4" class="anchored" data-anchor-id="direct-materials-budget"><span class="header-section-number">10.4</span> Direct Materials Budget</h2>
+<p>The <code>direct materials budget</code> shows the quantity and cost of direct materials that need to be purchased.</p>
+<ul>
+<li>required direct materials units to be purchased (<code>rdmup</code>)</li>
+<li>direct materials units required for production (<code>dmurp</code>)</li>
+<li>ending direct materials units {desired} (<code>edmu</code>)</li>
+<li>beginning direct materials units (<code>bdmu</code>)</li>
+<li>rdmup = dmurp + edmu - bdmu</li>
+</ul>
+<p>Units to be produced are the values from production budget function, when all of these functions are inside the master budget function you can just use the stored array of values. Here in this example the units to be produced are manually placed inside the dictionary array. Ending direct materials (edmu) is 10% of next quarter’s production requirements.</p>
+<div class="cell" data-execution_count="8">
+<details>
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>materials <span class="op">=</span> {</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">'quarter'</span>: [<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>],</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">'units_to_produce'</span>: [<span class="dv">3100</span>,<span class="dv">3600</span>,<span class="dv">4100</span>,<span class="dv">4600</span>],</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">'direct_materials_per_unit'</span>: <span class="dv">2</span>,</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">'production_percent'</span>: <span class="fl">0.1</span>,</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>  <span class="st">'edmu'</span>: [<span class="dv">720</span>,<span class="dv">820</span>,<span class="dv">920</span>,<span class="dv">1020</span>],</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>  <span class="st">'cost_per_kg'</span>: <span class="dv">4</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>function</p>
+<div class="cell" data-execution_count="9">
+<details>
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># --- operating budgets</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> direct_materials_budget( <span class="bu">dict</span> ):</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  units_to_prod <span class="op">=</span> <span class="bu">dict</span>[<span class="st">'units_to_produce'</span>]</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>  dL <span class="op">=</span> <span class="bu">len</span>(units_to_prod)</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>  quarter <span class="op">=</span> <span class="bu">dict</span>[<span class="st">'quarter'</span>]</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>  percent <span class="op">=</span> <span class="bu">dict</span>[<span class="st">'production_percent'</span>]</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>  cost <span class="op">=</span> <span class="bu">dict</span>[<span class="st">'cost_per_kg'</span>]</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>  <span class="co"># direct materials per unit</span></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>  dmpu <span class="op">=</span> <span class="bu">dict</span>[<span class="st">'direct_materials_per_unit'</span>]</span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>  <span class="co"># -- ending direct materials </span></span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a>  edmu <span class="op">=</span> <span class="bu">dict</span>[<span class="st">'edmu'</span>]</span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a>  prod <span class="op">=</span> []</span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a>  q <span class="op">=</span>[]</span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a>  mr <span class="op">=</span> [] <span class="co"># materials required</span></span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a>  bm <span class="op">=</span> [] <span class="co"># begin direct materials</span></span>
+<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a>  dmp <span class="op">=</span> [] <span class="co"># direct material purchase</span></span>
+<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a>  cpk <span class="op">=</span> [] <span class="co"># cost per kg</span></span>
+<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"-- Direct Materials Budget --"</span>)</span>
+<span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> x <span class="kw">in</span> <span class="bu">range</span>( dL ):</span>
+<span id="cb11-24"><a href="#cb11-24" aria-hidden="true" tabindex="-1"></a>    quarters <span class="op">=</span> quarter[x]</span>
+<span id="cb11-25"><a href="#cb11-25" aria-hidden="true" tabindex="-1"></a>    q.append(quarters)</span>
+<span id="cb11-26"><a href="#cb11-26" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb11-27"><a href="#cb11-27" aria-hidden="true" tabindex="-1"></a>    p <span class="op">=</span> units_to_prod[x] <span class="op">*</span> dmpu</span>
+<span id="cb11-28"><a href="#cb11-28" aria-hidden="true" tabindex="-1"></a>    prod.append(p)</span>
+<span id="cb11-29"><a href="#cb11-29" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb11-30"><a href="#cb11-30" aria-hidden="true" tabindex="-1"></a>    m <span class="op">=</span> p <span class="op">+</span> edmu[x]</span>
+<span id="cb11-31"><a href="#cb11-31" aria-hidden="true" tabindex="-1"></a>    mr.append(m)</span>
+<span id="cb11-32"><a href="#cb11-32" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb11-33"><a href="#cb11-33" aria-hidden="true" tabindex="-1"></a>    begin_mat <span class="op">=</span> prod[x] <span class="op">*</span> percent</span>
+<span id="cb11-34"><a href="#cb11-34" aria-hidden="true" tabindex="-1"></a>    bm.append(begin_mat)</span>
+<span id="cb11-35"><a href="#cb11-35" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb11-36"><a href="#cb11-36" aria-hidden="true" tabindex="-1"></a>    dm <span class="op">=</span> mr[x] <span class="op">-</span> bm[x]</span>
+<span id="cb11-37"><a href="#cb11-37" aria-hidden="true" tabindex="-1"></a>    dmp.append(dm)</span>
+<span id="cb11-38"><a href="#cb11-38" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb11-39"><a href="#cb11-39" aria-hidden="true" tabindex="-1"></a>    c <span class="op">=</span> dmp[x] <span class="op">*</span> cost</span>
+<span id="cb11-40"><a href="#cb11-40" aria-hidden="true" tabindex="-1"></a>    cpk.append(c)</span>
+<span id="cb11-41"><a href="#cb11-41" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb11-42"><a href="#cb11-42" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Quarter: </span><span class="sc">{}</span><span class="ch">\n</span><span class="st">Total units needed for production: ..... {:,}  "</span>.<span class="bu">format</span>(q[x], prod[x] ) ) </span>
+<span id="cb11-43"><a href="#cb11-43" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Total materials required: ........................... {:,}  "</span>.<span class="bu">format</span>(mr[x]) ) </span>
+<span id="cb11-44"><a href="#cb11-44" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Direct materials purchased: ......................... {:,}  "</span>.<span class="bu">format</span>(dmp[x]) ) </span>
+<span id="cb11-45"><a href="#cb11-45" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Total cost of direct materials purchased: ........... ${:,}  </span><span class="ch">\n</span><span class="st">"</span>.<span class="bu">format</span>(cpk[x]) ) </span>
+<span id="cb11-46"><a href="#cb11-46" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb11-47"><a href="#cb11-47" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb11-48"><a href="#cb11-48" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Total cost of direct materials purchased for year ..... ${:,}"</span>.<span class="bu">format</span>( <span class="bu">sum</span>(cpk)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>call function</p>
+<div class="cell" data-execution_count="10">
+<details>
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>direct_materials_budget( materials )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>-- Direct Materials Budget --
+Quarter: 1
+Total units needed for production: ..... 6,200  
+Total materials required: ........................... 6,920  
+Direct materials purchased: ......................... 6,300.0  
+Total cost of direct materials purchased: ........... $25,200.0  
+
+Quarter: 2
+Total units needed for production: ..... 7,200  
+Total materials required: ........................... 8,020  
+Direct materials purchased: ......................... 7,300.0  
+Total cost of direct materials purchased: ........... $29,200.0  
+
+Quarter: 3
+Total units needed for production: ..... 8,200  
+Total materials required: ........................... 9,120  
+Direct materials purchased: ......................... 8,300.0  
+Total cost of direct materials purchased: ........... $33,200.0  
+
+Quarter: 4
+Total units needed for production: ..... 9,200  
+Total materials required: ........................... 10,220  
+Direct materials purchased: ......................... 9,300.0  
+Total cost of direct materials purchased: ........... $37,200.0  
+
+Total cost of direct materials purchased for year ..... $124,800.0</code></pre>
+</div>
+</div>
+</section>
+<section id="direct-labor-budget" class="level2" data-number="10.5">
+<h2 data-number="10.5" class="anchored" data-anchor-id="direct-labor-budget"><span class="header-section-number">10.5</span> Direct Labor Budget</h2>
+<p>The <code>direct labor budget</code> deals with quantity of hours and the cost of direct labor that will be needed to meet production requirements.</p>
+<ul>
+<li>total direct labor cost (<code>tdlc</code>)</li>
+<li>units to be produced (<code>utp</code>)</li>
+<li>direct labor time per unit (<code>dltpu</code>)</li>
+<li>direct labor cost per hour (<code>dlcpu</code>)</li>
+<li><code>tdlc = utp * dltpu * dlcpu</code></li>
+</ul>
+<p>Labor data dictionary</p>
+<div class="cell" data-execution_count="11">
+<details>
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>labor <span class="op">=</span> {</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">'quarter'</span>: [<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>],</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">'units_to_produce'</span>: [<span class="dv">3100</span>,<span class="dv">3600</span>,<span class="dv">4100</span>,<span class="dv">4600</span>],</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># direct labor time per unit</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">'dltpu'</span>: <span class="dv">2</span>,</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>  <span class="co"># direct labor cost per hour</span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>  <span class="st">'dlcpu'</span>: <span class="dv">10</span></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>function</p>
+<div class="cell" data-execution_count="12">
+<details>
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> direct_labor_budget( <span class="bu">dict</span> ):</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  quarter <span class="op">=</span> <span class="bu">dict</span>[<span class="st">'quarter'</span>]</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  dltpu <span class="op">=</span> <span class="bu">dict</span>[<span class="st">'dltpu'</span>] <span class="co"># time per unit</span></span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>  dlcpu <span class="op">=</span> <span class="bu">dict</span>[<span class="st">'dlcpu'</span>] <span class="co"># cost per unit</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>  units_to_prod <span class="op">=</span> <span class="bu">dict</span>[<span class="st">'units_to_produce'</span>]</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>  dL <span class="op">=</span> <span class="bu">len</span>(units_to_prod)</span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>  prod <span class="op">=</span> []</span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>  q <span class="op">=</span>[]</span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>  lc <span class="op">=</span> [] <span class="co"># labor cost</span></span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"-- Direct Labor Budget --"</span>)</span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> x <span class="kw">in</span> <span class="bu">range</span>( dL ):</span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a>    quarters <span class="op">=</span> quarter[x]</span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a>    q.append(quarters)</span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a>    p <span class="op">=</span> units_to_prod[x] <span class="op">*</span> dltpu  <span class="co"># time per unit</span></span>
+<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a>    prod.append(p)</span>
+<span id="cb15-21"><a href="#cb15-21" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb15-22"><a href="#cb15-22" aria-hidden="true" tabindex="-1"></a>    c <span class="op">=</span> p <span class="op">*</span> dlcpu</span>
+<span id="cb15-23"><a href="#cb15-23" aria-hidden="true" tabindex="-1"></a>    lc.append(c)</span>
+<span id="cb15-24"><a href="#cb15-24" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb15-25"><a href="#cb15-25" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Quarter: </span><span class="sc">{}</span><span class="ch">\n</span><span class="st">Total required direct labor hours: ..... {:,}  "</span>.<span class="bu">format</span>(q[x], prod[x] ) ) </span>
+<span id="cb15-26"><a href="#cb15-26" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Total direct labor cost: ............................ ${:,}  </span><span class="ch">\n</span><span class="st">"</span>.<span class="bu">format</span>(lc[x]) ) </span>
+<span id="cb15-27"><a href="#cb15-27" aria-hidden="true" tabindex="-1"></a> </span>
+<span id="cb15-28"><a href="#cb15-28" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Total direct labor costs for year ..... ${:,}"</span>.<span class="bu">format</span>( <span class="bu">sum</span>(lc)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>call function</p>
+<div class="cell" data-execution_count="13">
+<details>
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>direct_labor_budget( labor )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>-- Direct Labor Budget --
+Quarter: 1
+Total required direct labor hours: ..... 6,200  
+Total direct labor cost: ............................ $62,000  
+
+Quarter: 2
+Total required direct labor hours: ..... 7,200  
+Total direct labor cost: ............................ $72,000  
+
+Quarter: 3
+Total required direct labor hours: ..... 8,200  
+Total direct labor cost: ............................ $82,000  
+
+Quarter: 4
+Total required direct labor hours: ..... 9,200  
+Total direct labor cost: ............................ $92,000  
+
+Total direct labor costs for year ..... $308,000</code></pre>
+</div>
+</div>
+</section>
+<section id="manufacturing-overhead-budget" class="level2" data-number="10.6">
+<h2 data-number="10.6" class="anchored" data-anchor-id="manufacturing-overhead-budget"><span class="header-section-number">10.6</span> Manufacturing Overhead Budget</h2>
+<p>The <code>manufacturing overhead budget</code> is about the expected manufacturing overhead costs for the budget period.</p>
+<p>A company is expecting variable costs to fluctuate along with the production volume, based upon the rates per direct labor hour. The company data is in a data dictionary. Indirect materials are values from the direct labor budget function.</p>
+<ul>
+<li>indirect materials ($1/hr)</li>
+<li>indirect labor ($1.40/hr)</li>
+<li>utilities ($0.40/hr)</li>
+<li>maintenance ($0.20/hr)</li>
+</ul>
+<div class="cell" data-execution_count="14">
+<details>
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>overhead <span class="op">=</span> {</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">'quarter'</span>: [<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>],</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">'direct_labor_hours'</span>: [<span class="dv">6200</span>,<span class="dv">7200</span>,<span class="dv">8200</span>,<span class="dv">9200</span>],</span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">'indirect_materials'</span>: <span class="dv">1</span>,</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">'indirect_labor'</span>: <span class="fl">1.4</span>,</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>  <span class="st">'utilities'</span>: <span class="fl">0.4</span>,</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>  <span class="st">'maintenance'</span>: <span class="fl">0.2</span>,</span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>  <span class="st">'fixed_costs'</span>: {</span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>      <span class="st">'supervisor_salaries'</span>: <span class="fl">20e3</span>,</span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>      <span class="st">'depreciation'</span>: <span class="dv">3800</span>,</span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>      <span class="st">'property_tax_insurance'</span>: <span class="fl">9e3</span>,</span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>      <span class="st">'maintenance'</span>: <span class="dv">5700</span></span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>function</p>
+<div class="cell" data-execution_count="15">
+<details>
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> manufacturing_overhead_budget( <span class="bu">dict</span> ):</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>  quarter <span class="op">=</span> <span class="bu">dict</span>[<span class="st">'quarter'</span>]</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>  labor_hrs <span class="op">=</span> <span class="bu">dict</span>[<span class="st">'direct_labor_hours'</span>]</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>  dL <span class="op">=</span> <span class="bu">len</span>(labor_hrs)</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>  ind_materials <span class="op">=</span> <span class="bu">dict</span>[<span class="st">'indirect_materials'</span>]</span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>  ind_labor <span class="op">=</span> <span class="bu">dict</span>[<span class="st">'indirect_labor'</span>]</span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>  util <span class="op">=</span> <span class="bu">dict</span>[<span class="st">'utilities'</span>]</span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a>  maint <span class="op">=</span> <span class="bu">dict</span>[<span class="st">'maintenance'</span>]</span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>  <span class="co"># - fixed costs</span></span>
+<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a>  fixed_cost <span class="op">=</span> <span class="bu">sum</span>( <span class="bu">list</span>(<span class="bu">dict</span>[<span class="st">'fixed_costs'</span>].values() ))</span>
+<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a>  total_labor_hrs <span class="op">=</span> <span class="bu">sum</span>(labor_hrs)</span>
+<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a>  lab <span class="op">=</span> []</span>
+<span id="cb19-18"><a href="#cb19-18" aria-hidden="true" tabindex="-1"></a>  q <span class="op">=</span>[]</span>
+<span id="cb19-19"><a href="#cb19-19" aria-hidden="true" tabindex="-1"></a>  idm <span class="op">=</span> [] <span class="co"># indirect materials</span></span>
+<span id="cb19-20"><a href="#cb19-20" aria-hidden="true" tabindex="-1"></a>  idl <span class="op">=</span> [] <span class="co"># indirect labor</span></span>
+<span id="cb19-21"><a href="#cb19-21" aria-hidden="true" tabindex="-1"></a>  uts <span class="op">=</span> [] <span class="co"># utilities</span></span>
+<span id="cb19-22"><a href="#cb19-22" aria-hidden="true" tabindex="-1"></a>  main <span class="op">=</span> [] <span class="co"># maintenance</span></span>
+<span id="cb19-23"><a href="#cb19-23" aria-hidden="true" tabindex="-1"></a>  var_costs <span class="op">=</span>  []</span>
+<span id="cb19-24"><a href="#cb19-24" aria-hidden="true" tabindex="-1"></a>  manuf_over <span class="op">=</span> [] <span class="co"># manufacturing overhead</span></span>
+<span id="cb19-25"><a href="#cb19-25" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb19-26"><a href="#cb19-26" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"-- Manufacturing Overhead Budget --"</span>)</span>
+<span id="cb19-27"><a href="#cb19-27" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> x <span class="kw">in</span> <span class="bu">range</span>( dL ):</span>
+<span id="cb19-28"><a href="#cb19-28" aria-hidden="true" tabindex="-1"></a>    quarters <span class="op">=</span> quarter[x]</span>
+<span id="cb19-29"><a href="#cb19-29" aria-hidden="true" tabindex="-1"></a>    q.append(quarters)</span>
+<span id="cb19-30"><a href="#cb19-30" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb19-31"><a href="#cb19-31" aria-hidden="true" tabindex="-1"></a>    h <span class="op">=</span> labor_hrs[x] <span class="op">*</span> ind_materials</span>
+<span id="cb19-32"><a href="#cb19-32" aria-hidden="true" tabindex="-1"></a>    lab.append(h)</span>
+<span id="cb19-33"><a href="#cb19-33" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb19-34"><a href="#cb19-34" aria-hidden="true" tabindex="-1"></a>    i <span class="op">=</span> h <span class="op">*</span> ind_labor</span>
+<span id="cb19-35"><a href="#cb19-35" aria-hidden="true" tabindex="-1"></a>    idl.append(i)</span>
+<span id="cb19-36"><a href="#cb19-36" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb19-37"><a href="#cb19-37" aria-hidden="true" tabindex="-1"></a>    u <span class="op">=</span> h <span class="op">*</span> util</span>
+<span id="cb19-38"><a href="#cb19-38" aria-hidden="true" tabindex="-1"></a>    uts.append(u)</span>
+<span id="cb19-39"><a href="#cb19-39" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb19-40"><a href="#cb19-40" aria-hidden="true" tabindex="-1"></a>    m <span class="op">=</span> h <span class="op">*</span> maint</span>
+<span id="cb19-41"><a href="#cb19-41" aria-hidden="true" tabindex="-1"></a>    main.append(m)</span>
+<span id="cb19-42"><a href="#cb19-42" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb19-43"><a href="#cb19-43" aria-hidden="true" tabindex="-1"></a>    t <span class="op">=</span> lab[x] <span class="op">+</span> idl[x] <span class="op">+</span>uts[x] <span class="op">+</span> main[x]</span>
+<span id="cb19-44"><a href="#cb19-44" aria-hidden="true" tabindex="-1"></a>    var_costs.append(t)</span>
+<span id="cb19-45"><a href="#cb19-45" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb19-46"><a href="#cb19-46" aria-hidden="true" tabindex="-1"></a>    mo <span class="op">=</span> t <span class="op">+</span> fixed_cost</span>
+<span id="cb19-47"><a href="#cb19-47" aria-hidden="true" tabindex="-1"></a>    manuf_over.append(mo)</span>
+<span id="cb19-48"><a href="#cb19-48" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb19-49"><a href="#cb19-49" aria-hidden="true" tabindex="-1"></a>    overhead_rate_per_hr <span class="op">=</span>  <span class="bu">sum</span>(manuf_over) <span class="op">/</span> total_labor_hrs </span>
+<span id="cb19-50"><a href="#cb19-50" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb19-51"><a href="#cb19-51" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Quarter: </span><span class="sc">{}</span><span class="ch">\n</span><span class="st">Indirect materials: ..... ${:,}  "</span>.<span class="bu">format</span>(q[x], lab[x] ) ) </span>
+<span id="cb19-52"><a href="#cb19-52" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Indirect labor: ...................... ${:,}  "</span>.<span class="bu">format</span>( idl[x] ))</span>
+<span id="cb19-53"><a href="#cb19-53" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Utilities: ........................... ${:,}  "</span>.<span class="bu">format</span>( uts[x] ) )</span>
+<span id="cb19-54"><a href="#cb19-54" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Maintenance: ......................... ${:,}  "</span>.<span class="bu">format</span>( main[x] ) )</span>
+<span id="cb19-55"><a href="#cb19-55" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Total variable cost: ............................ ${:,}"</span>.<span class="bu">format</span>(  t ) )</span>
+<span id="cb19-56"><a href="#cb19-56" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Total manufacturing cost: ....................... ${:,}  </span><span class="ch">\n</span><span class="st">"</span>.<span class="bu">format</span>( manuf_over[x]  ) )</span>
+<span id="cb19-57"><a href="#cb19-57" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb19-58"><a href="#cb19-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb19-59"><a href="#cb19-59" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Total variable costs for year ............. ${:,}"</span>.<span class="bu">format</span>( <span class="bu">sum</span>(var_costs) ))</span>
+<span id="cb19-60"><a href="#cb19-60" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Total manufacturing overhead for year ..... ${:,}"</span>.<span class="bu">format</span>( <span class="bu">sum</span>(manuf_over) ))</span>
+<span id="cb19-61"><a href="#cb19-61" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Total direct labor hours for year .........  {:,}"</span>.<span class="bu">format</span>( <span class="bu">sum</span>(lab) ))</span>
+<span id="cb19-62"><a href="#cb19-62" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Manufacturing overhead rate per labor hour ..... ${:,}"</span>.<span class="bu">format</span>( overhead_rate_per_hr ))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>call function</p>
+<div class="cell" data-execution_count="16">
+<details>
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>manufacturing_overhead_budget( overhead )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>-- Manufacturing Overhead Budget --
+Quarter: 1
+Indirect materials: ..... $6,200  
+Indirect labor: ...................... $8,680.0  
+Utilities: ........................... $2,480.0  
+Maintenance: ......................... $1,240.0  
+Total variable cost: ............................ $18,600.0
+Total manufacturing cost: ....................... $57,100.0  
+
+Quarter: 2
+Indirect materials: ..... $7,200  
+Indirect labor: ...................... $10,080.0  
+Utilities: ........................... $2,880.0  
+Maintenance: ......................... $1,440.0  
+Total variable cost: ............................ $21,600.0
+Total manufacturing cost: ....................... $60,100.0  
+
+Quarter: 3
+Indirect materials: ..... $8,200  
+Indirect labor: ...................... $11,480.0  
+Utilities: ........................... $3,280.0  
+Maintenance: ......................... $1,640.0  
+Total variable cost: ............................ $24,600.0
+Total manufacturing cost: ....................... $63,100.0  
+
+Quarter: 4
+Indirect materials: ..... $9,200  
+Indirect labor: ...................... $12,880.0  
+Utilities: ........................... $3,680.0  
+Maintenance: ......................... $1,840.0  
+Total variable cost: ............................ $27,600.0
+Total manufacturing cost: ....................... $66,100.0  
+
+Total variable costs for year ............. $92,400.0
+Total manufacturing overhead for year ..... $246,400.0
+Total direct labor hours for year .........  30,800
+Manufacturing overhead rate per labor hour ..... $8.0</code></pre>
+</div>
+</div>
+</section>
+<section id="selling-admin-budget" class="level2" data-number="10.7">
+<h2 data-number="10.7" class="anchored" data-anchor-id="selling-admin-budget"><span class="header-section-number">10.7</span> Selling &amp; Admin Budget</h2>
+<p>The <code>selling and administrative expense budget</code> is all about projections for the budget period regarding the selling and admin expenses.</p>
+<ul>
+<li>variable expense rate per unit of sales commission $3</li>
+<li>of the 3 is $1 for freight out</li>
+<li>variable expense per quarter are based on the unit of sales from the sales budget</li>
+</ul>
+<div class="cell" data-execution_count="17">
+<details>
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>admin <span class="op">=</span> {</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">'quarter'</span>: [<span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span>,<span class="dv">4</span>],</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">'sales_units'</span>: [<span class="dv">3000</span>,<span class="dv">3500</span>,<span class="dv">4000</span>,<span class="dv">4500</span>],</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">'sales_commission'</span>: <span class="dv">3</span>,</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">'freight_per_unit'</span>: <span class="dv">1</span>,</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>  <span class="st">'fixed_expenses'</span>: {</span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>    <span class="st">'advertising'</span>: <span class="dv">5000</span>,</span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">'sales_salaries'</span>: <span class="dv">15000</span>,</span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">'office_salaries'</span>: <span class="dv">7500</span>,</span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">'depreciation'</span>: <span class="dv">1000</span>,</span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>    <span class="st">'property_tax_insurance'</span>: <span class="dv">1500</span></span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>function</p>
+<div class="cell" data-execution_count="18">
+<details>
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> selling_admin_budget(<span class="bu">dict</span>):</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>  quarter <span class="op">=</span> <span class="bu">dict</span>[<span class="st">'quarter'</span>]</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>  sales_units <span class="op">=</span> <span class="bu">dict</span>[<span class="st">'sales_units'</span>]</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>  dL <span class="op">=</span> <span class="bu">len</span>(sales_units)</span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>  comm <span class="op">=</span> <span class="bu">dict</span>[<span class="st">'sales_commission'</span>]</span>
+<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a>  freight <span class="op">=</span> <span class="bu">dict</span>[<span class="st">'freight_per_unit'</span>]</span>
+<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a>  fixed_exp <span class="op">=</span> <span class="bu">sum</span>(<span class="bu">dict</span>[<span class="st">'fixed_expenses'</span>].values())</span>
+<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a>  su <span class="op">=</span> [] <span class="co"># sales units</span></span>
+<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a>  q <span class="op">=</span>[]</span>
+<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a>  fo <span class="op">=</span> [] <span class="co"># freight out</span></span>
+<span id="cb23-15"><a href="#cb23-15" aria-hidden="true" tabindex="-1"></a>  tot_var_exp <span class="op">=</span> []</span>
+<span id="cb23-16"><a href="#cb23-16" aria-hidden="true" tabindex="-1"></a>  fe <span class="op">=</span> [] <span class="co"># fixed expense</span></span>
+<span id="cb23-17"><a href="#cb23-17" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb23-18"><a href="#cb23-18" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"-- Selling &amp; Admin. Expense Budget --"</span>)</span>
+<span id="cb23-19"><a href="#cb23-19" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> x <span class="kw">in</span> <span class="bu">range</span>( dL ):</span>
+<span id="cb23-20"><a href="#cb23-20" aria-hidden="true" tabindex="-1"></a>    quarters <span class="op">=</span> quarter[x]</span>
+<span id="cb23-21"><a href="#cb23-21" aria-hidden="true" tabindex="-1"></a>    q.append(quarters)</span>
+<span id="cb23-22"><a href="#cb23-22" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb23-23"><a href="#cb23-23" aria-hidden="true" tabindex="-1"></a>    s <span class="op">=</span> sales_units[x] <span class="op">*</span> comm</span>
+<span id="cb23-24"><a href="#cb23-24" aria-hidden="true" tabindex="-1"></a>    su.append(s)</span>
+<span id="cb23-25"><a href="#cb23-25" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb23-26"><a href="#cb23-26" aria-hidden="true" tabindex="-1"></a>    f <span class="op">=</span> sales_units[x] <span class="op">*</span> freight</span>
+<span id="cb23-27"><a href="#cb23-27" aria-hidden="true" tabindex="-1"></a>    fo.append(f)</span>
+<span id="cb23-28"><a href="#cb23-28" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb23-29"><a href="#cb23-29" aria-hidden="true" tabindex="-1"></a>    t <span class="op">=</span> su[x] <span class="op">+</span> fo[x] </span>
+<span id="cb23-30"><a href="#cb23-30" aria-hidden="true" tabindex="-1"></a>    tot_var_exp.append(t)</span>
+<span id="cb23-31"><a href="#cb23-31" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb23-32"><a href="#cb23-32" aria-hidden="true" tabindex="-1"></a>    fc <span class="op">=</span> t <span class="op">+</span> fixed_exp</span>
+<span id="cb23-33"><a href="#cb23-33" aria-hidden="true" tabindex="-1"></a>    fe.append(fc)</span>
+<span id="cb23-34"><a href="#cb23-34" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb23-35"><a href="#cb23-35" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb23-36"><a href="#cb23-36" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb23-37"><a href="#cb23-37" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Quarter: </span><span class="sc">{}</span><span class="ch">\n</span><span class="st">Sales commissions per unit: ........... ${:,}  "</span>.<span class="bu">format</span>(q[x], su[x] ) ) </span>
+<span id="cb23-38"><a href="#cb23-38" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Freight out per unit: .............................. ${:,}  "</span>.<span class="bu">format</span>( fo[x] ))</span>
+<span id="cb23-39"><a href="#cb23-39" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Total variable expense: ............................ ${:,}  "</span>.<span class="bu">format</span>(  t ) )</span>
+<span id="cb23-40"><a href="#cb23-40" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Total selling &amp; admin expense: ............................ ${:,}  </span><span class="ch">\n</span><span class="st">"</span>.<span class="bu">format</span>(  fe[x] ) )</span>
+<span id="cb23-41"><a href="#cb23-41" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb23-42"><a href="#cb23-42" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">Total sales commission for year .................... ${:,}"</span>.<span class="bu">format</span>( <span class="bu">sum</span>(su) ))</span>
+<span id="cb23-43"><a href="#cb23-43" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Total variable costs for year ........................ ${:,}"</span>.<span class="bu">format</span>( <span class="bu">sum</span>(tot_var_exp) ))</span>
+<span id="cb23-44"><a href="#cb23-44" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Total selling &amp; admin expense for year ............... ${:,}"</span>.<span class="bu">format</span>( <span class="bu">sum</span>(fe) ))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>call function</p>
+<div class="cell" data-execution_count="19">
+<details>
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>selling_admin_budget( admin )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>-- Selling &amp; Admin. Expense Budget --
+Quarter: 1
+Sales commissions per unit: ........... $9,000  
+Freight out per unit: .............................. $3,000  
+Total variable expense: ............................ $12,000  
+Total selling &amp; admin expense: ............................ $42,000  
+
+Quarter: 2
+Sales commissions per unit: ........... $10,500  
+Freight out per unit: .............................. $3,500  
+Total variable expense: ............................ $14,000  
+Total selling &amp; admin expense: ............................ $44,000  
+
+Quarter: 3
+Sales commissions per unit: ........... $12,000  
+Freight out per unit: .............................. $4,000  
+Total variable expense: ............................ $16,000  
+Total selling &amp; admin expense: ............................ $46,000  
+
+Quarter: 4
+Sales commissions per unit: ........... $13,500  
+Freight out per unit: .............................. $4,500  
+Total variable expense: ............................ $18,000  
+Total selling &amp; admin expense: ............................ $48,000  
+
+
+Total sales commission for year .................... $45,000
+Total variable costs for year ........................ $60,000
+Total selling &amp; admin expense for year ............... $180,000</code></pre>
+</div>
+</div>
+</section>
+<section id="budgeted-income-statement" class="level2" data-number="10.8">
+<h2 data-number="10.8" class="anchored" data-anchor-id="budgeted-income-statement"><span class="header-section-number">10.8</span> Budgeted Income Statement</h2>
+<p>The <code>budgeted income statement</code> is an <strong>important</strong> function out of the operating budgets, as it indicates the expected profitability of operations for the budget period. Evaluation of the company’s performance is based on this income statement.</p>
+<p>This function ideally would just use the variables inside the master budget function, but here each part of the budgeted income uses values from previous functions. For this function you need the following function values:</p>
+<ul>
+<li><code>sales_budget()</code> : {total sales for year}</li>
+<li><code>production_budget()</code> : {production units for year}</li>
+<li><code>direct_materials_budget()</code> : {direct materials per unit, cost per unit}</li>
+<li><code>direct_labor_budget()</code> : {dltpu, dlcpu}</li>
+<li><code>manufacturing_overhead()</code> : {rate per hour, number of hours}</li>
+<li><code>selling_admin_budget()</code> : {total sell &amp; admin expense}</li>
+</ul>
+<p>In addition to these values, there are two more required: <code>interest expense</code> and <code>estimated income tax</code>. There are two parts to this section, the first is calculating the total unit cost, then the second part is deductions. Note: <em>the value for hours in manufacturing overhead function is arbitrary chosen</em>.</p>
+<div class="cell" data-execution_count="20">
+<details>
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># -- direct_materials_budget()</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>direct_materials_per_unit <span class="op">=</span> <span class="dv">2</span></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>cost_per_unit <span class="op">=</span> <span class="dv">4</span></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>total_direct_materials <span class="op">=</span> direct_materials_per_unit <span class="op">*</span> cost_per_unit</span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a><span class="co"># -- direct_labor_budget()</span></span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>dltpu <span class="op">=</span> <span class="dv">2</span></span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>dlcpu <span class="op">=</span> <span class="dv">10</span></span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>total_direct_labor <span class="op">=</span> dltpu <span class="op">*</span> dlcpu</span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a><span class="co"># --- manufacturing_overhead()</span></span>
+<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a>rate_per_hour <span class="op">=</span> <span class="dv">8</span></span>
+<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a>hours <span class="op">=</span> <span class="dv">2</span>  </span>
+<span id="cb26-14"><a href="#cb26-14" aria-hidden="true" tabindex="-1"></a>total_manufacture_overhead <span class="op">=</span> rate_per_hour <span class="op">*</span> hours</span>
+<span id="cb26-15"><a href="#cb26-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-16"><a href="#cb26-16" aria-hidden="true" tabindex="-1"></a><span class="co"># === cost element</span></span>
+<span id="cb26-17"><a href="#cb26-17" aria-hidden="true" tabindex="-1"></a>total_unit_cost <span class="op">=</span> total_direct_materials <span class="op">+</span> total_direct_labor <span class="op">+</span> total_manufacture_overhead</span>
+<span id="cb26-18"><a href="#cb26-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-19"><a href="#cb26-19" aria-hidden="true" tabindex="-1"></a><span class="co"># ----------------------- part 2</span></span>
+<span id="cb26-20"><a href="#cb26-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-21"><a href="#cb26-21" aria-hidden="true" tabindex="-1"></a><span class="co"># -- production_budget()</span></span>
+<span id="cb26-22"><a href="#cb26-22" aria-hidden="true" tabindex="-1"></a>total_production_units <span class="op">=</span> <span class="dv">15400</span></span>
+<span id="cb26-23"><a href="#cb26-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-24"><a href="#cb26-24" aria-hidden="true" tabindex="-1"></a><span class="co"># -- sales_budget()</span></span>
+<span id="cb26-25"><a href="#cb26-25" aria-hidden="true" tabindex="-1"></a>sales <span class="op">=</span> <span class="fl">900e3</span></span>
+<span id="cb26-26"><a href="#cb26-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-27"><a href="#cb26-27" aria-hidden="true" tabindex="-1"></a>cost_of_goods_sold <span class="op">=</span> total_unit_cost <span class="op">*</span> total_production_units</span>
+<span id="cb26-28"><a href="#cb26-28" aria-hidden="true" tabindex="-1"></a>gross_profit <span class="op">=</span> sales <span class="op">-</span> cost_of_goods_sold</span>
+<span id="cb26-29"><a href="#cb26-29" aria-hidden="true" tabindex="-1"></a>total_sell_admin_exp <span class="op">=</span> <span class="fl">180e3</span></span>
+<span id="cb26-30"><a href="#cb26-30" aria-hidden="true" tabindex="-1"></a>income_from_operations <span class="op">=</span> gross_profit <span class="op">-</span> total_sell_admin_exp</span>
+<span id="cb26-31"><a href="#cb26-31" aria-hidden="true" tabindex="-1"></a>interest <span class="op">=</span> <span class="dv">100</span></span>
+<span id="cb26-32"><a href="#cb26-32" aria-hidden="true" tabindex="-1"></a>income_tax <span class="op">=</span> <span class="fl">12e3</span></span>
+<span id="cb26-33"><a href="#cb26-33" aria-hidden="true" tabindex="-1"></a>net_income <span class="op">=</span> income_from_operations <span class="op">-</span> interest <span class="op">-</span> income_tax</span>
+<span id="cb26-34"><a href="#cb26-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-35"><a href="#cb26-35" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Budgeted Income Statement"</span>)</span>
+<span id="cb26-36"><a href="#cb26-36" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Total unit cost ................... ${:,}"</span>.<span class="bu">format</span>(total_unit_cost))</span>
+<span id="cb26-37"><a href="#cb26-37" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"sales ............................. ${:,}"</span>.<span class="bu">format</span>(sales))</span>
+<span id="cb26-38"><a href="#cb26-38" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"cost of goods sold ................ ${:,}"</span>.<span class="bu">format</span>(cost_of_goods_sold))</span>
+<span id="cb26-39"><a href="#cb26-39" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"gross profit ...................... ${:,}"</span>.<span class="bu">format</span>(gross_profit))</span>
+<span id="cb26-40"><a href="#cb26-40" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"income from operations ............ ${:,}"</span>.<span class="bu">format</span>(income_from_operations))</span>
+<span id="cb26-41"><a href="#cb26-41" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"net income ........................ ${:,}"</span>.<span class="bu">format</span>(net_income))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Budgeted Income Statement
+Total unit cost ................... $44
+sales ............................. $900,000.0
+cost of goods sold ................ $677,600
+gross profit ...................... $222,400.0
+income from operations ............ $42,400.0
+net income ........................ $30,300.0</code></pre>
+</div>
+</div>
+</section>
+<section id="cash-budget" class="level2" data-number="10.9">
+<h2 data-number="10.9" class="anchored" data-anchor-id="cash-budget"><span class="header-section-number">10.9</span> Cash Budget</h2>
+<p>Though the budgeted income statement is important, the <code>cash budget</code> is <em>super important</em>, as it helps the treasurer manage the cash. The cash budget is made at least once per month. There are three sections:</p>
+<ul>
+<li><code>cash receipts</code> : expected receipts from company’s main source(s) of revenue, including those from interest and dividends</li>
+<li><code>cash disbursements</code> : cash payments, direct materials, direct labor, manufacturing overhead, selling &amp; admin expenses. Payments from income taxes, dividends, investments and plant assets are also part of this section</li>
+<li><code>financing</code> : expected borrowings and repayment of borrowed funds plus interest</li>
+</ul>
+<p>Here is a basic cash budget. Company management wants to maintain monthly cash balance of $15,000. At the beginning of March the cash balance is 16,500, expected cash receipts for March are 210,000, and cash disbursements are expected to be 220,000.</p>
+<div class="cell" data-execution_count="21">
+<details>
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>cash <span class="op">=</span> {</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">'balance_goal'</span>: <span class="fl">15e3</span>,</span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">'begin_balance'</span>: <span class="dv">16500</span>,</span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">'cash_receipts'</span>: <span class="fl">210e3</span>,</span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">'cash_disbursements'</span>: <span class="fl">220e3</span></span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>function</p>
+<div class="cell" data-execution_count="22">
+<details>
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> cash_budget( <span class="bu">dict</span> ):</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>    total_avail_cash <span class="op">=</span> <span class="bu">dict</span>[<span class="st">'begin_balance'</span>] <span class="op">+</span> <span class="bu">dict</span>[<span class="st">'cash_receipts'</span>]</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>    cash_dis <span class="op">=</span> <span class="bu">dict</span>[<span class="st">'cash_disbursements'</span>]</span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>    excess_cash <span class="op">=</span> total_avail_cash <span class="op">-</span> cash_dis</span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>    balance <span class="op">=</span> <span class="bu">dict</span>[<span class="st">'balance_goal'</span>]</span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>    delta <span class="op">=</span> excess_cash <span class="op">-</span> balance</span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"-- Basic Cash Budget --"</span>)</span>
+<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Total available cash ............... ${:,}"</span>.<span class="bu">format</span>(total_avail_cash))</span>
+<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Excess of availble cash ............ ${:,}"</span>.<span class="bu">format</span>(excess_cash))</span>
+<span id="cb29-11"><a href="#cb29-11" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb29-12"><a href="#cb29-12" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> delta <span class="op">&lt;</span> <span class="dv">0</span>:</span>
+<span id="cb29-13"><a href="#cb29-13" aria-hidden="true" tabindex="-1"></a>      <span class="bu">print</span>(<span class="st">"Financing (need cash) ............. ${:,}"</span>.<span class="bu">format</span>(<span class="bu">abs</span>(delta)))</span>
+<span id="cb29-14"><a href="#cb29-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">else</span>:</span>
+<span id="cb29-15"><a href="#cb29-15" aria-hidden="true" tabindex="-1"></a>      <span class="bu">print</span>(<span class="st">"Financing ........................ ${:,}"</span>.<span class="bu">format</span>(delta))</span>
+<span id="cb29-16"><a href="#cb29-16" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Ending cash balance ................ ${:,}"</span>.<span class="bu">format</span>(balance))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>call function</p>
+<div class="cell" data-execution_count="23">
+<details>
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>cash_budget( cash )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>-- Basic Cash Budget --
+Total available cash ............... $226,500.0
+Excess of availble cash ............ $6,500.0
+Financing (need cash) ............. $8,500.0
+Ending cash balance ................ $15,000.0</code></pre>
+</div>
+</div>
+</section>
+<section id="non-manufacture-budgets" class="level2" data-number="10.10">
+<h2 data-number="10.10" class="anchored" data-anchor-id="non-manufacture-budgets"><span class="header-section-number">10.10</span> Non-Manufacture Budgets</h2>
+<p>A merchandiser uses sales budget but uses it differently than a manufacturer. The merchandiser uses merchandise purchases budget and does not use direct materials, direct labor and manufacturing overhead. <code>Merchandise purchase budget</code> shows the estimated cost of gooods to be purchased to meet expected sales.</p>
+<ul>
+<li>required merchandise purchases (<code>rmp</code>)</li>
+<li>budgeted cost of goods sold (<code>bcogs</code>)</li>
+<li>desired ending merchandise inventory (<code>demi</code>)</li>
+<li>beginning merchandise inventory (<code>bmi</code>)</li>
+<li><code>rmp = bcogs + demi - bmi</code></li>
+</ul>
+<p>A company is preparing a merchandise purchases budget for the month of July. The company estimates that sales will be 300,000 in July and 320,000 in August. The cost of goods sold is expected to be 70% of sales ($210,000: 0.70 x 300,000) and 224,000 in August (0.70 x 320,000). The company desired ending inventory is 30% of the following month’s cost of goods sold.</p>
+<div class="cell" data-execution_count="24">
+<details>
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>purchases <span class="op">=</span> {</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">'months'</span>: [<span class="st">'July'</span>,<span class="st">'August'</span>],</span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">'estimated_sales'</span>: [<span class="fl">300e3</span>, <span class="fl">320e3</span>],</span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">'expected_cogs'</span>: <span class="fl">0.7</span>,</span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">'desired_ending_inventory'</span>: <span class="fl">0.3</span></span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>function</p>
+<div class="cell" data-execution_count="25">
+<details>
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> merchandise_budget( <span class="bu">dict</span> ):</span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>  months <span class="op">=</span> <span class="bu">dict</span>[<span class="st">'months'</span>]</span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>  exp_sales_1 <span class="op">=</span> <span class="bu">dict</span>[<span class="st">'estimated_sales'</span>][<span class="dv">0</span>]</span>
+<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>  exp_sales_2 <span class="op">=</span> <span class="bu">dict</span>[<span class="st">'estimated_sales'</span>][<span class="dv">1</span>]</span>
+<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>  <span class="co"># budgeted cost of goods sold</span></span>
+<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a>  bcogs_1 <span class="op">=</span> exp_sales_1 <span class="op">*</span> <span class="bu">dict</span>[<span class="st">'expected_cogs'</span>]</span>
+<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a>  bcogs_2 <span class="op">=</span> (exp_sales_2 <span class="op">*</span>  <span class="bu">dict</span>[<span class="st">'expected_cogs'</span>])</span>
+<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a>  demi_prct <span class="op">=</span> <span class="bu">dict</span>[<span class="st">'desired_ending_inventory'</span>]</span>
+<span id="cb33-11"><a href="#cb33-11" aria-hidden="true" tabindex="-1"></a>  demi <span class="op">=</span> bcogs_2 <span class="op">*</span> demi_prct</span>
+<span id="cb33-12"><a href="#cb33-12" aria-hidden="true" tabindex="-1"></a>  total <span class="op">=</span> bcogs_1 <span class="op">+</span> demi </span>
+<span id="cb33-13"><a href="#cb33-13" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb33-14"><a href="#cb33-14" aria-hidden="true" tabindex="-1"></a>  bmi <span class="op">=</span> (bcogs_1 <span class="op">*</span> demi_prct)</span>
+<span id="cb33-15"><a href="#cb33-15" aria-hidden="true" tabindex="-1"></a>  bmp <span class="op">=</span> total <span class="op">-</span> bmi</span>
+<span id="cb33-16"><a href="#cb33-16" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb33-17"><a href="#cb33-17" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"- Merchandise Purchases Budget -"</span>)</span>
+<span id="cb33-18"><a href="#cb33-18" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Budgeted cost of goods sold .......................... ${:,}"</span>.<span class="bu">format</span>(bcogs_1))</span>
+<span id="cb33-19"><a href="#cb33-19" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Desired ending merchandise inventory total ........... ${:,}"</span>.<span class="bu">format</span>(total))</span>
+<span id="cb33-20"><a href="#cb33-20" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Budgeted merchandise purchases for </span><span class="sc">{}</span><span class="st"> ................ ${:,}"</span>.<span class="bu">format</span>(months[<span class="dv">0</span>], bmp))</span>
+<span id="cb33-21"><a href="#cb33-21" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb33-22"><a href="#cb33-22" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb33-23"><a href="#cb33-23" aria-hidden="true" tabindex="-1"></a>merchandise_budget( purchases )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>- Merchandise Purchases Budget -
+Budgeted cost of goods sold .......................... $210,000.0
+Desired ending merchandise inventory total ........... $277,200.0
+Budgeted merchandise purchases for July ................ $214,200.0</code></pre>
+</div>
+</div>
+</section>
+<section id="service-enterprises" class="level2" data-number="10.11">
+<h2 data-number="10.11" class="anchored" data-anchor-id="service-enterprises"><span class="header-section-number">10.11</span> Service Enterprises</h2>
+<p>In service enterprises the key to budgeting is the coordination of staff needs and expected services. If a company is overstaffed, then problems could arise such as:</p>
+<ul>
+<li>labor costs will be high</li>
+<li>profits will be lower due to salaries</li>
+<li>staff turnover may increase due to lack of extra work</li>
+</ul>
+<p>Seasonal yard work company data is in a data dictionary</p>
+<div class="cell" data-execution_count="26">
+<details>
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>lawns <span class="op">=</span> {</span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">'lawn_size'</span>: [<span class="st">'small'</span>,<span class="st">'medium'</span>,<span class="st">'large'</span>],</span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">'lawns_to_service'</span>: [<span class="dv">300</span>, <span class="dv">200</span>, <span class="dv">100</span>],</span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">'direct_labor_hrs'</span>: [<span class="dv">1</span>, <span class="fl">1.75</span>, <span class="fl">2.75</span>],</span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">'avg_cost_labor_hr'</span>: <span class="dv">15</span></span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>Instead of a function this part simply uses a for loop as it is same amount of work as an Excel sheet more or less and is a simple example.</p>
+<div class="cell" data-execution_count="27">
+<details>
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>sizes <span class="op">=</span> lawns[<span class="st">'lawn_size'</span>]</span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>service <span class="op">=</span> lawns[<span class="st">'lawns_to_service'</span>]</span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>hrs <span class="op">=</span> lawns[<span class="st">'direct_labor_hrs'</span>]</span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>wage <span class="op">=</span> lawns[<span class="st">'avg_cost_labor_hr'</span>]</span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a>s <span class="op">=</span> []</span>
+<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a>a <span class="op">=</span> []</span>
+<span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a>w <span class="op">=</span> []</span>
+<span id="cb36-9"><a href="#cb36-9" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> x <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(lawns[<span class="st">'lawn_size'</span>])):</span>
+<span id="cb36-10"><a href="#cb36-10" aria-hidden="true" tabindex="-1"></a>  tl <span class="op">=</span> service[x] <span class="op">*</span> hrs[x]</span>
+<span id="cb36-11"><a href="#cb36-11" aria-hidden="true" tabindex="-1"></a>  a.append(tl)</span>
+<span id="cb36-12"><a href="#cb36-12" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb36-13"><a href="#cb36-13" aria-hidden="true" tabindex="-1"></a>  size <span class="op">=</span> sizes[x]</span>
+<span id="cb36-14"><a href="#cb36-14" aria-hidden="true" tabindex="-1"></a>  s.append(size)</span>
+<span id="cb36-15"><a href="#cb36-15" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb36-16"><a href="#cb36-16" aria-hidden="true" tabindex="-1"></a>  cost <span class="op">=</span> tl <span class="op">*</span> wage</span>
+<span id="cb36-17"><a href="#cb36-17" aria-hidden="true" tabindex="-1"></a>  w.append(cost)</span>
+<span id="cb36-18"><a href="#cb36-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-19"><a href="#cb36-19" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Lawn size: </span><span class="sc">{}</span><span class="st"> </span><span class="ch">\n</span><span class="st">total labor hours ..... {:,}"</span>.<span class="bu">format</span>( s[x], a[x] ))</span>
+<span id="cb36-20"><a href="#cb36-20" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Total direct labor cost ...... ${:,}"</span>.<span class="bu">format</span>(w[x]))</span>
+<span id="cb36-21"><a href="#cb36-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-22"><a href="#cb36-22" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">Total costs ..... ${:,}"</span>.<span class="bu">format</span>( <span class="bu">sum</span>(w)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Lawn size: small 
+total labor hours ..... 300
+Total direct labor cost ...... $4,500
+Lawn size: medium 
+total labor hours ..... 350.0
+Total direct labor cost ...... $5,250.0
+Lawn size: large 
+total labor hours ..... 275.0
+Total direct labor cost ...... $4,125.0
+
+Total costs ..... $13,875.0</code></pre>
+</div>
+</div>
+<hr>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  let localAlternateSentinel = 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./chapter8.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Pricing</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./glossary.html" class="pagination-link">
+        <span class="nav-page-text">Glossary</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+</body></html>

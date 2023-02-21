@@ -1,0 +1,1195 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.269">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>AccountingPy - 4&nbsp; Process Cost Accounting</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./chapter4.html" rel="next">
+<link href="./chapter2.html" rel="prev">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+
+</head>
+
+<body class="nav-sidebar floating">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+    <div class="container-fluid d-flex justify-content-between">
+      <h1 class="quarto-secondary-nav-title"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Process Cost Accounting</span></h1>
+      <button type="button" class="quarto-btn-toggle btn" aria-label="Show secondary navigation">
+        <i class="bi bi-chevron-right"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">AccountingPy</a> 
+        <div class="sidebar-tools-main">
+  <a href="" class="quarto-color-scheme-toggle sidebar-tool" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+    </div>
+      </div>
+      <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+      </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">Welcome</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./intro.html" class="sidebar-item-text sidebar-link">Introduction</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./pythonbasics.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Python Basics</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter1.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Financial Accounting</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter2.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Job Cost Accounting</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter3.html" class="sidebar-item-text sidebar-link active"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Process Cost Accounting</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter4.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Activity Based Costing</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./glossary.html" class="sidebar-item-text sidebar-link">Glossary</a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./summary.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Summary</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./references.html" class="sidebar-item-text sidebar-link">References</a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Table of contents</h2>
+   
+  <ul>
+  <li><a href="#process-cost-systems" id="toc-process-cost-systems" class="nav-link active" data-scroll-target="#process-cost-systems"><span class="toc-section-number">4.1</span>  Process Cost Systems</a></li>
+  <li><a href="#manufacturing-costs" id="toc-manufacturing-costs" class="nav-link" data-scroll-target="#manufacturing-costs"><span class="toc-section-number">4.2</span>  Manufacturing costs</a>
+  <ul class="collapse">
+  <li><a href="#proccess-costing-example" id="toc-proccess-costing-example" class="nav-link" data-scroll-target="#proccess-costing-example"><span class="toc-section-number">4.2.1</span>  Proccess costing example</a></li>
+  <li><a href="#equivalent-units" id="toc-equivalent-units" class="nav-link" data-scroll-target="#equivalent-units"><span class="toc-section-number">4.2.2</span>  Equivalent units</a></li>
+  <li><a href="#weighted-average-method" id="toc-weighted-average-method" class="nav-link" data-scroll-target="#weighted-average-method"><span class="toc-section-number">4.2.3</span>  Weighted average method</a></li>
+  <li><a href="#quick-example-1" id="toc-quick-example-1" class="nav-link" data-scroll-target="#quick-example-1"><span class="toc-section-number">4.2.4</span>  Quick example</a></li>
+  </ul></li>
+  <li><a href="#production-cost-report" id="toc-production-cost-report" class="nav-link" data-scroll-target="#production-cost-report"><span class="toc-section-number">4.3</span>  Production cost report</a>
+  <ul class="collapse">
+  <li><a href="#physical-flow" id="toc-physical-flow" class="nav-link" data-scroll-target="#physical-flow"><span class="toc-section-number">4.3.1</span>  Physical flow</a></li>
+  <li><a href="#equivalent-units-production" id="toc-equivalent-units-production" class="nav-link" data-scroll-target="#equivalent-units-production"><span class="toc-section-number">4.3.2</span>  Equivalent units: Production</a></li>
+  <li><a href="#unit-production-costs" id="toc-unit-production-costs" class="nav-link" data-scroll-target="#unit-production-costs"><span class="toc-section-number">4.3.3</span>  Unit Production Costs</a></li>
+  <li><a href="#cost-reconciliation-schedule" id="toc-cost-reconciliation-schedule" class="nav-link" data-scroll-target="#cost-reconciliation-schedule"><span class="toc-section-number">4.3.4</span>  Cost Reconciliation Schedule</a></li>
+  <li><a href="#production-cost-report-1" id="toc-production-cost-report-1" class="nav-link" data-scroll-target="#production-cost-report-1"><span class="toc-section-number">4.3.5</span>  Production Cost Report</a></li>
+  <li><a href="#cost-report-other" id="toc-cost-report-other" class="nav-link" data-scroll-target="#cost-report-other"><span class="toc-section-number">4.3.6</span>  Cost Report: other</a></li>
+  <li><a href="#production-cost-report-2" id="toc-production-cost-report-2" class="nav-link" data-scroll-target="#production-cost-report-2"><span class="toc-section-number">4.3.7</span>  Production Cost Report</a></li>
+  </ul></li>
+  <li><a href="#equivalent-units-fifo" id="toc-equivalent-units-fifo" class="nav-link" data-scroll-target="#equivalent-units-fifo"><span class="toc-section-number">4.4</span>  Equivalent Units: FIFO</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title d-none d-lg-block"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Process Cost Accounting</span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+</header>
+
+<p>Process cost accounting is about the process involved in mass producing products that are identical or similar in nature. To calculate production costs the process costing is used.</p>
+<p>Process cost accounting involves:</p>
+<ul>
+<li>process costing for manufacturing and service companies</li>
+<li>determining the similarities and differences between job-order cost and process cost systems</li>
+<li>operations costing</li>
+<li>cost flow</li>
+<li>manufacturing costs assignment (journal entries)</li>
+<li>weighted average method</li>
+<li>physical unit flow</li>
+<li>equivalent units of production</li>
+<li>unit production costs</li>
+<li>cost reconciliation schedule</li>
+<li>production cost report</li>
+<li>equivalent units and production cost report</li>
+<li>FIFO method, equivalent units, weighted average</li>
+</ul>
+<section id="process-cost-systems" class="level2" data-number="4.1">
+<h2 data-number="4.1" class="anchored" data-anchor-id="process-cost-systems"><span class="header-section-number">4.1</span> Process Cost Systems</h2>
+<p>Manufacturing <code>process cost systems</code> is to apply costs to similar products that are mass produced in a continuous way.</p>
+<p>Similarities and differences between job order and process cost systems is that costs are tracked through the series of manufacturing processes and not by individual jobs.</p>
+<p>Job order cost flow:</p>
+<ol type="1">
+<li>direct materials, labor, manufacturing overhead</li>
+<li>work in process inventory</li>
+<li>finished goods inventory</li>
+<li>cost of goods sold</li>
+</ol>
+<p>Process cost flow:</p>
+<ol type="1">
+<li>direct materials, labor, manufacturing overhead</li>
+<li>work in process (department A)</li>
+<li>work in process (department B)</li>
+<li>finished goods inventory</li>
+<li>cost of goods sold</li>
+</ol>
+<p>The similarities of job order cost and process cost systems, are manufacturing cost elements, both have costing systems track materials, labor and overhead. The accumulation of the costs of materials, labor and overhead are all debited costs. Lastly, the flow of costs are debited in both costing system but the methods used do differ between them.</p>
+<p>The differences are the number of work in process accounts used, job order costing uses only one process account. The documents used to track costs, as process costs system summarizes the costs in a production cost report for each department and job cost systems tally individual jobs then sums the cost in a cost sheet when the job is finished. The process cost system the unit cost is the total manufacturing costs for the period divided by the units produced during the period, unlike job cost system job cost divided by units produced.</p>
+<ul>
+<li><code>Operating costs</code> is the hybrid approach using both process cost and job order cost systems.</li>
+</ul>
+</section>
+<section id="manufacturing-costs" class="level2" data-number="4.2">
+<h2 data-number="4.2" class="anchored" data-anchor-id="manufacturing-costs"><span class="header-section-number">4.2</span> Manufacturing costs</h2>
+<p>The accumulation of costs for materials, labor and manufacturing overhead is debited for all raw materials when materials are purchased. Factory labor is debited when costs are incurred, and likewise for debit overhead costs.</p>
+<ul>
+<li>All raw materials used for production are the material costs</li>
+<li>time tickets could be used in a factory labor cost for process cost system</li>
+<li>manufacturing overhead costs can be determined by looking at the machine time used (not direct labor), as this provides a clear overhead cost.</li>
+</ul>
+<section id="proccess-costing-example" class="level3" data-number="4.2.1">
+<h3 data-number="4.2.1" class="anchored" data-anchor-id="proccess-costing-example"><span class="header-section-number">4.2.1</span> Proccess costing example</h3>
+<p>A company makes a generic beverage, using two processes such as blending and bottling. In June the raw materials used cost $18,000 for blending and 4,000 dollars for bottling. Factory labor costs were $12,000 for blending, 5,000 for bottling. Manufacturing overhead costs were 6,000 dollars for blending and 2500 dollars for bottling. Units completed at a cost of 19,000 dollars in the blending department transferred to bottling department. Units completed at a cost of 11,000 dollars in the bottling department transferred to the finished goods inventory. Journalize the assignment of these costs to the two processes and the transfer of the units.</p>
+<p>Make a dictionary for the costs. The abbreviation ‘wip’ is for work in process.</p>
+<div class="cell" data-execution_count="1">
+<details>
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>bev_costs <span class="op">=</span> {</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="co"># raw materials</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">'raw_wip_blending'</span>: <span class="fl">18e3</span>,</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">'raw_wip_bottling'</span>: <span class="fl">4e3</span>,</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="co"># factory labor</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="st">'labor_wip_blending'</span>: <span class="fl">12e3</span>,</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="st">'labor_wip_bottling'</span>: <span class="fl">5e3</span>,</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="co"># manufacturing</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  <span class="st">'man_wip_blending'</span>: <span class="fl">6e3</span>,</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="st">'man_wip_bottling'</span>: <span class="dv">2500</span>,</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  <span class="st">'blending_dep'</span>: <span class="fl">19e3</span>,</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>  <span class="st">'bottling_dep'</span>: <span class="fl">11e3</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>Calculate the materials used, factory labor to production and overhead to production.</p>
+<div class="cell" data-execution_count="2">
+<details>
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> process_costing( <span class="bu">dict</span>):</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  raw_invent <span class="op">=</span> <span class="bu">dict</span>[<span class="st">'raw_wip_blending'</span>] <span class="op">+</span> <span class="bu">dict</span>[<span class="st">'raw_wip_bottling'</span>]</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  factory_labor <span class="op">=</span> <span class="bu">dict</span>[<span class="st">'labor_wip_blending'</span>] <span class="op">+</span> <span class="bu">dict</span>[<span class="st">'labor_wip_bottling'</span>]</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  manuf_overhead <span class="op">=</span> <span class="bu">dict</span>[<span class="st">'man_wip_blending'</span>] <span class="op">+</span> <span class="bu">dict</span>[<span class="st">'man_wip_bottling'</span>]</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">" -- Process Costing --"</span>)</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Raw materials inventory = "</span>,<span class="st">"."</span><span class="op">*</span><span class="dv">5</span>,<span class="st">"${:,}"</span>.<span class="bu">format</span>(raw_invent))</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Factory labor = "</span>,<span class="st">"."</span><span class="op">*</span><span class="dv">15</span>,<span class="st">"${:,}"</span>.<span class="bu">format</span>(factory_labor))</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Manufacturing overhead = "</span>, <span class="st">"."</span><span class="op">*</span><span class="dv">7</span>,<span class="st">"${:,}"</span>.<span class="bu">format</span>(manuf_overhead))</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Work in process blending = "</span>,<span class="st">"."</span><span class="op">*</span><span class="dv">4</span>,<span class="st">"${:,}"</span>.<span class="bu">format</span>(<span class="bu">dict</span>[<span class="st">'blending_dep'</span>]))</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Work in process bottling = "</span>,<span class="st">"."</span><span class="op">*</span><span class="dv">4</span>,<span class="st">"${:,}"</span>.<span class="bu">format</span>(<span class="bu">dict</span>[<span class="st">'bottling_dep'</span>]))</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>process_costing( bev_costs)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code> -- Process Costing --
+Raw materials inventory =  ..... $22,000.0
+Factory labor =  ............... $17,000.0
+Manufacturing overhead =  ....... $8,500.0
+Work in process blending =  .... $19,000.0
+Work in process bottling =  .... $11,000.0</code></pre>
+</div>
+</div>
+</section>
+<section id="equivalent-units" class="level3" data-number="4.2.2">
+<h3 data-number="4.2.2" class="anchored" data-anchor-id="equivalent-units"><span class="header-section-number">4.2.2</span> Equivalent units</h3>
+<p>Process cost system uses <code>equivalent units of production</code> which measures the work done during the period in completed units.</p>
+<p>the formula:</p>
+<ul>
+<li><code>conversion costs</code> is the sum of labor costs and overhead costs</li>
+<li>units completed and transferred out (materials) + equivalent units of ending work in process (materials) = equivalent units of production (materials)</li>
+<li>units completes and transferred out (conversion costs) + equivalent units of ending work in process (conversion costs) = equivalent units of production (conversion costs)</li>
+</ul>
+<section id="quick-example" class="level4" data-number="4.2.2.1">
+<h4 data-number="4.2.2.1" class="anchored" data-anchor-id="quick-example"><span class="header-section-number">4.2.2.1</span> Quick example</h4>
+<p>Calculate the cost of teachers at a college for each full time student.</p>
+<ul>
+<li>total cost of teachers $9,000,000</li>
+<li>part time students = 900</li>
+<li>full time students = 1,000</li>
+<li>part time students take 60% of the classes of a full time student</li>
+</ul>
+<div class="cell" data-execution_count="3">
+<details>
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>PT<span class="op">=</span> <span class="dv">900</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>FT<span class="op">=</span> <span class="dv">1000</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>teacher_cost <span class="op">=</span> <span class="fl">9e6</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>FT_equiv <span class="op">=</span> PT <span class="op">+</span> (<span class="fl">0.60</span> <span class="op">*</span> FT)</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>total_teacher_cost <span class="op">=</span> teacher_cost<span class="op">/</span> FT_equiv</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"The cost of teacher per FT student = $</span><span class="sc">{</span>total_teacher_cost<span class="sc">}</span><span class="ss">"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>The cost of teacher per FT student = $6000.0</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="weighted-average-method" class="level3" data-number="4.2.3">
+<h3 data-number="4.2.3" class="anchored" data-anchor-id="weighted-average-method"><span class="header-section-number">4.2.3</span> Weighted average method</h3>
+<p>Reusing the beverage company from before, the blending department has an ending work in process of 4,000 units which account for 60% of the materials, labor and overhead. Period output for completion and transfer (to another department in the manufacturing process) is not specified in this example but is added to the calculation.</p>
+<div class="cell" data-execution_count="4">
+<details>
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>units <span class="op">=</span> <span class="dv">4000</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>percent <span class="op">=</span> <span class="fl">0.60</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>period_output <span class="op">=</span> <span class="dv">0</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>equivalent_units <span class="op">=</span> units <span class="op">*</span> percent <span class="op">+</span> period_output</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Equivalent units of production = </span><span class="sc">{</span>equivalent_units<span class="sc">}</span><span class="ss"> units"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Equivalent units of production = 2400.0 units</code></pre>
+</div>
+</div>
+</section>
+<section id="quick-example-1" class="level3" data-number="4.2.4">
+<h3 data-number="4.2.4" class="anchored" data-anchor-id="quick-example-1"><span class="header-section-number">4.2.4</span> Quick example</h3>
+<p>A company has start of process and end of process, where all raw materials for production are accounted for at the beginning of manufacturing, therefore shows materials 100% accounted for while conversion costs is part of the manufacturing process.</p>
+<ul>
+<li>wip = work in process</li>
+</ul>
+<table class="table">
+<thead>
+<tr class="header">
+<th>stage</th>
+<th>units</th>
+<th>materials</th>
+<th>conversion costs</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>wip June 1</td>
+<td>100,000</td>
+<td>100%</td>
+<td>70%</td>
+</tr>
+<tr class="even">
+<td>started production</td>
+<td>800,000</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>total units</td>
+<td>900,000</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="even">
+<td>units transferred</td>
+<td>700,000</td>
+<td></td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>wip June 30</td>
+<td>200,000</td>
+<td>100%</td>
+<td>70%</td>
+</tr>
+<tr class="even">
+<td>total units</td>
+<td>900,000</td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<div class="cell" data-execution_count="5">
+<details>
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>units <span class="op">=</span> <span class="fl">200e3</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>percent <span class="op">=</span> [<span class="fl">1.0</span>, <span class="fl">0.6</span>]</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>period_output <span class="op">=</span> <span class="fl">700e3</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>equivalent_units <span class="op">=</span> (units <span class="op">*</span> percent[<span class="dv">0</span>]) <span class="op">+</span> period_output</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>equivalent_units_2 <span class="op">=</span> (units <span class="op">*</span> percent[<span class="dv">1</span>]) <span class="op">+</span> period_output</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Equivalent units of production (materials) = {:,} units"</span>.<span class="bu">format</span>(equivalent_units))</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Equivalent units of production (conversion costs) = {:,} units"</span>.<span class="bu">format</span>(equivalent_units_2))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Equivalent units of production (materials) = 900,000.0 units
+Equivalent units of production (conversion costs) = 820,000.0 units</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="production-cost-report" class="level2" data-number="4.3">
+<h2 data-number="4.3" class="anchored" data-anchor-id="production-cost-report"><span class="header-section-number">4.3</span> Production cost report</h2>
+<p>A <code>production cost report</code> is the key document management uses to understand the activities in a department, showing the production quantities and cost data for each department. Requirements for this report are:</p>
+<ul>
+<li>calculation for physical unit flow</li>
+<li>calculate the equivalent units of production</li>
+<li>calculate the unit production costs</li>
+<li>prepare the cost reconciliation schedule</li>
+</ul>
+<p>This section will continue with the company used in previous examples. This example company makes breakfast pancakes which has different departments.</p>
+<section id="physical-flow" class="level3" data-number="4.3.1">
+<h3 data-number="4.3.1" class="anchored" data-anchor-id="physical-flow"><span class="header-section-number">4.3.1</span> Physical flow</h3>
+<p><code>Physical units</code> are the actual units to be accounted for during a period, regardless of any work performed. To keep track of these units, add units that got started or transferred into production during the time period, these units are called <code>total units to be accounted for</code>.</p>
+<p>Using a nested list that has 2 data dictionaries to hold data about the company’s mixing department. This data object looks like a JSON data object, you can convert nested lists into dataframes but we will just use this nested list for the functions as this is flexible and looks similar to a Excel spreadsheet (in a way).</p>
+<p>Normally we have seen simple dictionaries where there is a single key and a value pair, but here we have a list that stores 2 dictionaries, each which has a single key then the value is a dictionary instead of a single value. To access elements from a nested list array and get items from a dictionary, you need to slice the list, then specify which dictionary key, then the name of the nested dictionary key to get the value.</p>
+<ul>
+<li>mixing_data has 2 elements which are both dictionaries <code>[ {}, {} ]</code>, <em>remember zero index</em></li>
+<li>name the dictionary key <code>[0]['units']</code></li>
+<li>name the nested dictionary key <code>[0]['units']['wip_start']</code> to get the value</li>
+</ul>
+<div class="cell" data-execution_count="6">
+<details>
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>mixing_data <span class="op">=</span> [</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  {</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">'units'</span>: {</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>        <span class="st">'wip_start'</span>: <span class="fl">100e3</span>,                   <span class="co"># June 1</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>        <span class="st">'direct_materials_percent'</span>: <span class="dv">1</span>,</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>        <span class="st">'conversion_costs_percent'</span>: <span class="fl">0.70</span>,</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>        <span class="st">'units_in_production'</span>: <span class="fl">800e3</span>,</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>        <span class="st">'units_completed_transferred'</span>: <span class="fl">700e3</span>,</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>        <span class="st">'wip_end'</span>:<span class="fl">200e3</span>,                       <span class="co"># June 30</span></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>        <span class="st">'wip_end_materials_percent'</span>: <span class="dv">1</span>,</span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>        <span class="st">'wip_end_conversion_costs_percent'</span>:  <span class="fl">0.60</span></span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a>      }</span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>    },</span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>    {</span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a>    <span class="st">'costs'</span>: {</span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>        <span class="st">'wip_start_direct_materials'</span>: <span class="fl">50e3</span>,</span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>        <span class="st">'wip_start_conversion_costs'</span>: <span class="fl">35e3</span>,</span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a>        <span class="st">'cost_wip_start'</span>: <span class="fl">85e3</span>,</span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>        <span class="st">'costs_direct_materials'</span>: <span class="fl">400e3</span>,</span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a>        <span class="st">'costs_conversion_costs'</span>: <span class="fl">170e3</span>,</span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a>        <span class="st">'costs_incurred'</span>: <span class="fl">570e3</span></span>
+<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a>      }  </span>
+<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>Physical unit flow calculation</p>
+<div class="cell" data-execution_count="7">
+<details>
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> physical_flow( mixing_data<span class="op">=</span> <span class="bu">list</span>):</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># units to be accounted for = wip_start + started_transferred</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>  tot_units <span class="op">=</span> mixing_data[<span class="dv">0</span>][<span class="st">'units'</span>][<span class="st">'wip_start'</span>] <span class="op">+</span> mixing_data[<span class="dv">0</span>][<span class="st">'units'</span>][<span class="st">'units_in_production'</span>]</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>  <span class="co"># units accounted for = completed_transferred + wip_end</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>  units_acc <span class="op">=</span> mixing_data[<span class="dv">0</span>][<span class="st">'units'</span>][<span class="st">'units_completed_transferred'</span>] <span class="op">+</span> mixing_data[<span class="dv">0</span>][<span class="st">'units'</span>][<span class="st">'wip_end'</span>]</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"-- Physical Unit Flow --"</span>)</span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Total units accounted for  "</span>,<span class="st">"."</span><span class="op">*</span><span class="dv">5</span>,<span class="st">"{:,}"</span>.<span class="bu">format</span>(tot_units))</span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Total units   "</span>, <span class="st">"."</span><span class="op">*</span><span class="dv">18</span>,<span class="st">"{:,}"</span>.<span class="bu">format</span>(tot_units))</span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a>physical_flow(mixing_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>-- Physical Unit Flow --
+Total units accounted for   ..... 900,000.0
+Total units    .................. 900,000.0</code></pre>
+</div>
+</div>
+</section>
+<section id="equivalent-units-production" class="level3" data-number="4.3.2">
+<h3 data-number="4.3.2" class="anchored" data-anchor-id="equivalent-units-production"><span class="header-section-number">4.3.2</span> Equivalent units: Production</h3>
+<p>After determining the physical flow of units next step is to measure the department’s productivity in equivalent units of production. For this example company, two calculations are required as there is mixing materials and the conversion costs.</p>
+<div class="cell" data-execution_count="8">
+<details>
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> equivalent_units(cost_data<span class="op">=</span> <span class="bu">list</span>):</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  materials_equiv_cost <span class="op">=</span> (mixing_data[<span class="dv">0</span>][<span class="st">'units'</span>][<span class="st">'wip_end'</span>] <span class="op">*</span> mixing_data[<span class="dv">0</span>][<span class="st">'units'</span>][<span class="st">'wip_end_materials_percent'</span>]) <span class="op">+</span> mixing_data[<span class="dv">0</span>][<span class="st">'units'</span>][<span class="st">'units_completed_transferred'</span>]</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  conv_costs_equiv_cost <span class="op">=</span> (mixing_data[<span class="dv">0</span>][<span class="st">'units'</span>][<span class="st">'wip_end'</span>] <span class="op">*</span> mixing_data[<span class="dv">0</span>][<span class="st">'units'</span>][<span class="st">'wip_end_conversion_costs_percent'</span>]) <span class="op">+</span> mixing_data[<span class="dv">0</span>][<span class="st">'units'</span>][<span class="st">'units_completed_transferred'</span>]</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"-- Equivalent Units --"</span>)</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Equivalent units (materials) = "</span>,<span class="st">"."</span><span class="op">*</span><span class="dv">12</span>,<span class="st">"{:,}"</span>.<span class="bu">format</span>(materials_equiv_cost))</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Equivalent units (conversion costs) = "</span>,<span class="st">"."</span><span class="op">*</span><span class="dv">5</span>,<span class="st">"{:,}"</span>.<span class="bu">format</span>(conv_costs_equiv_cost))</span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>equivalent_units(mixing_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>-- Equivalent Units --
+Equivalent units (materials) =  ............ 900,000.0
+Equivalent units (conversion costs) =  ..... 820,000.0</code></pre>
+</div>
+</div>
+</section>
+<section id="unit-production-costs" class="level3" data-number="4.3.3">
+<h3 data-number="4.3.3" class="anchored" data-anchor-id="unit-production-costs"><span class="header-section-number">4.3.3</span> Unit Production Costs</h3>
+<p>Now we need to calculate the <code>unit production costs</code> which are costs expressed in terms of equivalent units of production. If equivalent units of production are different for materials and for conversion costs, then 3 unit costs are calculated:</p>
+<ul>
+<li>material costs</li>
+<li>conversion costs</li>
+<li>total manufacturing cost</li>
+</ul>
+<p>Calculation of the total materials cost for pancakes</p>
+<div class="cell" data-execution_count="9">
+<details>
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> production_costs( cost_data<span class="op">=</span> <span class="bu">list</span>):</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  materials_equiv_cost <span class="op">=</span> (mixing_data[<span class="dv">0</span>][<span class="st">'units'</span>][<span class="st">'wip_end'</span>] <span class="op">*</span> mixing_data[<span class="dv">0</span>][<span class="st">'units'</span>][<span class="st">'wip_end_materials_percent'</span>]) <span class="op">+</span> mixing_data[<span class="dv">0</span>][<span class="st">'units'</span>][<span class="st">'units_completed_transferred'</span>]</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>  tot_material_cost <span class="op">=</span> mixing_data[<span class="dv">1</span>][<span class="st">'costs'</span>][<span class="st">'wip_start_direct_materials'</span>] <span class="op">+</span> mixing_data[<span class="dv">1</span>][<span class="st">'costs'</span>][<span class="st">'costs_direct_materials'</span>]</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>  unit_material_cost <span class="op">=</span> tot_material_cost <span class="op">/</span> materials_equiv_cost</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>  tot_conv_cost <span class="op">=</span> mixing_data[<span class="dv">1</span>][<span class="st">'costs'</span>][<span class="st">'wip_start_conversion_costs'</span>] <span class="op">+</span> mixing_data[<span class="dv">1</span>][<span class="st">'costs'</span>][<span class="st">'costs_conversion_costs'</span>]</span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>  conv_costs_equiv_cost <span class="op">=</span> (mixing_data[<span class="dv">0</span>][<span class="st">'units'</span>][<span class="st">'wip_end'</span>] <span class="op">*</span> mixing_data[<span class="dv">0</span>][<span class="st">'units'</span>][<span class="st">'wip_end_conversion_costs_percent'</span>]) <span class="op">+</span> mixing_data[<span class="dv">0</span>][<span class="st">'units'</span>][<span class="st">'units_completed_transferred'</span>]</span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>  unit_conv_cost <span class="op">=</span> tot_conv_cost <span class="op">/</span> conv_costs_equiv_cost</span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a>  tot_manuf_cpu <span class="op">=</span> unit_material_cost <span class="op">+</span> unit_conv_cost</span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a>  transf_out <span class="op">=</span> mixing_data[<span class="dv">0</span>][<span class="st">'units'</span>][<span class="st">'units_completed_transferred'</span>] <span class="op">*</span> tot_manuf_cpu</span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a>  tot_cost_recon <span class="op">=</span> (mixing_data[<span class="dv">0</span>][<span class="st">'units'</span>][<span class="st">'wip_end'</span>] <span class="op">*</span> unit_material_cost) <span class="op">+</span> ((mixing_data[<span class="dv">0</span>][<span class="st">'units'</span>][<span class="st">'wip_end'</span>] <span class="op">*</span> mixing_data[<span class="dv">0</span>][<span class="st">'units'</span>][<span class="st">'wip_end_conversion_costs_percent'</span>]) <span class="op">*</span> unit_conv_cost)</span>
+<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a>  recon_sched <span class="op">=</span> transf_out <span class="op">+</span> tot_cost_recon</span>
+<span id="cb15-21"><a href="#cb15-21" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb15-22"><a href="#cb15-22" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"-- Unit Production Costs --"</span>)</span>
+<span id="cb15-23"><a href="#cb15-23" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Total materials costs  "</span>,<span class="st">"."</span><span class="op">*</span><span class="dv">15</span>,<span class="st">"${:,}"</span>.<span class="bu">format</span>(tot_material_cost))</span>
+<span id="cb15-24"><a href="#cb15-24" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Unit materials cost  "</span>,<span class="st">"."</span><span class="op">*</span><span class="dv">17</span>,<span class="st">"${:,}</span><span class="ch">\n</span><span class="st">"</span>.<span class="bu">format</span>(unit_material_cost))</span>
+<span id="cb15-25"><a href="#cb15-25" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb15-26"><a href="#cb15-26" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Total conversion costs "</span>,<span class="st">"."</span><span class="op">*</span><span class="dv">15</span>,<span class="st">"${:,}"</span>.<span class="bu">format</span>(tot_conv_cost))</span>
+<span id="cb15-27"><a href="#cb15-27" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Unit conversion costs  "</span>,<span class="st">"."</span><span class="op">*</span><span class="dv">17</span>,<span class="st">"${:,}"</span>.<span class="bu">format</span>(unit_conv_cost))</span>
+<span id="cb15-28"><a href="#cb15-28" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Total manufacturing cost per unit  "</span>,<span class="st">"."</span><span class="op">*</span><span class="dv">5</span>,<span class="st">"${:,}</span><span class="ch">\n</span><span class="st">"</span>.<span class="bu">format</span>(tot_manuf_cpu))</span>
+<span id="cb15-29"><a href="#cb15-29" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb15-30"><a href="#cb15-30" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Cost reconciliation schedule  "</span>,<span class="st">"."</span><span class="op">*</span><span class="dv">5</span>,<span class="st">"${:,}"</span>.<span class="bu">format</span>(recon_sched))</span>
+<span id="cb15-31"><a href="#cb15-31" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb15-32"><a href="#cb15-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-33"><a href="#cb15-33" aria-hidden="true" tabindex="-1"></a>production_costs( mixing_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>-- Unit Production Costs --
+Total materials costs   ............... $450,000.0
+Unit materials cost   ................. $0.5
+
+Total conversion costs  ............... $205,000.0
+Unit conversion costs   ................. $0.25
+Total manufacturing cost per unit   ..... $0.75
+
+Cost reconciliation schedule   ..... $655,000.0</code></pre>
+</div>
+</div>
+</section>
+<section id="cost-reconciliation-schedule" class="level3" data-number="4.3.4">
+<h3 data-number="4.3.4" class="anchored" data-anchor-id="cost-reconciliation-schedule"><span class="header-section-number">4.3.4</span> Cost Reconciliation Schedule</h3>
+<p>Now is the stage where the cost of goods transferred out of one department and into another are determined.</p>
+<div class="cell" data-execution_count="10">
+<details>
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> cost_reconciliation( cost_data<span class="op">=</span> <span class="bu">list</span>):</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  tot_cost <span class="op">=</span> mixing_data[<span class="dv">1</span>][<span class="st">'costs'</span>][<span class="st">'cost_wip_start'</span>] <span class="op">+</span> mixing_data[<span class="dv">1</span>][<span class="st">'costs'</span>][<span class="st">'costs_incurred'</span>]</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"-- Cost Reconciliation --"</span>)</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Total costs charged to department = "</span>,<span class="st">"."</span><span class="op">*</span><span class="dv">5</span>,<span class="st">"${:,}"</span>.<span class="bu">format</span>(tot_cost))</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>cost_reconciliation(mixing_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>-- Cost Reconciliation --
+Total costs charged to department =  ..... $655,000.0</code></pre>
+</div>
+</div>
+<p>For this company example, $655,000 were the costs for the mixing department.</p>
+</section>
+<section id="production-cost-report-1" class="level3" data-number="4.3.5">
+<h3 data-number="4.3.5" class="anchored" data-anchor-id="production-cost-report-1"><span class="header-section-number">4.3.5</span> Production Cost Report</h3>
+<p>The production cost report is an internal document use by management that shows the production quantity and cost data for a department. There are 4 steps in preparing a production cost report:</p>
+<ul>
+<li>prepare a physical unit schedule</li>
+<li>calculate the equivalent units</li>
+<li>calculate the unit costs</li>
+<li>prepare a cost reconciliation schedule</li>
+</ul>
+<blockquote class="blockquote">
+<p>This book is showing only Python code and output, but since accounting is in the business sector, you will obviously want to use your Python skills and convert your own <code>.py</code> file into a Microsoft Word document or presentation. By knowing Python you can extend these skills to using libraries such as <a href="https://python-docx.readthedocs.io/en/latest/">python-docx</a> which makes and reads Word Documents. Once you know Python you can usually type in Google or any other web search engine for “python + <em>search terms</em>” and will get results. Python code now is what you are seeing, but on your own you can make your python files into reproducible professional documents, dashboards and even web apps.</p>
+</blockquote>
+<p>Since each of the steps has already been calculated above using functions, we can just copy our call our functions and get the output of the calculations.</p>
+<div class="cell" data-execution_count="11">
+<details>
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"-- PRODUCTION COST REPORT --"</span>)</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">''</span>)</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>physical_flow(mixing_data)</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">''</span>)</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>equivalent_units(mixing_data)</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">''</span>)</span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>production_costs( mixing_data)</span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">''</span>)</span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a>cost_reconciliation(mixing_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>-- PRODUCTION COST REPORT --
+
+-- Physical Unit Flow --
+Total units accounted for   ..... 900,000.0
+Total units    .................. 900,000.0
+
+-- Equivalent Units --
+Equivalent units (materials) =  ............ 900,000.0
+Equivalent units (conversion costs) =  ..... 820,000.0
+
+-- Unit Production Costs --
+Total materials costs   ............... $450,000.0
+Unit materials cost   ................. $0.5
+
+Total conversion costs  ............... $205,000.0
+Unit conversion costs   ................. $0.25
+Total manufacturing cost per unit   ..... $0.75
+
+Cost reconciliation schedule   ..... $655,000.0
+
+-- Cost Reconciliation --
+Total costs charged to department =  ..... $655,000.0</code></pre>
+</div>
+</div>
+<p>The wonderful thing about functions is that you spend the time making them, but once you do you benefit from it. Making this report output was really easy, just calling the functions already created.</p>
+</section>
+<section id="cost-report-other" class="level3" data-number="4.3.6">
+<h3 data-number="4.3.6" class="anchored" data-anchor-id="cost-report-other"><span class="header-section-number">4.3.6</span> Cost Report: other</h3>
+<p>This example company that makes pancakes has 3 departments: mixing, baking and freezing then packaging. The costs of completed units from the mixing department are treated as material costs in the baking department. <code>Transferred-in cost</code> is the component treated the same way as any other cost component in the equivalent units of production and the cost per equivalent unit of production.</p>
+<p>Cost data for the freezing and packaging department. By copying the list object <strong>mixing_data</strong>, we can reuse the structure for new values for the packaging department. Changes do need to be made to this nested list object, but overall less work involved.</p>
+<div class="cell" data-execution_count="12">
+<details>
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>freezing_data <span class="op">=</span> [</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  {</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">'units'</span>: {</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>        <span class="st">'wip_start'</span>: <span class="fl">200e3</span>,                   <span class="co"># June 1</span></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>        <span class="st">'transferred_in_percent_complete'</span>: <span class="dv">1</span>,</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a>        <span class="st">'direct_materials_percent_complete'</span>: <span class="dv">0</span>,</span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a>        <span class="st">'conversion_percent_complete'</span>: <span class="fl">0.90</span>,</span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>        <span class="st">'units_completed_transferred'</span>: <span class="fl">700e3</span>,</span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a>        <span class="st">'units_in_production_complete'</span>: <span class="fl">800e3</span>,</span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a>        <span class="st">'wip_end'</span>:  <span class="fl">100e3</span>,                       <span class="co"># June 30</span></span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a>        <span class="st">'wip_end_transf_complete_prct'</span>: <span class="dv">1</span>,</span>
+<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a>        <span class="st">'wip_end_direct_material_prct'</span>:  <span class="dv">0</span>,</span>
+<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a>        <span class="st">'wip_end_conversion_complete'</span>: <span class="fl">0.75</span></span>
+<span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a>      }</span>
+<span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a>    },</span>
+<span id="cb21-16"><a href="#cb21-16" aria-hidden="true" tabindex="-1"></a>    {</span>
+<span id="cb21-17"><a href="#cb21-17" aria-hidden="true" tabindex="-1"></a>    <span class="st">'costs'</span>: {</span>
+<span id="cb21-18"><a href="#cb21-18" aria-hidden="true" tabindex="-1"></a>        <span class="st">'wip_start_direct_materials'</span>: <span class="fl">170e3</span>,</span>
+<span id="cb21-19"><a href="#cb21-19" aria-hidden="true" tabindex="-1"></a>        <span class="st">'transferred_in_percent_complete'</span>: <span class="dv">1</span>,</span>
+<span id="cb21-20"><a href="#cb21-20" aria-hidden="true" tabindex="-1"></a>        <span class="st">'direct_materials_percent_complete'</span>: <span class="dv">0</span>,</span>
+<span id="cb21-21"><a href="#cb21-21" aria-hidden="true" tabindex="-1"></a>        <span class="st">'direct_materials_complete'</span>: <span class="dv">0</span>,</span>
+<span id="cb21-22"><a href="#cb21-22" aria-hidden="true" tabindex="-1"></a>        <span class="st">'conversion_percent_complete'</span>: <span class="fl">0.90</span>,</span>
+<span id="cb21-23"><a href="#cb21-23" aria-hidden="true" tabindex="-1"></a>        <span class="st">'conversion_complete'</span>: <span class="fl">36e3</span>,</span>
+<span id="cb21-24"><a href="#cb21-24" aria-hidden="true" tabindex="-1"></a>        <span class="st">'cost_wip_start'</span>: <span class="fl">206e3</span>,</span>
+<span id="cb21-25"><a href="#cb21-25" aria-hidden="true" tabindex="-1"></a>        <span class="st">'costs_transferred_in'</span>: <span class="fl">595e3</span>,</span>
+<span id="cb21-26"><a href="#cb21-26" aria-hidden="true" tabindex="-1"></a>        <span class="st">'costs_direct_materials'</span>: <span class="fl">120e3</span>,</span>
+<span id="cb21-27"><a href="#cb21-27" aria-hidden="true" tabindex="-1"></a>        <span class="st">'costs_conversion_costs'</span>: <span class="fl">139e3</span>,</span>
+<span id="cb21-28"><a href="#cb21-28" aria-hidden="true" tabindex="-1"></a>        <span class="st">'total_costs'</span>: <span class="fl">854e3</span>,</span>
+<span id="cb21-29"><a href="#cb21-29" aria-hidden="true" tabindex="-1"></a>      }  </span>
+<span id="cb21-30"><a href="#cb21-30" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb21-31"><a href="#cb21-31" aria-hidden="true" tabindex="-1"></a>    ]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+</section>
+<section id="production-cost-report-2" class="level3" data-number="4.3.7">
+<h3 data-number="4.3.7" class="anchored" data-anchor-id="production-cost-report-2"><span class="header-section-number">4.3.7</span> Production Cost Report</h3>
+<div class="cell" data-execution_count="13">
+<details>
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> prod_cost_report(cost_data<span class="op">=</span> <span class="bu">list</span>):</span>
+<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">" --- Production Cost Report ---</span><span class="ch">\n</span><span class="st">"</span>)</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># --</span></span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>  units_acc_transf <span class="op">=</span> freezing_data[<span class="dv">0</span>][<span class="st">'units'</span>][<span class="st">'units_in_production_complete'</span>] <span class="op">+</span> freezing_data[<span class="dv">0</span>][<span class="st">'units'</span>][<span class="st">'wip_end'</span>]</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>  tot_units <span class="op">=</span> freezing_data[<span class="dv">0</span>][<span class="st">'units'</span>][<span class="st">'wip_start'</span>] <span class="op">+</span> freezing_data[<span class="dv">0</span>][<span class="st">'units'</span>][<span class="st">'units_completed_transferred'</span>]</span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a>  units_acc_materials <span class="op">=</span> freezing_data[<span class="dv">0</span>][<span class="st">'units'</span>][<span class="st">'units_in_production_complete'</span>] <span class="op">+</span> freezing_data[<span class="dv">0</span>][<span class="st">'units'</span>][<span class="st">'direct_materials_percent_complete'</span>]</span>
+<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a>  prct<span class="op">=</span> freezing_data[<span class="dv">0</span>][<span class="st">'units'</span>][<span class="st">'wip_end'</span>]  <span class="op">*</span> freezing_data[<span class="dv">0</span>][<span class="st">'units'</span>][<span class="st">'wip_end_conversion_complete'</span>]</span>
+<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a>  units_acc_conv <span class="op">=</span> freezing_data[<span class="dv">0</span>][<span class="st">'units'</span>][<span class="st">'units_in_production_complete'</span>] <span class="op">+</span> prct</span>
+<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a>  cost_transf <span class="op">=</span> freezing_data[<span class="dv">1</span>][<span class="st">'costs'</span>][<span class="st">'wip_start_direct_materials'</span>] <span class="op">+</span> freezing_data[<span class="dv">1</span>][<span class="st">'costs'</span>][<span class="st">'costs_transferred_in'</span>]</span>
+<span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a>  cost_materials <span class="op">=</span> freezing_data[<span class="dv">1</span>][<span class="st">'costs'</span>][<span class="st">'direct_materials_complete'</span>] <span class="op">+</span> freezing_data[<span class="dv">1</span>][<span class="st">'costs'</span>][<span class="st">'costs_direct_materials'</span>]</span>
+<span id="cb22-16"><a href="#cb22-16" aria-hidden="true" tabindex="-1"></a>  cost_conv <span class="op">=</span> freezing_data[<span class="dv">1</span>][<span class="st">'costs'</span>][<span class="st">'conversion_complete'</span>] <span class="op">+</span> freezing_data[<span class="dv">1</span>][<span class="st">'costs'</span>][<span class="st">'costs_conversion_costs'</span>]</span>
+<span id="cb22-17"><a href="#cb22-17" aria-hidden="true" tabindex="-1"></a>  tot_unit_costs <span class="op">=</span> cost_transf <span class="op">+</span> cost_materials <span class="op">+</span> cost_conv</span>
+<span id="cb22-18"><a href="#cb22-18" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb22-19"><a href="#cb22-19" aria-hidden="true" tabindex="-1"></a>  unit_cost_transf <span class="op">=</span> cost_transf <span class="op">/</span> units_acc_transf</span>
+<span id="cb22-20"><a href="#cb22-20" aria-hidden="true" tabindex="-1"></a>  unit_cost_materials <span class="op">=</span> cost_materials <span class="op">/</span> units_acc_materials</span>
+<span id="cb22-21"><a href="#cb22-21" aria-hidden="true" tabindex="-1"></a>  unit_costs_conv <span class="op">=</span> cost_conv <span class="op">/</span>units_acc_conv </span>
+<span id="cb22-22"><a href="#cb22-22" aria-hidden="true" tabindex="-1"></a>  tot_unit_costs_2 <span class="op">=</span> unit_cost_transf <span class="op">+</span> unit_cost_materials <span class="op">+</span> unit_costs_conv</span>
+<span id="cb22-23"><a href="#cb22-23" aria-hidden="true" tabindex="-1"></a>  total_costs <span class="op">=</span> freezing_data[<span class="dv">1</span>][<span class="st">'costs'</span>][<span class="st">'cost_wip_start'</span>] <span class="op">+</span> freezing_data[<span class="dv">1</span>][<span class="st">'costs'</span>][<span class="st">'total_costs'</span>]</span>
+<span id="cb22-24"><a href="#cb22-24" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb22-25"><a href="#cb22-25" aria-hidden="true" tabindex="-1"></a>  cost_acc_transf <span class="op">=</span> tot_unit_costs_2 <span class="op">*</span> units_acc_materials</span>
+<span id="cb22-26"><a href="#cb22-26" aria-hidden="true" tabindex="-1"></a>  wip_end_transf <span class="op">=</span> freezing_data[<span class="dv">0</span>][<span class="st">'units'</span>][<span class="st">'wip_end'</span>] <span class="op">*</span> unit_cost_transf</span>
+<span id="cb22-27"><a href="#cb22-27" aria-hidden="true" tabindex="-1"></a>  wip_end_material <span class="op">=</span> freezing_data[<span class="dv">0</span>][<span class="st">'units'</span>][<span class="st">'wip_end_direct_material_prct'</span>] <span class="op">*</span> unit_cost_materials </span>
+<span id="cb22-28"><a href="#cb22-28" aria-hidden="true" tabindex="-1"></a>  wip_end_conv <span class="op">=</span>  prct <span class="op">*</span> unit_costs_conv</span>
+<span id="cb22-29"><a href="#cb22-29" aria-hidden="true" tabindex="-1"></a>  tot_cost_recon <span class="op">=</span> wip_end_transf <span class="op">+</span> wip_end_material <span class="op">+</span> wip_end_conv <span class="op">+</span> cost_acc_transf</span>
+<span id="cb22-30"><a href="#cb22-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-31"><a href="#cb22-31" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb22-32"><a href="#cb22-32" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"-- Physical Unit Flow --"</span>)</span>
+<span id="cb22-33"><a href="#cb22-33" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Total units"</span>, <span class="st">"."</span><span class="op">*</span><span class="dv">25</span>,<span class="st">"{:,}"</span>.<span class="bu">format</span>(tot_units))</span>
+<span id="cb22-34"><a href="#cb22-34" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Total units accounted for transferred "</span>,<span class="st">"."</span><span class="op">*</span><span class="dv">9</span>,<span class="st">"{:,}"</span>.<span class="bu">format</span>(units_acc_transf))</span>
+<span id="cb22-35"><a href="#cb22-35" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Total units accounted for direct materials"</span>,<span class="st">"."</span><span class="op">*</span><span class="dv">5</span>,<span class="st">"{:,}"</span>.<span class="bu">format</span>(units_acc_materials))</span>
+<span id="cb22-36"><a href="#cb22-36" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Total units accounted for conversion costs"</span>,<span class="st">"."</span><span class="op">*</span><span class="dv">5</span>,<span class="st">"{:,}"</span>.<span class="bu">format</span>(units_acc_conv))</span>
+<span id="cb22-37"><a href="#cb22-37" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb22-38"><a href="#cb22-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-39"><a href="#cb22-39" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">-- Unit Costs --"</span>)</span>
+<span id="cb22-40"><a href="#cb22-40" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Total unit costs transferred "</span>,<span class="st">"."</span><span class="op">*</span><span class="dv">9</span>,<span class="st">"${:,}"</span>.<span class="bu">format</span>(cost_transf))</span>
+<span id="cb22-41"><a href="#cb22-41" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Total unit costs direct materials"</span>,<span class="st">"."</span><span class="op">*</span><span class="dv">5</span>,<span class="st">"${:,}"</span>.<span class="bu">format</span>(cost_materials))</span>
+<span id="cb22-42"><a href="#cb22-42" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Total unit conversion costs "</span>,<span class="st">"."</span><span class="op">*</span><span class="dv">9</span>,<span class="st">"${:,}"</span>.<span class="bu">format</span>(cost_conv))</span>
+<span id="cb22-43"><a href="#cb22-43" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Total unit costs"</span>,<span class="st">"."</span><span class="op">*</span><span class="dv">35</span>,<span class="st">"${:,}"</span>.<span class="bu">format</span>(tot_unit_costs))</span>
+<span id="cb22-44"><a href="#cb22-44" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb22-45"><a href="#cb22-45" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Unit costs transferred"</span>,<span class="st">"."</span><span class="op">*</span><span class="dv">9</span>,<span class="st">"${:,}"</span>.<span class="bu">format</span>(unit_cost_transf))</span>
+<span id="cb22-46"><a href="#cb22-46" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Unit costs direct materials"</span>,<span class="st">"."</span><span class="op">*</span><span class="dv">5</span>,<span class="st">"${:,}"</span>.<span class="bu">format</span>(unit_cost_materials))</span>
+<span id="cb22-47"><a href="#cb22-47" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Unit conversion costs"</span>,<span class="st">"."</span><span class="op">*</span><span class="dv">9</span>,<span class="st">"${:,}"</span>.<span class="bu">format</span>(unit_costs_conv))</span>
+<span id="cb22-48"><a href="#cb22-48" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Unit costs total"</span>,<span class="st">"."</span><span class="op">*</span><span class="dv">28</span>,<span class="st">"${:,}"</span>.<span class="bu">format</span>(tot_unit_costs_2))    </span>
+<span id="cb22-49"><a href="#cb22-49" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Total costs"</span>,<span class="st">"."</span><span class="op">*</span><span class="dv">40</span>,<span class="st">"${:,}"</span>.<span class="bu">format</span>(total_costs))</span>
+<span id="cb22-50"><a href="#cb22-50" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb22-51"><a href="#cb22-51" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st"> --- Cost Reconciliation Schedule ---"</span>)</span>
+<span id="cb22-52"><a href="#cb22-52" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Costs accounted for transferred"</span>,<span class="st">"."</span><span class="op">*</span><span class="dv">9</span>,<span class="st">"${:,}"</span>.<span class="bu">format</span>(cost_acc_transf))</span>
+<span id="cb22-53"><a href="#cb22-53" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Work in process end transferred"</span>,<span class="st">"."</span><span class="op">*</span><span class="dv">9</span>,<span class="st">"${:,}"</span>.<span class="bu">format</span>(wip_end_transf))    </span>
+<span id="cb22-54"><a href="#cb22-54" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Work in process end materials"</span>,<span class="st">"."</span><span class="op">*</span><span class="dv">11</span>,<span class="st">"${:,}"</span>.<span class="bu">format</span>(wip_end_material))</span>
+<span id="cb22-55"><a href="#cb22-55" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Work in process end conversion costs"</span>,<span class="st">"."</span><span class="op">*</span><span class="dv">5</span>,<span class="st">"${:,}"</span>.<span class="bu">format</span>(wip_end_conv))</span>
+<span id="cb22-56"><a href="#cb22-56" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Total costs accounted for"</span>,<span class="st">"."</span><span class="op">*</span><span class="dv">27</span>,<span class="st">"${:,}"</span>.<span class="bu">format</span>(tot_cost_recon))</span>
+<span id="cb22-57"><a href="#cb22-57" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb22-58"><a href="#cb22-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-59"><a href="#cb22-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb22-60"><a href="#cb22-60" aria-hidden="true" tabindex="-1"></a><span class="co">#-----</span></span>
+<span id="cb22-61"><a href="#cb22-61" aria-hidden="true" tabindex="-1"></a>prod_cost_report(freezing_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code> --- Production Cost Report ---
+
+-- Physical Unit Flow --
+Total units ......................... 900,000.0
+Total units accounted for transferred  ......... 900,000.0
+Total units accounted for direct materials ..... 800,000.0
+Total units accounted for conversion costs ..... 875,000.0
+
+-- Unit Costs --
+Total unit costs transferred  ......... $765,000.0
+Total unit costs direct materials ..... $120,000.0
+Total unit conversion costs  ......... $175,000.0
+Total unit costs ................................... $1,060,000.0
+Unit costs transferred ......... $0.85
+Unit costs direct materials ..... $0.15
+Unit conversion costs ......... $0.2
+Unit costs total ............................ $1.2
+Total costs ........................................ $1,060,000.0
+
+ --- Cost Reconciliation Schedule ---
+Costs accounted for transferred ......... $960,000.0
+Work in process end transferred ......... $85,000.0
+Work in process end materials ........... $0.0
+Work in process end conversion costs ..... $15,000.0
+Total costs accounted for ........................... $1,060,000.0</code></pre>
+</div>
+</div>
+</section>
+</section>
+<section id="equivalent-units-fifo" class="level2" data-number="4.4">
+<h2 data-number="4.4" class="anchored" data-anchor-id="equivalent-units-fifo"><span class="header-section-number">4.4</span> Equivalent Units: FIFO</h2>
+<p><code>FIFO</code> is first in, first out method for calculating equivalent units. The FIFO method for costs assumes that the work in process completes before new work is initiated. Equivalent units for FIFO are:</p>
+<ul>
+<li>process inventory is finished work in units</li>
+<li>units in production have been completed</li>
+<li>work started but not complete is partially completed, perpetually work in process</li>
+</ul>
+<p>The company for this example makes home furnishings.</p>
+<div class="cell" data-execution_count="14">
+<details>
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>fifo_data <span class="op">=</span> {</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>    <span class="st">'units_start'</span>: {</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>      <span class="st">'wip_start_complete_percent'</span>: <span class="fl">0.40</span>,</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>      <span class="st">'wip_start_complete'</span>: <span class="dv">500</span>,</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>      <span class="st">'units_transf_prod'</span>: <span class="fl">8e3</span>,</span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>      <span class="st">'total_units'</span>:  <span class="dv">8500</span></span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>      },</span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">'units_end'</span>: {</span>
+<span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a>      <span class="st">'wip_end_complete_transf'</span>: <span class="dv">8100</span>,</span>
+<span id="cb24-10"><a href="#cb24-10" aria-hidden="true" tabindex="-1"></a>      <span class="st">'wip_end_complete_percent'</span>: <span class="fl">0.75</span>,</span>
+<span id="cb24-11"><a href="#cb24-11" aria-hidden="true" tabindex="-1"></a>      <span class="st">'wip_end'</span>: <span class="dv">400</span>,</span>
+<span id="cb24-12"><a href="#cb24-12" aria-hidden="true" tabindex="-1"></a>      <span class="st">'total_units'</span>:  <span class="dv">8500</span></span>
+<span id="cb24-13"><a href="#cb24-13" aria-hidden="true" tabindex="-1"></a>      }</span>
+<span id="cb24-14"><a href="#cb24-14" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>Equivalent units</p>
+<div class="cell" data-execution_count="15">
+<details>
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> fifo_method(data<span class="op">=</span> <span class="bu">dict</span>):</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>  begin_inv <span class="op">=</span>  fifo_data[<span class="st">'units_start'</span>][<span class="st">'wip_start_complete'</span>] <span class="op">*</span> (<span class="dv">1</span> <span class="op">-</span> fifo_data[<span class="st">'units_start'</span>][<span class="st">'wip_start_complete_percent'</span>])</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>  units_started_finished <span class="op">=</span> fifo_data[<span class="st">'units_end'</span>][<span class="st">'wip_end_complete_transf'</span>] <span class="op">-</span> fifo_data[<span class="st">'units_start'</span>][<span class="st">'wip_start_complete'</span>]</span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>  equiv_units <span class="op">=</span> fifo_data[<span class="st">'units_end'</span>][<span class="st">'wip_end'</span>] <span class="op">*</span> fifo_data[<span class="st">'units_end'</span>][<span class="st">'wip_end_complete_percent'</span>]</span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>  tot_equiv <span class="op">=</span> begin_inv <span class="op">+</span>units_started_finished <span class="op">+</span>equiv_units</span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"-- Equivalent Units: FIFO --"</span>)</span>
+<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"beginning inventory required to complete"</span>,<span class="st">"."</span><span class="op">*</span><span class="dv">5</span>,<span class="st">"{:,} units"</span>.<span class="bu">format</span>(begin_inv))</span>
+<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"units started &amp; completed"</span>,<span class="st">"."</span><span class="op">*</span><span class="dv">19</span>,<span class="st">"{:,} units"</span>.<span class="bu">format</span>(units_started_finished ))</span>
+<span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"equivalent units"</span>,<span class="st">"."</span><span class="op">*</span><span class="dv">28</span>,<span class="st">"{:,} units"</span>.<span class="bu">format</span>(equiv_units ))</span>
+<span id="cb25-15"><a href="#cb25-15" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Total equivalent units"</span>,<span class="st">"."</span><span class="op">*</span><span class="dv">40</span>,<span class="st">" {:,} units"</span>.<span class="bu">format</span>(tot_equiv ))</span>
+<span id="cb25-16"><a href="#cb25-16" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb25-17"><a href="#cb25-17" aria-hidden="true" tabindex="-1"></a>fifo_method(fifo_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>-- Equivalent Units: FIFO --
+beginning inventory required to complete ..... 300.0 units
+units started &amp; completed ................... 7,600 units
+equivalent units ............................ 300.0 units
+Total equivalent units ........................................  8,200.0 units</code></pre>
+</div>
+</div>
+<hr>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  let localAlternateSentinel = 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="./chapter2.html" class="pagination-link">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Job Cost Accounting</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="./chapter4.html" class="pagination-link">
+        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Activity Based Costing</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+</body></html>

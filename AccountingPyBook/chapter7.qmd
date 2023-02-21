@@ -1,0 +1,503 @@
+
+# Alt Inventory Costing Methods
+
+Alternative inventory costing methods for decision making. Fixed and variable costs are determinant in
+a company's profitability, where fixed costs impact net income. Some companies focus on the variable costs and its role in profitability. Alternative inventory costing methods (AICM) includes:
+
+- comparing absorption costing and variable costing
+- net income effects 
+- performance evaluation
+- potential advantage of variable costing 
+- normal costing 
+- throughput costing 
+
+## Inventory Costing Methods
+
+> Previously variable and fixed manufacturing costs were classified as product costs.
+
+- job order costing = costs of direct materials, direct labor and both variable and fixed manufacturing overhead
+
+- `Full absorption costing` is all manufacturing costs are charged to or absorbed by the product. 
+
+
+Example company cost data 
+
+```{python}
+cost_data = {
+  'selling_price': 20,
+  'units_produced': 30e3,
+  'units_sold': 20e3,
+  'begin_inventory': 0,
+  'variable_costs': {
+    'manufacturing': 9,
+    'direct_materials':5,
+    'direct_labor': 3,
+    'var_overhead': 1
+    },
+  'selling_admin_costs': 2,
+  'fixed_costs': {
+      'manuf_overhead': 120e3,
+      'selling_admin_expenses': 15e3
+    }
+}
+
+```
+
+
+
+
+
+
+per unit manufacturing cost using each costing approach
+
+```{python}
+def absorption_costing_compare(cost_data: dict):
+  
+  # absorption costing
+  fixed_manuf_overhead = cost_data['fixed_costs']['manuf_overhead'] / cost_data['units_produced']
+  abs_cost = sum( list( cost_data['variable_costs'].values()  )[1:] ) + fixed_manuf_overhead
+  var_cost = sum( list( cost_data['variable_costs'].values()  )[1:] )
+  
+  diff = abs_cost - var_cost
+  
+  print(" - Absorption vs Variable costing -")
+  print("Absorption costing : manufacturing cost per unit ..... ${:,}".format(abs_cost))
+  print("Variable costing :   manufacturing cost per unit ..... ${:,}".format(var_cost))
+  
+  print("\n difference in manufacturing cost per unit is $", diff)
+  
+  
+  #----------- income statements
+  sales = cost_data['units_sold'] * cost_data['selling_price']
+  cogsm = cost_data['units_produced'] * abs_cost
+  
+  #                  10,0000
+  end_inventory = (sales - cogsm) * abs_cost
+  cog_sold = cost_data['units_sold'] * abs_cost
+  gross_profit = sales - cog_sold
+  var_admin_expense = (sales - cogsm) * diff
+  fixed_admin_expense = cost_data['fixed_costs']['selling_admin_expenses']
+  net_income = gross_profit - var_admin_expense - fixed_admin_expense 
+  
+  
+  print("\n === Income Statement ===")
+  print("Absorption cost\n Cost of Goods Sold")
+  print(" Sales ..... ${:,}".format(sales))
+  print(" Cost of goods manufactured ............ ${:,}".format(cogsm))
+  print(" end of inventory ...................... ${:,}".format(end_inventory))
+  print(" cost of goods sold .................... ${:,}".format(cog_sold))
+  print(" gross profit .......................... ${:,}".format(gross_profit))
+  print(" variable selling & admin expenses ..... ${:,}".format(var_admin_expense))
+  print(" fixed selling & admin expenses ........ ${:,}".format(fixed_admin_expense))
+  print(" Net income ........................................... ${:,}".format(net_income))
+  
+  
+  #---- var costing
+  var_sales = cost_data['units_sold'] * cost_data['selling_price']
+  var_manuf_costs = cost_data['units_produced'] * var_cost
+  end_inventory = (sales - cogsm) * var_cost
+  var_cog_sold = var_manuf_costs - end_inventory
+  var_sell_admin_expense = cost_data['units_sold'] * cost_data['selling_admin_costs']
+  contrib_margin = var_sales - (var_cog_sold + var_sell_admin_expense )
+  var_fixed_manuf_overhead = cost_data['fixed_costs']['manuf_overhead']
+  var_fixed_sell_admin = cost_data['fixed_costs']['selling_admin_expenses']
+  var_net_income = contrib_margin - var_fixed_manuf_overhead - var_fixed_sell_admin 
+  
+  
+  print("\n === Income Statement ===")
+  print("Variable cost\n Cost of Goods Sold")
+  print(" Sales ...... ${:,}".format(var_sales))
+  print(" variable manufacturing costs .......... ${:,}".format(var_manuf_costs))
+  print(" end inventory ......................... ${:,}".format(end_inventory))
+  print(" variable cost of goods sold ........... ${:,}".format(var_cog_sold))
+  print(" variable selling & admin expenses ..... ${:,}".format(var_sell_admin_expense))
+  print(" contribution margin ................... ${:,}".format(contrib_margin))
+  print(" fixed manufacturing overhead  ......... ${:,}".format(var_fixed_manuf_overhead))
+  print(" fixed selling & admin expenses ........ ${:,}".format(var_fixed_sell_admin))
+  print(" Net income ........................................... ${:,}".format( var_net_income))
+  
+  
+
+```
+
+
+call the function 
+
+```{python}
+absorption_costing_compare( cost_data )
+```
+
+Absorption costing, both variable and fixed selling & admin expenses are treated as period costs.
+Under variable costing the fixed manufacturing overhead is charged as an expense.
+
+- When there are more units produced than sold, income via absorption costing is higher
+- When there are fewer units produced than sold, income via absorption costing is lower
+
+
+
+
+### Absorption Costing Example
+
+Company makes sport balls, the company data is in a data dictionary.
+
+```{python}
+sport_co = {
+  'variable_costs': {
+      'direct_materials': 0.10,
+      'direct_labor': 0.05,
+      'var_manuf_overhead': 0.08, # manufacturing overhead
+      'var_sell_admin_expense': 0.02 },
+    'fixed_costs': {
+      'fixed_manuf_overhead': 500e3, 
+      'sell_admin_expense': 100e3
+    },
+  'begin_inventory': 0,
+  'units_sold': 7.5e6,
+  'units_produced': 8e6,
+  'selling_price': 0.5
+}
+```
+
+
+A function to calculate the cost of 1 unit of product using the absorption costing method
+
+```{python}
+def absorption_costing( company: dict):
+  
+  fixed_manuf_overhead = sport_co['fixed_costs']['fixed_manuf_overhead'] / sport_co['units_produced']
+  cpu_abs =  sum( list( sport_co['variable_costs'].values() )[0:-1]) + fixed_manuf_overhead
+  # print(cpu_abs)
+  
+  sales = sport_co['units_sold'] * sport_co['selling_price']
+  cog_sold = round( sport_co['units_sold'] * cpu_abs, 2)
+  gross_margin = sales - cog_sold 
+  var_sell_admin_expense = sport_co['units_sold'] * sport_co['variable_costs']['var_sell_admin_expense']
+  fixed_sell_admin_expense = sport_co['fixed_costs']['sell_admin_expense']
+  
+  net_income = gross_margin - (var_sell_admin_expense + fixed_sell_admin_expense)
+  
+  print(" - Absorption Costing -" )
+  print(" sales ................ ${:,}".format(sales))
+  print(" cost of goods sold ............................... ${:,}".format(cog_sold))
+  print(" gross margin ..................................... ${:,}".format(gross_margin))
+  print(" variable selling & admin expenses ................ ${:,}".format(var_sell_admin_expense))
+  print(" fixed selling & admin expenses ................... ${:,}".format(fixed_sell_admin_expense))
+  print(" net income .................................................... ${:,}".format(net_income))
+  
+
+```
+
+
+Call the function 
+
+```{python}
+absorption_costing( sport_co )
+
+```
+
+### Variable Costing Example
+
+Using the same sport company data for variable costing function
+
+```{python}
+def variable_costing( company: dict):
+  cpu_abs =  sum( list( sport_co['variable_costs'].values() )[0:-1]) 
+  # print(cpu_abs)
+  
+  sales = sport_co['units_sold'] * sport_co['selling_price']
+  cog_sold = round( sport_co['units_sold'] * cpu_abs, 2)
+  gross_margin = sales - cog_sold
+  var_sell_admin_expense = sport_co['units_sold'] * sport_co['variable_costs']['var_sell_admin_expense']
+  contrib_margin = cog_sold + var_sell_admin_expense 
+  
+  fixed_manuf_overhead = sport_co['fixed_costs']['fixed_manuf_overhead']
+  fixed_sell_admin_expense = sport_co['fixed_costs']['sell_admin_expense'] 
+  
+  net_income = sales - contrib_margin - (fixed_manuf_overhead + fixed_sell_admin_expense )
+  
+  print(" - Variable Costing -" )
+  print(" sales ................ ${:,}".format(sales))
+  print(" variable cost of goods sold ...................... ${:,}".format(cog_sold))
+  print(" variable selling & admin expenses ................ ${:,}".format(var_sell_admin_expense))
+  print(" contribution margin .............................. ${:,}".format(contrib_margin))
+  print(" fixed manufacturing overhead ..................... ${:,}".format(fixed_manuf_overhead))
+  print(" fixed selling & admin expenses ................... ${:,}".format(fixed_sell_admin_expense))
+  print(" net income .................................................... ${:,}".format(net_income))
+   
+```
+
+call variable costing function 
+
+```{python}
+variable_costing( sport_co )
+```
+
+
+
+## Normal Costing
+
+Using the `sports_co` dictionary used previously to calculate the normal costing
+
+```{python}
+sport_co['fixed_costs']['fixed_manuf_overhead'] / 10e6
+
+```
+
+Normal costing function 
+
+```{python}
+def normal_costing( company: dict):
+  
+  fixed_manuf_overhead = sport_co['fixed_costs']['fixed_manuf_overhead'] / 10e6
+  cpu_abs =  sum( list( sport_co['variable_costs'].values() )[0:-1]) + fixed_manuf_overhead
+  # print(cpu_abs)
+  
+  sales = sport_co['units_sold'] * sport_co['selling_price']
+  cog_sold = round( sport_co['units_sold'] * cpu_abs, 2)
+  
+  var_sell_admin_expense = sport_co['units_sold'] * sport_co['variable_costs']['var_sell_admin_expense']
+  contrib_margin = cog_sold + var_sell_admin_expense 
+  
+  fixed_manuf_overhead = sport_co['fixed_costs']['fixed_manuf_overhead']
+  fixed_sell_admin_expense = sport_co['fixed_costs']['sell_admin_expense'] 
+  var_sell_admin_expense = sport_co['variable_costs']['var_sell_admin_expense'] * sport_co['units_sold']
+  
+  # -----
+  unfav_vol_var = sport_co['fixed_costs']['fixed_manuf_overhead'] - (sport_co['fixed_costs']['fixed_manuf_overhead'] - sport_co['fixed_costs']['sell_admin_expense'])
+  
+  gross_margin = sales - cog_sold - unfav_vol_var
+  
+  expenses = [cog_sold, unfav_vol_var , var_sell_admin_expense , fixed_sell_admin_expense]
+  net_income = sales - sum(expenses)
+  
+  print(" - Normal Costing -" )
+  print(" sales ....................... ${:,}".format(sales))
+  print(" variable cost of goods sold ...................... ${:,}".format(cog_sold))
+  print(" unfavorable volume variance ...................... ${:,}".format(unfav_vol_var))
+  print(" gross margin ..................................... ${:,}".format(gross_margin))
+  print(" variable selling & admin expenses ................ ${:,}".format(var_sell_admin_expense))
+  print(" fixed selling & admin expenses ................... ${:,}".format(fixed_sell_admin_expense))
+  print(" net income .................................................... ${:,}".format(net_income))
+```
+
+
+Call the normal costing function
+
+```{python}
+normal_costing(sport_co)
+```
+
+
+
+## Throughput costing
+
+`Throughput costing` (_super variable costing_) treats all costs as period expenses _except_
+for direct materials {much like variable costing system}.Product costs are only direct material costs, inventory is valued using only direct material costs and manufacturing costs are labelled as expenses in the accounting period when they occur.  There are two criteria that should 
+be met before using throughput costing:
+
+- companies that engage in a manufacturing process where conversion costs (direct labor and manufacturing overhead) are fixed costs, meaning no variance during units of production
+- management uses cost accounting information in order to make decisions such as accepting or rejecting an offer
+
+
+Using the cost data from previous section 
+
+```{python}
+cost_data
+```
+
+Throughput costing and variable costing for manufacturing cost per unit
+
+```{python}
+thru_cpu = cost_data['variable_costs']['direct_materials']
+var_cpu = sum( list( cost_data['variable_costs'].values())[1:] )
+
+print("Throughput costing: direct materials = ${:,}".format(thru_cpu))
+print("Variable costing: direct materials = ${:,}".format(var_cpu))
+```
+
+
+
+
+
+
+
+
+### Throughput function
+
+```{python}
+def throughput_costing( company: dict):
+  
+  sales = company['units_sold'] * company['selling_price']
+  direct_material_costs = company['units_produced'] * company['variable_costs']['direct_materials']
+  start_inventory = company['begin_inventory']
+  cog_sale = direct_material_costs - start_inventory 
+  # print(cog_sale)
+  
+  end_inventory = (company['units_produced'] - company['units_sold']) * company['variable_costs']['direct_materials']
+  
+  var_cog_sold = direct_material_costs - end_inventory
+  thru_contrib_margin = sales - var_cog_sold
+  
+  direct_labor_costs = company['units_produced'] * company['variable_costs']['direct_labor']
+  var_overhead_costs = company['units_produced'] * company['variable_costs']['var_overhead']
+  var_sell_admin_expense = company['units_sold'] * company['selling_admin_costs']
+  fixed_manuf_overhead = company['fixed_costs']['manuf_overhead']
+  fixed_sell_admin = company['fixed_costs']['selling_admin_expenses']
+  
+  expenses = [direct_labor_costs, var_overhead_costs, var_sell_admin_expense, fixed_manuf_overhead, fixed_sell_admin]
+  
+  total_other_op_costs = sum(expenses)
+  
+  net_income = thru_contrib_margin - total_other_op_costs
+ 
+  print(" - Throughput Costing -" )
+  print(" sales ....................... ${:,}".format(sales))
+  print(" direct material costs ....................... ${:,}".format(direct_material_costs))
+  print(" ending inventory ............................ ${:,}".format(end_inventory))
+  print(" throughput contribution margin .............. ${:,}".format(thru_contrib_margin))
+  print("\t direct labor costs .......................... ${:,}".format(direct_labor_costs))
+  print("\t variable overhead costs ..................... ${:,}".format(var_overhead_costs))
+  print("\t variable sell & admin costs ................. ${:,}".format(var_sell_admin_expense))
+  print("\t fixed manufacturing overhead ................ ${:,}".format(fixed_manuf_overhead))
+  print("\t fixed sell & admin expenses  ................ ${:,}".format(fixed_sell_admin))
+  print("\t total other operating costs  .................... ${:,}".format(total_other_op_costs))
+  
+  print(" net income ....................................................... ${:,}".format(net_income))
+
+
+```
+
+Call the function
+
+```{python}
+throughput_costing(cost_data)
+```
+
+
+
+### Variable costing
+
+this is a second version of the variable costing function
+
+```{python}
+def variable_costing2( company: dict):
+  
+  sales = cost_data['units_sold'] * cost_data['selling_price']
+  
+  
+  direct_material_costs = cost_data['units_produced'] * cost_data['variable_costs']['manufacturing']
+  start_inventory = cost_data['begin_inventory']
+  cog_sale = direct_material_costs - start_inventory  
+  
+  end_inventory = (cost_data['units_produced'] - cost_data['units_sold']) * cost_data['variable_costs']['manufacturing']
+  
+  var_manuf_costs = cost_data['units_produced'] * cost_data['variable_costs']['manufacturing']
+  var_cogs_sold = cog_sale - end_inventory
+  var_sell_admin_expense = cost_data['units_sold'] * cost_data['selling_admin_costs']
+  
+  contrib_margin = sales - (var_sell_admin_expense +var_cogs_sold )
+  
+  fixed_manuf_overhead = cost_data['fixed_costs']['manuf_overhead']
+  fixed_sell_admin = cost_data['fixed_costs']['selling_admin_expenses']
+  net_income = contrib_margin -fixed_manuf_overhead - fixed_sell_admin
+  
+  
+  
+  print(" - Variable Costing -" )
+  print(" sales ........................... ${:,}".format(sales))
+  print(" variable manufacturing costs ...................... ${:,}".format(var_manuf_costs))
+  print(" cost of goods available for sale  ................. ${:,}".format(cog_sale))
+  print(" variable cost of goods sold  ...................... ${:,}".format(var_cogs_sold))
+  print(" variable selling & admin expenses ................. ${:,}".format(var_sell_admin_expense))
+  print(" contribution margin ............................... ${:,}".format(contrib_margin))
+  print(" fixed manufacturing overhead ...................... ${:,}".format(fixed_manuf_overhead))
+  print(" fixed selling & admin expenses .................... ${:,}".format(fixed_sell_admin))
+  print(" net income .................................................... ${:,}".format(net_income))
+  
+
+variable_costing2(cost_data)
+```
+
+### Throughput Costing Summary
+
+```{}
+if (units produced) == units sold:
+  variable costing = throughput costing
+
+if (units produced) > units sold:
+  variable costing > throughput costing
+  
+if (units produced) < units sold:
+  variable costing < throughput costing
+```
+
+
+### Throughput Example
+
+Using the sport company data dictionary using a revised version of the throughput function
+
+```{python}
+def throughput_costing2( company: dict):
+  
+  sales = company['units_sold'] * company['selling_price']
+  direct_material_costs = company['units_produced'] * company['variable_costs']['direct_materials']
+  start_inventory = company['begin_inventory']
+  cog_sale = direct_material_costs - start_inventory 
+  # print(cog_sale)
+  
+  end_inventory = (company['units_produced'] - company['units_sold']) * company['variable_costs']['direct_materials']
+  
+  var_cog_sold = direct_material_costs - end_inventory
+  thru_contrib_margin = sales - var_cog_sold
+  
+  direct_labor_costs = company['units_produced'] * company['variable_costs']['direct_labor']
+  var_overhead_costs = company['units_produced'] * company['variable_costs']['var_manuf_overhead']
+  var_sell_admin_expense = company['units_sold'] * company['variable_costs']['var_sell_admin_expense']
+  fixed_manuf_overhead = company['fixed_costs']['fixed_manuf_overhead']
+  fixed_sell_admin = company['fixed_costs']['sell_admin_expense']
+  
+  expenses = [direct_labor_costs, var_overhead_costs, var_sell_admin_expense, fixed_manuf_overhead, fixed_sell_admin]
+  
+  total_other_op_costs = sum(expenses)
+  
+  net_income = thru_contrib_margin - total_other_op_costs
+ 
+  print(" - Throughput Costing -" )
+  print(" sales ....................... ${:,}".format(sales))
+  # print(" direct material costs ....................... ${:,}".format(direct_material_costs))
+  # print(" ending inventory ............................ ${:,}".format(end_inventory))
+  print(" throughput contribution margin .............. ${:,}".format(thru_contrib_margin))
+  print("\t direct labor costs .......................... ${:,}".format(direct_labor_costs))
+  print("\t variable overhead costs ..................... ${:,}".format(var_overhead_costs))
+
+  print("\t fixed manufacturing overhead ................ ${:,}".format(fixed_manuf_overhead))
+  print("\t fixed sell & admin expenses  ................ ${:,}".format(fixed_sell_admin))
+  print("\t variable sell & admin costs ................. ${:,}".format(var_sell_admin_expense))
+  print("\t total other operating costs  .................... ${:,}".format(total_other_op_costs))
+  
+  print(" net income ....................................................... ${:,}".format(net_income))
+  
+
+throughput_costing2(sport_co)
+```
+
+
+---
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

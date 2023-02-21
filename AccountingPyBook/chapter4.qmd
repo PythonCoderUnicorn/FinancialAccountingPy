@@ -1,0 +1,422 @@
+
+# Activity Based Costing
+
+Companies use Activity Based Costing (ABC) for more accurate data for better decision making.
+Activity based costing includes:
+
+- ABC system: 
+  - identify and classify activities and allocate overhead to cost pools (step 1)
+  - identify cost drivers (step 2)
+  - calculate overhead rates (step 3)
+  - assign overhead costs to products (step 4)
+  - unit cost comparison
+
+
+## The ABC system
+
+The amount of direct labor used in industries has changed with decreased, and the total overhead costs such as: depreciation on equipment, machinery, utilities, repairs and maintenance has increased. 
+The ABC system uses machine hours as foundation for determining overhead costs, but this may not be precise enough for accurate costing for some industries where the manufacturing process is complicated, thus there is _activity based costing_. The ABC is a method for allocating overhead costs for specific activities then assigns these costs to products and services using costing drivers.
+
+
+- `activity` is any event, transaction or work sequence that incurs a cost during production
+- `activity cost pool`  is a unique activity like ordering materials or machinery setting up
+- `cost driver` any activity that has a direct cause-effect relationship with resources consumed
+
+
+> If there is no or little correlation between changes in the cost driver and the consumption of the overhead cost, then inaccurate product costs will result
+
+### ABC example
+
+A company produces two items, item 1 is a high volume item totalling 25,000 units annually.
+The second item is a low volume item totalling only 5,000 units per year. Each product requires 1 hour 
+of direct labor to complete. Expected annual manufacturing overhead costs are $900,000.
+
+
+```{python}
+high_vol_item = 25e3
+low_vol_item = 5e3
+expect_overhead = 900e3
+
+total_annual_direct_labor = high_vol_item + low_vol_item
+
+pred_overhead_rate = expect_overhead / total_annual_direct_labor
+
+print("Total annual direct labor hours = {:,}".format(total_annual_direct_labor))
+print("Predetermined overhead rate \n(traditional costing) = ${:,} per labor hr".format(pred_overhead_rate))
+
+```
+
+### ABC step 1
+
+This example company has three activity cost pools: setting p machine, machining and inspecting.
+All overhead costs directly associated with machine setting up (salaries, supplies and depreciation) are assigned to machine set-up cost pool.
+
+| cost pool         | estimated overhead |
+|-------------------|--------------------|
+| machines set up   | $300,000            |
+| machining         | $500,000            |
+| inspecting        | $100,000            |
+
+
+```{python}
+abc_costs = {
+  'setting_up_machines': 300e3,
+  'machining': 500e3,
+  'inspecting': 100e3
+}
+
+# make a list variable that stores the dictionary values
+dict_list = list( abc_costs.values() )
+# loop through the dictionary values then sum the values and store in variable s
+for num in dict_list:
+  s = sum( dict_list )
+
+print("Activity cost pool total = $ {:,}".format(s))
+```
+
+
+### ABC step 2
+
+Now the task is to identify the cost drivers for each cost pool. The cost driver must accurately measure
+the actual consumption of the activity by the various products. To get accurate costing, there needs to be a 
+high degree of correlation between cost driver and consumption of the overhead costs. 
+
+- `activity cost pool` - Setting up machines, Machining, Inspecting
+- `cost drivers` - number of machines set up, machine hours, number of inspection
+- `expected use: cost driver` - 1,500 machine set ups, 50,000 machine hours and 2,000 inpsections
+
+### ABC step 3
+
+Calculate the `activity based overhead rate` per cost driver by dividing the estimated overhead per activity by the number of cost drivers by the number of cost drivers expected to be used.
+
+```{python}
+# make a copy of the abc costs
+cost_drivers = abc_costs.copy()
+# add new dictionary keys and values to cost drivers dictionary
+cost_drivers.update( {'expected_machine_setups': 1500} )
+cost_drivers.update( {'expected_machine_hours': 50e3} )
+cost_drivers.update( {'expected_inspections': 2000} )
+
+```
+
+Make a function to calculate the activity based overhead rates.
+
+```{python}
+# create a function to calculate the overhead rates
+def activity_overhead_rates(costing_data: dict):
+  overhead_rates_1 = cost_drivers['setting_up_machines'] / cost_drivers['expected_machine_setups']
+  overhead_rates_2 = cost_drivers['machining'] / cost_drivers['expected_machine_hours']
+  overhead_rates_3 = cost_drivers['inspecting'] / cost_drivers['expected_inspections']
+  
+  print("\n --- Activity Based Overhead Rates --")
+  print("per machine set up","."*8,"${:.2f}".format( overhead_rates_1))
+  print("per machine hours","."*10,"${:.2f}".format( overhead_rates_2))
+  print("per machine inpections","."*5,"${:.2f}".format( overhead_rates_3))
+
+
+
+activity_overhead_rates( cost_drivers)
+```
+
+### ABC step 4
+
+This step is about assigning overhead costs, necessary to know the overhead cost driver for each product.
+This example company has two items, one item takes longer for set up and inspections.
+
+- expected use of cost driver per product 
+- item 1 = 500, 30,000, 500
+- item 2 = 1,000, 20,000 and 1,500
+
+Update the dictionary
+
+```{python}
+cost_drivers.update({'item_1': {'exp_cost_machine_setups':500, 'exp_cost_machining':30e3, 'exp_cost_inpsecting': 500} })
+cost_drivers.update( {'item_2': {'exp_cost_machine_setups':1000, 'exp_cost_machining':20e3, 'exp_cost_inpsecting': 1500} })
+
+# add the number of units produced, stated in the beginining of section
+cost_drivers.update({'units_produced_item1': 25e3})
+cost_drivers.update({'units_produced_item2': 5e3})
+# cost_drivers
+```
+
+Make a function to calculate the product overhead costs. 
+
+```{python}
+def product_overhead_costs( costing_data: dict ):
+  # need rate for calculation
+  overhead_rates_1 = cost_drivers['setting_up_machines'] / cost_drivers['expected_machine_setups'] # $200
+  overhead_rates_2 = cost_drivers['machining'] / cost_drivers['expected_machine_hours']            # $10
+  overhead_rates_3 = cost_drivers['inspecting'] / cost_drivers['expected_inspections']             # $50
+  
+  # -- item 1
+  mach_setup_cost_1 = cost_drivers['item_1']['exp_cost_machine_setups'] * overhead_rates_1
+  machine_cost_1 = cost_drivers['item_1']['exp_cost_machining'] * overhead_rates_2
+  inspect_cost_1 = cost_drivers['item_1']['exp_cost_inpsecting'] * overhead_rates_3
+  total_assigned_costs_1 = mach_setup_cost_1 + machine_cost_1 + inspect_cost_1
+  overhead_cpu_1 = total_assigned_costs_1 / cost_drivers['units_produced_item1']
+  
+  #-- item 2
+  mach_setup_cost_2 = cost_drivers['item_2']['exp_cost_machine_setups'] * overhead_rates_1
+  machine_cost_2 = cost_drivers['item_2']['exp_cost_machining'] * overhead_rates_2
+  inspect_cost_2 = cost_drivers['item_2']['exp_cost_inpsecting'] * overhead_rates_3
+  total_assigned_costs_2 = mach_setup_cost_2 + machine_cost_2 + inspect_cost_2
+  overhead_cpu_2 = total_assigned_costs_2 / cost_drivers['units_produced_item2']
+  
+  
+  print("\n --- Product Overhead Costs ---")
+  print("item 1")
+  print("Cost assigned: machine set up ", "."*5,"${:,}".format(mach_setup_cost_1))
+  print("Cost assigned: machine costs ", "."*6,"${:,}".format(machine_cost_1))
+  print("Cost assigned: machine costs ", "."*6,"${:,}".format(inspect_cost_1))
+  print("Total costs assigned","."*20,"${:,}".format(total_assigned_costs_1))
+  print("Overhead cost per unit","."*18,"${:,}".format(overhead_cpu_1))
+  print("item 2")
+  print("Cost assigned: machine set up ", "."*5,"${:,}".format(mach_setup_cost_2))
+  print("Cost assigned: machine costs ", "."*6,"${:,}".format(machine_cost_2))
+  print("Cost assigned: machine costs ", "."*6,"${:,}".format(inspect_cost_2))
+  print("Total costs assigned","."*20,"${:,}".format(total_assigned_costs_2))
+  print("Overhead cost per unit","."*18,"${:,}".format(overhead_cpu_2))
+  
+  
+
+product_overhead_costs( cost_drivers )
+```
+
+
+### ABC unit cost comparison
+
+Looking at the manufacturing costs for this example company, comparison of unit costs of the two items produced.
+
+- direct materials costs = (item 1) 40, (item 2) 30
+- direct labor costs = 12
+- overhead = (predetermined overhead rate * 1 hr) 30
+
+```{python}
+# -- info from start of section 5.1
+high_vol_item = 25e3
+low_vol_item = 5e3
+expect_overhead = 900e3
+hours = 1
+# ------
+
+total_annual_direct_labor = high_vol_item + low_vol_item
+
+pred_overhead_rate = expect_overhead / total_annual_direct_labor
+print("Predetermined overhead rate = $",pred_overhead_rate * hours)
+```
+
+Make a manufacturing costs data dictionary to use for unit cost comparisons.
+
+```{python}
+manuf_costs = {
+  'item_1': {'direct_material': 40, 'direct_labor': 12, 'overhead_rate': 30},
+  'item_2': {'direct_material': 30, 'direct_labor': 12, 'overhead_rate': 30}
+}
+```
+
+A function for unit cost comparison between traditional costs and the ABC method.
+We use the information from [ABC step 4 product cost overhead](###abc-step-4). 
+
+```{python}
+
+def unit_comparison( manufacturing_data: dict,  item_1_cpu: int, item_2_cpu: int):
+  
+  # convert the dictionary into a list
+  m = list( manuf_costs )
+  # create an empty array to loop through the values and sum them
+  ml = []
+  for x in m:
+    sx = sum( manuf_costs[x].values() )
+    ml.append(sx)  # append the summed values to the array
+      
+  print("Tradional costing")
+  print("\titem 1 product total unit cost = $", ml[0])
+  print("\titem 2 product total unit cost = $", ml[1])
+
+
+  # item 1 overhead cost per unit
+  # item_1_cpu = 17
+  # item_2_cpu = 95
+    
+  abc_1 = (manuf_costs['item_1']['direct_material'] + manuf_costs['item_1']['direct_labor'] + item_1_cpu)
+  abc_2 = (manuf_costs['item_2']['direct_material'] + manuf_costs['item_2']['direct_labor'] + item_2_cpu)
+    
+  print("ABC method")
+  print("\titem 1 product total unit cost = $", abc_1 )
+  print("\titem 2 product total unit cost = $", abc_2)
+    
+
+# ----
+unit_comparison(manuf_costs, 17, 95)
+
+```
+
+By comparing the costing systems, item 1 was over costed (82 vs the 69) and 
+for item 2 the cost was under the more accurate cost of $137.
+
+
+
+
+### ABC example
+
+In this ABC system example, a company has 7 cost pools and 2 products. 
+The expected units produced are: item 1 = 200,000 units and item 2 = 80,000 units.
+This company has annual overhead data available for calculations. 
+
+
+This example section uses the library [NumPy](https://numpy.org/) to do multiple calculations of 
+array vectors (lists) which you have already used in previous sections. This is new information and is not explained, but the use in this section is simply converting a python list into a NumPy array which allows for mathematical operations. So far the functions have been very simple and one by one calculation and this section does all of the math in one step, much like you would using Excel. Python lists cannot do math operations for what we want to do, so knowing and understanding NumPy is important to know for this section alone _(NumPy is a huge library for various math operations using array vectors, so just see if you can follow along here)_. 
+
+
+The company overhead data is stored in a data dictionary. 
+
+```{python}
+overhead_data = {
+  'activity_cost_pools': ['ordering_receiving','machine_setup', 'machining','assembling','inspecting_testing'],
+  
+  'expected_units': {'item_1': 200e3, 'item_2': 80e3},
+  
+  'cost_drivers':{
+    'purchase_orders': 200e3,
+    'set_up': 600e3,
+    'machine_hours': 2e6,
+    'parts': 1.8e6,
+    'tests': 700e3
+    },
+    
+    'expected_use_cost_drivers': {
+      'orders': 2500,
+      'set_ups': 1200,
+      'hours': 800e3,
+      'parts': 3e6,
+      'tests': 35e3
+      },
+      
+     'exp_use_item_1': {
+      'orders': 1000,
+      'set_ups': 500,
+      'hours': 300e3,
+      'parts': 1.8e6,
+      'tests': 20e3
+      },
+      
+      'exp_use_item_2': {
+      'orders': 1500,
+      'set_ups': 700,
+      'hours': 500e3,
+      'parts': 1.2e6,
+      'tests': 15e3
+      }
+}
+```
+
+
+A function that does all of the ABC steps in one step, including the unit cost comparison between the items. The library NumPy comes installed with the Anaconda download and is also easily installed in the terminal. Import NumPy inside the function as outside of the function it will not be accessible (function scope). This function takes the data dictionary as a function argument and prints out the calculations.
+
+
+```{python}
+def abc_method( costing_data: dict ):
+  # import the NumPy library in order to do math of arrays 
+  import numpy as np
+  
+  print("--- ABC method ---")
+  
+  # sum the values in the cost drivers
+  total_estimated_overhead = sum( overhead_data['cost_drivers'].values() )
+  print("Total activity costs, estimated overhead = ${:,}".format(total_estimated_overhead))
+  
+  # convert the dictionary values into a list
+  estimated_overhead = list( overhead_data['cost_drivers'].values() )
+  exp_use_cost_drivers = list( overhead_data['expected_use_cost_drivers'].values() )
+  
+  # ---- convert the python lists into NumPy arrays, needed for calculations
+  act_overhead_rates = np.array(estimated_overhead) / np.array(exp_use_cost_drivers)
+  
+  print("\nActivity based overhead rates")
+  
+  # loop through the NumPy array and print it
+  for x in range(len(act_overhead_rates)):
+    print("."*5,'$', act_overhead_rates[x], " per ",overhead_data['activity_cost_pools'][x] )
+  
+  # convert list into a NumPy array from the list conversion of data dictionary values
+  item_1_exp_cost_driver = np.array( list( overhead_data['exp_use_item_1'].values() ) )
+  item_1_costs_assigned = item_1_exp_cost_driver * act_overhead_rates
+
+  print("\nitem 1")
+  # convert the costs assigned into a list
+  # using range from 0 to the length of the array
+  item1_costs_assigned = list( range(len(item_1_costs_assigned)) )
+  cost_list = [] # create empty array to store values
+  
+  for x in  item1_costs_assigned:
+    cost_items_1 = item_1_costs_assigned[x]
+    print("Cost assigned",'${:,}'.format( cost_items_1," per unit" ) )
+    cost_list.append(cost_items_1) # add each looped item to array to be summed
+ 
+  total_assigned_costs = sum(cost_list )
+  print("Total assigned costs = ${:,}".format(total_assigned_costs))
+
+  #-- repeat same process for second item
+
+  item_2_exp_cost_driver = np.array( list( overhead_data['exp_use_item_2'].values() ) )
+  item_2_costs_assigned = item_2_exp_cost_driver * act_overhead_rates
+  print("\nitem 2")
+  item1_costs_assigned = list( range(len(item_2_costs_assigned)) )
+  cost_list_2 = []
+  for x in  item1_costs_assigned:
+    cost_items_2 = item_2_costs_assigned[x]
+    print("Cost assigned",'${:,}'.format( cost_items_2," per unit" ) )
+    cost_list_2.append(cost_items_2)
+   
+  total_assigned_costs_2 = sum(cost_list_2 )
+  print("Total assigned costs = ${:,}".format(total_assigned_costs_2))
+
+  
+  item1_overhead_cpu =   total_assigned_costs / overhead_data['expected_units']['item_1']
+  item2_overhead_cpu = total_assigned_costs_2 / overhead_data['expected_units']['item_2']
+  
+  print("\nOverhead cost per unit (item 1) = ${:,}".format(item1_overhead_cpu))
+  print("Overhead cost per unit (item 2) = ${:,}".format(item2_overhead_cpu))
+
+```
+
+
+Call the function
+
+```{python}
+abc_method( overhead_data )
+```
+
+As mentioned before, building functions does take some time and effort, but once you have it, you can use it again and again. 
+
+
+---
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

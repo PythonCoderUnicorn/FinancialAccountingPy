@@ -1,0 +1,462 @@
+
+# Budgetary Control & Responsibility
+
+This chapter deals with how managers utilize budgets to control operations, as there
+are factors that need to be accounted for which can't be controlled. 
+There is budgetary control and responsibility accounting. 
+
+- budgetary control and static budget reports
+- flexible budgets
+- responsibility accounting for cost & profit 
+- evaluating performance in investment places 
+- residual income: performance measure 
+
+
+Using budgets to control operations is `budgetary control` and by comparing actual results to planned
+objectives is the method used by managers, thought of as a "mid term report". Budgetary control reports should have the following:
+
+- identify the name of the budgetary report:  _"X Budget"_
+- state the frequency of the report (weekly, monthly)
+- specify the purpose of the report
+- indicate who the primary recipients of the report are
+
+
+```{}
+Sales Report
+Weekly
+Determine whether sales goals are being met
+Top Management & Sales Manager
+```
+
+Budgetary control activities include: develop budget, analyze difference between actual and budget, modify future plans and take corrective action.
+
+
+## Static Budget Reports
+
+A `static budget` is a projection of budget data at one level of activity, and are part of the 
+whole master budget.
+
+```{python}
+sales ={
+  'expected_units': 5000,
+  'variable_costs': {
+    'direct_materials': 6,
+    'direct_labor': 15,
+    'overhead': 24
+    },
+  'fixed_costs': {
+    'depreciation': 10e3,
+    'supervision': 5000
+    },
+  'actual': {
+    'direct_materials': 33900,
+    'direct_labor': 74200,
+    'overhead': 120500,
+    'depreciation': 10e3,
+    'supervision': 5000
+    },
+  'budget': {
+    'direct_materials': 30e3,
+    'direct_labor': 75e3,
+    'overhead': 120e3,
+    'depreciation': 10e3,
+    'supervision': 5000
+    }
+}
+```
+
+
+
+Static budget function
+
+```{python}
+def static_budget( dict ):
+  
+  tb = list(dict['budget'].values())
+  ta = list(dict['actual'].values())
+  total_diff = sum(tb)  - sum(ta)
+  tot_var_diff = sum(tb[0:3] ) - sum(ta[0:3] )
+ 
+  
+  print("-- Static Budget Report --")
+  print("Total variable costs (Budget) ............ ${:,}".format( sum(tb[0:3] )  ))
+  print("Total variable costs (Actual) ............ ${:,}".format( sum(ta[0:3] ) ))
+  
+  if tot_var_diff < 1:
+    print("Difference in variable costs (unfavorable) ............. ${:,}\n".format( tot_var_diff))
+  else:
+    print("Difference in variable costs ............. ${:,}\n".format( tot_var_diff))
+    
+  print("Total Budgeted Sales ........... ${:,}".format( sum(tb) ))
+  print("Total Actual Sales ............. ${:,}".format( sum(ta) ))
+  
+  if total_diff < 1:
+    print("Total Difference in Sales (unfavorable) ............... ${:,}".format( total_diff ))
+  else:
+    print("Total Difference in Sales .................... ${:,}".format( total_diff ))
+ 
+
+```
+
+
+call function 
+
+```{python}
+static_budget( sales )
+```
+
+
+## Flexible Budgets
+
+A `flexible budget` projects budget data for various levels of activity. 
+
+There are 4 steps to making a flexible budget:
+
+1. determine the activity index & relevant range of activity (labor hours per month) which is determined by management
+2. determine the variable costs and the budgeted variable cost per unit of activity for each 
+3. determine the fixed costs and the budgeted amount for each
+4. prepare the budget for selected increments of activity within the relevant range
+
+
+```{python}
+flex_data = {
+  'variable_costs': {
+    'indirect materials': 180e3,
+    'indirect labor': 240e3,
+    'utilities': 60e3
+    },
+  'fixed_costs': {
+    'depreciation': 180e3,
+    'supervision': 120e3,
+    'property tax': 60e3
+    },
+  'direct_labor_hrs': [8e3, 9e3,10e3, 11e3, 12e3]
+}
+```
+
+
+function 
+
+```{python}
+def flexible_budget( dict ):
+  print("~~ Flexible Budget ~~~")
+  # 1
+  labor_hrs = dict['direct_labor_hrs']
+  
+  # 3
+  fixed_costs = sum(dict['fixed_costs'].values())
+  fc_per_month = fixed_costs/ 12
+
+  
+  # 2
+  ops_hrs = dict['fixed_costs']['supervision']
+  var_costs = list(dict['variable_costs'].values())
+  var_cost_k = list(dict['variable_costs'].keys())
+  
+  vcpu = [] # variable cost per unit
+  hrs_cpu = [] # hours * cost per unit
+  indw = [] # indirect labor work 
+  uts = [] # utilities
+  
+  for x in range( len(var_costs)):
+    vc = var_costs[x] / ops_hrs
+    vcpu.append(vc)
+    print("Variable cost: {} per direct labor hour .... ${:,}".format(var_cost_k[x], vcpu[x] ))
+    
+  print("Total variable cost per direct labor hour ..... ${:,}\n".format( sum(vcpu) ))
+  print("Total fixed costs per month ...... ${:,}".format(fc_per_month))
+  
+  # labor hours x vcpu 
+  for x in range(len(labor_hrs)):
+    units = labor_hrs[x] * vcpu[0]
+    hrs_cpu.append(units)
+    
+    ind = labor_hrs[x] * vcpu[1]
+    indw.append(ind)
+
+    utils = labor_hrs[x] * vcpu[2]
+    uts.append(utils)
+  
+    print("\nDirect labor hours {}".format(labor_hrs[x] ))
+    print("{} : ${:,}".format(var_cost_k[0], hrs_cpu[x] ))
+    print("{} : ${:,}".format(var_cost_k[1], indw[x]))
+    print("{} : ${:,}".format(var_cost_k[2], uts[x]))
+
+    tot_vc = hrs_cpu[x] + indw[x] + uts[x]
+    print("total variable costs : ${:,}".format(tot_vc))
+    grand_tot = fc_per_month + tot_vc
+    print("Total costs ........................... ${:,}".format(grand_tot ))
+
+```
+
+call function
+
+```{python}
+flexible_budget( flex_data )
+```
+
+
+
+total budgeted costs
+
+```{python}
+budgeted_costs = 186e3
+fixed_costs = 36e3
+labor_hrs = 50e3
+# variable costs (total variable cost per unit)
+vcpu = (budgeted_costs - fixed_costs) / labor_hrs
+
+
+def total_budgeted_costs(fixed_costs: float, vcpu: float, labor_hrs: float):
+  
+  tot_budget_costs = fixed_costs + vcpu * labor_hrs
+  print("Total budgeted costs ... ${:,}".format(tot_budget_costs))
+  
+
+
+# labor_hrs = 30e3 #9e3
+
+total_budgeted_costs(fixed_costs, vcpu, labor_hrs)
+```
+
+
+
+## Responsiblility Accounting
+
+`Responsibility accounting` is accumulating and reporting costs (and revenues) that
+involve the manager who has the authority to make the day-to-day decisions about 
+cost items. 
+
+
+```{python}
+profit_co = {
+  'actual': {
+    'sales': 1.7e6,
+    'variable_costs': 800e3,
+    'fixed_costs': 400e3,
+    'unfixed_costs': 200e3
+  },
+  'budgeted': {
+    'sales': 1.5e6,
+    'variable_costs': 700e3,
+    'fixed_costs': 400e3,
+    'unfixed_costs': 200e3
+  }
+}
+```
+
+
+function for responsibility report 
+
+```{python}
+def responsibility_report( dict ):
+  b = list(dict['budgeted'].values())
+  sb = b[0]
+  b_vc = b[1]
+  b_contrib_marg = sb - b_vc
+  b_ctrl_marg = b_contrib_marg - b[2]
+  
+  a = list(dict['actual'].values())
+  sa = a[0]
+  a_vc = a[1]
+  a_contrib_marg = sa - a_vc
+  a_ctrl_marg = a_contrib_marg - a[2]
+  
+  diff = sa - sb  - (a_contrib_marg - b_contrib_marg) 
+  
+  ROI = diff / a_ctrl_marg
+  print("- Responsibility Report - ")
+  print("Budgeted controllable margin ......... ${:,}".format(b_ctrl_marg))
+  print("Actual controllable margin ........... ${:,}".format(a_ctrl_marg))
+  print("sales difference ..................... ${:,}".format(sa - sb))
+  print("contribution margin difference ....... ${:,}".format((a_contrib_marg - b_contrib_marg)))
+  print("Difference: controllable margin ............. ${:,}".format(diff))
+  print("Return on Investment ........................ {:.2f}%".format(ROI * 100))
+  
+
+responsibility_report( profit_co )
+```
+
+
+## Evaluating Performance
+
+The main basis for evaluation is the `return on investment (ROI)` which shows how effective the manager
+was in using assets at their disposal. Assets such as plant andits future use are excluded from ROI.
+The average operating assets are based on the asset cost or value at both beginning and end of the year.
+
+- `ROI` = controllable margin / average operating assets
+
+
+Modified Responsibility Report showing return on investments for budget vs actual costs with the difference. 
+
+```{python}
+column = ['Budget','Actual']
+ctrl_margin = [300e3, 264e3] # controllable margins
+avg_op_asset = 2e6  # average operating assets
+
+# return on investments
+rois = []
+
+for x in range(len(ctrl_margin)):
+  # return
+  r = (ctrl_margin[x] / avg_op_asset) *100
+  rois.append(r)
+  print("{} Return on Investment .... {:.2f}%".format(column[x], rois[x]) )
+
+# budget ROI subtract the Actual ROI
+rd = rois[0] - rois[-1]
+print("Return on Investment difference : {:.2f}%".format(rd))
+
+# use the return difference divided by the budget ROI
+roi = (rd/ rois[0])*100
+print("Performance Return on Investment is {:.2f}%".format(roi))
+
+```
+
+### Improving ROI 
+
+There are various factors that affect ROI, there is an extended ROI formula to determine what
+the driving factors are behind the ROI value.
+
+- `profit margin` = operating income / sales
+- `investment turnover` = sales / operating assets
+- `ROI` = (`profit margin`) x (`investment turnover`)
+
+
+
+```{python}
+sales = 2e6 
+variable_costs = 1.1e6
+controllable_fixed_costs = 300e3
+avg_operating_assets = 5e6
+contribution_margin_prct = 0.45 # margin percent
+
+contribution_margin = sales - variable_costs
+contrib_margin = sales * contribution_margin_prct
+
+# operating income
+controllable_margin = contribution_margin - controllable_fixed_costs
+roi = (controllable_margin / avg_operating_assets)*100
+print("Return on Investment : {:.2f}%".format(roi))
+
+# -- expanded
+profit_margin = controllable_margin/ sales
+investment_turnover = sales / avg_operating_assets
+roi_2 = (profit_margin * investment_turnover)*100
+
+print("\nROI expanded ....... {:.2f}%".format(roi_2))
+print("Profit Margin: ......{}%  ".format(profit_margin*100))
+print("Investment Turnover: {}%".format(investment_turnover*100))
+```
+
+### ROI Example
+
+Investment company data 
+
+```{python}
+investment_co = {
+  'sales': 400e3,
+  'variable_costs': 320e3,
+  'controllable_fixed_costs': 40800,
+  'avg_operating_assets': 280e3
+}
+```
+
+Management wants to reduce operating assets by 80,000 with no change in controllable margin.
+Increase sales by 80,000 with no change in controllable margin percentage. Calculate the controllable margin and expected return on investment. 
+
+```{python}
+def return_on_investment( dict ):
+  print("--- Return on Investment ---")
+  
+  # -- dictionary
+  sales = dict['sales']
+  var_costs = dict['variable_costs']
+  ctrl_fixed_costs = dict['controllable_fixed_costs']
+  avg_op_assets = dict['avg_operating_assets']
+  
+  # formulas
+  contribution_margin = sales - var_costs
+  contrib_margin_prct = contribution_margin / sales
+  ctrl_margin = contribution_margin - ctrl_fixed_costs
+  
+  roi = (ctrl_margin / avg_op_assets)*100
+  
+  expected_roi = ctrl_margin / (avg_op_assets - contribution_margin) *100
+  
+  # -- expanded
+  profit_margin = ctrl_margin/ sales
+  investment_turnover = sales / (avg_op_assets) #- contribution_margin)
+  roi_2 = (profit_margin * investment_turnover)*100
+  
+  #---- expected roi 2
+  sales_2 = sales + contribution_margin
+  var_cost_2 = (var_costs / sales) * sales_2
+  cm_2 = sales_2 - var_cost_2 - ctrl_fixed_costs
+  
+  roi_3 = (cm_2 / avg_op_assets)*100
+  profit_margin3 = cm_2/ sales_2
+  investment_turnover2 = sales_2 / (avg_op_assets )#- contribution_margin)
+  roi_4 = (profit_margin3 * investment_turnover2)*100
+  
+  print("Controllable margin ................ ${:,}".format(ctrl_margin))
+  print("Return on Investment ............... {:.2f}%".format(roi))
+  print("Expected return on investment ...... {:.2f}% (Expanded: {:.2f}%)".format(expected_roi, roi_2))
+  
+  print("\nAlternative:\nControllable margin ....... ${:,}".format(cm_2))
+  print("Return on Investment ...... {:.2f}%  (Expanded: {:.2f}%)".format(roi_3, roi_4))
+
+```
+
+
+call function
+
+```{python}
+return_on_investment( investment_co )
+```
+
+
+### Residual Income
+
+`Residual income` is the income that remains after subtracting from the controllable margin the 
+minimum rate of return on a company's average operating assets.
+
+- `residual income` = controllable margin - (min. rate of return x average operating assets)
+
+
+Formula 
+
+```{python}
+avg_operating_assets = 2e6
+controllable_margin = 260e3
+min_rate_of_return = 0.10
+
+residual_income = controllable_margin - (min_rate_of_return * avg_operating_assets)
+print("Residual income ... ${:,}".format(residual_income))
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

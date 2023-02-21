@@ -1,0 +1,581 @@
+
+# Planning for Capital Investments
+
+`Capital budgeting` uses various capital projects to find the one that will maximize a company's return on its financial investment. Planning for capital investments involves:
+
+- capital budgeting evaluation process
+- net present value method
+- capital budgeting challenges
+- internal risks of return method
+- annual rate of return method
+
+
+A company is pondering the investment of $130,000 in new equipment, this new equipment 
+is expected to last 10 years. This equipment will not have any salvageable value at the end of
+the decade of use. Cash inflows from this equipment will be 200,000 dollars and the outflow of cash will be 176,000 dollars. 
+
+```{python}
+investment = 130e3
+estimated_life = 10
+estimated_salvage = 0
+cash_inflow_customers = 200e3
+cash_outflow_operations = 176e3
+
+annual_cashflow = cash_inflow_customers - cash_outflow_operations
+print("Net annual cash flow ..... ${:,}".format(annual_cashflow))
+```
+
+## Cash Payback Technique
+
+The `cash payback technique` identifies the time period required to recover the cost of the capital investment from the net annual cash flow produced by the investment.
+
+- cash payback technique (`CPT`) = `(cost of capital investment) / (net annual cash flow)`
+
+```{python}
+cpt = investment / annual_cashflow
+useful_life = cpt/estimated_life*100
+print("Cash payback technique ....... {:.2f} years ({:.2f}% of asset's life)".format(cpt, useful_life ))
+```
+
+### Example
+
+A company is considering a new machine, the new machine would cost $900,000, with an estimated 6 years of life and no salvage value after 6 years.
+
+```{python}
+cashback = {
+  'investment_cost': 900e3,
+  'estimated_life' : 6,
+  'estimated_salvage' : 0,
+  'cash_inflow_customers' : 400e3,
+  'cash_outflow_operations' : 190e3
+}
+```
+
+Function for cash payback period calculation
+
+```{python}
+def payback_period( dict ):
+  investment = dict['investment_cost']
+  estimated_life = dict['estimated_life']
+  
+  cash_inflow_customers = dict['cash_inflow_customers']
+  cash_outflow_operations = dict['cash_outflow_operations']
+  annual_cashflow = cash_inflow_customers - cash_outflow_operations
+  print("Net annual cash flow ......... ${:,}".format(annual_cashflow))
+  
+  cpt = investment / annual_cashflow
+  useful_life = cpt/estimated_life*100
+  print("Cash payback technique ....... {:.2f} years ({:.0f}% of asset's life)".format(cpt, useful_life ))
+  
+  
+payback_period( cashback )
+  
+```
+
+
+
+## Net Present Value 
+
+`Net present value (NPV)` method involves discounting net cash flows to their present value and then comparing that present value with the capital required by the investment. A proposal is _acceptable_ when net present value is 0 or positive.
+
+- `NPV = net cash flow - capital investment`
+
+
+## Equal Annual Cash Flows
+
+Using the cash flow data from previously, if an asset's life is to be assumed to be uniform, calculate the present value of net annual cash flow by using the present value of an ordinary annuity. To get the
+value of ordinary annuity, use a table which requires to know the `n` periods and the discount rate `n %`, in this case the periods are 10 (10 years) and discount rate of 12%.
+
+- Table: 10 periods, 12% = 5.65022
+- Net cash flow is $24,000
+
+```{python}
+investment = 130e3
+estimated_life = 10
+estimated_salvage = 0
+cash_inflow_customers = 200e3
+cash_outflow_operations = 176e3
+
+annual_cashflow = cash_inflow_customers - cash_outflow_operations
+print("Net annual cash flow ..... ${:,}".format(annual_cashflow))
+
+annuity_value = 5.65022 # value from a table
+pv = annual_cashflow * annuity_value
+npv = pv - investment
+print("Net present value ........ ${:.2f}".format(npv))
+```
+
+## Unequal Annual Cash Flow
+
+For unequal annual cash flows, need to use tables that show present value of a single _future_ amount
+that must be applied to each annual cash flow.
+
+- total net cash flow for the 10 years = $240,000
+- each year of annual net cash flow is assumed and is more or less around 24,000
+- the discount factor annuities for 12% are found using a table (present value of a single sum)
+- capital investment is $130,000
+
+
+```{python}
+import numpy as np
+
+# create an array 0 to 9
+years = np.arange(10)
+# assumed annual net cash flows 18,000 to 24,000 (for 10 years)
+yearly_cashflows = [34e3, 30e3, 27e3,25e3,24e3,22e3,21e3,20e3,19e3, 18e3]
+# discount_factor for 12% values from a table for 10 periods (n)
+discount_factor = [0.89286, 0.79719,0.71178,0.63552,0.56743,0.50663,0.45235,0.40388,0.36061,0.32197]
+
+capital_investment = 130e3
+
+# present values
+pv = []
+
+for x in range(len(years)):
+  PV = yearly_cashflows[x] * discount_factor[x]
+  pv.append(PV)
+
+  # print("Year: {} Present value @ 12% ... ${:.2f}".format(years[x]+1, pv[x]))
+
+total_pv = sum(pv)
+npv = total_pv - capital_investment 
+
+print("Present value @ 12% cash flows ..... ${:,}".format( total_pv ))
+print("Net present value .................. ${:.2f}".format( npv ))
+
+```
+
+
+## Choosing a Discount Rate
+
+In the world of business, the discount rate is chosen by using a rate that is equal to its `cost of capital` which is the rate that a company must pay to get funds from creditors and shareholders. 
+
+- company can compare 12% vs 15% (riskier investment): 5.65022 and 5.01877
+- net cash flow = $24,000
+- investment $130,000
+
+
+This quick function has the 2 values for 10 periods and for 12% and 15% inside the function.
+
+```{python}
+def discount_rate(cashflow: int, investment: int):
+  rate1 = cashflow * 5.65022  # 12%
+  rate2 = cashflow * 5.01877  # 15%
+  
+  npv1 = round(rate1 - investment, 2)
+  npv2 = round(rate2 - investment, 2)
+  
+  print(" - Discount Rate -")
+  print("Net present value for {}% ..... ${:,}".format(12, npv1) )
+  print("Net present value for {}% ..... ${:,}".format(15, npv2) )
+```
+
+call function
+
+```{python}
+discount_rate(24e3, 130e3)
+```
+
+
+### Example 
+
+This example is the extension of the cash payback, but now with the discount rate (rate of return) being 9%. The value is found by using the table present value of an ordinary annuity of 1. The period being 6 years and at 9% has the value of 4.48592.
+
+```{python}
+cashback = {
+  'investment_cost': 900e3,
+  'estimated_life' : 6,
+  'estimated_salvage' : 0,
+  'cash_inflow_customers' : 400e3,
+  'cash_outflow_operations' : 190e3,
+  'rate_of_return': 0.09 # discount rate
+}
+```
+
+
+```{python}
+def present_value( annuity: float, dict ):
+  investment = dict['investment_cost']
+  estimated_life = dict['estimated_life']
+  
+  cash_inflow_customers = dict['cash_inflow_customers']
+  cash_outflow_operations = dict['cash_outflow_operations']
+  annual_cashflow = cash_inflow_customers - cash_outflow_operations
+  print("Net annual cash flow ......... ${:,}".format(annual_cashflow))
+  
+  cpt = investment / annual_cashflow
+  useful_life = cpt/estimated_life*100
+  print("Cash payback technique ....... {:.2f} years ({:.0f}% of asset's life)".format(cpt, useful_life ))
+  
+
+  # annuity_value = 4.48592 # value from a table
+  pv = annual_cashflow * annuity #annuity_value
+  npv = round(pv - investment,2)
+  print("Net present value ............. ${:,}".format(npv))
+  
+
+```
+
+call function
+
+```{python}
+present_value( 4.48592, cashback )
+```
+
+> For a fully formed function, you could have rate of return (discount rate) and the `n` periods and return the value for annuity by using a CSV table or some data structure.
+
+
+
+## Intangible Benefits
+
+Intangible benefits are values such as increased quality, improved safety, greater employee loyalty, etc.
+and are values typically eliminated from the equation when doing net present value using tangible costs and benefits. 
+
+- if the NPV is negative, are the intangible assets worth at least the amount of the negative NPV
+- estimated values of the intangible benefits are used in the NPV calculation
+
+A company example 
+
+```{python}
+robot_investment = {
+  'investment_cost': 200e3,
+  'estimated_life' : 10,
+  'estimated_salvage' : 0,
+  'cash_inflow_customers' : 50e3,
+  'cash_outflow_operations' : 20e3,
+  'rate_of_return': 0.12 # discount rate
+}
+```
+
+
+Function to get the present value that takes the annuity value, assuming the user looks up the value for 
+the function input. 
+
+```{python}
+present_value( 5.65022, robot_investment )
+```
+
+Staff at the company estimate that sales will increase of $10,000 annually due to the increase 
+in quality from customers point of view. Staff also estimate the cost outflows will be reduced by 5,000  as a result from lower injury claims. Update the robot investment data and call the present value function with the annuity value.
+
+```{python}
+robot_investment2 = {
+  'investment_cost': 200e3,
+  'estimated_life' : 10,
+  'estimated_salvage' : 0,
+  'cash_inflow_customers' : 60e3,
+  'cash_outflow_operations' : 15e3,
+  'rate_of_return': 0.12 # discount rate
+}
+```
+
+
+```{python}
+present_value( 5.65022, robot_investment2 )
+```
+
+Business decision based on net present values. Ideally the conditional statement would be inside a function. 
+
+```{python}
+npv1 = abs(-30493.4)
+npv2 = 54259.9
+if npv2 > npv1:
+  print("Company should accept project")
+else:
+  print("do not accept project")
+```
+
+
+## Mutually Exclusive Projects
+
+Most project proposals are mutually exclusive, which means only 1 project is afforded the finances to proceed. One appealing method of selecting a project is to go with the project with the higher NPV.
+`Profitability index` is a method that evaluates both the size of the original investment and the discounted cash flows.
+
+- `profitability index = present value net cash flows / initial investment`
+
+
+```{python}
+projects = {
+  'project_A': {
+    'investment': 40e3,
+    'annual_cash_inflow': 10e3,
+    'salvage_value': 5e3
+    },
+  'project_B': {
+    'investment': 90e3,
+    'annual_cash_inflow': 19e3,
+    'salvage_value': 10e3
+    }
+}
+```
+
+
+
+
+function to compare present value of net cash flows, a 12% discount rate. This function has 
+profitability index inside.
+
+```{python}
+def exclusive_projects( annuity1: float, annuity2: float, dict ):
+  
+  # project A
+  projA = list(dict['project_A'].values())
+  investmentA = projA[0]
+  cash_inflow_A = projA[1]
+  salvage_A = projA[2]
+  
+  # project B
+  projB = list(dict['project_B'].values())
+  investmentB = projB[0]
+  cash_inflow_B = projB[1]
+  salvage_B = projB[2]
+  
+  pvA = round( (cash_inflow_A * annuity1) + (salvage_A * annuity2), 2)
+  pvB = round( (cash_inflow_B * annuity1) + (salvage_B * annuity2), 2)
+  
+  print("Project A : present value of net cash flows ............. ${:,}".format(pvA))
+  print("Project B : present value of net cash flows ............. ${:,}\n".format(pvB))
+
+  npvA = round(pvA - investmentA, 2)
+  npvB = round(pvB - investmentB, 2)
+
+  print("Project A : Net present value ............. ${:,}".format(npvA))
+  print("Project B : Net present value ............. ${:,}".format(npvB))
+
+  if npvA > npvB:
+    print(" Project A has higher NPV", '\U0001f7e1')
+  else:
+    print(" Project B has higher NPV", '\U0001f7e1')
+
+  # -- profitability index 
+  pindexA = round(pvA / investmentA, 2)
+  pindexB = round(pvB / investmentB, 2)
+  
+  print("\nProject A : Profitability Index ............. {:.2f}".format(pindexA))
+  print("Project B : Profitability Index ............. {:.2f}".format(pindexB))
+  
+  if pindexA > pindexB:
+    print(" Project A has higher profitability", '\U0001f7e2')
+  else:
+    print(" Project B has higher profitability", '\U0001f7e2')
+
+```
+
+
+Project A has annuity of 5.65022 and Project B has annuity of 0.32197 at the 12% discount rate for 10 periods for both. 
+
+```{python}
+a12 = 5.65022
+b12 = 0.32197
+
+exclusive_projects(a12, b12, projects)
+```
+
+
+## Internal Rate of Return 
+
+The `internal rate of return` is the interest rate that will cause the present value of the proposed capital expenditure to equal the present value of the expected net annual cash flows. 
+
+If the cash flows are uneven, then trial-and-error approach or a financial calculator is to be used.
+Once the internal rate of return (`IRR`), compare it with the required rate of return (`RRR`) (discount rate).
+
+```{}
+if IRR >= RRR:
+  Accept project
+else:
+  Reject project
+```
+
+
+A company is pondering buying a new machine
+
+```{python}
+machine_investment = {
+  'investment_cost': 900e3,
+  'estimated_life' : 6,
+  'estimated_salvage' : 0,
+  'cash_inflow_customers' : 400e3,
+  'cash_outflow_operations' : 190e3,
+  'rate_of_return': 0.09 # REQUIRED /discount rate
+}
+```
+
+
+Internal rate of return function (changed `present_value()` function)
+
+```{python}
+def irr( annuity: float, dict ):
+  investment = dict['investment_cost']
+  estimated_life = dict['estimated_life']
+  
+  cash_inflow_customers = dict['cash_inflow_customers']
+  cash_outflow_operations = dict['cash_outflow_operations']
+  annual_cashflow = cash_inflow_customers - cash_outflow_operations
+  print("Net annual cash flow ....................... ${:,}".format(annual_cashflow))
+  
+  cpt = investment / annual_cashflow
+  print("Internal Rate of Return factor (IRR) ....... {:.2f} years ".format(cpt  ))
+  
+
+  pv = annual_cashflow * annuity #annuity_value
+  npv = round(pv - investment,2)
+  # print("Net present value .......................... ${:,}".format(npv))
+```
+
+
+Call the internal rate of return function with the annuity value, using the information of 6 years (`n` periods) and 9% for rate of return.
+
+
+```{python}
+# Table : 6 periods, 9%
+annuity = 4.48592 
+irr( annuity, machine_investment )
+```
+
+Now that we have the IRR value, we look up in a table for present value of ordinary annuity to find closest value. In this case, there are two numbers at the 10% and 11% place that when averaged equal the IRR. So the IRR is > RRR (the 9%), the accept the project. 
+
+```{python}
+# table values for 10% and 11%
+nums = [4.35526, 4.23054]
+print("IRR factors for 10% and 11% (averaged) = ",sum(nums)/2)
+
+```
+
+
+
+## Annual Rate of Return 
+
+`Annual rate of return` method is based on directly on accrual accounting data _rather_ than on cash flows. This annual rate of return indicates the profitability of a cpaital expenditure.
+
+- annual rate of return (`ARR`) = `expected net income / annual average investment`
+
+Company investment data
+
+```{python}
+machine_investment2 = {
+  'sales': 200e3,
+  'investment_cost': 130e3,
+  'estimated_life' : 5,
+  'estimated_salvage' : 0,
+  'manufacturing_costs': 132e3,
+  'selling_admin': 22e3,
+  'income_tax_expense': 7e3
+}
+```
+
+
+function for annual rate of return 
+
+```{python}
+def annual_return( dict ):
+  sales = dict['sales']
+  manuf_costs = dict['manufacturing_costs']
+  depreciation = dict['investment_cost'] / dict['estimated_life']
+  sell_admin= dict['selling_admin']
+  tax_exp = dict['income_tax_expense']
+  
+  cost_expenses = manuf_costs + depreciation + sell_admin 
+  print("Costs & Expenses ........................ ${:,}".format(cost_expenses))
+  income_b4_tax = sales - cost_expenses
+  print("Income before income taxes .............. ${:,}".format(income_b4_tax))
+  net_income = income_b4_tax - tax_exp
+  print("Net income .............................. ${:,}".format(net_income))
+  
+  avg_investment = (dict['investment_cost'] + dict['estimated_salvage'])/2
+  print("Average investment ...................... ${:,}".format(avg_investment))
+  
+  # expected annual rate of return on investment in new equipment/ machine
+  exp_return = net_income / avg_investment
+  print("Expected annual rate of return ...................... {:,}%".format(exp_return *100))
+  
+```
+
+
+```{python}
+annual_return( machine_investment2 )
+```
+
+
+### Example 
+
+
+```{python}
+machine_investment = {
+  'investment_cost': 900e3,
+  'estimated_life' : 6,
+  'estimated_salvage' : 0,
+  'cash_inflow_customers' : 400e3,
+  'cash_outflow_operations' : 190e3,
+  'rate_of_return': 0.09 # REQUIRED /discount rate
+}
+```
+
+
+A function for annual rate of return 
+
+```{python}
+def annual_return2( dict ):
+  
+  revenue = dict['cash_inflow_customers']
+  expenses = dict['cash_outflow_operations']
+  depreciation = dict['investment_cost'] /dict['estimated_life']
+  cost_expenses = expenses + depreciation 
+  net_income = revenue - cost_expenses
+  
+  print("Revenue ................................. ${:,}".format(revenue))
+  print("Costs & Expenses ........................ ${:,}".format(cost_expenses))
+  print("Annual net income ....................... ${:,}".format(net_income))
+  
+  avg_investment = (dict['investment_cost'] + dict['estimated_salvage'])/2
+  print("Average investment ...................... ${:,}".format(avg_investment))
+  
+  # expected annual rate of return on investment in new equipment/ machine
+  exp_return = round(net_income / avg_investment, 2)*100
+  print("Expected annual rate of return (ARR) ...................... {:,}%".format(exp_return ))
+
+  RRR = dict['rate_of_return'] *100
+  # print(RRR)
+  
+  # if ARR > RRR
+  if exp_return > RRR:
+    print(" project should go ahead (ARR > RRR) ", '\U0001f7e2')
+  else:
+    print(" project should not go ahead (ARR < RRR) ", '\U0001f7e0')
+
+```
+
+
+```{python}
+annual_return2( machine_investment )
+```
+
+
+
+---
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

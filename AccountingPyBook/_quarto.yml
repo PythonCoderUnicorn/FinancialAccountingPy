@@ -12,7 +12,17 @@ book:
     - pythonbasics.qmd
     - chapter1.qmd
     - chapter2.qmd 
-    - glossary.qmd
+    - chapter3.qmd
+    - chapter4.qmd
+    - chapter5.qmd
+    - chapter6.qmd
+    - chapter7.qmd
+    - chapter8.qmd
+    - chapter9.qmd
+    - chapter10.qmd
+    - chapter11.qmd
+    - chapter12.qmd
+    # - glossary.qmd
     - summary.qmd
     - references.qmd
 
@@ -23,7 +33,10 @@ format:
     toc: true
     theme: 
       light: pulse  #united  # lumen
-      dark: slate #cyborg
+      dark: [slate, custom.scss]
+        # - slate
+        #- custom.scss
+        #- #cyborg
       
     code-fold: true
     code-summary: "Show the code"

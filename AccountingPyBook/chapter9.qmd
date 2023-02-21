@@ -1,0 +1,810 @@
+
+# Budgetary Planning
+
+Every manager and person deals with a budget at some time in their lives, every business
+needs to use planning tools for their budgets. By knowing the budget allows for 
+ample cash to pay for materials, employees, production, and so forth. 
+
+
+A `budget` is a formal written statement in financial terms of management's plan for a specified future time period. Budgetary planning involves:
+
+- Budgeting Basics & master budget
+- preparing the sales, production  & direct materials budgets
+- preparing direct labor, manufacturing, expense budgets
+- preparing the financial budgets
+- budgeting in non-manufacturing companies
+
+
+The list above is a general overview of each section.
+
+Benefits of budgets:
+
+- all management levels use to plan ahead & form goals
+- gives objectives for evaluation
+- clear communication for coordinated activities 
+
+> The budget period is not set in stone, it is not mandatory to be 1 year, it can be any period of time
+
+
+
+A sales forecast is part of the budgeting process: 
+
+- shows expected sales (industry) & company's expected share of sales
+- general economic conditions
+- industry trends
+- market research studies
+- anticipated advertising & promotion
+- market share
+- changes in prices
+- technology developments
+
+
+## Master Budget
+
+A _master budget_ is several budget documents combined. Using a Python function to illustrate
+the part of a master budget, as it shows how to make nested functions and is main overview of 
+all the functions.
+
+```{python}
+def master_budget():
+  
+  def sales_budget():
+    pass 
+  
+  def production_budget():
+    pass 
+  
+  # --- operating budgets
+  def direct_materials_budget():
+    pass
+  
+  def direct_labor_budget():
+    pass
+  
+  def manufacturing_overhead_budget():
+    pass
+  # ----
+  
+  def selling_admin_budget():
+    pass
+  
+  def income_statement_budget():
+    pass
+  
+  # --- financial budgets
+  def capital_expenditure_budget():
+    pass
+  
+  def cash_budget():
+    pass
+  
+  def budgeted_balance_sheet():
+    pass
+  # --------
+
+master_budget()
+```
+
+
+## Sales Budget
+
+The sales budget is the first budget, which represents management's best estimate of sales revenue for the budgeted period. Inaccurate sales budget can affect net income.
+
+- `sales budget` = expected sales units x anticipated selling price per unit
+
+
+Sales data in a data dictionary.
+
+```{python}
+sales = {
+  'quarter': [1,2,3,4],
+  'expected_sales': [3000, 3500, 4000, 4500],
+  'unit_selling_price': 60
+}
+
+```
+
+Sales budget function 
+
+```{python}
+def sales_budget( dict ):
+  
+  price = dict['unit_selling_price']
+  expected_sales  = dict['expected_sales'] 
+  dL = len( dict['expected_sales'] ) # length of dictionary array
+  quarter = dict['quarter'] # get each quarter
+  sales = []
+  q =[]
+  print("-- Sales Budget --")
+  
+  for x in range(dL):
+    quarters = quarter[x]
+    q.append(quarters)
+    s = expected_sales[x] * price
+    sales.append(s)
+  
+    print("total sales ${:,} Quarter: {:,}".format(sales[x], q[x]))
+  
+  print("Total sales for year ..... ${:,}".format( sum(sales)))
+  
+```
+
+Call the function
+
+```{python}
+sales_budget( sales ) 
+```
+
+## Production Budget
+
+The production budget shows the units that must be produced to meet expected sales, production requirements have a formula.
+
+- budgeted sales units (`bsu`)
+- ending finished goods units (`efgu`), {desired units}
+- beginning finished goods units (`bfgu`)
+- `required production units` = bsu + efgu - bfgu
+
+
+production data is in a data dictionary, the ending finished goods unit values are based on the
+next quarter's sales times 20%.
+
+```{python}
+production = {
+  'quarter': [1,2,3,4],
+  'expected_sales': [3000, 3500, 4000, 4500],
+  # ending finished goods units
+  'efgu': [700,800,900, 1000],
+  # beginning finished goods units
+  'bfgu': [600,700,800,900]
+}
+
+```
+
+function
+
+```{python}
+def production_budget( dict ):
+  quarter = dict['quarter'] # get each quarter
+  expected_sales  = dict['expected_sales'] 
+  dL = len( expected_sales ) 
+  efgu = dict['efgu']
+  bfgu = dict['bfgu']
+  
+  prod = []
+  prod2 = []
+  q =[]
+  print("-- Production Budget --")
+  
+  for x in range( dL ):
+    quarters = quarter[x]
+    q.append(quarters)
+    p = expected_sales[x] + efgu[x] 
+    prod.append(p)
+    
+    p2 = p - bfgu[x]
+    prod2.append(p2)
+    print("Total required units : {:,} Quarter: {:,}".format(prod[x], q[x]))
+    print("Required production units : {:,} Quarter: {:,}\n".format(prod2[x], q[x]))
+  
+  print("Total production units for year ..... {:,}".format( sum(prod2)))
+```
+
+
+call function
+
+```{python}
+production_budget( production )
+```
+
+
+## Direct Materials Budget
+
+The `direct materials budget` shows the quantity and cost of direct materials that need to be purchased.
+
+- required direct materials units to be purchased (`rdmup`)
+- direct materials units required for production (`dmurp`)
+- ending direct materials units {desired} (`edmu`)
+- beginning direct materials units (`bdmu`)
+- rdmup = dmurp + edmu - bdmu
+
+
+Units to be produced are the values from production budget function, when all of these functions
+are inside the master budget function you can just use the stored array of values. Here in this example
+the units to be produced are manually placed inside the dictionary array. Ending direct materials (edmu) is 10% of next quarter's production requirements. 
+
+```{python}
+materials = {
+  'quarter': [1,2,3,4],
+  'units_to_produce': [3100,3600,4100,4600],
+  'direct_materials_per_unit': 2,
+  'production_percent': 0.1,
+  'edmu': [720,820,920,1020],
+  'cost_per_kg': 4
+}
+
+```
+
+function
+
+```{python}
+# --- operating budgets
+def direct_materials_budget( dict ):
+  
+  units_to_prod = dict['units_to_produce']
+  dL = len(units_to_prod)
+  quarter = dict['quarter']
+  percent = dict['production_percent']
+  cost = dict['cost_per_kg']
+  
+  # direct materials per unit
+  dmpu = dict['direct_materials_per_unit']
+  # -- ending direct materials 
+  edmu = dict['edmu']
+  
+  prod = []
+  q =[]
+  mr = [] # materials required
+  bm = [] # begin direct materials
+  dmp = [] # direct material purchase
+  cpk = [] # cost per kg
+  
+  print("-- Direct Materials Budget --")
+  for x in range( dL ):
+    quarters = quarter[x]
+    q.append(quarters)
+    
+    p = units_to_prod[x] * dmpu
+    prod.append(p)
+    
+    m = p + edmu[x]
+    mr.append(m)
+    
+    begin_mat = prod[x] * percent
+    bm.append(begin_mat)
+    
+    dm = mr[x] - bm[x]
+    dmp.append(dm)
+    
+    c = dmp[x] * cost
+    cpk.append(c)
+    
+    print("Quarter: {}\nTotal units needed for production: ..... {:,}  ".format(q[x], prod[x] ) ) 
+    print("Total materials required: ........................... {:,}  ".format(mr[x]) ) 
+    print("Direct materials purchased: ......................... {:,}  ".format(dmp[x]) ) 
+    print("Total cost of direct materials purchased: ........... ${:,}  \n".format(cpk[x]) ) 
+ 
+  
+  print("Total cost of direct materials purchased for year ..... ${:,}".format( sum(cpk)))
+    
+```
+
+
+call function
+
+```{python}
+direct_materials_budget( materials )
+```
+
+
+
+## Direct Labor Budget
+
+The `direct labor budget` deals with quantity of hours and the cost of direct labor that 
+will be needed to meet production requirements.
+
+- total direct labor cost (`tdlc`)
+- units to be produced (`utp`)
+- direct labor time per unit (`dltpu`)
+- direct labor cost per hour (`dlcpu`)
+- `tdlc = utp * dltpu * dlcpu`
+
+
+Labor data dictionary
+
+```{python}
+labor = {
+  'quarter': [1,2,3,4],
+  'units_to_produce': [3100,3600,4100,4600],
+  # direct labor time per unit
+  'dltpu': 2,
+  # direct labor cost per hour
+  'dlcpu': 10
+}
+```
+
+
+function 
+
+
+
+```{python}
+def direct_labor_budget( dict ):
+  
+  quarter = dict['quarter']
+  dltpu = dict['dltpu'] # time per unit
+  dlcpu = dict['dlcpu'] # cost per unit
+  
+  units_to_prod = dict['units_to_produce']
+  dL = len(units_to_prod)
+  
+  prod = []
+  q =[]
+  lc = [] # labor cost
+  
+  print("-- Direct Labor Budget --")
+  for x in range( dL ):
+    quarters = quarter[x]
+    q.append(quarters)
+    
+    p = units_to_prod[x] * dltpu  # time per unit
+    prod.append(p)
+    
+    c = p * dlcpu
+    lc.append(c)
+    
+    print("Quarter: {}\nTotal required direct labor hours: ..... {:,}  ".format(q[x], prod[x] ) ) 
+    print("Total direct labor cost: ............................ ${:,}  \n".format(lc[x]) ) 
+ 
+  print("Total direct labor costs for year ..... ${:,}".format( sum(lc)))
+  
+  
+```
+
+call function
+
+```{python}
+direct_labor_budget( labor )
+```
+
+
+## Manufacturing Overhead Budget
+
+The `manufacturing overhead budget` is about the expected manufacturing overhead costs for the budget period. 
+
+
+A company is expecting variable costs to fluctuate along with the production volume, based upon
+the rates per direct labor hour. The company data is in a data dictionary. Indirect materials are values from the direct labor budget function.
+
+- indirect materials ($1/hr)
+- indirect labor ($1.40/hr)
+- utilities ($0.40/hr)
+- maintenance ($0.20/hr)
+
+
+```{python}
+overhead = {
+  'quarter': [1,2,3,4],
+  'direct_labor_hours': [6200,7200,8200,9200],
+  'indirect_materials': 1,
+  'indirect_labor': 1.4,
+  'utilities': 0.4,
+  'maintenance': 0.2,
+  'fixed_costs': {
+      'supervisor_salaries': 20e3,
+      'depreciation': 3800,
+      'property_tax_insurance': 9e3,
+      'maintenance': 5700
+    }
+}
+```
+
+
+
+function
+
+```{python}
+def manufacturing_overhead_budget( dict ):
+  
+  quarter = dict['quarter']
+  labor_hrs = dict['direct_labor_hours']
+  dL = len(labor_hrs)
+  
+  ind_materials = dict['indirect_materials']
+  ind_labor = dict['indirect_labor']
+  util = dict['utilities']
+  maint = dict['maintenance']
+  
+  # - fixed costs
+  fixed_cost = sum( list(dict['fixed_costs'].values() ))
+  
+  total_labor_hrs = sum(labor_hrs)
+
+  lab = []
+  q =[]
+  idm = [] # indirect materials
+  idl = [] # indirect labor
+  uts = [] # utilities
+  main = [] # maintenance
+  var_costs =  []
+  manuf_over = [] # manufacturing overhead
+  
+  print("-- Manufacturing Overhead Budget --")
+  for x in range( dL ):
+    quarters = quarter[x]
+    q.append(quarters)
+    
+    h = labor_hrs[x] * ind_materials
+    lab.append(h)
+    
+    i = h * ind_labor
+    idl.append(i)
+    
+    u = h * util
+    uts.append(u)
+    
+    m = h * maint
+    main.append(m)
+    
+    t = lab[x] + idl[x] +uts[x] + main[x]
+    var_costs.append(t)
+    
+    mo = t + fixed_cost
+    manuf_over.append(mo)
+    
+    overhead_rate_per_hr =  sum(manuf_over) / total_labor_hrs 
+    
+    print("Quarter: {}\nIndirect materials: ..... ${:,}  ".format(q[x], lab[x] ) ) 
+    print("Indirect labor: ...................... ${:,}  ".format( idl[x] ))
+    print("Utilities: ........................... ${:,}  ".format( uts[x] ) )
+    print("Maintenance: ......................... ${:,}  ".format( main[x] ) )
+    print("Total variable cost: ............................ ${:,}".format(  t ) )
+    print("Total manufacturing cost: ....................... ${:,}  \n".format( manuf_over[x]  ) )
+  
+
+  print("Total variable costs for year ............. ${:,}".format( sum(var_costs) ))
+  print("Total manufacturing overhead for year ..... ${:,}".format( sum(manuf_over) ))
+  print("Total direct labor hours for year .........  {:,}".format( sum(lab) ))
+  print("Manufacturing overhead rate per labor hour ..... ${:,}".format( overhead_rate_per_hr ))
+  
+```
+
+call function
+
+```{python}
+manufacturing_overhead_budget( overhead )
+```
+
+
+
+## Selling & Admin Budget
+
+The `selling and administrative expense budget` is all about projections for the budget period regarding the selling and admin expenses. 
+
+- variable expense rate per unit of sales commission $3
+- of the 3 is $1 for freight out
+- variable expense per quarter are based on the unit of sales from the sales budget
+
+```{python}
+admin = {
+  'quarter': [1,2,3,4],
+  'sales_units': [3000,3500,4000,4500],
+  'sales_commission': 3,
+  'freight_per_unit': 1,
+  'fixed_expenses': {
+    'advertising': 5000,
+    'sales_salaries': 15000,
+    'office_salaries': 7500,
+    'depreciation': 1000,
+    'property_tax_insurance': 1500
+    }
+}
+
+```
+
+
+
+
+
+function
+
+```{python}
+def selling_admin_budget(dict):
+  
+  quarter = dict['quarter']
+  sales_units = dict['sales_units']
+  dL = len(sales_units)
+  
+  comm = dict['sales_commission']
+  freight = dict['freight_per_unit']
+  
+  fixed_exp = sum(dict['fixed_expenses'].values())
+  
+  su = [] # sales units
+  q =[]
+  fo = [] # freight out
+  tot_var_exp = []
+  fe = [] # fixed expense
+  
+  print("-- Selling & Admin. Expense Budget --")
+  for x in range( dL ):
+    quarters = quarter[x]
+    q.append(quarters)
+    
+    s = sales_units[x] * comm
+    su.append(s)
+    
+    f = sales_units[x] * freight
+    fo.append(f)
+    
+    t = su[x] + fo[x] 
+    tot_var_exp.append(t)
+    
+    fc = t + fixed_exp
+    fe.append(fc)
+    
+    
+    
+    print("Quarter: {}\nSales commissions per unit: ........... ${:,}  ".format(q[x], su[x] ) ) 
+    print("Freight out per unit: .............................. ${:,}  ".format( fo[x] ))
+    print("Total variable expense: ............................ ${:,}  ".format(  t ) )
+    print("Total selling & admin expense: ............................ ${:,}  \n".format(  fe[x] ) )
+    
+  print("\nTotal sales commission for year .................... ${:,}".format( sum(su) ))
+  print("Total variable costs for year ........................ ${:,}".format( sum(tot_var_exp) ))
+  print("Total selling & admin expense for year ............... ${:,}".format( sum(fe) ))
+```
+
+
+call function
+
+```{python}
+selling_admin_budget( admin )
+```
+
+
+
+## Budgeted Income Statement
+
+The `budgeted income statement` is an **important** function out of the operating budgets,
+as it indicates the expected profitability of operations for the budget period. 
+Evaluation of the company's performance is based on this income statement.  
+
+This function ideally would just use the variables inside the master budget function, but here each 
+part of the budgeted income uses values from previous functions. For this function you need the 
+following function values:
+
+- `sales_budget()` : {total sales for year}
+- `production_budget()` : {production units for year}
+- `direct_materials_budget()` : {direct materials per unit, cost per unit}
+- `direct_labor_budget()` : {dltpu, dlcpu}
+- `manufacturing_overhead()` : {rate per hour, number of hours}
+- `selling_admin_budget()` : {total sell & admin expense}
+
+
+In addition to these values, there are two more required: `interest expense` 
+and `estimated income tax`. There are two parts to this section, the first is calculating
+the total unit cost, then the second part is deductions. Note: _the value for hours in manufacturing overhead function is arbitrary chosen_.
+
+```{python}
+# -- direct_materials_budget()
+direct_materials_per_unit = 2
+cost_per_unit = 4
+total_direct_materials = direct_materials_per_unit * cost_per_unit
+
+# -- direct_labor_budget()
+dltpu = 2
+dlcpu = 10
+total_direct_labor = dltpu * dlcpu
+
+# --- manufacturing_overhead()
+rate_per_hour = 8
+hours = 2  
+total_manufacture_overhead = rate_per_hour * hours
+
+# === cost element
+total_unit_cost = total_direct_materials + total_direct_labor + total_manufacture_overhead
+
+# ----------------------- part 2
+
+# -- production_budget()
+total_production_units = 15400
+
+# -- sales_budget()
+sales = 900e3
+
+cost_of_goods_sold = total_unit_cost * total_production_units
+gross_profit = sales - cost_of_goods_sold
+total_sell_admin_exp = 180e3
+income_from_operations = gross_profit - total_sell_admin_exp
+interest = 100
+income_tax = 12e3
+net_income = income_from_operations - interest - income_tax
+
+print("Budgeted Income Statement")
+print("Total unit cost ................... ${:,}".format(total_unit_cost))
+print("sales ............................. ${:,}".format(sales))
+print("cost of goods sold ................ ${:,}".format(cost_of_goods_sold))
+print("gross profit ...................... ${:,}".format(gross_profit))
+print("income from operations ............ ${:,}".format(income_from_operations))
+print("net income ........................ ${:,}".format(net_income))
+```
+
+
+
+
+
+## Cash Budget
+
+Though the budgeted income statement is important, the `cash budget` is _super important_, as it 
+helps the treasurer manage the cash. The cash budget is made at least once per month. 
+There are three sections:
+
+- `cash receipts` : expected receipts from company's main source(s) of revenue, including those from interest and dividends
+- `cash disbursements` : cash payments, direct materials, direct labor, manufacturing overhead, selling & admin expenses. Payments from income taxes, dividends, investments and plant assets are also part of this section
+- `financing` : expected borrowings and repayment of borrowed funds plus interest
+
+
+Here is a basic cash budget. Company management wants to maintain monthly cash balance of $15,000.
+At the beginning of March the cash balance is 16,500, expected cash receipts for March are 210,000,
+and cash disbursements are expected to be 220,000.
+
+
+```{python}
+cash = {
+  'balance_goal': 15e3,
+  'begin_balance': 16500,
+  'cash_receipts': 210e3,
+  'cash_disbursements': 220e3
+}
+```
+
+
+function 
+
+```{python}
+def cash_budget( dict ):
+    total_avail_cash = dict['begin_balance'] + dict['cash_receipts']
+    cash_dis = dict['cash_disbursements']
+    excess_cash = total_avail_cash - cash_dis
+    balance = dict['balance_goal']
+    delta = excess_cash - balance
+    
+    print("-- Basic Cash Budget --")
+    print("Total available cash ............... ${:,}".format(total_avail_cash))
+    print("Excess of availble cash ............ ${:,}".format(excess_cash))
+    
+    if delta < 0:
+      print("Financing (need cash) ............. ${:,}".format(abs(delta)))
+    else:
+      print("Financing ........................ ${:,}".format(delta))
+    print("Ending cash balance ................ ${:,}".format(balance))
+    
+```
+
+
+call function
+
+```{python}
+cash_budget( cash )
+```
+
+
+
+## Non-Manufacture Budgets
+
+A merchandiser uses sales budget but uses it differently than a manufacturer. The merchandiser
+uses merchandise purchases budget and does not use direct materials, direct labor and manufacturing overhead. `Merchandise purchase budget` shows the estimated cost of gooods to be purchased to meet expected sales. 
+
+- required merchandise purchases (`rmp`)
+- budgeted cost of goods sold (`bcogs`)
+- desired ending merchandise inventory (`demi`)
+- beginning merchandise inventory (`bmi`)
+- `rmp = bcogs + demi - bmi` 
+
+
+A company is preparing a merchandise purchases budget for the month of July.
+The company estimates that sales will be 300,000 in July and 320,000 in August.
+The cost of goods sold is expected to be 70% of sales ($210,000: 0.70 x 300,000) 
+and 224,000 in August (0.70 x 320,000). The company desired ending inventory is 30% of the following
+month's cost of goods sold. 
+
+```{python}
+purchases = {
+  'months': ['July','August'],
+  'estimated_sales': [300e3, 320e3],
+  'expected_cogs': 0.7,
+  'desired_ending_inventory': 0.3
+}
+```
+
+
+function
+
+```{python}
+def merchandise_budget( dict ):
+  months = dict['months']
+  exp_sales_1 = dict['estimated_sales'][0]
+  exp_sales_2 = dict['estimated_sales'][1]
+  
+  # budgeted cost of goods sold
+  bcogs_1 = exp_sales_1 * dict['expected_cogs']
+  bcogs_2 = (exp_sales_2 *  dict['expected_cogs'])
+  
+  demi_prct = dict['desired_ending_inventory']
+  demi = bcogs_2 * demi_prct
+  total = bcogs_1 + demi 
+  
+  bmi = (bcogs_1 * demi_prct)
+  bmp = total - bmi
+  
+  print("- Merchandise Purchases Budget -")
+  print("Budgeted cost of goods sold .......................... ${:,}".format(bcogs_1))
+  print("Desired ending merchandise inventory total ........... ${:,}".format(total))
+  print("Budgeted merchandise purchases for {} ................ ${:,}".format(months[0], bmp))
+  
+  
+merchandise_budget( purchases )
+```
+
+
+## Service Enterprises
+
+In service enterprises the key to budgeting is the coordination of staff needs and expected services.
+If a company is overstaffed, then problems could arise such as:
+
+- labor costs will be high
+- profits will be lower due to salaries
+- staff turnover may increase due to lack of extra work 
+
+Seasonal yard work company data is in a data dictionary
+
+```{python}
+lawns = {
+  'lawn_size': ['small','medium','large'],
+  'lawns_to_service': [300, 200, 100],
+  'direct_labor_hrs': [1, 1.75, 2.75],
+  'avg_cost_labor_hr': 15
+}
+```
+
+Instead of a function this part simply uses a for loop as it is same amount of work as an Excel sheet more or less and is a simple example.
+
+```{python}
+sizes = lawns['lawn_size']
+service = lawns['lawns_to_service']
+hrs = lawns['direct_labor_hrs']
+wage = lawns['avg_cost_labor_hr']
+
+s = []
+a = []
+w = []
+for x in range(len(lawns['lawn_size'])):
+  tl = service[x] * hrs[x]
+  a.append(tl)
+  
+  size = sizes[x]
+  s.append(size)
+  
+  cost = tl * wage
+  w.append(cost)
+
+  print("Lawn size: {} \ntotal labor hours ..... {:,}".format( s[x], a[x] ))
+  print("Total direct labor cost ...... ${:,}".format(w[x]))
+
+print("\nTotal costs ..... ${:,}".format( sum(w)))
+  
+```
+
+
+  
+
+---
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

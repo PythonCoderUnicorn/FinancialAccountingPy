@@ -1,0 +1,664 @@
+
+# Pricing
+
+Management have to make many decisions, one of the most important ones is setting prices. 
+This chapter has 2 models for pricing; model for pricing goods sold or services provided to external parties, and other model is pricing for goods sold to internal company divisions. 
+The pricing models include:
+
+- target costing
+- total cost plus pricing
+- absorption cost plus pricing
+- variable cost plus pricing
+- pricing services
+- transfer pricing
+- transfers between divisions in different countries
+
+
+Factors that affect pricing:
+
+- `pricing objectives`: gain market share, achieve a target rate of return
+- `demand`: price sensitivity demographics
+- `environment`: political reaction to prices, patent or copyright protection
+- `cost considerations`: fixed and variable costs for short and long term
+
+
+## Target costing
+
+The laws of supply and demand affect the prices, 
+in order to make profit the costs need to be controlled.
+
+- `target cost` = market price - desired profit
+
+
+A phone manufacturer has done market research and learned that 200,000 units can be sold if the price
+is no more than $20. If new product of phone cases is to happen, an investment of 1 million dollars is 
+required for equipment, with a minimum rate of return of 25% on all investments.
+
+Store this information into a data dictionary
+
+```{python}
+phones = {
+  'investment': 1e6,
+  'rate_of_return': 0.25,
+  'target_units': 200e3,
+  'price': 20
+}
+```
+
+Call the function 
+
+```{python}
+def target_costing( dict):
+  
+  desired_profit = dict['investment'] * dict['rate_of_return']
+  item_return = desired_profit / dict['target_units']
+  target_cost = dict['price'] - item_return
+  
+  print("- Target Costing - ")
+  print("desired profit ................. ${:,}".format(desired_profit))
+  print("each item return of profit ..... ${:,}".format(item_return))
+  print("target cost per unit ........... ${:,}".format(target_cost))
+  
+  
+target_costing( phones )
+```
+
+
+## Total Cost + Pricing
+
+In the global competitive world of business, the price is often set by the market, and to obtain
+the desired profit the stronger emphasis is on target cost. `Total cost plus pricing` is when companies that can set prices do so as a function of cost of the product or service. 
+
+- `markup (profit)` = selling price - cost
+- basic cost plus pricing: `target selling price` = cost + (markup % * cost)
+
+
+A company that makes specialty pens, their data is in a dictionary. Specialty pen company incurs fixed manufacturing overhead of $280,000 and fixed selling & admin expenses of 240,000. The assumed units of production is 10,000. The company desires a return on investment of 20% and has invested 1 million dollars.
+
+```{python}
+pens = {
+  'direct_materials': 23,
+  'direct_labor': 17,
+  'var_manuf_overhead': 12, # manufacturing
+  'var_sell_admin': 8,  # variable selling and admin expense
+  'var_cpu': 60, # variable cost per unit
+  'fixed_manuf_overhead': 280e3,
+  'fixed_sell_admin': 240e3,
+  'units_produced': 10e3,
+  'ROI': 0.20, # return on investment
+  'investment': 1e6  # $ invested
+}
+```
+
+Call the function
+
+```{python}
+def total_cost_pricing( dict ):
+  
+  fixed_manuf_cpu = dict['fixed_manuf_overhead'] / dict['units_produced']
+  fixed_sell_admin = dict['fixed_sell_admin'] / dict['units_produced']
+  fixed_cpu = round( fixed_manuf_cpu + fixed_sell_admin, 2)
+  
+  desired_roi = dict['ROI'] * dict['investment']
+  markup_profit = round( desired_roi / dict['units_produced'], 2)
+  
+  var_cpu = sum( list(dict.values())[:4])
+  # print(var_cpu)
+  total_cost = var_cpu + fixed_cpu + markup_profit
+  costs = (var_cpu + fixed_cpu)
+  
+  markup_percent = round(markup_profit / costs, 3)
+  
+  target_selling_price = costs + (costs * markup_percent)
+  
+  print("- Total Cost plus Pricing - ")
+  print("fixed cost per unit ...................... ${:,}".format(fixed_cpu))
+  print("markup profit per unit ................... ${:,}".format(markup_profit ))
+  print("markup percentage ........................ {:,}%".format(markup_percent *100))
+  print("selling price per unit ................... ${:,}".format(total_cost))
+  print("target selling price per unit ............ ${:,}".format(total_cost))
+  print("expected income ROI ...................... ${:,}".format(desired_roi))
+  
+  
+
+total_cost_pricing(pens)
+```
+
+- sales volume units affect the total fixed cost per unit, if 8,000 units were sold instead of 10,000 the fixed cost per unit would be $65. Change the value in the `pens` dictionary for units produced then run the function. 
+
+
+## Absorption Cost + Pricing
+
+`Absorption cost plus pricing` defines the cost base as the manufacturing cost, both variable and fixed selling & admin costs are _excluded_ from the cost base. The markup profit is where companies earn their selling & admin costs along with target ROI.
+
+Using the `pens` data dictionary to calculate the manufacturing cost per unit
+
+```{python}
+def absorption_cost_pricing( dict ):
+  
+  costs = sum(list(dict.values())[:3])
+  fixed_manuf_cpu = dict['fixed_manuf_overhead'] / dict['units_produced']
+  total_manuf_cpu = costs + fixed_manuf_cpu
+  
+  var_sell_admin = dict['var_sell_admin']
+  fixed_sell_admin = dict['fixed_sell_admin'] /  dict['units_produced']
+  # print(fixed_sell_admin)
+  sell_admin_costs = var_sell_admin + fixed_sell_admin
+  
+  desired_roi = dict['ROI'] * dict['investment']
+  markup_profit = round( desired_roi / dict['units_produced'], 2)
+  
+  markup_percent = (markup_profit + sell_admin_costs) / total_manuf_cpu
+  
+  target_selling_price = total_manuf_cpu + (markup_percent * total_manuf_cpu)
+  
+  # ----- income statement
+  revenue = dict['units_produced'] * target_selling_price
+  cogs = dict['units_produced'] * total_manuf_cpu
+  gross_profit = revenue - cogs
+  admin_expenses = dict['units_produced'] * (dict['var_sell_admin'] + fixed_sell_admin)
+  net_income = revenue - cogs - admin_expenses
+  
+  print("- Absorption Cost + Pricing -")
+  print("Total manufacturing cost per unit ..... ${:,}".format(total_manuf_cpu))
+  print("fixed selling & admin costs ........... ${:,}".format(sell_admin_costs))
+  print("desired ROI per unit .................. ${:,}".format(markup_profit))
+  print("markup profit percentage .............. {:.2f}%".format(markup_percent *100))
+  print("target selling price .................. ${:,}".format(target_selling_price))
+  
+  print("\nAbsorption Cost Income Statement")
+  print(" Revenue ............................. ${:,}".format(revenue))
+  print(" Cost of goods sold .................. ${:,}".format(cogs))
+  print(" Gross profit ........................ ${:,}".format(gross_profit))
+  print(" selling & admin expenses ............ ${:,}".format(admin_expenses))
+  print(" net income .......................................... ${:,}".format(net_income))
+  
+  
+
+absorption_cost_pricing( pens )
+```
+
+
+
+## Variable Cost + Pricing
+
+`Variable cost plus pricing` includes all variable costs involved with a product, even selling and
+admin costs. Fixed costs are _excluded_ in the base, the markup needs to cover fixed costs and the ROI. 
+This method is useful for short term decisions as fixed and variables costs are dealt with separately.
+
+Using the same pens data dictionary 
+
+```{python}
+def variable_cost_pricing( dict ):
+  
+  costs = sum(list(dict.values())[:4])
+  fixed_manuf_cpu = dict['fixed_manuf_overhead'] / dict['units_produced']
+  fixed_sell_admin = dict['fixed_sell_admin'] /  dict['units_produced']
+  desired_roi = dict['ROI'] * dict['investment']
+  markup_profit = desired_roi / dict['units_produced']
+
+  markup_percent = ( markup_profit + (fixed_manuf_cpu + fixed_sell_admin)) / costs
+  target_selling_price = costs + (markup_percent * costs)
+  
+  # ----- income statement
+  revenue = dict['units_produced'] * target_selling_price
+  var_costs = dict['units_produced'] * costs 
+  contrib_margin = revenue - var_costs
+  fixed_manuf_costs = dict['units_produced'] * fixed_manuf_cpu
+  sell_admin_costs = dict['units_produced'] * fixed_sell_admin
+  net_income = contrib_margin - fixed_manuf_costs - sell_admin_costs
+
+  
+  print("- Variable Cost + Pricing -")
+  print("total variable costs per unit ............ ${:,}".format(costs))
+  print("fixed manufacturing cost per unit ........ ${:,}".format(fixed_manuf_cpu))
+  print("fixed selling & admin .................... ${:,}".format(fixed_sell_admin))
+  print("markup profit ............................ ${:,}".format(markup_profit))
+  print("markup percent ........................... {:.2f}%".format(markup_percent *100))
+  print("target selling price ..................... ${:,}".format(target_selling_price))
+  
+  print("\nVariable Cost Income Statement")
+  print(" Revenue ............................. ${:,}".format(revenue))
+  print(" variable costs ...................... ${:,}".format(var_costs))
+  print(" contribution margin ................. ${:,}".format(contrib_margin))
+  print(" fixed costs manufacturing ........... ${:,}".format(fixed_manuf_costs))
+  print(" selling & admin costs ............... ${:,}".format(sell_admin_costs))
+  print(" net income .......................................... ${:,}".format(net_income))
+
+variable_cost_pricing( pens )
+```
+
+
+### Variable Cost Example
+
+An air conditioning company has their data in a data dictionary, calculate the total cost per unit, determine the target selling price. Use 45% for markup profit on total cost per unit.
+
+```{python}
+air_condition = {
+  'direct_materials': 16,
+  'direct_labor': 18,
+  'var_manuf_overhead': 11,
+  'fixed_manuf_overhead': 10,
+  'var_sell_admin': 6,
+  'fixed_sell_admin': 10,
+  'markup_profit': 0.45
+}
+
+```
+
+Simplified version of the variable cost function
+
+```{python}
+def variable_cost_pricing2( dict ):
+  
+  costs = sum(list(dict.values())[:-1] )
+  cost_markup = dict['markup_profit'] * costs
+  total_costs = costs + cost_markup
+  
+  print("- Variable Cost + Pricing -")
+  print("total cost per unit ............ ${:,}".format(costs))
+  print("target selling price ........... ${:,}".format(total_costs))
+
+
+
+variable_cost_pricing2( air_condition )
+```
+
+
+
+## Pricing Services 
+
+`Time and material pricing` method is when a company sets two pricing rates: 1) for labor (labor and employee costs) and 2) materials (direct parts & materials used, including loading charge for overhead costs). This method is often used in the service industry. 
+
+A Yacht repair shop is the company example, their data is in a dictionary.
+
+```{python}
+yacht = {
+  'time_charges': {
+    'mechanic_wages_benefits': 103500,
+    'manager_salary_benefits': 0,
+    'employee_salary_benefits': 20700,
+    'overhead': 26800
+    },
+  'material_loading': {
+    'mechanic_wages_benefits': 0,
+    'manager_salary_benefits': 11500,
+    'employee_salary_benefits': 2300,
+    'overhead': 14400
+    },
+  'work_hours': 5000,
+  'profit_margin': 8,
+  'profit_margin_percent': 0.2,
+  'invoice_cost': 120e3, # estimated cost parts & materials
+  'job': {'work_hours': 50, 'parts_materials': 3600}
+}
+```
+
+
+A function to calculate labor charge, material loading charge and the charges for a particular job.
+
+```{python}
+def pricing_services( dict ):
+
+  #------- 1 labor charge
+  total_cost = list(dict['time_charges'].values())
+  # print(total_cost)
+  
+  total_hours = dict['work_hours']         
+  profit = dict['profit_margin']
+  
+  hourly = []
+  for x in range( len(total_cost) ):
+    per_hr_charge = total_cost[x] / total_hours
+    hourly.append(per_hr_charge)
+  
+  total_hourly_cost = sum(total_cost) / total_hours   
+  labor_rate = profit + total_hourly_cost
+  
+  # -- 2 material loading $
+  material_load = list(dict['material_loading'].values())
+  total_invoice = dict['invoice_cost']
+  
+  # print(material_load)
+  staff_salary = material_load[1] + material_load[2]
+  staff_material_load = staff_salary / total_invoice
+  overhead_material_load =  material_load[3] / total_invoice
+  total_material_load = (sum(material_load) / total_invoice)
+  total_load_percent = dict['profit_margin_percent'] + total_material_load 
+  
+  
+  # -- 3 calculate $ for job
+  labor_charge = round( dict['job']['work_hours'] * labor_rate, 2)
+  cost_parts = dict['job']['parts_materials']
+  material_load_fee = (total_load_percent * cost_parts)
+  total_material_fee = cost_parts + material_load_fee
+  total_price = labor_charge + total_material_fee
+  
+              
+  print(" - Pricing Services -")
+  print("total hourly cost ................. ${:,}".format( sum(total_cost) ))
+  print("mechanic wages & benefits (per hr) ........ ${:,}".format( hourly[0]))
+  print("employee wages & benefits (per hr) ........ ${:,}".format( hourly[2]))
+  print("other overhead (per hr) ................... ${:,}".format( hourly[3]))
+  print("total hourly cost (per hr) ................ ${:,}".format( total_hourly_cost ))
+  print("rate charged (per hr) for labor ........... ${:,}".format( labor_rate ))
+  
+  print("\nMaterial loading charges ............ ${:,}".format( sum(material_load )))
+  print(" staff material load percent ................ {:.2f}%".format( staff_material_load *100))
+  print(" overhead material load percent ............. {:.2f}%".format( overhead_material_load *100))
+  print(" total overhead material load percent ....... {:.2f}%".format( total_material_load *100))
+  print(" total material load percent ........................ {:.2f}%".format( total_load_percent *100))
+  
+  print("\nTime & Material Price Quotation ")
+  print("labor charge ......................... ${:,}".format(labor_charge))
+  print("material & parts, loading fee ........ ${:,}".format(total_material_fee))
+  print("total price of labor & material ......................... ${:,}".format(total_price))
+  
+  # print(hourly)
+```
+
+Call the function
+
+```{python}
+pricing_services( yacht )
+```
+
+
+
+## Transfer Pricing
+
+When companies transfer goods internally the price they use to record the transfer between 2 divisions is the `transfer price`. The price charged for intermediate goods is the cost of goods sold
+to the buying division and the revenue for the selling division.
+
+- high transfer price = high revenue for selling division and high costs for buying division
+- low transfer price = low revenue for selling division and low costs for buying division
+
+There are some price transfer objectives:
+
+- promote the goal congruence: the policy should choose actions that maximize company earnings as a whole
+- maintain divisional autonomy: upper management should not get involved in division managers 
+- provide accurate performance evaluations: policy should allow accurate evaluation of division managers involved in the transfer
+
+
+General transfer pricing formula
+
+- `transfer price` = variable cost per unit + opportunity costs
+
+
+A bike manufacturing company data, assembly division and manufacturing divisions.
+
+```{python}
+bike = {
+  'assembly_division': {
+  'selling_price': 290,
+  'var_cost_assembly': 200
+  },
+  'manufacture_division': {
+    'selling_price': 130,
+    'var_cost_manuf': 95
+  }
+}
+```
+
+Call the function 
+
+```{python}
+def transfer_pricing( dict ):
+  # assembly
+  assembly = list( dict['assembly_division'].values())
+  manufacture = list( dict['manufacture_division'].values())
+  
+  assembly_contrib_margin = assembly[0] - assembly[1]
+  manuf_contrib_margin = manufacture[0] - manufacture[1]
+  total_contrib_margin = assembly_contrib_margin + manuf_contrib_margin
+  
+  # -- manuf div
+  manuf_min_price = manuf_contrib_margin + manufacture[1]
+  
+  # - Excess Capacity , no opportunity costs
+  opportunity_cost = 0
+  capcity_min_price =  manufacture[1] + opportunity_cost
+  
+
+  
+  print("- Transfer Pricing - ")
+  print("Assembly contribution margin ......... ${:,}".format(assembly_contrib_margin))
+  print("Manufacture contribution margin ...... ${:,}".format(manuf_contrib_margin))
+  print("Total contribution margin ............ ${:,}".format(total_contrib_margin))
+  
+  print("min. transfer price to manufacturing ............ ${:,}".format(manuf_min_price))
+  
+  if manuf_min_price >= total_contrib_margin:
+    print("\nGoal Congruence: (no excess capacity) ",'\u2705')
+  
+  if capcity_min_price <= manuf_min_price:
+    print("Goal Congruence: (excess capacity)   ",'\u2705')
+  
+
+  
+  
+transfer_pricing( bike ) 
+```
+
+
+
+## Transfer Pricing Methods
+
+A boot company data will be used for `negotiated transfer price` between division managers.
+
+```{python}
+boots = {
+  'assembly_division': {
+    'selling_price': 90,
+    'var_cost_manuf': 35,
+    # cost of sole purchased from outside suppliers
+    'cost_outside_suppliers': 17 
+  },
+  'manufacture_division': {
+    'selling_price': 18,
+    'var_cost_per_sole': 11
+  }
+}
+```
+
+
+The function to calculate contribution margins 
+
+```{python}
+def transfer_pricing2( dict ):
+  # assembly (division 1)
+  assembly = list( dict['assembly_division'].values())
+  # manufacturing (division 2)
+  manufacture = list( dict['manufacture_division'].values())
+  
+  assembly_contrib_margin = assembly[0] - assembly[1] - assembly[2]
+  manuf_contrib_margin = manufacture[0] - manufacture[1]
+  total_contrib_margin = assembly_contrib_margin + manuf_contrib_margin
+  
+  # -- manuf div
+  manuf_min_price = manuf_contrib_margin + manufacture[1]
+  # print(manuf_min_price) # 18
+  
+  # -- no excess capacity
+  # variable cost + opportunity cost = min transfer price
+  opportunity_cost = assembly[2] # 17
+  # print(opportunity_cost)
+
+  # - Excess Capacity , no opportunity costs
+  # variable cost + opportunity cost = min transfer price
+  opportunity_cost2 = 0
+  capacity_min_price =  manufacture[1] + opportunity_cost2
+  
+  print("- Transfer Pricing Methods - ")
+  print("Assembly contribution margin ......... ${:,}".format(assembly_contrib_margin))
+  print("Manufacture contribution margin ...... ${:,}".format(manuf_contrib_margin))
+  print("Total contribution margin ............ ${:,}".format(total_contrib_margin))
+  
+  if manuf_min_price >= total_contrib_margin:
+    print("\nGoal Congruence: (no excess capacity) ",'\u2705')
+  
+  if opportunity_cost <= manuf_min_price:
+    print(f"\nno transfer deal (no excess capacity)\n :: Assembly (buyer) ${opportunity_cost} < Manufacturing (seller) ${manuf_min_price}")
+  
+  if capacity_min_price <= opportunity_cost :
+    print("\nGoal Congruence: (excess capacity)   ",'\u2705')
+    print(f"\ttransfer price range: ${capacity_min_price} to ${opportunity_cost}" )
+
+
+
+transfer_pricing2(boots)
+```
+
+
+## Transfer between Divisions
+
+Using a boot company example and comparing 2 transfer prices that include tax rates.
+The company data is in 2 data dictionaries.
+
+```{python}
+boot1 = {
+  'division1': {
+    'selling_price': 90,
+    'var_cost_manuf': 35,
+    'cost_item_internally': 18, # cost of item purchased internally
+    'tax_rate': 0.10
+    },
+  'division2': {
+    'selling_price': 18,
+    'var_cost_per_item': 11,
+    'tax_rate': 0.30
+    }
+}
+
+boot2 = {
+  'division1': {
+    'selling_price': 90,
+    'var_cost_manuf': 35,
+    'cost_item_internally': 11, # cost of item purchased internally
+    'tax_rate': 0.10
+    },
+  'division2': {
+    'selling_price': 11,
+    'var_cost_per_item': 11,
+    'tax_rate': 0.30
+    }
+}
+```
+
+Function
+
+```{python}
+def transfer_divisions( dict1: dict, dict2: dict):
+  # --- dict 1 -- div 1
+  div1_1 = list(dict1['division1'].values())
+  # print(div1)
+  before_tax_contrib_margin11 = div1_1[0] - div1_1[1] - div1_1[2]
+  tax_11 = before_tax_contrib_margin11 * div1_1[-1]
+  post_tax_contrib_margin1 = before_tax_contrib_margin11 - tax_11
+
+  # --- dict1 -- div 2
+  div1_2 = list(dict1['division2'].values())
+  # print(div1_2)
+  before_tax_contrib_margin12 = div1_2[0] - div1_2[1]
+  tax_12 = before_tax_contrib_margin12 * div1_2[-1]
+  post_tax_contrib_margin2 = before_tax_contrib_margin12 - tax_12
+  total_before_tax_1 = before_tax_contrib_margin11 + before_tax_contrib_margin12
+  total_post_tax_1 = post_tax_contrib_margin1 + post_tax_contrib_margin2
+
+  # -- dict 2 - 1
+  div2_1 = list(dict2['division1'].values())
+  # print(div2_1)
+  before_tax_contrib_margin21 = div2_1[0] - div2_1[1] - div2_1[2]  # 44
+  tax_21 = before_tax_contrib_margin21 * div2_1[-1] # 4.4
+  post_tax_contrib_margin3 = before_tax_contrib_margin21 - tax_21 # 39.6
+
+  # # -- dict 2 - 2
+  div2_2 = list(dict2['division2'].values())
+  before_tax_contrib_margin22 = div2_2[0] - div2_2[1] # 0
+  tax_22 = before_tax_contrib_margin22 * div2_2[-1]  # 0
+  post_tax_contrib_margin4 = before_tax_contrib_margin22 - tax_22  # 0
+  total_before_tax_2 = before_tax_contrib_margin21 + before_tax_contrib_margin22
+  total_post_tax_2 = post_tax_contrib_margin3 + post_tax_contrib_margin4
+
+  
+
+  print("-- Transfers: Divisions & Countries --")
+  print("Transfer Price 1")
+  print("After tax contribution margin (div 1)....... ${:,}".format(post_tax_contrib_margin1))
+  print("After tax contribution margin (div 2)....... ${:,}".format(post_tax_contrib_margin2))
+  print("Before total tax contribution margin to company ...... ${:,}".format(total_before_tax_1))
+  print("After total tax contribution margin to company ...... ${:.2f}".format(total_post_tax_1))
+
+  print("\nTransfer Price 2")
+  print("After tax contribution margin (div 1)....... ${:,}".format(post_tax_contrib_margin3))
+  print("After tax contribution margin (div 2)....... ${:,}".format(post_tax_contrib_margin4))
+  print("Before total tax contribution margin to company ...... ${:,}".format(total_before_tax_2))
+  print("After total tax contribution margin to company ...... ${:.2f}".format(total_post_tax_2))
+  
+  print("\n:: whichever transfer price is lower",'\u25C0')
+
+
+transfer_divisions( boot1, boot2)
+```
+
+
+### Example
+
+Transfer pricing example, a clock manufacturer company. Packaging costs of 50 cents can be saved by having internal company sales, and 8,000 units are to be transferred from one division to another.
+If manufacturer is not operating at full capacity, then the opportunity cost is $0.
+
+```{python}
+clocks = {
+  'customer_price': 10,
+  'var_cost': 4,
+  'fixed_cost': 2.5,
+  'units_transfer': 8000,
+  'internal_price': 5,
+  'packaging_cost': 0.5
+}
+```
+
+function
+
+```{python}
+def transfer_pricing3( dict ):
+  
+  variable_cost = dict['var_cost'] - dict['packaging_cost']
+  opportunity_cost_1 = 0
+  min_transfer_price = variable_cost + opportunity_cost_1
+  
+  opportunity_cost_2 = dict['customer_price'] - dict['var_cost']
+  transfer_price2 = variable_cost  + opportunity_cost_2
+  
+  print("internal sales variable cost = ${:,}".format(variable_cost))
+  print("minimum transfer price (no opportunity costs) = ${:,}".format(min_transfer_price))
+  print("minimum transfer price (full opportunity costs) = ${:,}".format(transfer_price2))
+
+transfer_pricing3( clocks )
+```
+
+---
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

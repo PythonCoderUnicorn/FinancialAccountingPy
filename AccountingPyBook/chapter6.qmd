@@ -1,0 +1,481 @@
+
+# Incremental Analysis
+
+Management has many decisions to make, another part of that is the incremental analysis, which analyzes 
+the costs of various alternatives to outsourcing. Incremental analysis involves:
+
+- whether to accept an order at a special price
+- make or buy
+- sell or process more 
+- retain or replace equipment 
+- eliminate an unprofitable segment
+- allocate limited resources 
+
+
+## Management Decision Making
+
+Part of being involved in management is making decisions, and is a key function to the role.
+There are some important steps in the process, we will make a easy function to help practice 
+making functions and to aid in the concept.
+
+```{python}
+def decision_making():
+  print(" - Decision Making Process -")
+  
+  def step1():
+    print("1. Identify the problem, and assign responsibility")
+    
+  def step2():
+    print("2. Determine and evaluate possible courses of action")
+    
+  def step3():
+    print("3. Make a decision")
+  
+  def step4():
+    print("4. Review the results of the decision")
+  
+  #-- inside the main function
+  step1()
+  step2()
+  step3()
+  step4()
+  
+```
+
+Now call the decision making function
+
+```{python}
+decision_making()
+```
+
+
+
+## Incremental Analysis
+
+In the function of decision making is evaluating options for actions to take. Incremental analysis is used to determine the financial expenses that change under alternative courses of action.
+Incremental analysis uses three concepts:
+
+- `relevant cost` factors that are costs and revenues (differ for each option) and that they occur in the future
+- `opportunity costs` is the loss of one opportunity in favor of another
+- `sunk costs` are costs already incurred that won't change or can be avoided by decisions (not relevant costs)
+
+
+## Incremental Analysis Types
+
+### Puchase Order 
+
+Decision to accept an order at special price or reject. Company data is in the data dictionary.
+
+```{python}
+manuf_data = {
+  'product': 'blender',
+  'produced_per_month': 100e3,
+  'plant_capacity': 0.80,
+  'variable_costs_per_unit': 8,
+  'fixed_costs_per_unit': 4,
+  'price': 20,
+  'offer': {'purchase': 2000, 'price_per_unit': 11}
+}
+
+```
+
+Purchase order function is made to help in making a decision
+
+```{python}
+def purchase_order(maufacturing_data: dict):
+  total_cost_per_unit = manuf_data['variable_costs_per_unit'] + manuf_data['fixed_costs_per_unit']
+
+  offer_price = manuf_data['offer']['price_per_unit']
+  
+  var_manuf_costs = manuf_data['variable_costs_per_unit'] * manuf_data['offer']['purchase']
+  exp_revenue = manuf_data['offer']['price_per_unit'] * manuf_data['offer']['purchase']
+  net_income_offer = exp_revenue - var_manuf_costs
+  
+  print("\n -- Incremental Analysis: Purchase Order --")
+  
+  if total_cost_per_unit > offer_price:
+    print("Reject offer (based on cost alone)")
+    
+  print("Variable manufacturing costs will be ${:,}".format( var_manuf_costs))
+  print("Expected revenue for order ${:,}".format(exp_revenue))
+  print("Net income from order ${:,}".format(net_income_offer))
+  
+  
+purchase_order(manuf_data)
+```
+
+### Make or Buy
+
+Company decision to make parts or buy them. 
+
+- look for costs that change
+- ignore costs that don't change
+- opportunity costs can make a difference
+
+
+If this company decides to purchase items, all variable costs and one quarter of the fixed costs will be eliminated.
+
+```{python}
+product_cost_data = {
+  'direct_materials': 90e3,
+  'direct_labor': 20e3,
+  'variable_manuf_overhead': 32e3,
+  'fixed_manuf_overhead': 24e3,
+  'production_costs': 166e3,
+  'purchase_price': 0.90,
+  'eliminated_costs': 0.25
+}
+
+```
+
+A function to help with make or buy decision
+
+```{python}
+
+def make_buy(prod_data: dict):
+    
+    tot_costs = sum( list(product_cost_data.values() )[:-3]  )
+    prod_costs = prod_data['production_costs']
+    avg_cost_per_unit = tot_costs / prod_costs
+    
+    print("Make")
+    print("Average cost per unit ${:,}".format(avg_cost_per_unit))
+    print("Total costs to make ..... ${:,}".format(tot_costs))
+  
+    #--- purchase
+    fixed_cost_elim = prod_data['eliminated_costs']
+    purch_fixed_costs = prod_data['fixed_manuf_overhead'] * (1 - fixed_cost_elim )
+    tot_purch_price = prod_data['purchase_price'] * prod_costs
+    tot_purch_costs = purch_fixed_costs + tot_purch_price
+    
+    print("\nBuy")
+    print("purchase fixed costs  ${:,}".format(purch_fixed_costs))
+    print("purchase price  ${:,}".format(tot_purch_price))
+    print("Total cost to buy ..... ${:,}".format(tot_purch_costs))
+    print("Net income from purchase  ${:,}".format( tot_costs - tot_purch_costs) )
+  
+  
+
+make_buy(product_cost_data)
+
+
+```
+
+
+
+
+
+
+
+### Sell or process 
+
+a company decision to sell item assembled or not
+
+```{python}
+furniture = {
+  'price': 25,
+  'var_production_cost': 12,
+  'fixed_production_cost' : 8,
+  # process = paint & assemble furniture
+  'process': {
+    'price': 35, 
+    'var_production_cost': 9, 
+    'fixed_production_cost': 2
+    }
+}
+
+
+```
+
+A function to help in deciding whether to sell or process further 
+
+```{python}
+def sell_process( prod_data: dict):
+  
+  print("Incremental analysis: Sell or Process")
+  
+  net_income_sell = prod_data['price'] - \
+                    prod_data['var_production_cost'] - \
+                    prod_data['fixed_production_cost']
+  
+  price_delta =  prod_data['process']['price'] - prod_data['price'] 
+  
+  var_costs = prod_data['var_production_cost'] + prod_data['process']['var_production_cost']
+  var_costs_delta = prod_data['var_production_cost'] - var_costs 
+  
+  prod_costs = prod_data['fixed_production_cost'] + prod_data['process']['fixed_production_cost']
+  prod_costs_delta = prod_data['fixed_production_cost'] - prod_costs
+  
+  net_income_process = prod_data['process']['price'] - \
+                         var_costs - \
+                         prod_costs
+                         
+  net_income_delta = price_delta + prod_costs_delta + \
+                  var_costs_delta                         
+                         
+                    
+  print("Net income (Sell) ..... $", net_income_sell)
+  print("Net income (Process) ..... $", net_income_process)
+  
+  print("Total Net income revenues ..... $", net_income_delta)
+  # print(var_costs_delta)
+  # print(prod_costs_delta)
+  # print(net_income_delta)
+  
+  if net_income_process < net_income_sell:
+    print(" It is advised to sell without further processing")
+  
+
+sell_process( furniture )
+```
+
+
+### Retain or Sell
+
+Sunk costs are not relevant to incremental analysis
+
+```{python}
+machines = {
+  'old_machine': {
+    'original_price': 160e3,
+    'accumulated_depreciation': 120e3,
+    'estimated_life_yrs': 4,
+    'scrap_revenue': 24e3 # machines sold to scrap dealer
+    },
+  'new_machine': {
+    'original_price': 240e3,
+    'accumulated_depreciation': 0,
+    'estimated_life_yrs': 4,
+    'estimated_cost_savings': 55e3
+    }
+}
+```
+
+
+
+
+```{python}
+
+def retain_replace( machine_data: dict):
+  
+  cost_savings_replace = machines['new_machine']['estimated_cost_savings'] * machines['new_machine']['estimated_life_yrs']
+  
+  new_machine_cost = machines['new_machine']['original_price']
+  
+  sale_proceeds = machines['old_machine']['scrap_revenue']
+  
+  net_savings = cost_savings_replace + (-1 * new_machine_cost) + sale_proceeds
+  
+  
+  print("- Incremental Analysis: Retain or Replace - ")
+  print("Replace Equipment ............... ${:,}".format(cost_savings_replace))
+  print("New machine cost ...............  ${:,}".format(new_machine_cost))
+  print("Proceeds from old machine ......  ${:,}".format(sale_proceeds))
+  print("Net incremental savings ......... ${:,}".format(net_savings))
+  
+  if net_savings > 0:
+    print("\tPurchasing new machines will increase net income by ${:,}".format(net_savings))
+
+
+retain_replace(machines)
+```
+
+
+
+### Eliminate Segment
+
+focus on the relevant costs, the data that changes under the alternate courses of action.
+
+This company makes various accessories such as hats and scarves. The hats and scarves line had 
+a net loss of 30,000 dollars. If this company eliminates the hats & scarves, $20,000 fixed costs will remain.
+
+```{python}
+accessories = {
+  'hats_scarves': {
+    'sales': 400e3, 
+    'var_expenses': 310e3, 
+    'fixed_expenses': 120e3,
+    'elim_fixed_costs': 20e3
+    }
+}
+
+```
+
+a function to determine if both hats and scarves should be eliminated
+
+
+```{python}
+def elim_segment( products: dict):
+  
+  sales_continue = products['hats_scarves']['sales']
+  var_costs = products['hats_scarves']['var_expenses']
+  contrib_margin = sales_continue - var_costs
+  fixed_costs = products['hats_scarves']['fixed_expenses']
+  
+  net_income = contrib_margin - fixed_costs
+  # no sales, no var costs, no contribution margin
+  elim_fixed = 0 - products['hats_scarves']['elim_fixed_costs'] 
+  
+  net_income_delta = (fixed_costs + elim_fixed ) - contrib_margin
+  
+  
+  
+  print("- Incremental Analysis: Eliminate Segment -")
+  print("Continue --")
+  print(" Sales ............... ${:,}".format(sales_continue))
+  print(" Variable costs ...... ${:,}".format(var_costs))
+  print(" Contribution margin ...... ${:,}".format(contrib_margin))
+  print(" Fixed costs .............. ${:,}".format(fixed_costs))
+  print(" Net income ............... ${:,}".format(net_income))
+  print("Eliminate --")
+  print(" Net income ............... ${:,}".format(elim_fixed))
+  
+  print("\nTotal net income ..... ${:,}".format(net_income_delta))
+  
+  if net_income_delta > 0:
+    print("Eliminating product line(s) results in net income of ${:,}".format(net_income_delta))
+  
+
+elim_segment( accessories)
+```
+
+
+### Allocate Resources 
+
+A company that sells 3 types of an item, machine time is limited. The company requires more machine times to manufacture the second and third type item.
+
+```{python}
+product_types = {
+  'type_1': {'selling_price': 6, 'var_costs': 4, 'machine_hours': 0.02},
+  'type_2': {'selling_price': 10, 'var_costs': 6.50, 'machine_hours': 0.04},
+  'type_3': {'selling_price': 16, 'var_costs': 11, 'machine_hours': 0.08},
+  'total_fixed_costs': 234e3
+}
+```
+
+
+
+```{python}
+def allocate_res( product_data: dict):
+  print("- Incremental Analysis: Allocate Resources -")
+  
+  contrib_margin = []
+  for x in range(1,4):
+    z = product_types[f'type_{x}']['selling_price'] - product_types[f'type_{x}']['var_costs']
+    contrib_margin.append(z)
+    print(f"Contribution margin per unit (type {x}) ... ${z}")
+    
+  print()
+  if (contrib_margin[0] > contrib_margin[1]) and (contrib_margin[0] > contrib_margin[2]) :
+    print("... Type 1 has highest cmpu value")
+  elif (contrib_margin[1] > contrib_margin[0]) and (contrib_margin[1] > contrib_margin[2]) :
+    print("... Type 2 has highest cmpu value")
+  elif (contrib_margin[2] > contrib_margin[0]) and (contrib_margin[2] > contrib_margin[1]) :
+    print("... Type 3 has highest cmpu value")
+  else:
+    print(" No cmpu difference between items")
+  
+  
+  # print(contrib_margin)
+  print("")
+  cms = []
+  
+  print("Limited resources consumed per unit")
+  for cm in range(3):
+    item_cm = contrib_margin[cm] / product_data[f'type_{cm +1}']['machine_hours']
+    cms.append(item_cm)
+    print(f"  Contribution margin (machine hrs) (type {cm +1}) .... ${item_cm}" )
+ 
+  print()
+  if (cms[0] > cms[1]) and (cms[0] > cms[2]):
+    print("... Item 1 has highest resources consumed per unit")
+  elif (cms[1] > cms[0]) and (cms[1] > cms[2]):
+    print("... Item 2 has highest resources consumed per unit")
+  elif (cms[2] > cms[0]) and (cms[2] > cms[2]):
+    print("... Item 3 has highest resources consumed per unit")
+  else:
+    print(" All items have equal consumption per unit")
+
+  
+allocate_res(product_types)
+```
+
+
+
+## Example
+
+Cabinet making company
+
+```{python}
+cabinets = {
+  'materials': 500e3,
+  'labor': 250e3,
+  'var_costs': 100e3,
+  'fixed_costs': 400e3,
+  'selling_cost': 20,
+  'purchase_offer': {'price': 165, 'quantity':1000, 'selling_cost': 5}
+}
+
+```
+
+
+
+```{python}
+
+def purchase_order(manuf_data: dict):
+  
+  tot_costs = sum( list( cabinets.values())[:-2] )
+  order_costs = (cabinets['purchase_offer']['quantity'] * cabinets['purchase_offer']['selling_cost'])
+  materials = cabinets['materials'] / order_costs
+  labor = cabinets['labor'] / order_costs
+  var_cost = cabinets['var_costs'] / order_costs
+  selling_cost = cabinets['purchase_offer']['selling_cost']
+  
+  tot_rel_cpu = materials + labor + var_cost + selling_cost
+  
+  #-- offer
+  offer_revenue = cabinets['purchase_offer']['price'] * cabinets['purchase_offer']['quantity']
+  offer_costs = tot_rel_cpu * cabinets['purchase_offer']['quantity']
+  offer_net_income = offer_revenue - offer_costs
+  
+  
+  print("-- Incremental Analysis --")
+  print("Total costs .... ${:,}".format(tot_costs))
+  print("Total relevant cost per unit ..... ${:,}".format(tot_rel_cpu))
+  print("Offer --")
+  print("Accept offer revenues ...... ${:,}".format(offer_revenue))
+  print("Accept offer costs ......... ${:,}".format(offer_costs))
+  print("Accept offer net income  ......... ${:,}".format(offer_net_income))
+  
+  if offer_net_income < tot_rel_cpu:
+    print(f" ::: Reject offer: ${cabinets['purchase_offer']['price']} < ${tot_rel_cpu}")
+  else:
+    print(" ::: Accept offer: offer net income > relevant cpu")
+  
+  
+purchase_order(cabinets)
+```
+
+---
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

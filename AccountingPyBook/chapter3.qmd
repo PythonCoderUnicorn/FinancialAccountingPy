@@ -1,0 +1,597 @@
+
+# Process Cost Accounting
+
+Process cost accounting is about the process involved in mass producing products that are identical or similar in nature. To calculate production costs the process costing is used.
+
+Process cost accounting involves:
+
+- process costing for manufacturing and service companies
+- determining the similarities and differences between job-order cost and process cost systems
+- operations costing
+- cost flow
+- manufacturing costs assignment (journal entries)
+- weighted average method 
+- physical unit flow 
+- equivalent units of production
+- unit production costs
+- cost reconciliation schedule
+- production cost report
+- equivalent units and production cost report
+- FIFO method, equivalent units, weighted average 
+
+
+## Process Cost Systems 
+
+Manufacturing `process cost systems` is to apply costs to similar products that are mass produced in a continuous way. 
+
+Similarities and differences between job order and process cost systems is that costs are tracked through the series of manufacturing processes and not by individual jobs. 
+
+
+Job order cost flow:
+
+1. direct materials, labor, manufacturing overhead
+2. work in process inventory
+3. finished goods inventory
+4. cost of goods sold
+
+Process cost flow:
+
+1. direct materials, labor, manufacturing overhead
+2. work in process (department A)
+3. work in process (department B)
+4. finished goods inventory
+5. cost of goods sold
+
+
+The similarities of job order cost and process cost systems, are manufacturing cost elements, both have costing systems track materials, labor and overhead. The accumulation of the costs of materials, labor and overhead are all debited costs. Lastly, the flow of costs are debited in both costing system but the methods used do differ between them. 
+
+
+The differences are the number of work in process accounts used, job order costing uses only one process account. The documents used to track costs, as process costs system summarizes the costs in a production cost report for each department and job cost systems tally individual jobs then sums the cost in a cost sheet when the job is finished. The process cost system the unit cost is the total manufacturing costs for the period divided by the units produced during the period, unlike job cost system  job cost divided by units produced.
+
+
+- `Operating costs` is the hybrid approach using both process cost and job order cost systems.
+
+
+## Manufacturing costs 
+
+The accumulation of costs for materials, labor and manufacturing overhead is debited for all raw materials when materials are purchased. Factory labor is debited when costs are incurred, and likewise for debit overhead costs. 
+
+
+- All raw materials used for production are the material costs
+- time tickets could be used in a factory labor cost for process cost system
+- manufacturing overhead costs can be determined by looking at the machine time used (not direct labor), as this provides a clear overhead cost.
+
+
+### Proccess costing example
+
+A company makes a generic beverage, using two processes such as blending and bottling.
+In June the raw materials used cost $18,000 for blending and 4,000 dollars for bottling.
+Factory labor costs were $12,000 for blending, 5,000 for bottling. Manufacturing overhead costs were 6,000 dollars for blending and 2500 dollars for bottling. Units completed at a cost of 19,000 dollars in the blending department transferred to bottling department. Units completed at a cost of 11,000 dollars in the bottling department transferred to the finished goods inventory. Journalize the assignment of these costs to the two processes and the transfer of the units.
+
+Make a dictionary for the costs. The abbreviation 'wip' is for work in process.
+
+```{python}
+bev_costs = {
+  # raw materials
+  'raw_wip_blending': 18e3,
+  'raw_wip_bottling': 4e3,
+  # factory labor
+  'labor_wip_blending': 12e3,
+  'labor_wip_bottling': 5e3,
+  # manufacturing
+  'man_wip_blending': 6e3,
+  'man_wip_bottling': 2500,
+  
+  'blending_dep': 19e3,
+  'bottling_dep': 11e3
+}
+
+```
+
+Calculate the materials used, factory labor to production and overhead to production.
+
+```{python}
+
+def process_costing( dict):
+  
+  raw_invent = dict['raw_wip_blending'] + dict['raw_wip_bottling']
+  factory_labor = dict['labor_wip_blending'] + dict['labor_wip_bottling']
+  manuf_overhead = dict['man_wip_blending'] + dict['man_wip_bottling']
+  
+  print(" -- Process Costing --")
+  print("Raw materials inventory = ","."*5,"${:,}".format(raw_invent))
+  print("Factory labor = ","."*15,"${:,}".format(factory_labor))
+  print("Manufacturing overhead = ", "."*7,"${:,}".format(manuf_overhead))
+  print("Work in process blending = ","."*4,"${:,}".format(dict['blending_dep']))
+  print("Work in process bottling = ","."*4,"${:,}".format(dict['bottling_dep']))
+  
+
+process_costing( bev_costs)
+```
+
+
+### Equivalent units
+
+Process cost system uses `equivalent units of production` which measures the work done during the period in completed units. 
+
+
+the formula:
+
+- `conversion costs` is the sum of labor costs and overhead costs
+- units completed and transferred out (materials) + equivalent units of ending work in process (materials) = equivalent units of production (materials)
+- units completes and transferred out (conversion costs) + equivalent units of ending work in process (conversion costs) = equivalent units of production (conversion costs)
+
+
+#### Quick example
+
+Calculate the cost of teachers at a college for each full time student.
+
+- total cost of teachers $9,000,000
+- part time students = 900
+- full time students = 1,000
+- part time students take 60% of the classes of a full time student 
+
+```{python}
+PT= 900
+FT= 1000
+teacher_cost = 9e6
+
+FT_equiv = PT + (0.60 * FT)
+total_teacher_cost = teacher_cost/ FT_equiv
+print(f"The cost of teacher per FT student = ${total_teacher_cost}")
+```
+
+### Weighted average method
+
+Reusing the beverage company from before, the blending department has an ending work in process of 4,000 units which account for 60% of the materials, labor and overhead. Period output for completion and transfer (to another department in the manufacturing process) is not specified in this example but is added to the calculation.
+
+```{python}
+units = 4000
+percent = 0.60
+period_output = 0
+
+equivalent_units = units * percent + period_output
+print(f"Equivalent units of production = {equivalent_units} units")
+```
+
+
+
+### Quick example
+
+A company has start of process and end of process, where all raw materials for production are accounted for at the beginning of manufacturing, therefore shows materials 100% accounted for while conversion costs is part of the manufacturing process. 
+
+- wip = work in process
+
+| stage         | units     |   materials | conversion costs  |
+|---------------|-----------|-------------|-------------------|
+| wip June 1    | 100,000   | 100%        | 70%               |
+| started production| 800,000 |           |                   |
+| total units   | 900,000   |             |                   |
+| units transferred | 700,000 |           |                   |
+| wip June 30   | 200,000   | 100%        | 70%               |
+| total units   | 900,000   |             |                   |
+
+
+
+```{python}
+units = 200e3
+percent = [1.0, 0.6]
+period_output = 700e3
+
+equivalent_units = (units * percent[0]) + period_output
+equivalent_units_2 = (units * percent[1]) + period_output
+
+print("Equivalent units of production (materials) = {:,} units".format(equivalent_units))
+print("Equivalent units of production (conversion costs) = {:,} units".format(equivalent_units_2))
+```
+
+## Production cost report 
+
+A `production cost report` is the key document management uses to understand the activities in a department, showing the production quantities and cost data for each department.
+Requirements for this report are:
+
+- calculation for physical unit flow
+- calculate the equivalent units of production
+- calculate the unit production costs
+- prepare the cost reconciliation schedule
+
+This section will continue with the company used in previous examples. This example company makes breakfast pancakes which has different departments.
+
+
+### Physical flow
+
+`Physical units` are the actual units to be accounted for during a period, regardless of any work performed.
+To keep track of these units, add units that got started or transferred into production during the time period, these units are called `total units to be accounted for`.
+
+
+Using a nested list that has 2 data dictionaries to hold data about the company's mixing department. This data object looks like a JSON data object, you can convert nested lists into dataframes but we will just use this nested list for the functions as this is flexible and looks similar to a Excel spreadsheet (in a way). 
+
+
+Normally we have seen simple dictionaries where there is a single key and a value pair, but here we have a list that stores 2 dictionaries, each which has a single key then the value is a dictionary instead of a single value.
+To access elements from a nested list array and get items from a dictionary, you need to slice the list, then specify which dictionary key, then the name of the nested dictionary key to get the value. 
+
+- mixing_data has 2 elements which are both dictionaries `[ {}, {} ]`, _remember zero index_
+- name the dictionary key `[0]['units']`
+- name the nested dictionary key `[0]['units']['wip_start']` to get the value
+
+
+
+```{python}
+mixing_data = [
+  {
+    'units': {
+        'wip_start': 100e3,                   # June 1
+        'direct_materials_percent': 1,
+        'conversion_costs_percent': 0.70,
+        'units_in_production': 800e3,
+        'units_completed_transferred': 700e3,
+        'wip_end':200e3,                       # June 30
+        'wip_end_materials_percent': 1,
+        'wip_end_conversion_costs_percent':  0.60
+      }
+    },
+    {
+    'costs': {
+        'wip_start_direct_materials': 50e3,
+        'wip_start_conversion_costs': 35e3,
+        'cost_wip_start': 85e3,
+        'costs_direct_materials': 400e3,
+        'costs_conversion_costs': 170e3,
+        'costs_incurred': 570e3
+      }  
+    }
+]
+
+```
+
+
+
+Physical unit flow calculation
+
+```{python}
+
+def physical_flow( mixing_data= list):
+  
+  # units to be accounted for = wip_start + started_transferred
+  tot_units = mixing_data[0]['units']['wip_start'] + mixing_data[0]['units']['units_in_production']
+  
+  # units accounted for = completed_transferred + wip_end
+  units_acc = mixing_data[0]['units']['units_completed_transferred'] + mixing_data[0]['units']['wip_end']
+  
+  print("-- Physical Unit Flow --")
+  print("Total units accounted for  ","."*5,"{:,}".format(tot_units))
+  print("Total units   ", "."*18,"{:,}".format(tot_units))
+  
+
+physical_flow(mixing_data)
+```
+
+
+### Equivalent units: Production
+
+After determining the physical flow of units next step is to measure the department's productivity in equivalent units of production. For this example company, two calculations are required as there is mixing materials and the conversion costs.
+
+
+```{python}
+
+def equivalent_units(cost_data= list):
+  
+  materials_equiv_cost = (mixing_data[0]['units']['wip_end'] * mixing_data[0]['units']['wip_end_materials_percent']) + mixing_data[0]['units']['units_completed_transferred']
+  
+  conv_costs_equiv_cost = (mixing_data[0]['units']['wip_end'] * mixing_data[0]['units']['wip_end_conversion_costs_percent']) + mixing_data[0]['units']['units_completed_transferred']
+
+  print("-- Equivalent Units --")
+  print("Equivalent units (materials) = ","."*12,"{:,}".format(materials_equiv_cost))
+  print("Equivalent units (conversion costs) = ","."*5,"{:,}".format(conv_costs_equiv_cost))
+  
+  
+equivalent_units(mixing_data)
+```
+
+
+### Unit Production Costs
+
+Now we need to calculate the `unit production costs` which are costs expressed in terms of equivalent units of production. If equivalent units of production are different for materials and for conversion costs, then 3 unit costs are calculated:
+
+- material costs
+- conversion costs
+- total manufacturing cost
+
+Calculation of the total materials cost for pancakes
+
+```{python}
+def production_costs( cost_data= list):
+  
+  materials_equiv_cost = (mixing_data[0]['units']['wip_end'] * mixing_data[0]['units']['wip_end_materials_percent']) + mixing_data[0]['units']['units_completed_transferred']
+  
+  tot_material_cost = mixing_data[1]['costs']['wip_start_direct_materials'] + mixing_data[1]['costs']['costs_direct_materials']
+  
+  unit_material_cost = tot_material_cost / materials_equiv_cost
+  
+  tot_conv_cost = mixing_data[1]['costs']['wip_start_conversion_costs'] + mixing_data[1]['costs']['costs_conversion_costs']
+  
+  conv_costs_equiv_cost = (mixing_data[0]['units']['wip_end'] * mixing_data[0]['units']['wip_end_conversion_costs_percent']) + mixing_data[0]['units']['units_completed_transferred']
+  
+  unit_conv_cost = tot_conv_cost / conv_costs_equiv_cost
+  
+  tot_manuf_cpu = unit_material_cost + unit_conv_cost
+  
+  transf_out = mixing_data[0]['units']['units_completed_transferred'] * tot_manuf_cpu
+  tot_cost_recon = (mixing_data[0]['units']['wip_end'] * unit_material_cost) + ((mixing_data[0]['units']['wip_end'] * mixing_data[0]['units']['wip_end_conversion_costs_percent']) * unit_conv_cost)
+  
+  recon_sched = transf_out + tot_cost_recon
+  
+  print("-- Unit Production Costs --")
+  print("Total materials costs  ","."*15,"${:,}".format(tot_material_cost))
+  print("Unit materials cost  ","."*17,"${:,}\n".format(unit_material_cost))
+  
+  print("Total conversion costs ","."*15,"${:,}".format(tot_conv_cost))
+  print("Unit conversion costs  ","."*17,"${:,}".format(unit_conv_cost))
+  print("Total manufacturing cost per unit  ","."*5,"${:,}\n".format(tot_manuf_cpu))
+  
+  print("Cost reconciliation schedule  ","."*5,"${:,}".format(recon_sched))
+  
+
+production_costs( mixing_data)
+
+```
+
+
+### Cost Reconciliation Schedule
+
+Now is the stage where the cost of goods transferred out of one department and into another are determined. 
+
+```{python}
+def cost_reconciliation( cost_data= list):
+  tot_cost = mixing_data[1]['costs']['cost_wip_start'] + mixing_data[1]['costs']['costs_incurred']
+  
+  print("-- Cost Reconciliation --")
+  print("Total costs charged to department = ","."*5,"${:,}".format(tot_cost))
+  
+cost_reconciliation(mixing_data)
+```
+
+For this company example, $655,000 were the costs for the mixing department.
+
+
+
+### Production Cost Report
+
+The production cost report is an internal document use by management that shows the production quantity and cost data for a department. There are 4 steps in preparing a production cost report:
+
+- prepare a physical unit schedule
+- calculate the equivalent units
+- calculate the unit costs
+- prepare a cost reconciliation schedule
+
+
+
+> This book is showing only Python code and output, but since accounting is in the business sector, you will obviously want to use your Python skills and convert your own `.py` file into a Microsoft Word document or presentation. By knowing Python you can extend these skills to using libraries such as [python-docx](https://python-docx.readthedocs.io/en/latest/) which makes and reads Word Documents. Once you know Python you can usually type in Google or any other web search engine for "python + _search terms_" and will get results. Python code now is what you are seeing, but on your own you can make your python files into reproducible professional documents, dashboards and even web apps.
+
+
+Since each of the steps has already been calculated above using functions, we can 
+just copy our call our functions and get the output of the calculations.
+
+```{python}
+print("-- PRODUCTION COST REPORT --")
+print('')
+physical_flow(mixing_data)
+print('')
+equivalent_units(mixing_data)
+print('')
+production_costs( mixing_data)
+print('')
+cost_reconciliation(mixing_data)
+
+```
+
+The wonderful thing about functions is that you spend the time making them, but once you do you benefit from it.
+Making this report output was really easy, just calling the functions already created.
+
+
+
+### Cost Report: other
+
+This example company that makes pancakes has 3 departments: mixing, baking and freezing then packaging. 
+The costs of completed units from the mixing department are treated as material costs in the baking department. 
+`Transferred-in cost` is the component treated the same way as any other cost component in the equivalent units of production and the cost per equivalent unit of production.
+
+
+Cost data for the freezing and packaging department. By copying the list object **mixing_data**, we can reuse the structure for new values for the packaging department. Changes do need to be made to this nested list object, but overall less work involved.
+
+```{python}
+
+freezing_data = [
+  {
+    'units': {
+        'wip_start': 200e3,                   # June 1
+        'transferred_in_percent_complete': 1,
+        'direct_materials_percent_complete': 0,
+        'conversion_percent_complete': 0.90,
+        'units_completed_transferred': 700e3,
+        'units_in_production_complete': 800e3,
+        'wip_end':  100e3,                       # June 30
+        'wip_end_transf_complete_prct': 1,
+        'wip_end_direct_material_prct':  0,
+        'wip_end_conversion_complete': 0.75
+      }
+    },
+    {
+    'costs': {
+        'wip_start_direct_materials': 170e3,
+        'transferred_in_percent_complete': 1,
+        'direct_materials_percent_complete': 0,
+        'direct_materials_complete': 0,
+        'conversion_percent_complete': 0.90,
+        'conversion_complete': 36e3,
+        'cost_wip_start': 206e3,
+        'costs_transferred_in': 595e3,
+        'costs_direct_materials': 120e3,
+        'costs_conversion_costs': 139e3,
+        'total_costs': 854e3,
+      }  
+    }
+    ]
+
+```
+
+### Production Cost Report 
+
+
+```{python}
+
+def prod_cost_report(cost_data= list):
+  print(" --- Production Cost Report ---\n")
+  
+  # --
+  units_acc_transf = freezing_data[0]['units']['units_in_production_complete'] + freezing_data[0]['units']['wip_end']
+  
+  tot_units = freezing_data[0]['units']['wip_start'] + freezing_data[0]['units']['units_completed_transferred']
+  
+  units_acc_materials = freezing_data[0]['units']['units_in_production_complete'] + freezing_data[0]['units']['direct_materials_percent_complete']
+  
+  prct= freezing_data[0]['units']['wip_end']  * freezing_data[0]['units']['wip_end_conversion_complete']
+  units_acc_conv = freezing_data[0]['units']['units_in_production_complete'] + prct
+  
+  cost_transf = freezing_data[1]['costs']['wip_start_direct_materials'] + freezing_data[1]['costs']['costs_transferred_in']
+  cost_materials = freezing_data[1]['costs']['direct_materials_complete'] + freezing_data[1]['costs']['costs_direct_materials']
+  cost_conv = freezing_data[1]['costs']['conversion_complete'] + freezing_data[1]['costs']['costs_conversion_costs']
+  tot_unit_costs = cost_transf + cost_materials + cost_conv
+  
+  unit_cost_transf = cost_transf / units_acc_transf
+  unit_cost_materials = cost_materials / units_acc_materials
+  unit_costs_conv = cost_conv /units_acc_conv 
+  tot_unit_costs_2 = unit_cost_transf + unit_cost_materials + unit_costs_conv
+  total_costs = freezing_data[1]['costs']['cost_wip_start'] + freezing_data[1]['costs']['total_costs']
+  
+  cost_acc_transf = tot_unit_costs_2 * units_acc_materials
+  wip_end_transf = freezing_data[0]['units']['wip_end'] * unit_cost_transf
+  wip_end_material = freezing_data[0]['units']['wip_end_direct_material_prct'] * unit_cost_materials 
+  wip_end_conv =  prct * unit_costs_conv
+  tot_cost_recon = wip_end_transf + wip_end_material + wip_end_conv + cost_acc_transf
+
+  
+  print("-- Physical Unit Flow --")
+  print("Total units", "."*25,"{:,}".format(tot_units))
+  print("Total units accounted for transferred ","."*9,"{:,}".format(units_acc_transf))
+  print("Total units accounted for direct materials","."*5,"{:,}".format(units_acc_materials))
+  print("Total units accounted for conversion costs","."*5,"{:,}".format(units_acc_conv))
+    
+
+  print("\n-- Unit Costs --")
+  print("Total unit costs transferred ","."*9,"${:,}".format(cost_transf))
+  print("Total unit costs direct materials","."*5,"${:,}".format(cost_materials))
+  print("Total unit conversion costs ","."*9,"${:,}".format(cost_conv))
+  print("Total unit costs","."*35,"${:,}".format(tot_unit_costs))
+    
+  print("Unit costs transferred","."*9,"${:,}".format(unit_cost_transf))
+  print("Unit costs direct materials","."*5,"${:,}".format(unit_cost_materials))
+  print("Unit conversion costs","."*9,"${:,}".format(unit_costs_conv))
+  print("Unit costs total","."*28,"${:,}".format(tot_unit_costs_2))    
+  print("Total costs","."*40,"${:,}".format(total_costs))
+    
+  print("\n --- Cost Reconciliation Schedule ---")
+  print("Costs accounted for transferred","."*9,"${:,}".format(cost_acc_transf))
+  print("Work in process end transferred","."*9,"${:,}".format(wip_end_transf))    
+  print("Work in process end materials","."*11,"${:,}".format(wip_end_material))
+  print("Work in process end conversion costs","."*5,"${:,}".format(wip_end_conv))
+  print("Total costs accounted for","."*27,"${:,}".format(tot_cost_recon))
+    
+
+
+#-----
+prod_cost_report(freezing_data)
+    
+    
+```
+
+
+
+## Equivalent Units: FIFO
+
+`FIFO` is first in, first out method for calculating equivalent units. The FIFO method for costs assumes that the work in process completes before new work is initiated.
+Equivalent units for FIFO are:
+
+- process inventory is finished work in units
+- units in production have been completed
+- work started but not complete is partially completed, perpetually work in process
+
+The company for this example makes home furnishings.
+
+```{python}
+fifo_data = {
+    'units_start': {
+      'wip_start_complete_percent': 0.40,
+      'wip_start_complete': 500,
+      'units_transf_prod': 8e3,
+      'total_units':  8500
+      },
+    'units_end': {
+      'wip_end_complete_transf': 8100,
+      'wip_end_complete_percent': 0.75,
+      'wip_end': 400,
+      'total_units':  8500
+      }
+}
+
+
+```
+
+Equivalent units
+
+```{python}
+
+def fifo_method(data= dict):
+  
+  begin_inv =  fifo_data['units_start']['wip_start_complete'] * (1 - fifo_data['units_start']['wip_start_complete_percent'])
+  
+  units_started_finished = fifo_data['units_end']['wip_end_complete_transf'] - fifo_data['units_start']['wip_start_complete']
+  
+  equiv_units = fifo_data['units_end']['wip_end'] * fifo_data['units_end']['wip_end_complete_percent']
+  
+  tot_equiv = begin_inv +units_started_finished +equiv_units
+  
+  print("-- Equivalent Units: FIFO --")
+  print("beginning inventory required to complete","."*5,"{:,} units".format(begin_inv))
+  print("units started & completed","."*19,"{:,} units".format(units_started_finished ))
+  print("equivalent units","."*28,"{:,} units".format(equiv_units ))
+  print("Total equivalent units","."*40," {:,} units".format(tot_equiv ))
+  
+fifo_method(fifo_data)
+```
+
+
+
+---
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
