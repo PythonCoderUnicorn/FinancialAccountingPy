@@ -181,16 +181,16 @@ def cvp_income_statement( cost_data: dict, target_income: int, tax_rate_percent:
   cmr = (cmpu / (sales/units) )
   
   print("\n --- CVP Income Statement ---")
-  print("Sales ","."*10,"{:,} units".format(units) )
-  print("Sales total ","."*10,"${:,}".format(sales) )
-  print(".... ${:,} per unit".format(price))
-  print("Total variable expenses ","."*10,"${:,}".format(total_var_exp))
-  print("Contribution margin per unit = ${:,}".format(cmpu))
-  print("Contribution margin ","."*10, "${:,}".format(contrib_margin))
-  print("Contribution margin ratio = {:,}%".format(cmr * 100))
+  print("Sales ....................................... {:,} units".format(units) )
+  print("Sales total ................................ ${:,}".format(sales) )
+  print("............. ${:,} per unit".format(price))
+  print("Total variable expenses .................... ${:,}".format(total_var_exp))
+  print("Contribution margin per unit ............... ${:,}".format(cmpu))
+  print("Contribution margin ........................ ${:,}".format(contrib_margin))
+  print("Contribution margin ratio .................. {:,}%".format(cmr * 100))
   print("  (${:.2f} of every $1 can go to fixed costs & operating income)".format(cmr))
-  print("Total fixed expenses ","."*10,"${:,}".format(total_fixed_exp))
-  print("Operating income ","."*30,"${:,}".format(op_income))
+  print("Total fixed expenses ....................... ${:,}".format(total_fixed_exp))
+  print("Operating income ........................... ${:,}".format(op_income))
   
   
   # ------ BREAK EVEN POINT
@@ -205,56 +205,54 @@ def cvp_income_statement( cost_data: dict, target_income: int, tax_rate_percent:
   required_sales_dollars = (total_fixed_exp + toi) / cmr
   
   print("\n--- Target Operating Income ----")
-  print("Required sales (units) = {:,}".format(required_sales_units))
-  print("Required sales = ${:,}".format(required_sales_dollars))
+  print("Required sales (units) ..................... {:,}".format(required_sales_units))
+  print("Required sales ............................. ${:,}".format(required_sales_dollars))
   
   tax_rate = tax_rate_percent/100
   op_income_post_tax = total_fixed_exp + toi / (1 - tax_rate)
   req_sales_post_tax_units = op_income_post_tax / cmpu
   req_sales_post_tax_dollars = op_income_post_tax / tax_rate
-  print("Target operating income after taxes = ${:,}".format(op_income_post_tax ))
-  print("Required sales after taxes = {:,} units".format(req_sales_post_tax_units))
-  print("Required sales after taxes = ${:,} ".format(req_sales_post_tax_dollars))
+  print("Target operating income after taxes ................. ${:,}".format(op_income_post_tax ))
+  print("Required sales after taxes .......................... {:,} units".format(req_sales_post_tax_units))
+  print("Required sales after taxes .......................... ${:,} ".format(req_sales_post_tax_dollars))
 
   # --- margin of safety (mos)
   mos_dollars = sales - break_even_dollars
   mos_ratio = (mos_dollars) / sales
   print("\n--- Margin of Safety ---")
-  print("Margin of safety = ${:,}".format(mos_dollars))
-  print("Margin of safety ratio = {:,}%".format(mos_ratio *100))
-
-
-
+  print("Margin of safety ..................... ${:,}".format(mos_dollars))
+  print("Margin of safety ratio ............... {:,}%".format(mos_ratio *100))
 
   print("\n ====== Company Cost Structure - Comparison ======")
   contrib_margin_1 = cost_data['company_1']['sales'] - cost_data['company_1']['variable_costs']
   contrib_margin_2 = cost_data['company_2']['sales'] - cost_data['company_2']['variable_costs']
-  print("contribution margin (company 1) = ${:,}".format( contrib_margin_1))
-  print("contribution margin (company 2) = ${:,}".format( contrib_margin_2))
+  
+  print("contribution margin (company 1) ................. ${:,}".format( contrib_margin_1))
+  print("contribution margin (company 2) ................. ${:,}".format( contrib_margin_2))
   
   contrib_margin_ratio_1 = contrib_margin_1 / cost_data['company_1']['sales']
   contrib_margin_ratio_2 = contrib_margin_2 / cost_data['company_2']['sales']
-  print("contribution margin ratio (company 1) = {:,}".format( contrib_margin_ratio_1))
-  print("contribution margin ratio (company 2) = {:,}".format( contrib_margin_ratio_2))
+  print("\ncontribution margin ratio (company 1) ............ {:,}".format( contrib_margin_ratio_1))
+  print("contribution margin ratio (company 2) ............ {:,}".format( contrib_margin_ratio_2))
   
   be_company1 = cost_data['company_1']['fixed_costs'] / contrib_margin_ratio_1
   be_company2 = cost_data['company_2']['fixed_costs'] / contrib_margin_ratio_2
-  print("Break even point (company 1) = ${:,}".format( be_company1))
-  print("Break even point (company 2) = ${:,}".format( be_company2))
+  print("\nBreak even point (company 1) .................. ${:,}".format( be_company1))
+  print("Break even point (company 2) .................... ${:,}".format( be_company2))
   
   # margin of safety (mos)
   mos_ratio_1 = (cost_data['company_1']['sales'] - be_company1) / cost_data['company_1']['sales']
   mos_ratio_2 = (cost_data['company_2']['sales'] - be_company2) / cost_data['company_2']['sales']
-  print("Margin of safety ratio (company 1) = {:,}".format( mos_ratio_1))
-  print("Margin of safety ratio (company 2) = {:,}".format( mos_ratio_2))
+  print("\nMargin of safety ratio (company 1) ................. {:,}".format( mos_ratio_1))
+  print("Margin of safety ratio (company 2) ................... {:,}".format( mos_ratio_2))
   
   op_income_1 = contrib_margin_1  - cost_data['company_1']['fixed_costs']
   op_income_2 = contrib_margin_2  - cost_data['company_2']['fixed_costs']
   
   operating_leverage_1 = contrib_margin_1 / op_income_1
   operating_leverage_2 = contrib_margin_2 / op_income_2
-  print("Degree of operating leverage (company 1) = {:.2f}".format( operating_leverage_1))
-  print("Degree of operating leverage (company 2) = {:.2f}".format( operating_leverage_2))
+  print("\nDegree of operating leverage (company 1) .............. {:.2f}".format( operating_leverage_1))
+  print("Degree of operating leverage (company 2) ................ {:.2f}".format( operating_leverage_2))
   
 # ---------------
 
@@ -303,39 +301,49 @@ companies = {
 ```
 
 
+
+
 ### Effect of CMR
 
 - `operating leverage` is the level a company's operating income reacts to a given change in sales. 
 
 ```{python}
-cmr_company1 = companies['company1']['contribution_margin'] / companies['company1']['sales']
-cmr_company2 = companies['company2']['contribution_margin'] / companies['company2']['sales']
+def cmr( dict ):
+  company1 = list(dict['company1'].values())
+  company2 = list(dict['company2'].values())
+  
+  # contribution_margin / sales
+  cmr_company1 = company1[2] / company1[0]
+  cmr_company2 = company2[2] / company2[0]
 
-print("\nContribution margin ratio (company 1) = ",cmr_company1)
-print("Contribution margin ratio (company 2) = ",cmr_company2)
+  print("Contribution margin ratio (company 1) ......... {:,} ".format(cmr_company1))
+  print("Contribution margin ratio (company 2) ......... {:,} ".format(cmr_company2))
 
-# break even point
-be_company1 = companies['company1']['fixed_costs'] / cmr_company1
-be_company2 = companies['company2']['fixed_costs'] / cmr_company2
+  # break even point: 'fixed_costs'
+  be_company1 = company1[3] / cmr_company1
+  be_company2 = company2[3] / cmr_company2
 
-print("\nBreak even point (company 1) = ${:,}".format(be_company1))
-print("Break even point (company 2) = ${:,}".format(be_company2))
+  print("\nBreak even point (company 1) ............ ${:,}".format(be_company1))
+  print("Break even point (company 2) ............ ${:,}".format(be_company2))
 
-# margin of safety
-magin_safe_1 = (companies['company1']['sales'] - be_company1) / companies['company1']['sales']
-magin_safe_2 = (companies['company2']['sales'] - be_company2) / companies['company2']['sales']
+  # margin of safety
+  magin_safe_1 = (company1[0] - be_company1) / company1[0]
+  magin_safe_2 = (company2[0] - be_company2) / company2[0]
 
-print("\nMargin of safety ratio (company 1) = ", magin_safe_1)
-print("Margin of safety ratio (company 2) = ", magin_safe_2)
+  print("\nMargin of safety ratio (company 1) ............ {:,} ".format( magin_safe_1))
+  print("Margin of safety ratio (company 2) ............ {:,} ".format( magin_safe_2))
 
+  # operating leverage
+  op_lev_1 = company1[2] / company1[-1]
+  op_lev_2 = company2[2] / company2[-1]
 
-# operating leverage
-op_lev_1 = companies['company1']['contribution_margin'] / companies['company1']['operating_income']
-op_lev_2 = companies['company2']['contribution_margin'] / companies['company2']['operating_income']
-
-print("\nDegree of operating leverage (company 1) = {:.2f}".format(op_lev_1))
-print("Degree of operating leverage (company 2) = {:.2f}".format(op_lev_2))
+  print("\nDegree of operating leverage (company 1) ........... {:.2f}".format(op_lev_1))
+  print("Degree of operating leverage (company 2) ........... {:.2f}".format(op_lev_2))
+  
+  
+cmr( companies )
 ```
+
 
 - For every 1 dollar of sales, company 2 makes 80 cents 
 to contribution margin (added to operating income)

@@ -88,22 +88,31 @@ bev_costs = {
 
 ```
 
+
+```{python}
+list(bev_costs.values())
+```
+
+
 Calculate the materials used, factory labor to production and overhead to production.
 
 ```{python}
 
 def process_costing( dict):
-  
-  raw_invent = dict['raw_wip_blending'] + dict['raw_wip_bottling']
-  factory_labor = dict['labor_wip_blending'] + dict['labor_wip_bottling']
-  manuf_overhead = dict['man_wip_blending'] + dict['man_wip_bottling']
+  # get the dictionary values as an array and use the index of elements
+  d = list(dict.values())
+  raw_invent = d[0] + d[1]
+  factory_labor = d[2] + d[3]
+  manuf_overhead = d[4] + d[5]
+  blending = dict['blending_dep']
+  bottle = dict['bottling_dep']
   
   print(" -- Process Costing --")
-  print("Raw materials inventory = ","."*5,"${:,}".format(raw_invent))
-  print("Factory labor = ","."*15,"${:,}".format(factory_labor))
-  print("Manufacturing overhead = ", "."*7,"${:,}".format(manuf_overhead))
-  print("Work in process blending = ","."*4,"${:,}".format(dict['blending_dep']))
-  print("Work in process bottling = ","."*4,"${:,}".format(dict['bottling_dep']))
+  print("Raw materials inventory ............ ${:,}".format(raw_invent))
+  print("Factory labor ...................... ${:,}".format(factory_labor))
+  print("Manufacturing overhead ............. ${:,}".format(manuf_overhead))
+  print("Work in process blending ........... ${:,}".format(blending ))
+  print("Work in process bottling ........... ${:,}".format(bottle ))
   
 
 process_costing( bev_costs)
@@ -132,14 +141,22 @@ Calculate the cost of teachers at a college for each full time student.
 - part time students take 60% of the classes of a full time student 
 
 ```{python}
-PT= 900
-FT= 1000
-teacher_cost = 9e6
+teachers = {'PartTime': 900, 'FullTime': 1000,'Cost': 9e6,'PT_percent': 0.6}
 
-FT_equiv = PT + (0.60 * FT)
-total_teacher_cost = teacher_cost/ FT_equiv
-print(f"The cost of teacher per FT student = ${total_teacher_cost}")
+
+def teacher_cost( dict):
+  pt = dict['PartTime']
+  ft = dict['FullTime']
+  cost = dict['Cost']
+  prct = dict['PT_percent']
+  FT_equiv = pt + (prct * ft)
+  total_teacher_cost = cost/ FT_equiv
+  print("The cost of teacher per FT student = ${:,}".format(total_teacher_cost))
+  
+teacher_cost( teachers )
 ```
+
+
 
 ### Weighted average method
 
@@ -217,53 +234,47 @@ To access elements from a nested list array and get items from a dictionary, you
 
 
 ```{python}
-mixing_data = [
-  {
-    'units': {
-        'wip_start': 100e3,                   # June 1
-        'direct_materials_percent': 1,
-        'conversion_costs_percent': 0.70,
-        'units_in_production': 800e3,
-        'units_completed_transferred': 700e3,
-        'wip_end':200e3,                       # June 30
-        'wip_end_materials_percent': 1,
-        'wip_end_conversion_costs_percent':  0.60
-      }
+mixing_data = {
+  'units': {
+    'wip_start': 100e3,                   # June 1
+    'direct_materials_percent': 1,
+    'conversion_costs_percent': 0.70,
+    'units_in_production': 800e3,
+    'units_completed_transferred': 700e3,
+    'wip_end':200e3,                       # June 30
+    'wip_end_materials_percent': 1,
+    'wip_end_conversion_costs_percent':  0.60
     },
-    {
-    'costs': {
-        'wip_start_direct_materials': 50e3,
-        'wip_start_conversion_costs': 35e3,
-        'cost_wip_start': 85e3,
-        'costs_direct_materials': 400e3,
-        'costs_conversion_costs': 170e3,
-        'costs_incurred': 570e3
-      }  
-    }
-]
+  'costs': {
+    'wip_start_direct_materials': 50e3,
+    'wip_start_conversion_costs': 35e3,
+    'cost_wip_start': 85e3,
+    'costs_direct_materials': 400e3,
+    'costs_conversion_costs': 170e3,
+    'costs_incurred': 570e3
+    }  
+}
 
 ```
-
 
 
 Physical unit flow calculation
 
 ```{python}
 
-def physical_flow( mixing_data= list):
+def physical_flow( dict):
   
   # units to be accounted for = wip_start + started_transferred
-  tot_units = mixing_data[0]['units']['wip_start'] + mixing_data[0]['units']['units_in_production']
-  
+  tot_units = dict['units']['wip_start'] + dict['units']['units_in_production']
   # units accounted for = completed_transferred + wip_end
-  units_acc = mixing_data[0]['units']['units_completed_transferred'] + mixing_data[0]['units']['wip_end']
+  units_acc = dict['units']['units_completed_transferred'] + dict['units']['wip_end']
   
   print("-- Physical Unit Flow --")
-  print("Total units accounted for  ","."*5,"{:,}".format(tot_units))
-  print("Total units   ", "."*18,"{:,}".format(tot_units))
+  print("Total units accounted for  ........ {:,}".format(units_acc))
+  print("Total units ....................... {:,}".format(tot_units))
   
 
-physical_flow(mixing_data)
+physical_flow( mixing_data )
 ```
 
 
@@ -272,17 +283,24 @@ physical_flow(mixing_data)
 After determining the physical flow of units next step is to measure the department's productivity in equivalent units of production. For this example company, two calculations are required as there is mixing materials and the conversion costs.
 
 
+
+
 ```{python}
 
-def equivalent_units(cost_data= list):
+def equivalent_units( dict ):
   
-  materials_equiv_cost = (mixing_data[0]['units']['wip_end'] * mixing_data[0]['units']['wip_end_materials_percent']) + mixing_data[0]['units']['units_completed_transferred']
-  
-  conv_costs_equiv_cost = (mixing_data[0]['units']['wip_end'] * mixing_data[0]['units']['wip_end_conversion_costs_percent']) + mixing_data[0]['units']['units_completed_transferred']
+  units = list(dict['units'].values())
+ 
+  wip_end = units[-3] 
+  wip_end_materials = units[-2]
+  units_completed_transferred = units[-4]
+  wip_end_conversion_costs_percent = units[-1]
+  materials_equiv_cost = (wip_end * wip_end_materials) + units_completed_transferred
+  conv_costs_equiv_cost = (wip_end * wip_end_conversion_costs_percent) + units_completed_transferred
 
   print("-- Equivalent Units --")
-  print("Equivalent units (materials) = ","."*12,"{:,}".format(materials_equiv_cost))
-  print("Equivalent units (conversion costs) = ","."*5,"{:,}".format(conv_costs_equiv_cost))
+  print("Equivalent units (materials) .................... {:,}".format(materials_equiv_cost))
+  print("Equivalent units (conversion costs) ............. {:,}".format(conv_costs_equiv_cost))
   
   
 equivalent_units(mixing_data)
@@ -299,40 +317,45 @@ Now we need to calculate the `unit production costs` which are costs expressed i
 
 Calculation of the total materials cost for pancakes
 
+
 ```{python}
-def production_costs( cost_data= list):
+def production_costs( dict ):
   
-  materials_equiv_cost = (mixing_data[0]['units']['wip_end'] * mixing_data[0]['units']['wip_end_materials_percent']) + mixing_data[0]['units']['units_completed_transferred']
+  units = list(dict['units'].values())
+
+  wip_end = units[-3]
+  wip_end_materials_percent = units[-2]
+  units_completed_transferred = units[4]
   
-  tot_material_cost = mixing_data[1]['costs']['wip_start_direct_materials'] + mixing_data[1]['costs']['costs_direct_materials']
+  materials_equiv_cost = (wip_end * wip_end_materials_percent) + units_completed_transferred
   
-  unit_material_cost = tot_material_cost / materials_equiv_cost
+  costs = list(dict['costs'].values())
   
-  tot_conv_cost = mixing_data[1]['costs']['wip_start_conversion_costs'] + mixing_data[1]['costs']['costs_conversion_costs']
+  wip_start_conversion_costs = costs[0]
+  costs_conversion_costs = costs[-2]
   
-  conv_costs_equiv_cost = (mixing_data[0]['units']['wip_end'] * mixing_data[0]['units']['wip_end_conversion_costs_percent']) + mixing_data[0]['units']['units_completed_transferred']
-  
-  unit_conv_cost = tot_conv_cost / conv_costs_equiv_cost
-  
+  tot_material_cost =  wip_start_conversion_costs + costs_conversion_costs
+  unit_material_cost = round(tot_material_cost / materials_equiv_cost, 2)
+  tot_conv_cost = wip_start_conversion_costs + costs_conversion_costs
+  conv_costs_equiv_cost = (wip_end * units[-1]) + units_completed_transferred
+  unit_conv_cost = round(tot_conv_cost / conv_costs_equiv_cost, 2)
   tot_manuf_cpu = unit_material_cost + unit_conv_cost
+  transf_out = units_completed_transferred * tot_manuf_cpu
   
-  transf_out = mixing_data[0]['units']['units_completed_transferred'] * tot_manuf_cpu
-  tot_cost_recon = (mixing_data[0]['units']['wip_end'] * unit_material_cost) + ((mixing_data[0]['units']['wip_end'] * mixing_data[0]['units']['wip_end_conversion_costs_percent']) * unit_conv_cost)
+  tot_cost_recon = (wip_end * unit_material_cost) + ((wip_end * units[-1]) * unit_conv_cost)
   
   recon_sched = transf_out + tot_cost_recon
   
   print("-- Unit Production Costs --")
-  print("Total materials costs  ","."*15,"${:,}".format(tot_material_cost))
-  print("Unit materials cost  ","."*17,"${:,}\n".format(unit_material_cost))
-  
-  print("Total conversion costs ","."*15,"${:,}".format(tot_conv_cost))
-  print("Unit conversion costs  ","."*17,"${:,}".format(unit_conv_cost))
-  print("Total manufacturing cost per unit  ","."*5,"${:,}\n".format(tot_manuf_cpu))
-  
-  print("Cost reconciliation schedule  ","."*5,"${:,}".format(recon_sched))
+  print("Total materials costs  ..................... ${:,}".format(tot_material_cost))
+  print("Unit materials cost  ....................... ${:,}\n".format(unit_material_cost))
+  print("Total conversion costs ..................... ${:,}".format(tot_conv_cost))
+  print("Unit conversion costs  ..................... ${:,}".format(unit_conv_cost))
+  print("Total manufacturing cost per unit  ......... ${:,}\n".format(tot_manuf_cpu))
+  print("Cost reconciliation schedule ............... ${:,}".format(recon_sched))
   
 
-production_costs( mixing_data)
+production_costs( mixing_data )
 
 ```
 
@@ -342,13 +365,16 @@ production_costs( mixing_data)
 Now is the stage where the cost of goods transferred out of one department and into another are determined. 
 
 ```{python}
-def cost_reconciliation( cost_data= list):
-  tot_cost = mixing_data[1]['costs']['cost_wip_start'] + mixing_data[1]['costs']['costs_incurred']
+def cost_reconciliation( dict ):
+  
+  costs = list(dict['costs'].values())
+  
+  tot_cost = costs[2] + costs[-1]
   
   print("-- Cost Reconciliation --")
-  print("Total costs charged to department = ","."*5,"${:,}".format(tot_cost))
+  print("Total costs charged to department ........... ${:,}".format(tot_cost))
   
-cost_reconciliation(mixing_data)
+cost_reconciliation( mixing_data )
 ```
 
 For this company example, $655,000 were the costs for the mixing department.
@@ -400,9 +426,7 @@ The costs of completed units from the mixing department are treated as material 
 Cost data for the freezing and packaging department. By copying the list object **mixing_data**, we can reuse the structure for new values for the packaging department. Changes do need to be made to this nested list object, but overall less work involved.
 
 ```{python}
-
-freezing_data = [
-  {
+freezing_data = {
     'units': {
         'wip_start': 200e3,                   # June 1
         'transferred_in_percent_complete': 1,
@@ -414,9 +438,7 @@ freezing_data = [
         'wip_end_transf_complete_prct': 1,
         'wip_end_direct_material_prct':  0,
         'wip_end_conversion_complete': 0.75
-      }
-    },
-    {
+      },
     'costs': {
         'wip_start_direct_materials': 170e3,
         'transferred_in_percent_complete': 1,
@@ -430,77 +452,93 @@ freezing_data = [
         'costs_conversion_costs': 139e3,
         'total_costs': 854e3,
       }  
-    }
-    ]
-
+}
 ```
+
+
 
 ### Production Cost Report 
 
+A function for production cost report using a data dictionary.
 
 ```{python}
 
-def prod_cost_report(cost_data= list):
+def prod_cost_report( dict ):
+  
   print(" --- Production Cost Report ---\n")
+  units = list(dict['units'].values()) 
+  costs = list(dict['costs'].values())
   
-  # --
-  units_acc_transf = freezing_data[0]['units']['units_in_production_complete'] + freezing_data[0]['units']['wip_end']
+  # -- units_in_production_complete + wip_end
+  units_acc_transf = units[5] + units[6]
+  # -- wip_start + units_completed_transferred
+  tot_units = units[0] + units[4]
+  # -- 
+  units_in_production_complete = units[5]
+  direct_materials_percent_complete = units[2]
   
-  tot_units = freezing_data[0]['units']['wip_start'] + freezing_data[0]['units']['units_completed_transferred']
+  units_acc_materials = units_in_production_complete + direct_materials_percent_complete 
   
-  units_acc_materials = freezing_data[0]['units']['units_in_production_complete'] + freezing_data[0]['units']['direct_materials_percent_complete']
+  wip_end_conversion_complete= units[-1]
   
-  prct= freezing_data[0]['units']['wip_end']  * freezing_data[0]['units']['wip_end_conversion_complete']
-  units_acc_conv = freezing_data[0]['units']['units_in_production_complete'] + prct
+  prct = units[6]  * wip_end_conversion_complete
+  units_acc_conv = units_in_production_complete + prct
   
-  cost_transf = freezing_data[1]['costs']['wip_start_direct_materials'] + freezing_data[1]['costs']['costs_transferred_in']
-  cost_materials = freezing_data[1]['costs']['direct_materials_complete'] + freezing_data[1]['costs']['costs_direct_materials']
-  cost_conv = freezing_data[1]['costs']['conversion_complete'] + freezing_data[1]['costs']['costs_conversion_costs']
+  costs_transferred_in = costs[-4]
+  cost_transf = units[-2] + costs_transferred_in
+  
+  # direct_materials_complete + costs_direct_materials
+  cost_materials = costs[3] + costs[8]
+  # conversion_complete + costs_conversion_costs
+  cost_conv = costs[5] + costs[-2]
   tot_unit_costs = cost_transf + cost_materials + cost_conv
   
-  unit_cost_transf = cost_transf / units_acc_transf
-  unit_cost_materials = cost_materials / units_acc_materials
-  unit_costs_conv = cost_conv /units_acc_conv 
+  unit_cost_transf = round(cost_transf / units_acc_transf, 2)
+  unit_cost_materials = round(cost_materials / units_acc_materials, 2)
+  unit_costs_conv = round(cost_conv /units_acc_conv , 2)
+  
   tot_unit_costs_2 = unit_cost_transf + unit_cost_materials + unit_costs_conv
-  total_costs = freezing_data[1]['costs']['cost_wip_start'] + freezing_data[1]['costs']['total_costs']
+  # cost_wip_start + total_costs
+  total_costs = costs[6] + costs[-1]
   
   cost_acc_transf = tot_unit_costs_2 * units_acc_materials
-  wip_end_transf = freezing_data[0]['units']['wip_end'] * unit_cost_transf
-  wip_end_material = freezing_data[0]['units']['wip_end_direct_material_prct'] * unit_cost_materials 
+  wip_end_transf = units[6] * unit_cost_transf
+  # wip_end_direct_material_prct * unit_cost_materials
+  wip_end_material = units[-2] * unit_cost_materials 
   wip_end_conv =  prct * unit_costs_conv
   tot_cost_recon = wip_end_transf + wip_end_material + wip_end_conv + cost_acc_transf
 
   
   print("-- Physical Unit Flow --")
-  print("Total units", "."*25,"{:,}".format(tot_units))
-  print("Total units accounted for transferred ","."*9,"{:,}".format(units_acc_transf))
-  print("Total units accounted for direct materials","."*5,"{:,}".format(units_acc_materials))
-  print("Total units accounted for conversion costs","."*5,"{:,}".format(units_acc_conv))
+  print("Total units ......................................... {:,}".format(tot_units))
+  print("Total units accounted for transferred ............... {:,}".format(units_acc_transf))
+  print("Total units accounted for direct materials .......... {:,}".format(units_acc_materials))
+  print("Total units accounted for conversion costs .......... {:,}".format(units_acc_conv))
     
 
   print("\n-- Unit Costs --")
-  print("Total unit costs transferred ","."*9,"${:,}".format(cost_transf))
-  print("Total unit costs direct materials","."*5,"${:,}".format(cost_materials))
-  print("Total unit conversion costs ","."*9,"${:,}".format(cost_conv))
-  print("Total unit costs","."*35,"${:,}".format(tot_unit_costs))
+  print("Total unit costs transferred ....................... ${:,}".format(cost_transf))
+  print("Total unit costs direct materials .................. ${:,}".format(cost_materials))
+  print("Total unit conversion costs ........................ ${:,}".format(cost_conv))
+  print("Total unit costs ................................... ${:,}".format(tot_unit_costs))
     
-  print("Unit costs transferred","."*9,"${:,}".format(unit_cost_transf))
-  print("Unit costs direct materials","."*5,"${:,}".format(unit_cost_materials))
-  print("Unit conversion costs","."*9,"${:,}".format(unit_costs_conv))
-  print("Unit costs total","."*28,"${:,}".format(tot_unit_costs_2))    
-  print("Total costs","."*40,"${:,}".format(total_costs))
+  print("Unit costs transferred ............................. ${:,}".format(unit_cost_transf))
+  print("Unit costs direct materials ........................ ${:,}".format(unit_cost_materials))
+  print("Unit conversion costs .............................. ${:,}".format(unit_costs_conv))
+  print("Unit costs total ................................... ${:,}".format(tot_unit_costs_2))    
+  print("Total costs ........................................ ${:,}".format(total_costs))
     
   print("\n --- Cost Reconciliation Schedule ---")
-  print("Costs accounted for transferred","."*9,"${:,}".format(cost_acc_transf))
-  print("Work in process end transferred","."*9,"${:,}".format(wip_end_transf))    
-  print("Work in process end materials","."*11,"${:,}".format(wip_end_material))
-  print("Work in process end conversion costs","."*5,"${:,}".format(wip_end_conv))
-  print("Total costs accounted for","."*27,"${:,}".format(tot_cost_recon))
+  print("Costs accounted for transferred ................... ${:,}".format(cost_acc_transf))
+  print("Work in process end transferred ................... ${:,}".format(wip_end_transf))    
+  print("Work in process end materials ..................... ${:,}".format(wip_end_material))
+  print("Work in process end conversion costs .............. ${:,}".format(wip_end_conv))
+  print("Total costs accounted for ......................... ${:,}".format(tot_cost_recon))
     
 
 
 #-----
-prod_cost_report(freezing_data)
+prod_cost_report( freezing_data )
     
     
 ```
@@ -533,29 +571,35 @@ fifo_data = {
       'total_units':  8500
       }
 }
-
-
 ```
+
+
 
 Equivalent units
 
 ```{python}
 
-def fifo_method(data= dict):
+def fifo_method( dict):
   
-  begin_inv =  fifo_data['units_start']['wip_start_complete'] * (1 - fifo_data['units_start']['wip_start_complete_percent'])
+  start = list(dict['units_start'].values())
+  end = list(dict['units_end'].values())
   
-  units_started_finished = fifo_data['units_end']['wip_end_complete_transf'] - fifo_data['units_start']['wip_start_complete']
+  # wip_start_complete , wip_start_complete_percent
+  begin_inv =  start[1] * (1 - start[0] )
   
-  equiv_units = fifo_data['units_end']['wip_end'] * fifo_data['units_end']['wip_end_complete_percent']
+  # wip_end_complete_transf - wip_start_complete
+  units_started_finished = end[0] - start[1]
   
-  tot_equiv = begin_inv +units_started_finished +equiv_units
+  # wip_end * wip_end_complete_percent
+  equiv_units = end[2] * end[1]
+  
+  tot_equiv = begin_inv + units_started_finished + equiv_units
   
   print("-- Equivalent Units: FIFO --")
-  print("beginning inventory required to complete","."*5,"{:,} units".format(begin_inv))
-  print("units started & completed","."*19,"{:,} units".format(units_started_finished ))
-  print("equivalent units","."*28,"{:,} units".format(equiv_units ))
-  print("Total equivalent units","."*40," {:,} units".format(tot_equiv ))
+  print("beginning inventory required to complete ............ {:,} units".format(begin_inv))
+  print("units started & completed ........................... {:,} units".format(units_started_finished ))
+  print("equivalent units .................................... {:,} units".format(equiv_units ))
+  print("Total equivalent units .............................. {:,} units".format(tot_equiv ))
   
 fifo_method(fifo_data)
 ```

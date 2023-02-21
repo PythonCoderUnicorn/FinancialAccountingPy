@@ -104,14 +104,15 @@ Make a function to calculate the activity based overhead rates.
 ```{python}
 # create a function to calculate the overhead rates
 def activity_overhead_rates(costing_data: dict):
+  
   overhead_rates_1 = cost_drivers['setting_up_machines'] / cost_drivers['expected_machine_setups']
   overhead_rates_2 = cost_drivers['machining'] / cost_drivers['expected_machine_hours']
   overhead_rates_3 = cost_drivers['inspecting'] / cost_drivers['expected_inspections']
   
   print("\n --- Activity Based Overhead Rates --")
-  print("per machine set up","."*8,"${:.2f}".format( overhead_rates_1))
-  print("per machine hours","."*10,"${:.2f}".format( overhead_rates_2))
-  print("per machine inpections","."*5,"${:.2f}".format( overhead_rates_3))
+  print("per machine set up ................... ${:.2f}".format( overhead_rates_1))
+  print("per machine hours .................... ${:.2f}".format( overhead_rates_2))
+  print("per machine inpections ............... ${:.2f}".format( overhead_rates_3))
 
 
 
@@ -165,17 +166,17 @@ def product_overhead_costs( costing_data: dict ):
   
   print("\n --- Product Overhead Costs ---")
   print("item 1")
-  print("Cost assigned: machine set up ", "."*5,"${:,}".format(mach_setup_cost_1))
-  print("Cost assigned: machine costs ", "."*6,"${:,}".format(machine_cost_1))
-  print("Cost assigned: machine costs ", "."*6,"${:,}".format(inspect_cost_1))
-  print("Total costs assigned","."*20,"${:,}".format(total_assigned_costs_1))
-  print("Overhead cost per unit","."*18,"${:,}".format(overhead_cpu_1))
+  print("Cost assigned: machine set up ................... ${:,}".format(mach_setup_cost_1))
+  print("Cost assigned: machine costs .................... ${:,}".format(machine_cost_1))
+  print("Cost assigned: machine costs..................... ${:,}".format(inspect_cost_1))
+  print("Total costs assigned ............................ ${:,}".format(total_assigned_costs_1))
+  print("Overhead cost per unit .......................... ${:,}".format(overhead_cpu_1))
   print("item 2")
-  print("Cost assigned: machine set up ", "."*5,"${:,}".format(mach_setup_cost_2))
-  print("Cost assigned: machine costs ", "."*6,"${:,}".format(machine_cost_2))
-  print("Cost assigned: machine costs ", "."*6,"${:,}".format(inspect_cost_2))
-  print("Total costs assigned","."*20,"${:,}".format(total_assigned_costs_2))
-  print("Overhead cost per unit","."*18,"${:,}".format(overhead_cpu_2))
+  print("Cost assigned: machine set up ................... ${:,}".format(mach_setup_cost_2))
+  print("Cost assigned: machine costs .................... ${:,}".format(machine_cost_2))
+  print("Cost assigned: machine costs .................... ${:,}".format(inspect_cost_2))
+  print("Total costs assigned ............................ ${:,}".format(total_assigned_costs_2))
+  print("Overhead cost per unit .......................... ${:,}".format(overhead_cpu_2))
   
   
 

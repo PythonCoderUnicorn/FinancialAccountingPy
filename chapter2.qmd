@@ -131,66 +131,80 @@ Balance sheet
 
 - during 2016, the cost sheet showed a total cost of $100,000, company prices its product at 50% above its cost
 
+
+A data dictionary to store all of the manufacturing data to be used in a function.
+
 ```{python}
-annual_costs=24e6 
-direct_labor_costs=20e6
-
-overhead_rate = annual_overhead_costs /direct_labor_costs
-
-job_cost = 100e3
-markup_percentage = 0.5
-profit = job_cost * markup_percentage
-
 manufacture = {
-  "direct_materials" : 30e6,
-  "direct_labor_cost": 21e6,
-  "factory_insurance": 500e3,
-  "indirect_labor" : 7_500_000,
-  "maintenance": 1e6,
-  "building_rent" : 11e6,
-  "depreciation_equipment": 2e6
+  'annual_overhead_costs': 280e3,
+  'direct_labor_costs':  350e3,
+  
+  'annual_costs' : 24e6 ,
+  'direct_labor_costs' : 20e6 ,
+  
+  'job_cost': 100e3,
+  'markup_percentage': 0.5,
+  
+  "factory": {
+    "direct_materials" : 30e6,
+    "direct_labor_cost": 21e6,
+    "factory_insurance": 500e3,
+    "indirect_labor" : 7_500_000,
+    "maintenance": 1e6,
+    "building_rent" : 11e6,
+    "depreciation_equipment": 2e6
+  },
+  
+  'work_in_process': [5e6, 4e6],
+  'finished_goods': [13e6, 11e6]
 }
-
-work_in_process = [5e6, 4e6]
-finished_goods = [13e6, 11e6]
-
-actual_manuf_overhead = manufacture['factory_insurance']+ \
-                        manufacture['indirect_labor']+ \
-                        manufacture['maintenance'] +\
-                        manufacture['building_rent'] +\
-                        manufacture['depreciation_equipment']
-                        
-applied_overhead_cost = manufacture['direct_labor_cost'] * overhead_rate
-over_applied_overhead= actual_manuf_overhead - applied_overhead_cost
-
-total_manuf_costs = manufacture['direct_materials'] + manufacture['direct_labor_cost'] + applied_overhead_cost
-
-tot_cost_process = total_manuf_costs + work_in_process[0]
-cogsm = tot_cost_process - work_in_process[1]
-
-cogs_avail_4sale = finished_goods[0] + cogsm 
-cogsun = cogs_avail_4sale - finished_goods[1]
-cogs = cogsun + over_applied_overhead
 ```
 
 
-The printed output. 
-```{}
-------- Cost Accounting --------
-Overhead rate = 120.00%
-Actual manufacturing overhead .. $22,000,000.0
-Applied overhead cost .......... $25,200,000.0
-Over applied overhead .......... $-3,200,000.0
-Total manufacturing costs ........... $76,200,000.0
-Total cost of work in process ....... $81,200,000.0
-Cost of goods manufactured .......... $77,200,000.0
-Cost of goods available for sale ............ $90,200,000.0
-Cost of goods sold (unadjusted) ............. $79,200,000.0
-Cost of goods sold .......................... $76,000,000.0
+Function for manufacture job costing
 
-Price to customer = $150,000.0 (Profit: $50,000.0)
-
+```{python}
+def job_costing( dict ):
+  
+  overhead_rate = (dict['annual_overhead_costs'] /dict['direct_labor_costs'])*100
+  profit = dict['job_cost'] * dict['markup_percentage']
+  price = dict['job_cost'] + profit
+  actual_manuf_overhead = sum(list(dict['factory'].values())[2:])
+  
+  factory_direct_labor_cost = list(dict['factory'].values())[1]
+  applied_overhead_cost =  round( factory_direct_labor_cost * overhead_rate, 2)
+  over_applied_overhead = actual_manuf_overhead - applied_overhead_cost
+  
+  total_manuf_costs = list(dict['factory'].values())[0] + list(manufacture['factory'].values())[1] + applied_overhead_cost
+  
+  tot_cost_process = total_manuf_costs + dict['work_in_process'][0]
+  cogsm = tot_cost_process - dict['work_in_process'][1]
+  cogs_avail_4sale = dict['finished_goods'][0] + cogsm 
+  cogsun = cogs_avail_4sale - dict['finished_goods'][1]
+  cogs = cogsun + over_applied_overhead
+  
+  
+  print("-- Job Costing --")
+  print("Overhead rate = {:.2f}% ({:.2f} cents goes to assigned job)".format(overhead_rate, overhead_rate))
+  print("Actual manufacturing overhead .. ${:,}".format(actual_manuf_overhead))
+  print("Applied overhead cost .......... ${:,}".format(applied_overhead_cost))
+  print("Over applied overhead .......... ${:,}".format(over_applied_overhead))
+  print("Total manufacturing costs ........... ${:,}".format(total_manuf_costs))
+  print("Total cost of work in process ....... ${:,}".format(tot_cost_process))
+  print("Cost of goods manufactured .......... ${:,}".format(cogsm))
+  print("Cost of goods available for sale ............ ${:,}".format(cogs_avail_4sale))
+  print("Cost of goods sold (unadjusted) ............. ${:,}".format(cogsun))
+  print("Cost of goods sold .......................... ${:,}".format(cogs))
+  print("Price to customer = ${:,} (profit: ${:,})".format(price, profit))
+  
+  
+job_costing( manufacture )
 ```
+
+
+
+
+
 
 
 

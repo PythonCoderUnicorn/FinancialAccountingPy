@@ -208,12 +208,37 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./glossary.html" class="sidebar-item-text sidebar-link">Glossary</a>
+  <a href="./chapter7.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Alt Inventory Costing Methods</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./summary.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Summary</span></a>
+  <a href="./chapter8.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Pricing</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter9.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Budgetary Planning</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter10.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Budgetary Control &amp; Responsibility</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter11.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Standard Costs</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter12.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Planning for Capital Investments</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./summary.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Summary</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -436,16 +461,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>  cmr <span class="op">=</span> (cmpu <span class="op">/</span> (sales<span class="op">/</span>units) )</span>
 <span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>  </span>
 <span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st"> --- CVP Income Statement ---"</span>)</span>
-<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Sales "</span>,<span class="st">"."</span><span class="op">*</span><span class="dv">10</span>,<span class="st">"{:,} units"</span>.<span class="bu">format</span>(units) )</span>
-<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Sales total "</span>,<span class="st">"."</span><span class="op">*</span><span class="dv">10</span>,<span class="st">"${:,}"</span>.<span class="bu">format</span>(sales) )</span>
-<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">".... ${:,} per unit"</span>.<span class="bu">format</span>(price))</span>
-<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Total variable expenses "</span>,<span class="st">"."</span><span class="op">*</span><span class="dv">10</span>,<span class="st">"${:,}"</span>.<span class="bu">format</span>(total_var_exp))</span>
-<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Contribution margin per unit = ${:,}"</span>.<span class="bu">format</span>(cmpu))</span>
-<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Contribution margin "</span>,<span class="st">"."</span><span class="op">*</span><span class="dv">10</span>, <span class="st">"${:,}"</span>.<span class="bu">format</span>(contrib_margin))</span>
-<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Contribution margin ratio = {:,}%"</span>.<span class="bu">format</span>(cmr <span class="op">*</span> <span class="dv">100</span>))</span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Sales ....................................... {:,} units"</span>.<span class="bu">format</span>(units) )</span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Sales total ................................ ${:,}"</span>.<span class="bu">format</span>(sales) )</span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"............. ${:,} per unit"</span>.<span class="bu">format</span>(price))</span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Total variable expenses .................... ${:,}"</span>.<span class="bu">format</span>(total_var_exp))</span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Contribution margin per unit ............... ${:,}"</span>.<span class="bu">format</span>(cmpu))</span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Contribution margin ........................ ${:,}"</span>.<span class="bu">format</span>(contrib_margin))</span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Contribution margin ratio .................. {:,}%"</span>.<span class="bu">format</span>(cmr <span class="op">*</span> <span class="dv">100</span>))</span>
 <span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"  ($</span><span class="sc">{:.2f}</span><span class="st"> of every $1 can go to fixed costs &amp; operating income)"</span>.<span class="bu">format</span>(cmr))</span>
-<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Total fixed expenses "</span>,<span class="st">"."</span><span class="op">*</span><span class="dv">10</span>,<span class="st">"${:,}"</span>.<span class="bu">format</span>(total_fixed_exp))</span>
-<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Operating income "</span>,<span class="st">"."</span><span class="op">*</span><span class="dv">30</span>,<span class="st">"${:,}"</span>.<span class="bu">format</span>(op_income))</span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Total fixed expenses ....................... ${:,}"</span>.<span class="bu">format</span>(total_fixed_exp))</span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Operating income ........................... ${:,}"</span>.<span class="bu">format</span>(op_income))</span>
 <span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>  </span>
 <span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>  </span>
 <span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a>  <span class="co"># ------ BREAK EVEN POINT</span></span>
@@ -460,58 +485,56 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a>  required_sales_dollars <span class="op">=</span> (total_fixed_exp <span class="op">+</span> toi) <span class="op">/</span> cmr</span>
 <span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a>  </span>
 <span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">--- Target Operating Income ----"</span>)</span>
-<span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Required sales (units) = {:,}"</span>.<span class="bu">format</span>(required_sales_units))</span>
-<span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Required sales = ${:,}"</span>.<span class="bu">format</span>(required_sales_dollars))</span>
+<span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Required sales (units) ..................... {:,}"</span>.<span class="bu">format</span>(required_sales_units))</span>
+<span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Required sales ............................. ${:,}"</span>.<span class="bu">format</span>(required_sales_dollars))</span>
 <span id="cb2-50"><a href="#cb2-50" aria-hidden="true" tabindex="-1"></a>  </span>
 <span id="cb2-51"><a href="#cb2-51" aria-hidden="true" tabindex="-1"></a>  tax_rate <span class="op">=</span> tax_rate_percent<span class="op">/</span><span class="dv">100</span></span>
 <span id="cb2-52"><a href="#cb2-52" aria-hidden="true" tabindex="-1"></a>  op_income_post_tax <span class="op">=</span> total_fixed_exp <span class="op">+</span> toi <span class="op">/</span> (<span class="dv">1</span> <span class="op">-</span> tax_rate)</span>
 <span id="cb2-53"><a href="#cb2-53" aria-hidden="true" tabindex="-1"></a>  req_sales_post_tax_units <span class="op">=</span> op_income_post_tax <span class="op">/</span> cmpu</span>
 <span id="cb2-54"><a href="#cb2-54" aria-hidden="true" tabindex="-1"></a>  req_sales_post_tax_dollars <span class="op">=</span> op_income_post_tax <span class="op">/</span> tax_rate</span>
-<span id="cb2-55"><a href="#cb2-55" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Target operating income after taxes = ${:,}"</span>.<span class="bu">format</span>(op_income_post_tax ))</span>
-<span id="cb2-56"><a href="#cb2-56" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Required sales after taxes = {:,} units"</span>.<span class="bu">format</span>(req_sales_post_tax_units))</span>
-<span id="cb2-57"><a href="#cb2-57" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Required sales after taxes = ${:,} "</span>.<span class="bu">format</span>(req_sales_post_tax_dollars))</span>
+<span id="cb2-55"><a href="#cb2-55" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Target operating income after taxes ................. ${:,}"</span>.<span class="bu">format</span>(op_income_post_tax ))</span>
+<span id="cb2-56"><a href="#cb2-56" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Required sales after taxes .......................... {:,} units"</span>.<span class="bu">format</span>(req_sales_post_tax_units))</span>
+<span id="cb2-57"><a href="#cb2-57" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Required sales after taxes .......................... ${:,} "</span>.<span class="bu">format</span>(req_sales_post_tax_dollars))</span>
 <span id="cb2-58"><a href="#cb2-58" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-59"><a href="#cb2-59" aria-hidden="true" tabindex="-1"></a>  <span class="co"># --- margin of safety (mos)</span></span>
 <span id="cb2-60"><a href="#cb2-60" aria-hidden="true" tabindex="-1"></a>  mos_dollars <span class="op">=</span> sales <span class="op">-</span> break_even_dollars</span>
 <span id="cb2-61"><a href="#cb2-61" aria-hidden="true" tabindex="-1"></a>  mos_ratio <span class="op">=</span> (mos_dollars) <span class="op">/</span> sales</span>
 <span id="cb2-62"><a href="#cb2-62" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">--- Margin of Safety ---"</span>)</span>
-<span id="cb2-63"><a href="#cb2-63" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Margin of safety = ${:,}"</span>.<span class="bu">format</span>(mos_dollars))</span>
-<span id="cb2-64"><a href="#cb2-64" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Margin of safety ratio = {:,}%"</span>.<span class="bu">format</span>(mos_ratio <span class="op">*</span><span class="dv">100</span>))</span>
+<span id="cb2-63"><a href="#cb2-63" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Margin of safety ..................... ${:,}"</span>.<span class="bu">format</span>(mos_dollars))</span>
+<span id="cb2-64"><a href="#cb2-64" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Margin of safety ratio ............... {:,}%"</span>.<span class="bu">format</span>(mos_ratio <span class="op">*</span><span class="dv">100</span>))</span>
 <span id="cb2-65"><a href="#cb2-65" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-66"><a href="#cb2-66" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-67"><a href="#cb2-67" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-68"><a href="#cb2-68" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-69"><a href="#cb2-69" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st"> ====== Company Cost Structure - Comparison ======"</span>)</span>
-<span id="cb2-70"><a href="#cb2-70" aria-hidden="true" tabindex="-1"></a>  contrib_margin_1 <span class="op">=</span> cost_data[<span class="st">'company_1'</span>][<span class="st">'sales'</span>] <span class="op">-</span> cost_data[<span class="st">'company_1'</span>][<span class="st">'variable_costs'</span>]</span>
-<span id="cb2-71"><a href="#cb2-71" aria-hidden="true" tabindex="-1"></a>  contrib_margin_2 <span class="op">=</span> cost_data[<span class="st">'company_2'</span>][<span class="st">'sales'</span>] <span class="op">-</span> cost_data[<span class="st">'company_2'</span>][<span class="st">'variable_costs'</span>]</span>
-<span id="cb2-72"><a href="#cb2-72" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"contribution margin (company 1) = ${:,}"</span>.<span class="bu">format</span>( contrib_margin_1))</span>
-<span id="cb2-73"><a href="#cb2-73" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"contribution margin (company 2) = ${:,}"</span>.<span class="bu">format</span>( contrib_margin_2))</span>
-<span id="cb2-74"><a href="#cb2-74" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb2-75"><a href="#cb2-75" aria-hidden="true" tabindex="-1"></a>  contrib_margin_ratio_1 <span class="op">=</span> contrib_margin_1 <span class="op">/</span> cost_data[<span class="st">'company_1'</span>][<span class="st">'sales'</span>]</span>
-<span id="cb2-76"><a href="#cb2-76" aria-hidden="true" tabindex="-1"></a>  contrib_margin_ratio_2 <span class="op">=</span> contrib_margin_2 <span class="op">/</span> cost_data[<span class="st">'company_2'</span>][<span class="st">'sales'</span>]</span>
-<span id="cb2-77"><a href="#cb2-77" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"contribution margin ratio (company 1) = {:,}"</span>.<span class="bu">format</span>( contrib_margin_ratio_1))</span>
-<span id="cb2-78"><a href="#cb2-78" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"contribution margin ratio (company 2) = {:,}"</span>.<span class="bu">format</span>( contrib_margin_ratio_2))</span>
-<span id="cb2-79"><a href="#cb2-79" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb2-80"><a href="#cb2-80" aria-hidden="true" tabindex="-1"></a>  be_company1 <span class="op">=</span> cost_data[<span class="st">'company_1'</span>][<span class="st">'fixed_costs'</span>] <span class="op">/</span> contrib_margin_ratio_1</span>
-<span id="cb2-81"><a href="#cb2-81" aria-hidden="true" tabindex="-1"></a>  be_company2 <span class="op">=</span> cost_data[<span class="st">'company_2'</span>][<span class="st">'fixed_costs'</span>] <span class="op">/</span> contrib_margin_ratio_2</span>
-<span id="cb2-82"><a href="#cb2-82" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Break even point (company 1) = ${:,}"</span>.<span class="bu">format</span>( be_company1))</span>
-<span id="cb2-83"><a href="#cb2-83" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Break even point (company 2) = ${:,}"</span>.<span class="bu">format</span>( be_company2))</span>
-<span id="cb2-84"><a href="#cb2-84" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb2-85"><a href="#cb2-85" aria-hidden="true" tabindex="-1"></a>  <span class="co"># margin of safety (mos)</span></span>
-<span id="cb2-86"><a href="#cb2-86" aria-hidden="true" tabindex="-1"></a>  mos_ratio_1 <span class="op">=</span> (cost_data[<span class="st">'company_1'</span>][<span class="st">'sales'</span>] <span class="op">-</span> be_company1) <span class="op">/</span> cost_data[<span class="st">'company_1'</span>][<span class="st">'sales'</span>]</span>
-<span id="cb2-87"><a href="#cb2-87" aria-hidden="true" tabindex="-1"></a>  mos_ratio_2 <span class="op">=</span> (cost_data[<span class="st">'company_2'</span>][<span class="st">'sales'</span>] <span class="op">-</span> be_company2) <span class="op">/</span> cost_data[<span class="st">'company_2'</span>][<span class="st">'sales'</span>]</span>
-<span id="cb2-88"><a href="#cb2-88" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Margin of safety ratio (company 1) = {:,}"</span>.<span class="bu">format</span>( mos_ratio_1))</span>
-<span id="cb2-89"><a href="#cb2-89" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Margin of safety ratio (company 2) = {:,}"</span>.<span class="bu">format</span>( mos_ratio_2))</span>
-<span id="cb2-90"><a href="#cb2-90" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb2-91"><a href="#cb2-91" aria-hidden="true" tabindex="-1"></a>  op_income_1 <span class="op">=</span> contrib_margin_1  <span class="op">-</span> cost_data[<span class="st">'company_1'</span>][<span class="st">'fixed_costs'</span>]</span>
-<span id="cb2-92"><a href="#cb2-92" aria-hidden="true" tabindex="-1"></a>  op_income_2 <span class="op">=</span> contrib_margin_2  <span class="op">-</span> cost_data[<span class="st">'company_2'</span>][<span class="st">'fixed_costs'</span>]</span>
-<span id="cb2-93"><a href="#cb2-93" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb2-94"><a href="#cb2-94" aria-hidden="true" tabindex="-1"></a>  operating_leverage_1 <span class="op">=</span> contrib_margin_1 <span class="op">/</span> op_income_1</span>
-<span id="cb2-95"><a href="#cb2-95" aria-hidden="true" tabindex="-1"></a>  operating_leverage_2 <span class="op">=</span> contrib_margin_2 <span class="op">/</span> op_income_2</span>
-<span id="cb2-96"><a href="#cb2-96" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Degree of operating leverage (company 1) = </span><span class="sc">{:.2f}</span><span class="st">"</span>.<span class="bu">format</span>( operating_leverage_1))</span>
-<span id="cb2-97"><a href="#cb2-97" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Degree of operating leverage (company 2) = </span><span class="sc">{:.2f}</span><span class="st">"</span>.<span class="bu">format</span>( operating_leverage_2))</span>
-<span id="cb2-98"><a href="#cb2-98" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb2-99"><a href="#cb2-99" aria-hidden="true" tabindex="-1"></a><span class="co"># ---------------</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-66"><a href="#cb2-66" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st"> ====== Company Cost Structure - Comparison ======"</span>)</span>
+<span id="cb2-67"><a href="#cb2-67" aria-hidden="true" tabindex="-1"></a>  contrib_margin_1 <span class="op">=</span> cost_data[<span class="st">'company_1'</span>][<span class="st">'sales'</span>] <span class="op">-</span> cost_data[<span class="st">'company_1'</span>][<span class="st">'variable_costs'</span>]</span>
+<span id="cb2-68"><a href="#cb2-68" aria-hidden="true" tabindex="-1"></a>  contrib_margin_2 <span class="op">=</span> cost_data[<span class="st">'company_2'</span>][<span class="st">'sales'</span>] <span class="op">-</span> cost_data[<span class="st">'company_2'</span>][<span class="st">'variable_costs'</span>]</span>
+<span id="cb2-69"><a href="#cb2-69" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb2-70"><a href="#cb2-70" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"contribution margin (company 1) ................. ${:,}"</span>.<span class="bu">format</span>( contrib_margin_1))</span>
+<span id="cb2-71"><a href="#cb2-71" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"contribution margin (company 2) ................. ${:,}"</span>.<span class="bu">format</span>( contrib_margin_2))</span>
+<span id="cb2-72"><a href="#cb2-72" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb2-73"><a href="#cb2-73" aria-hidden="true" tabindex="-1"></a>  contrib_margin_ratio_1 <span class="op">=</span> contrib_margin_1 <span class="op">/</span> cost_data[<span class="st">'company_1'</span>][<span class="st">'sales'</span>]</span>
+<span id="cb2-74"><a href="#cb2-74" aria-hidden="true" tabindex="-1"></a>  contrib_margin_ratio_2 <span class="op">=</span> contrib_margin_2 <span class="op">/</span> cost_data[<span class="st">'company_2'</span>][<span class="st">'sales'</span>]</span>
+<span id="cb2-75"><a href="#cb2-75" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">contribution margin ratio (company 1) ............ {:,}"</span>.<span class="bu">format</span>( contrib_margin_ratio_1))</span>
+<span id="cb2-76"><a href="#cb2-76" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"contribution margin ratio (company 2) ............ {:,}"</span>.<span class="bu">format</span>( contrib_margin_ratio_2))</span>
+<span id="cb2-77"><a href="#cb2-77" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb2-78"><a href="#cb2-78" aria-hidden="true" tabindex="-1"></a>  be_company1 <span class="op">=</span> cost_data[<span class="st">'company_1'</span>][<span class="st">'fixed_costs'</span>] <span class="op">/</span> contrib_margin_ratio_1</span>
+<span id="cb2-79"><a href="#cb2-79" aria-hidden="true" tabindex="-1"></a>  be_company2 <span class="op">=</span> cost_data[<span class="st">'company_2'</span>][<span class="st">'fixed_costs'</span>] <span class="op">/</span> contrib_margin_ratio_2</span>
+<span id="cb2-80"><a href="#cb2-80" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">Break even point (company 1) .................. ${:,}"</span>.<span class="bu">format</span>( be_company1))</span>
+<span id="cb2-81"><a href="#cb2-81" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Break even point (company 2) .................... ${:,}"</span>.<span class="bu">format</span>( be_company2))</span>
+<span id="cb2-82"><a href="#cb2-82" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb2-83"><a href="#cb2-83" aria-hidden="true" tabindex="-1"></a>  <span class="co"># margin of safety (mos)</span></span>
+<span id="cb2-84"><a href="#cb2-84" aria-hidden="true" tabindex="-1"></a>  mos_ratio_1 <span class="op">=</span> (cost_data[<span class="st">'company_1'</span>][<span class="st">'sales'</span>] <span class="op">-</span> be_company1) <span class="op">/</span> cost_data[<span class="st">'company_1'</span>][<span class="st">'sales'</span>]</span>
+<span id="cb2-85"><a href="#cb2-85" aria-hidden="true" tabindex="-1"></a>  mos_ratio_2 <span class="op">=</span> (cost_data[<span class="st">'company_2'</span>][<span class="st">'sales'</span>] <span class="op">-</span> be_company2) <span class="op">/</span> cost_data[<span class="st">'company_2'</span>][<span class="st">'sales'</span>]</span>
+<span id="cb2-86"><a href="#cb2-86" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">Margin of safety ratio (company 1) ................. {:,}"</span>.<span class="bu">format</span>( mos_ratio_1))</span>
+<span id="cb2-87"><a href="#cb2-87" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Margin of safety ratio (company 2) ................... {:,}"</span>.<span class="bu">format</span>( mos_ratio_2))</span>
+<span id="cb2-88"><a href="#cb2-88" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb2-89"><a href="#cb2-89" aria-hidden="true" tabindex="-1"></a>  op_income_1 <span class="op">=</span> contrib_margin_1  <span class="op">-</span> cost_data[<span class="st">'company_1'</span>][<span class="st">'fixed_costs'</span>]</span>
+<span id="cb2-90"><a href="#cb2-90" aria-hidden="true" tabindex="-1"></a>  op_income_2 <span class="op">=</span> contrib_margin_2  <span class="op">-</span> cost_data[<span class="st">'company_2'</span>][<span class="st">'fixed_costs'</span>]</span>
+<span id="cb2-91"><a href="#cb2-91" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb2-92"><a href="#cb2-92" aria-hidden="true" tabindex="-1"></a>  operating_leverage_1 <span class="op">=</span> contrib_margin_1 <span class="op">/</span> op_income_1</span>
+<span id="cb2-93"><a href="#cb2-93" aria-hidden="true" tabindex="-1"></a>  operating_leverage_2 <span class="op">=</span> contrib_margin_2 <span class="op">/</span> op_income_2</span>
+<span id="cb2-94"><a href="#cb2-94" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">Degree of operating leverage (company 1) .............. </span><span class="sc">{:.2f}</span><span class="st">"</span>.<span class="bu">format</span>( operating_leverage_1))</span>
+<span id="cb2-95"><a href="#cb2-95" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Degree of operating leverage (company 2) ................ </span><span class="sc">{:.2f}</span><span class="st">"</span>.<span class="bu">format</span>( operating_leverage_2))</span>
+<span id="cb2-96"><a href="#cb2-96" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb2-97"><a href="#cb2-97" aria-hidden="true" tabindex="-1"></a><span class="co"># ---------------</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <p>Now call the CVP income statement function. The function’s arguments are the data dictionary, the target operation income and the tax rate as a percentage.</p>
@@ -523,41 +546,45 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="cell-output cell-output-stdout">
 <pre><code>
  --- CVP Income Statement ---
-Sales  .......... 1,600 units
-Sales total  .......... $800,000.0
-.... $500.0 per unit
-Total variable expenses  .......... $480,000.0
-Contribution margin per unit = $200.0
-Contribution margin  .......... $320,000.0
-Contribution margin ratio = 40.0%
+Sales ....................................... 1,600 units
+Sales total ................................ $800,000.0
+............. $500.0 per unit
+Total variable expenses .................... $480,000.0
+Contribution margin per unit ............... $200.0
+Contribution margin ........................ $320,000.0
+Contribution margin ratio .................. 40.0%
   ($0.40 of every $1 can go to fixed costs &amp; operating income)
-Total fixed expenses  .......... $200,000.0
-Operating income  .............................. $120,000.0
+Total fixed expenses ....................... $200,000.0
+Operating income ........................... $120,000.0
 
 Break even point = 1,000.0 units or $500,000.0
 
 --- Target Operating Income ----
-Required sales (units) = 1,600.0
-Required sales = $800,000.0
-Target operating income after taxes = $400,000.0
-Required sales after taxes = 2,000.0 units
-Required sales after taxes = $1,000,000.0 
+Required sales (units) ..................... 1,600.0
+Required sales ............................. $800,000.0
+Target operating income after taxes ................. $400,000.0
+Required sales after taxes .......................... 2,000.0 units
+Required sales after taxes .......................... $1,000,000.0 
 
 --- Margin of Safety ---
-Margin of safety = $300,000.0
-Margin of safety ratio = 37.5%
+Margin of safety ..................... $300,000.0
+Margin of safety ratio ............... 37.5%
 
  ====== Company Cost Structure - Comparison ======
-contribution margin (company 1) = $320,000.0
-contribution margin (company 2) = $640,000.0
-contribution margin ratio (company 1) = 0.4
-contribution margin ratio (company 2) = 0.8
-Break even point (company 1) = $500,000.0
-Break even point (company 2) = $650,000.0
-Margin of safety ratio (company 1) = 0.375
-Margin of safety ratio (company 2) = 0.1875
-Degree of operating leverage (company 1) = 2.67
-Degree of operating leverage (company 2) = 5.33</code></pre>
+contribution margin (company 1) ................. $320,000.0
+contribution margin (company 2) ................. $640,000.0
+
+contribution margin ratio (company 1) ............ 0.4
+contribution margin ratio (company 2) ............ 0.8
+
+Break even point (company 1) .................. $500,000.0
+Break even point (company 2) .................... $650,000.0
+
+Margin of safety ratio (company 1) ................. 0.375
+Margin of safety ratio (company 2) ................... 0.1875
+
+Degree of operating leverage (company 1) .............. 2.67
+Degree of operating leverage (company 2) ................ 5.33</code></pre>
 </div>
 </div>
 </section>
@@ -594,47 +621,53 @@ Degree of operating leverage (company 2) = 5.33</code></pre>
 <div class="cell" data-execution_count="5">
 <details>
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>cmr_company1 <span class="op">=</span> companies[<span class="st">'company1'</span>][<span class="st">'contribution_margin'</span>] <span class="op">/</span> companies[<span class="st">'company1'</span>][<span class="st">'sales'</span>]</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>cmr_company2 <span class="op">=</span> companies[<span class="st">'company2'</span>][<span class="st">'contribution_margin'</span>] <span class="op">/</span> companies[<span class="st">'company2'</span>][<span class="st">'sales'</span>]</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">Contribution margin ratio (company 1) = "</span>,cmr_company1)</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Contribution margin ratio (company 2) = "</span>,cmr_company2)</span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="co"># break even point</span></span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>be_company1 <span class="op">=</span> companies[<span class="st">'company1'</span>][<span class="st">'fixed_costs'</span>] <span class="op">/</span> cmr_company1</span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>be_company2 <span class="op">=</span> companies[<span class="st">'company2'</span>][<span class="st">'fixed_costs'</span>] <span class="op">/</span> cmr_company2</span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">Break even point (company 1) = ${:,}"</span>.<span class="bu">format</span>(be_company1))</span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Break even point (company 2) = ${:,}"</span>.<span class="bu">format</span>(be_company2))</span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="co"># margin of safety</span></span>
-<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>magin_safe_1 <span class="op">=</span> (companies[<span class="st">'company1'</span>][<span class="st">'sales'</span>] <span class="op">-</span> be_company1) <span class="op">/</span> companies[<span class="st">'company1'</span>][<span class="st">'sales'</span>]</span>
-<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>magin_safe_2 <span class="op">=</span> (companies[<span class="st">'company2'</span>][<span class="st">'sales'</span>] <span class="op">-</span> be_company2) <span class="op">/</span> companies[<span class="st">'company2'</span>][<span class="st">'sales'</span>]</span>
-<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">Margin of safety ratio (company 1) = "</span>, magin_safe_1)</span>
-<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Margin of safety ratio (company 2) = "</span>, magin_safe_2)</span>
-<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a><span class="co"># operating leverage</span></span>
-<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>op_lev_1 <span class="op">=</span> companies[<span class="st">'company1'</span>][<span class="st">'contribution_margin'</span>] <span class="op">/</span> companies[<span class="st">'company1'</span>][<span class="st">'operating_income'</span>]</span>
-<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>op_lev_2 <span class="op">=</span> companies[<span class="st">'company2'</span>][<span class="st">'contribution_margin'</span>] <span class="op">/</span> companies[<span class="st">'company2'</span>][<span class="st">'operating_income'</span>]</span>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> cmr( <span class="bu">dict</span> ):</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  company1 <span class="op">=</span> <span class="bu">list</span>(<span class="bu">dict</span>[<span class="st">'company1'</span>].values())</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  company2 <span class="op">=</span> <span class="bu">list</span>(<span class="bu">dict</span>[<span class="st">'company2'</span>].values())</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="co"># contribution_margin / sales</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  cmr_company1 <span class="op">=</span> company1[<span class="dv">2</span>] <span class="op">/</span> company1[<span class="dv">0</span>]</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  cmr_company2 <span class="op">=</span> company2[<span class="dv">2</span>] <span class="op">/</span> company2[<span class="dv">0</span>]</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Contribution margin ratio (company 1) ......... {:,} "</span>.<span class="bu">format</span>(cmr_company1))</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Contribution margin ratio (company 2) ......... {:,} "</span>.<span class="bu">format</span>(cmr_company2))</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>  <span class="co"># break even point: 'fixed_costs'</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>  be_company1 <span class="op">=</span> company1[<span class="dv">3</span>] <span class="op">/</span> cmr_company1</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>  be_company2 <span class="op">=</span> company2[<span class="dv">3</span>] <span class="op">/</span> cmr_company2</span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">Break even point (company 1) ............ ${:,}"</span>.<span class="bu">format</span>(be_company1))</span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Break even point (company 2) ............ ${:,}"</span>.<span class="bu">format</span>(be_company2))</span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a>  <span class="co"># margin of safety</span></span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>  magin_safe_1 <span class="op">=</span> (company1[<span class="dv">0</span>] <span class="op">-</span> be_company1) <span class="op">/</span> company1[<span class="dv">0</span>]</span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a>  magin_safe_2 <span class="op">=</span> (company2[<span class="dv">0</span>] <span class="op">-</span> be_company2) <span class="op">/</span> company2[<span class="dv">0</span>]</span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">Margin of safety ratio (company 1) ............ {:,} "</span>.<span class="bu">format</span>( magin_safe_1))</span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Margin of safety ratio (company 2) ............ {:,} "</span>.<span class="bu">format</span>( magin_safe_2))</span>
 <span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">Degree of operating leverage (company 1) = </span><span class="sc">{:.2f}</span><span class="st">"</span>.<span class="bu">format</span>(op_lev_1))</span>
-<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Degree of operating leverage (company 2) = </span><span class="sc">{:.2f}</span><span class="st">"</span>.<span class="bu">format</span>(op_lev_2))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a>  <span class="co"># operating leverage</span></span>
+<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a>  op_lev_1 <span class="op">=</span> company1[<span class="dv">2</span>] <span class="op">/</span> company1[<span class="op">-</span><span class="dv">1</span>]</span>
+<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a>  op_lev_2 <span class="op">=</span> company2[<span class="dv">2</span>] <span class="op">/</span> company2[<span class="op">-</span><span class="dv">1</span>]</span>
+<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">Degree of operating leverage (company 1) ........... </span><span class="sc">{:.2f}</span><span class="st">"</span>.<span class="bu">format</span>(op_lev_1))</span>
+<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Degree of operating leverage (company 2) ........... </span><span class="sc">{:.2f}</span><span class="st">"</span>.<span class="bu">format</span>(op_lev_2))</span>
+<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb6-34"><a href="#cb6-34" aria-hidden="true" tabindex="-1"></a>cmr( companies )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
-<pre><code>
-Contribution margin ratio (company 1) =  0.4
-Contribution margin ratio (company 2) =  0.8
+<pre><code>Contribution margin ratio (company 1) ......... 0.4 
+Contribution margin ratio (company 2) ......... 0.8 
 
-Break even point (company 1) = $500,000.0
-Break even point (company 2) = $650,000.0
+Break even point (company 1) ............ $500,000.0
+Break even point (company 2) ............ $650,000.0
 
-Margin of safety ratio (company 1) =  0.375
-Margin of safety ratio (company 2) =  0.1875
+Margin of safety ratio (company 1) ............ 0.375 
+Margin of safety ratio (company 2) ............ 0.1875 
 
-Degree of operating leverage (company 1) = 2.67
-Degree of operating leverage (company 2) = 5.33</code></pre>
+Degree of operating leverage (company 1) ........... 2.67
+Degree of operating leverage (company 2) ........... 5.33</code></pre>
 </div>
 </div>
 <ul>

@@ -193,12 +193,52 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./glossary.html" class="sidebar-item-text sidebar-link">Glossary</a>
+  <a href="./chapter4.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Activity Based Costing</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./summary.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Summary</span></a>
+  <a href="./chapter5.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Decision Making: Cost Volume Profit</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter6.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Incremental Analysis</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter7.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Alt Inventory Costing Methods</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter8.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Pricing</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter9.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Budgetary Planning</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter10.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Budgetary Control &amp; Responsibility</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter11.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Standard Costs</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter12.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Planning for Capital Investments</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./summary.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Summary</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -429,65 +469,90 @@ Manufact. overhead   7500 | 7500</code></pre>
 <ul>
 <li>during 2016, the cost sheet showed a total cost of $100,000, company prices its product at 50% above its cost</li>
 </ul>
+<p>A data dictionary to store all of the manufacturing data to be used in a function.</p>
 <div class="cell" data-execution_count="4">
 <details>
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>annual_costs<span class="op">=</span><span class="fl">24e6</span> </span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>direct_labor_costs<span class="op">=</span><span class="fl">20e6</span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>overhead_rate <span class="op">=</span> annual_overhead_costs <span class="op">/</span>direct_labor_costs</span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>job_cost <span class="op">=</span> <span class="fl">100e3</span></span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>markup_percentage <span class="op">=</span> <span class="fl">0.5</span></span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>profit <span class="op">=</span> job_cost <span class="op">*</span> markup_percentage</span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>manufacture <span class="op">=</span> {</span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>  <span class="st">"direct_materials"</span> : <span class="fl">30e6</span>,</span>
-<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>  <span class="st">"direct_labor_cost"</span>: <span class="fl">21e6</span>,</span>
-<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>  <span class="st">"factory_insurance"</span>: <span class="fl">500e3</span>,</span>
-<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>  <span class="st">"indirect_labor"</span> : <span class="dv">7_500_000</span>,</span>
-<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>  <span class="st">"maintenance"</span>: <span class="fl">1e6</span>,</span>
-<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>  <span class="st">"building_rent"</span> : <span class="fl">11e6</span>,</span>
-<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>  <span class="st">"depreciation_equipment"</span>: <span class="fl">2e6</span></span>
-<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>work_in_process <span class="op">=</span> [<span class="fl">5e6</span>, <span class="fl">4e6</span>]</span>
-<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>finished_goods <span class="op">=</span> [<span class="fl">13e6</span>, <span class="fl">11e6</span>]</span>
-<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>actual_manuf_overhead <span class="op">=</span> manufacture[<span class="st">'factory_insurance'</span>]<span class="op">+</span> <span class="op">\</span></span>
-<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a>                        manufacture[<span class="st">'indirect_labor'</span>]<span class="op">+</span> <span class="op">\</span></span>
-<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a>                        manufacture[<span class="st">'maintenance'</span>] <span class="op">+\</span></span>
-<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a>                        manufacture[<span class="st">'building_rent'</span>] <span class="op">+\</span></span>
-<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a>                        manufacture[<span class="st">'depreciation_equipment'</span>]</span>
-<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a>                        </span>
-<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a>applied_overhead_cost <span class="op">=</span> manufacture[<span class="st">'direct_labor_cost'</span>] <span class="op">*</span> overhead_rate</span>
-<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a>over_applied_overhead<span class="op">=</span> actual_manuf_overhead <span class="op">-</span> applied_overhead_cost</span>
-<span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-32"><a href="#cb7-32" aria-hidden="true" tabindex="-1"></a>total_manuf_costs <span class="op">=</span> manufacture[<span class="st">'direct_materials'</span>] <span class="op">+</span> manufacture[<span class="st">'direct_labor_cost'</span>] <span class="op">+</span> applied_overhead_cost</span>
-<span id="cb7-33"><a href="#cb7-33" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-34"><a href="#cb7-34" aria-hidden="true" tabindex="-1"></a>tot_cost_process <span class="op">=</span> total_manuf_costs <span class="op">+</span> work_in_process[<span class="dv">0</span>]</span>
-<span id="cb7-35"><a href="#cb7-35" aria-hidden="true" tabindex="-1"></a>cogsm <span class="op">=</span> tot_cost_process <span class="op">-</span> work_in_process[<span class="dv">1</span>]</span>
-<span id="cb7-36"><a href="#cb7-36" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-37"><a href="#cb7-37" aria-hidden="true" tabindex="-1"></a>cogs_avail_4sale <span class="op">=</span> finished_goods[<span class="dv">0</span>] <span class="op">+</span> cogsm </span>
-<span id="cb7-38"><a href="#cb7-38" aria-hidden="true" tabindex="-1"></a>cogsun <span class="op">=</span> cogs_avail_4sale <span class="op">-</span> finished_goods[<span class="dv">1</span>]</span>
-<span id="cb7-39"><a href="#cb7-39" aria-hidden="true" tabindex="-1"></a>cogs <span class="op">=</span> cogsun <span class="op">+</span> over_applied_overhead</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>manufacture <span class="op">=</span> {</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">'annual_overhead_costs'</span>: <span class="fl">280e3</span>,</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">'direct_labor_costs'</span>:  <span class="fl">350e3</span>,</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">'annual_costs'</span> : <span class="fl">24e6</span> ,</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  <span class="st">'direct_labor_costs'</span> : <span class="fl">20e6</span> ,</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>  <span class="st">'job_cost'</span>: <span class="fl">100e3</span>,</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>  <span class="st">'markup_percentage'</span>: <span class="fl">0.5</span>,</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>  <span class="st">"factory"</span>: {</span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a>    <span class="st">"direct_materials"</span> : <span class="fl">30e6</span>,</span>
+<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a>    <span class="st">"direct_labor_cost"</span>: <span class="fl">21e6</span>,</span>
+<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a>    <span class="st">"factory_insurance"</span>: <span class="fl">500e3</span>,</span>
+<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>    <span class="st">"indirect_labor"</span> : <span class="dv">7_500_000</span>,</span>
+<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>    <span class="st">"maintenance"</span>: <span class="fl">1e6</span>,</span>
+<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a>    <span class="st">"building_rent"</span> : <span class="fl">11e6</span>,</span>
+<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a>    <span class="st">"depreciation_equipment"</span>: <span class="fl">2e6</span></span>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>  },</span>
+<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a>  <span class="st">'work_in_process'</span>: [<span class="fl">5e6</span>, <span class="fl">4e6</span>],</span>
+<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>  <span class="st">'finished_goods'</span>: [<span class="fl">13e6</span>, <span class="fl">11e6</span>]</span>
+<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
-<p>The printed output.</p>
-<pre><code>------- Cost Accounting --------
-Overhead rate = 120.00%
+<p>Function for manufacture job costing</p>
+<div class="cell" data-execution_count="5">
+<details>
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> job_costing( <span class="bu">dict</span> ):</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  overhead_rate <span class="op">=</span> (<span class="bu">dict</span>[<span class="st">'annual_overhead_costs'</span>] <span class="op">/</span><span class="bu">dict</span>[<span class="st">'direct_labor_costs'</span>])<span class="op">*</span><span class="dv">100</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  profit <span class="op">=</span> <span class="bu">dict</span>[<span class="st">'job_cost'</span>] <span class="op">*</span> <span class="bu">dict</span>[<span class="st">'markup_percentage'</span>]</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  price <span class="op">=</span> <span class="bu">dict</span>[<span class="st">'job_cost'</span>] <span class="op">+</span> profit</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  actual_manuf_overhead <span class="op">=</span> <span class="bu">sum</span>(<span class="bu">list</span>(<span class="bu">dict</span>[<span class="st">'factory'</span>].values())[<span class="dv">2</span>:])</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>  factory_direct_labor_cost <span class="op">=</span> <span class="bu">list</span>(<span class="bu">dict</span>[<span class="st">'factory'</span>].values())[<span class="dv">1</span>]</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>  applied_overhead_cost <span class="op">=</span>  <span class="bu">round</span>( factory_direct_labor_cost <span class="op">*</span> overhead_rate, <span class="dv">2</span>)</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>  over_applied_overhead <span class="op">=</span> actual_manuf_overhead <span class="op">-</span> applied_overhead_cost</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>  total_manuf_costs <span class="op">=</span> <span class="bu">list</span>(<span class="bu">dict</span>[<span class="st">'factory'</span>].values())[<span class="dv">0</span>] <span class="op">+</span> <span class="bu">list</span>(manufacture[<span class="st">'factory'</span>].values())[<span class="dv">1</span>] <span class="op">+</span> applied_overhead_cost</span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>  tot_cost_process <span class="op">=</span> total_manuf_costs <span class="op">+</span> <span class="bu">dict</span>[<span class="st">'work_in_process'</span>][<span class="dv">0</span>]</span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>  cogsm <span class="op">=</span> tot_cost_process <span class="op">-</span> <span class="bu">dict</span>[<span class="st">'work_in_process'</span>][<span class="dv">1</span>]</span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>  cogs_avail_4sale <span class="op">=</span> <span class="bu">dict</span>[<span class="st">'finished_goods'</span>][<span class="dv">0</span>] <span class="op">+</span> cogsm </span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>  cogsun <span class="op">=</span> cogs_avail_4sale <span class="op">-</span> <span class="bu">dict</span>[<span class="st">'finished_goods'</span>][<span class="dv">1</span>]</span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>  cogs <span class="op">=</span> cogsun <span class="op">+</span> over_applied_overhead</span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"-- Job Costing --"</span>)</span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Overhead rate = </span><span class="sc">{:.2f}</span><span class="st">% (</span><span class="sc">{:.2f}</span><span class="st"> cents goes to assigned job)"</span>.<span class="bu">format</span>(overhead_rate, overhead_rate))</span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Actual manufacturing overhead .. ${:,}"</span>.<span class="bu">format</span>(actual_manuf_overhead))</span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Applied overhead cost .......... ${:,}"</span>.<span class="bu">format</span>(applied_overhead_cost))</span>
+<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Over applied overhead .......... ${:,}"</span>.<span class="bu">format</span>(over_applied_overhead))</span>
+<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Total manufacturing costs ........... ${:,}"</span>.<span class="bu">format</span>(total_manuf_costs))</span>
+<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Total cost of work in process ....... ${:,}"</span>.<span class="bu">format</span>(tot_cost_process))</span>
+<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Cost of goods manufactured .......... ${:,}"</span>.<span class="bu">format</span>(cogsm))</span>
+<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Cost of goods available for sale ............ ${:,}"</span>.<span class="bu">format</span>(cogs_avail_4sale))</span>
+<span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Cost of goods sold (unadjusted) ............. ${:,}"</span>.<span class="bu">format</span>(cogsun))</span>
+<span id="cb8-31"><a href="#cb8-31" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Cost of goods sold .......................... ${:,}"</span>.<span class="bu">format</span>(cogs))</span>
+<span id="cb8-32"><a href="#cb8-32" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Price to customer = ${:,} (profit: ${:,})"</span>.<span class="bu">format</span>(price, profit))</span>
+<span id="cb8-33"><a href="#cb8-33" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb8-34"><a href="#cb8-34" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb8-35"><a href="#cb8-35" aria-hidden="true" tabindex="-1"></a>job_costing( manufacture )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>-- Job Costing --
+Overhead rate = 1.40% (1.40 cents goes to assigned job)
 Actual manufacturing overhead .. $22,000,000.0
-Applied overhead cost .......... $25,200,000.0
-Over applied overhead .......... $-3,200,000.0
-Total manufacturing costs ........... $76,200,000.0
-Total cost of work in process ....... $81,200,000.0
-Cost of goods manufactured .......... $77,200,000.0
-Cost of goods available for sale ............ $90,200,000.0
-Cost of goods sold (unadjusted) ............. $79,200,000.0
+Applied overhead cost .......... $29,400,000.0
+Over applied overhead .......... $-7,400,000.0
+Total manufacturing costs ........... $80,400,000.0
+Total cost of work in process ....... $85,400,000.0
+Cost of goods manufactured .......... $81,400,000.0
+Cost of goods available for sale ............ $94,400,000.0
+Cost of goods sold (unadjusted) ............. $83,400,000.0
 Cost of goods sold .......................... $76,000,000.0
-
-Price to customer = $150,000.0 (Profit: $50,000.0)
-</code></pre>
+Price to customer = $150,000.0 (profit: $50,000.0)</code></pre>
+</div>
+</div>
 <hr>
 
 
