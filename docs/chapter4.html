@@ -203,12 +203,42 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./glossary.html" class="sidebar-item-text sidebar-link">Glossary</a>
+  <a href="./chapter6.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Incremental Analysis</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./summary.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Summary</span></a>
+  <a href="./chapter7.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Alt Inventory Costing Methods</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter8.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Pricing</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter9.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Budgetary Planning</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter10.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Budgetary Control &amp; Responsibility</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter11.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Standard Costs</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./chapter12.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Planning for Capital Investments</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./summary.html" class="sidebar-item-text sidebar-link"><span class="chapter-number">14</span>&nbsp; <span class="chapter-title">Summary</span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -380,25 +410,26 @@ Predetermined overhead rate
 <summary>Show the code</summary>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># create a function to calculate the overhead rates</span></span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> activity_overhead_rates(costing_data: <span class="bu">dict</span>):</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  overhead_rates_1 <span class="op">=</span> cost_drivers[<span class="st">'setting_up_machines'</span>] <span class="op">/</span> cost_drivers[<span class="st">'expected_machine_setups'</span>]</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  overhead_rates_2 <span class="op">=</span> cost_drivers[<span class="st">'machining'</span>] <span class="op">/</span> cost_drivers[<span class="st">'expected_machine_hours'</span>]</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  overhead_rates_3 <span class="op">=</span> cost_drivers[<span class="st">'inspecting'</span>] <span class="op">/</span> cost_drivers[<span class="st">'expected_inspections'</span>]</span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st"> --- Activity Based Overhead Rates --"</span>)</span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"per machine set up"</span>,<span class="st">"."</span><span class="op">*</span><span class="dv">8</span>,<span class="st">"$</span><span class="sc">{:.2f}</span><span class="st">"</span>.<span class="bu">format</span>( overhead_rates_1))</span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"per machine hours"</span>,<span class="st">"."</span><span class="op">*</span><span class="dv">10</span>,<span class="st">"$</span><span class="sc">{:.2f}</span><span class="st">"</span>.<span class="bu">format</span>( overhead_rates_2))</span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"per machine inpections"</span>,<span class="st">"."</span><span class="op">*</span><span class="dv">5</span>,<span class="st">"$</span><span class="sc">{:.2f}</span><span class="st">"</span>.<span class="bu">format</span>( overhead_rates_3))</span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  overhead_rates_1 <span class="op">=</span> cost_drivers[<span class="st">'setting_up_machines'</span>] <span class="op">/</span> cost_drivers[<span class="st">'expected_machine_setups'</span>]</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  overhead_rates_2 <span class="op">=</span> cost_drivers[<span class="st">'machining'</span>] <span class="op">/</span> cost_drivers[<span class="st">'expected_machine_hours'</span>]</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  overhead_rates_3 <span class="op">=</span> cost_drivers[<span class="st">'inspecting'</span>] <span class="op">/</span> cost_drivers[<span class="st">'expected_inspections'</span>]</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st"> --- Activity Based Overhead Rates --"</span>)</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"per machine set up ................... $</span><span class="sc">{:.2f}</span><span class="st">"</span>.<span class="bu">format</span>( overhead_rates_1))</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"per machine hours .................... $</span><span class="sc">{:.2f}</span><span class="st">"</span>.<span class="bu">format</span>( overhead_rates_2))</span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"per machine inpections ............... $</span><span class="sc">{:.2f}</span><span class="st">"</span>.<span class="bu">format</span>( overhead_rates_3))</span>
 <span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>activity_overhead_rates( cost_drivers)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>activity_overhead_rates( cost_drivers)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>
  --- Activity Based Overhead Rates --
-per machine set up ........ $200.00
-per machine hours .......... $10.00
-per machine inpections ..... $50.00</code></pre>
+per machine set up ................... $200.00
+per machine hours .................... $10.00
+per machine inpections ............... $50.00</code></pre>
 </div>
 </div>
 </section>
@@ -450,17 +481,17 @@ per machine inpections ..... $50.00</code></pre>
 <span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a>  </span>
 <span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st"> --- Product Overhead Costs ---"</span>)</span>
 <span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"item 1"</span>)</span>
-<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Cost assigned: machine set up "</span>, <span class="st">"."</span><span class="op">*</span><span class="dv">5</span>,<span class="st">"${:,}"</span>.<span class="bu">format</span>(mach_setup_cost_1))</span>
-<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Cost assigned: machine costs "</span>, <span class="st">"."</span><span class="op">*</span><span class="dv">6</span>,<span class="st">"${:,}"</span>.<span class="bu">format</span>(machine_cost_1))</span>
-<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Cost assigned: machine costs "</span>, <span class="st">"."</span><span class="op">*</span><span class="dv">6</span>,<span class="st">"${:,}"</span>.<span class="bu">format</span>(inspect_cost_1))</span>
-<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Total costs assigned"</span>,<span class="st">"."</span><span class="op">*</span><span class="dv">20</span>,<span class="st">"${:,}"</span>.<span class="bu">format</span>(total_assigned_costs_1))</span>
-<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Overhead cost per unit"</span>,<span class="st">"."</span><span class="op">*</span><span class="dv">18</span>,<span class="st">"${:,}"</span>.<span class="bu">format</span>(overhead_cpu_1))</span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Cost assigned: machine set up ................... ${:,}"</span>.<span class="bu">format</span>(mach_setup_cost_1))</span>
+<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Cost assigned: machine costs .................... ${:,}"</span>.<span class="bu">format</span>(machine_cost_1))</span>
+<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Cost assigned: machine costs..................... ${:,}"</span>.<span class="bu">format</span>(inspect_cost_1))</span>
+<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Total costs assigned ............................ ${:,}"</span>.<span class="bu">format</span>(total_assigned_costs_1))</span>
+<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Overhead cost per unit .......................... ${:,}"</span>.<span class="bu">format</span>(overhead_cpu_1))</span>
 <span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"item 2"</span>)</span>
-<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Cost assigned: machine set up "</span>, <span class="st">"."</span><span class="op">*</span><span class="dv">5</span>,<span class="st">"${:,}"</span>.<span class="bu">format</span>(mach_setup_cost_2))</span>
-<span id="cb9-31"><a href="#cb9-31" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Cost assigned: machine costs "</span>, <span class="st">"."</span><span class="op">*</span><span class="dv">6</span>,<span class="st">"${:,}"</span>.<span class="bu">format</span>(machine_cost_2))</span>
-<span id="cb9-32"><a href="#cb9-32" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Cost assigned: machine costs "</span>, <span class="st">"."</span><span class="op">*</span><span class="dv">6</span>,<span class="st">"${:,}"</span>.<span class="bu">format</span>(inspect_cost_2))</span>
-<span id="cb9-33"><a href="#cb9-33" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Total costs assigned"</span>,<span class="st">"."</span><span class="op">*</span><span class="dv">20</span>,<span class="st">"${:,}"</span>.<span class="bu">format</span>(total_assigned_costs_2))</span>
-<span id="cb9-34"><a href="#cb9-34" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Overhead cost per unit"</span>,<span class="st">"."</span><span class="op">*</span><span class="dv">18</span>,<span class="st">"${:,}"</span>.<span class="bu">format</span>(overhead_cpu_2))</span>
+<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Cost assigned: machine set up ................... ${:,}"</span>.<span class="bu">format</span>(mach_setup_cost_2))</span>
+<span id="cb9-31"><a href="#cb9-31" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Cost assigned: machine costs .................... ${:,}"</span>.<span class="bu">format</span>(machine_cost_2))</span>
+<span id="cb9-32"><a href="#cb9-32" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Cost assigned: machine costs .................... ${:,}"</span>.<span class="bu">format</span>(inspect_cost_2))</span>
+<span id="cb9-33"><a href="#cb9-33" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Total costs assigned ............................ ${:,}"</span>.<span class="bu">format</span>(total_assigned_costs_2))</span>
+<span id="cb9-34"><a href="#cb9-34" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Overhead cost per unit .......................... ${:,}"</span>.<span class="bu">format</span>(overhead_cpu_2))</span>
 <span id="cb9-35"><a href="#cb9-35" aria-hidden="true" tabindex="-1"></a>  </span>
 <span id="cb9-36"><a href="#cb9-36" aria-hidden="true" tabindex="-1"></a>  </span>
 <span id="cb9-37"><a href="#cb9-37" aria-hidden="true" tabindex="-1"></a></span>
@@ -470,17 +501,17 @@ per machine inpections ..... $50.00</code></pre>
 <pre><code>
  --- Product Overhead Costs ---
 item 1
-Cost assigned: machine set up  ..... $100,000.0
-Cost assigned: machine costs  ...... $300,000.0
-Cost assigned: machine costs  ...... $25,000.0
-Total costs assigned .................... $425,000.0
-Overhead cost per unit .................. $17.0
+Cost assigned: machine set up ................... $100,000.0
+Cost assigned: machine costs .................... $300,000.0
+Cost assigned: machine costs..................... $25,000.0
+Total costs assigned ............................ $425,000.0
+Overhead cost per unit .......................... $17.0
 item 2
-Cost assigned: machine set up  ..... $200,000.0
-Cost assigned: machine costs  ...... $200,000.0
-Cost assigned: machine costs  ...... $75,000.0
-Total costs assigned .................... $475,000.0
-Overhead cost per unit .................. $95.0</code></pre>
+Cost assigned: machine set up ................... $200,000.0
+Cost assigned: machine costs .................... $200,000.0
+Cost assigned: machine costs .................... $75,000.0
+Total costs assigned ............................ $475,000.0
+Overhead cost per unit .......................... $95.0</code></pre>
 </div>
 </div>
 </section>
