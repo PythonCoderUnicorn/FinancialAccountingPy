@@ -45,9 +45,6 @@ cost_data = {
 
 
 
-
-
-
 per unit manufacturing cost using each costing approach
 
 ```{python}
@@ -63,22 +60,18 @@ def absorption_costing_compare(cost_data: dict):
   print(" - Absorption vs Variable costing -")
   print("Absorption costing : manufacturing cost per unit ..... ${:,}".format(abs_cost))
   print("Variable costing :   manufacturing cost per unit ..... ${:,}".format(var_cost))
-  
   print("\n difference in manufacturing cost per unit is $", diff)
-  
   
   #----------- income statements
   sales = cost_data['units_sold'] * cost_data['selling_price']
   cogsm = cost_data['units_produced'] * abs_cost
-  
-  #                  10,0000
+  #                
   end_inventory = (sales - cogsm) * abs_cost
   cog_sold = cost_data['units_sold'] * abs_cost
   gross_profit = sales - cog_sold
   var_admin_expense = (sales - cogsm) * diff
   fixed_admin_expense = cost_data['fixed_costs']['selling_admin_expenses']
   net_income = gross_profit - var_admin_expense - fixed_admin_expense 
-  
   
   print("\n === Income Statement ===")
   print("Absorption cost\n Cost of Goods Sold")
@@ -102,7 +95,6 @@ def absorption_costing_compare(cost_data: dict):
   var_fixed_manuf_overhead = cost_data['fixed_costs']['manuf_overhead']
   var_fixed_sell_admin = cost_data['fixed_costs']['selling_admin_expenses']
   var_net_income = contrib_margin - var_fixed_manuf_overhead - var_fixed_sell_admin 
-  
   
   print("\n === Income Statement ===")
   print("Variable cost\n Cost of Goods Sold")
@@ -166,8 +158,7 @@ def absorption_costing( company: dict):
   
   fixed_manuf_overhead = sport_co['fixed_costs']['fixed_manuf_overhead'] / sport_co['units_produced']
   cpu_abs =  sum( list( sport_co['variable_costs'].values() )[0:-1]) + fixed_manuf_overhead
-  # print(cpu_abs)
-  
+
   sales = sport_co['units_sold'] * sport_co['selling_price']
   cog_sold = round( sport_co['units_sold'] * cpu_abs, 2)
   gross_margin = sales - cog_sold 
@@ -443,8 +434,6 @@ def throughput_costing2( company: dict):
   direct_material_costs = company['units_produced'] * company['variable_costs']['direct_materials']
   start_inventory = company['begin_inventory']
   cog_sale = direct_material_costs - start_inventory 
-  # print(cog_sale)
-  
   end_inventory = (company['units_produced'] - company['units_sold']) * company['variable_costs']['direct_materials']
   
   var_cog_sold = direct_material_costs - end_inventory
@@ -464,8 +453,8 @@ def throughput_costing2( company: dict):
  
   print(" - Throughput Costing -" )
   print(" sales ....................... ${:,}".format(sales))
-  # print(" direct material costs ....................... ${:,}".format(direct_material_costs))
-  # print(" ending inventory ............................ ${:,}".format(end_inventory))
+  print(" direct material costs ....................... ${:,}".format(direct_material_costs))
+  print(" ending inventory ............................ ${:,}".format(end_inventory))
   print(" throughput contribution margin .............. ${:,}".format(thru_contrib_margin))
   print("\t direct labor costs .......................... ${:,}".format(direct_labor_costs))
   print("\t variable overhead costs ..................... ${:,}".format(var_overhead_costs))

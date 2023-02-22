@@ -15,14 +15,24 @@ is expected to last 10 years. This equipment will not have any salvageable value
 the decade of use. Cash inflows from this equipment will be 200,000 dollars and the outflow of cash will be 176,000 dollars. 
 
 ```{python}
-investment = 130e3
-estimated_life = 10
-estimated_salvage = 0
-cash_inflow_customers = 200e3
-cash_outflow_operations = 176e3
+new_equipment = {
+  'investment' : 130e3,
+  'estimated_life' : 10,
+  'estimated_salvage' :  0,
+  'cash_inflow_customers' :  200e3,
+  'cash_outflow_operations' : 176e3
+}
 
-annual_cashflow = cash_inflow_customers - cash_outflow_operations
-print("Net annual cash flow ..... ${:,}".format(annual_cashflow))
+def investment_cashflow( dict ):
+  annual_cashflow = dict['cash_inflow_customers'] - dict['cash_outflow_operations']
+  print("Net annual cash flow from investment ........... ${:,}".format(annual_cashflow))
+  
+  cpt = dict['investment'] / annual_cashflow
+  useful_life = cpt/ dict['estimated_life']*100
+  print("Cash payback technique ....... {:.2f} years ({:.2f}% of asset's life)".format(cpt, useful_life ))
+  
+
+investment_cashflow( new_equipment)
 ```
 
 ## Cash Payback Technique
@@ -31,11 +41,7 @@ The `cash payback technique` identifies the time period required to recover the 
 
 - cash payback technique (`CPT`) = `(cost of capital investment) / (net annual cash flow)`
 
-```{python}
-cpt = investment / annual_cashflow
-useful_life = cpt/estimated_life*100
-print("Cash payback technique ....... {:.2f} years ({:.2f}% of asset's life)".format(cpt, useful_life ))
-```
+
 
 ### Example
 
@@ -90,19 +96,26 @@ value of ordinary annuity, use a table which requires to know the `n` periods an
 - Net cash flow is $24,000
 
 ```{python}
-investment = 130e3
-estimated_life = 10
-estimated_salvage = 0
-cash_inflow_customers = 200e3
-cash_outflow_operations = 176e3
+equal_cashflow = {
+  'investment': 130e3,
+  'estimated_life' : 10,
+  'estimated_salvage':  0,
+  'cash_inflow_customers': 200e3,
+  'cash_outflow_operations': 176e3
+}
 
-annual_cashflow = cash_inflow_customers - cash_outflow_operations
-print("Net annual cash flow ..... ${:,}".format(annual_cashflow))
+def equal_cashflows( annuity_value,  dict ):
+  
+  annual_cashflow = dict['cash_inflow_customers'] - dict['cash_outflow_operations']
+  
+  print("Net annual cash flow ..... ${:,}".format(annual_cashflow))
+  # annuity_value = 5.65022 # value from a table
+  pv = annual_cashflow * annuity_value
+  npv = pv - dict['investment']
+  print("Net present value ........ ${:.2f}".format(npv))
 
-annuity_value = 5.65022 # value from a table
-pv = annual_cashflow * annuity_value
-npv = pv - investment
-print("Net present value ........ ${:.2f}".format(npv))
+
+equal_cashflows( 5.65022, equal_cashflow )
 ```
 
 ## Unequal Annual Cash Flow
@@ -116,33 +129,41 @@ that must be applied to each annual cash flow.
 - capital investment is $130,000
 
 
+This code is inside a function only to bring attention that the calculations are for `unequal_cashflows`. 
+If you have the table values in an array as shown in the discount factor array. The `NumPy` library is used to quickly make an array list of integers from 0 to 9, instead of typing the numbers by hand.
+
+
 ```{python}
-import numpy as np
+def unequal_cashflows():
+  import numpy as np
+  
+  # create an array 0 to 9
+  years = np.arange(10)
+  # assumed annual net cash flows 18,000 to 24,000 (for 10 years)
+  yearly_cashflows = [34e3, 30e3, 27e3,25e3,24e3,22e3,21e3,20e3,19e3, 18e3]
+  # discount_factor for 12% values from a table for 10 periods (n)
+  discount_factor = [0.89286, 0.79719,0.71178,0.63552,0.56743,0.50663,0.45235,0.40388,0.36061,0.32197]
+  
+  capital_investment = 130e3
+  
+  # present values
+  pv = []
+  
+  for x in range(len(years)):
+    PV = yearly_cashflows[x] * discount_factor[x]
+    pv.append(PV)
+    
+    # comment out this line to only show the final total present value
+    print("Year: {} Present value @ 12% ... ${:.2f}".format(years[x]+1, pv[x]))
+  
+  total_pv = sum(pv)
+  npv = total_pv - capital_investment 
+  
+  print("Present value @ 12% cash flows ..... ${:,}".format( total_pv ))
+  print("Net present value .................. ${:.2f}".format( npv ))
 
-# create an array 0 to 9
-years = np.arange(10)
-# assumed annual net cash flows 18,000 to 24,000 (for 10 years)
-yearly_cashflows = [34e3, 30e3, 27e3,25e3,24e3,22e3,21e3,20e3,19e3, 18e3]
-# discount_factor for 12% values from a table for 10 periods (n)
-discount_factor = [0.89286, 0.79719,0.71178,0.63552,0.56743,0.50663,0.45235,0.40388,0.36061,0.32197]
 
-capital_investment = 130e3
-
-# present values
-pv = []
-
-for x in range(len(years)):
-  PV = yearly_cashflows[x] * discount_factor[x]
-  pv.append(PV)
-
-  # print("Year: {} Present value @ 12% ... ${:.2f}".format(years[x]+1, pv[x]))
-
-total_pv = sum(pv)
-npv = total_pv - capital_investment 
-
-print("Present value @ 12% cash flows ..... ${:,}".format( total_pv ))
-print("Net present value .................. ${:.2f}".format( npv ))
-
+unequal_cashflows()
 ```
 
 
@@ -192,6 +213,7 @@ cashback = {
 }
 ```
 
+a function for calculating present value for annuities
 
 ```{python}
 def present_value( annuity: float, dict ):
@@ -308,8 +330,6 @@ projects = {
     }
 }
 ```
-
-
 
 
 function to compare present value of net cash flows, a 12% discount rate. This function has 
@@ -445,7 +465,7 @@ print("IRR factors for 10% and 11% (averaged) = ",sum(nums)/2)
 
 ## Annual Rate of Return 
 
-`Annual rate of return` method is based on directly on accrual accounting data _rather_ than on cash flows. This annual rate of return indicates the profitability of a cpaital expenditure.
+`Annual rate of return` method is based on directly on accrual accounting data _rather_ than on cash flows. This annual rate of return indicates the profitability of a capital expenditure.
 
 - annual rate of return (`ARR`) = `expected net income / annual average investment`
 

@@ -16,62 +16,77 @@ A company example, Company X makes concentrated caffeinated syrups to be sold an
 
 -   `standard direct labor cost per unit` is the direct labor rate times the direct labor hours
 
-Company X direct material data is in a dictionary. Direct materials price and quantity dictionaries are separate here but can easily be placed inside one data dictionary.
+Company X direct material data is in a dictionary. Direct materials price and quantity dictionaries are placed inside one data dictionary.
 
 ```{python}
 
-# --- price standard
-materials_price = {
-  'purchase_price': 2.70,
-  'freight': 0.20,
-  'receiving_handling': 0.10
+std_costs = {
+  # --- price standard
+  'materials_price' : {
+    'purchase_price': 2.70,
+    'freight': 0.20,
+    'receiving_handling': 0.10
+  },
+  # --- quantity standard
+  'materials_quantity' : {
+    'required_materials': 3.5,
+    'waste_allowance': 0.4, # allowance for waste
+    'spoilage_waste': 0.1
+  },
+  # --- standard labor
+  'labor' : {
+    'hourly_wage_rate': 12.5,
+    'COLA': 0.25, # cost of living adjustments
+    'payroll_taxes': 0.75,
+    'benefits': 1.50
+  },
+  # --- labor quantity
+  'labor_quant' : {
+    'actual_production_time_hrs': 1.5,
+    'rest_periods_cleanup_hrs': 0.2,
+    'setup_downtime_hrs': 0.3
+  }
+  
 }
 
-standard_price = sum(materials_price.values())
-print("Standard direct materials price per liter : ${:.2f}".format(standard_price))
-
-# --- quantity standard
-materials_quantity = {
-  'required_materials': 3.5,
-  'waste_allowance': 0.4, # allowance for waste
-  'spoilage_waste': 0.1
-}
-
-standard_quantity = sum(materials_quantity.values())
-print("Standard direct materials quantity per unit : ${:.2f}".format(standard_quantity))
-
-
-# standard dm cost per unit
-sdm_cpu = standard_price * standard_quantity
-print("Standard direct materials cost per unit : ${:.2f} (liter)".format(sdm_cpu))
-
-
-# --- standard labor
-labor = {
-  'hourly_wage_rate': 12.5,
-  'COLA': 0.25, # cost of living adjustments
-  'payroll_taxes': 0.75,
-  'benefits': 1.50
-}
-
-standard_labor = sum(labor.values())
-print("Standard direct labor rate per hour : ${:.2f}".format(standard_labor))
-
-
-# --- labor quantity
-labor_quant = {
-  'actual_production_time_hrs': 1.5,
-  'rest_periods_cleanup_hrs': 0.2,
-  'setup_downtime_hrs': 0.3
-}
-standard_labor_quantity = sum(labor_quant.values())
-print("Standard direct labor hours per unit : {:.2f} (hours)".format(standard_labor_quantity))
-
-
-# -- labor cost per unit
-labor_cpu = standard_labor * standard_labor_quantity
-print("Standard direct labor cost per unit : ${:.2f}".format(labor_cpu))
 ```
+
+
+A function for calculating standard costs. 
+
+```{python}
+def standard_costs( dict ):
+  
+  standard_price = sum(dict['materials_price'].values()  )
+  standard_quantity = sum( dict['materials_quantity'].values() )
+  standard_labor = sum( dict['labor'].values() )
+  standard_labor_quantity = sum( dict['labor_quant'].values() )
+  # standard dm cost per unit
+  sdm_cpu = standard_price * standard_quantity
+  # -- labor cost per unit
+  labor_cpu = standard_labor * standard_labor_quantity
+  
+  print("- Standard Costs -")
+  print("Standard direct materials price per liter .......... ${:.2f}".format(standard_price))
+  print("Standard direct materials quantity per unit ........ ${:.2f}".format(standard_quantity))
+  print("Standard direct materials cost per unit ............ ${:.2f} (liter)".format(sdm_cpu))
+  print("Standard direct labor rate per hour ................ ${:.2f}".format(standard_labor))
+  print("Standard direct labor hours per unit ............... {:.2f} (hours)".format(standard_labor_quantity))
+  print("Standard direct labor cost per unit ................ ${:.2f}".format(labor_cpu))
+  
+```
+
+
+call function 
+
+```{python}
+standard_costs( std_costs )
+```
+
+
+
+
+## Manufacturing Overhead
 
 - Manufacturing overhead `standard predetermined overhead rate` is used in setting the standard. The rate is determined by dividing the budgeted overhead cost by the expected standard activity index {labor hours and standard machine hours}. Activity Based Costing (ABC) can be used to allocate the overhead costs.
 
@@ -87,34 +102,65 @@ print("Standard direct labor cost per unit : ${:.2f}".format(labor_cpu))
 Company X uses standard direct labor for it's activity index, and expects to produce 13,200 liters through the year at normal capacity.
 
 ```{python}
-# expected number for production
-expected_prod = 13200
-standard_direct_labour_hrs = standard_labor_quantity * expected_prod
+manuf_overhead = {
+  'labor_quant' : {
+    'actual_production_time_hrs': 1.5,
+    'rest_periods_cleanup_hrs': 0.2,
+    'setup_downtime_hrs': 0.3
+  },
+  # expected number for production
+  'expected_prod': 13200,
+  'budgeted_overhead' : {'variable_costs': 79200, 'fixed_costs': 52800}
+}
 
-budgeted_overhead = {'variable_costs': 79200, 'fixed_costs': 52800}
-
-overhead = list(budgeted_overhead.values())
-total_bugeted_overhead = sum(overhead)
-
-# overhead rate per direct labor hour
-var_rphr = overhead[0] / standard_direct_labour_hrs
-fixed_rphr = overhead[1] / standard_direct_labour_hrs
-total_rphr = var_rphr + fixed_rphr
-
-standard_manuf_rpu = total_rphr * standard_labor_quantity
-
-
-print("Standard direct labor hours ...... {:,}".format(standard_direct_labour_hrs))
-print("Total budgeted overhead costs .... ${:,}".format(total_bugeted_overhead))
-print("Variable: overhead rate per labor hour .... ${:,}".format(var_rphr))
-print("Fixed: overhead rate per labor hour .... ${:,}".format(fixed_rphr))
-print("Total overhead rate per labor hour .... ${:,}".format(total_rphr))
-print("Standard manufacturing overhead rate per unit .... ${:,}".format(standard_manuf_rpu))
 ```
+
+function for manufacturing overhead
+
+
+```{python}
+def manufacture_overhead( dict ):
+  
+  standard_labor_quantity = sum( dict['labor_quant'].values() )
+  standard_direct_labour_hrs = standard_labor_quantity * dict['expected_prod']
+  
+  overhead = list(dict['budgeted_overhead'].values())
+  total_bugeted_overhead = sum(overhead)
+  
+  # overhead rate per direct labor hour
+  var_rphr = overhead[0] / standard_direct_labour_hrs
+  fixed_rphr = overhead[1] / standard_direct_labour_hrs
+  total_rphr = var_rphr + fixed_rphr
+
+  standard_manuf_rpu = total_rphr * standard_labor_quantity
+  
+  print("- Manufacturing Overhead - ")
+  print("Standard direct labor hours ...................... {:,}".format(standard_direct_labour_hrs))
+  print("Total budgeted overhead costs .................... ${:,}".format(total_bugeted_overhead))
+  print("Variable: overhead rate per labor hour ........... ${:,}".format(var_rphr))
+  print("Fixed: overhead rate per labor hour .............. ${:,}".format(fixed_rphr))
+  print("Total overhead rate per labor hour ............... ${:,}".format(total_rphr))
+  print("Standard manufacturing overhead rate per unit .... ${:,}".format(standard_manuf_rpu))
+  
+  
+manufacture_overhead( manuf_overhead )
+```
+
 
 Total standard cost per unit 
 
 ```{python}
+# -------------- standard costs
+
+# print(standard_price)
+# print(standard_quantity)
+# print(standard_labor)
+# print(standard_labor_quantity)
+
+# -------------- manuf overhead
+# print(total_rphr)
+
+
 total_standard = (standard_price * standard_quantity) +\
                 (standard_labor * standard_labor_quantity) + \
                 (total_rphr * standard_labor_quantity)
@@ -140,7 +186,7 @@ company_costs = {
 function 
 
 ```{python}
-def standard_costs( dict ):
+def standard_costs2( dict ):
   direct_materials = list(dict['materials_per_unit'].values())
   dm_std_costs = direct_materials[0] * direct_materials[1]
   direct_labor = list(dict['labor_per_unit'].values())
@@ -155,7 +201,7 @@ def standard_costs( dict ):
   print("Manufacturing overhead Standard Cost .......... ${:,}".format(manuf_overh))
   print("Total standard cost .................................. ${:,}".format(total))
   
-standard_costs( company_costs )
+standard_costs2( company_costs )
 ```
 
 

@@ -315,8 +315,6 @@ labor = {
 
 function 
 
-
-
 ```{python}
 def direct_labor_budget( dict ):
   
@@ -490,8 +488,6 @@ admin = {
 }
 
 ```
-
-
 
 
 
@@ -757,32 +753,36 @@ lawns = {
 }
 ```
 
-Instead of a function this part simply uses a for loop as it is same amount of work as an Excel sheet more or less and is a simple example.
+Inside of a function this part simply uses a for loop as it is same amount of work as an Excel sheet more or less and is a simple example.
 
 ```{python}
-sizes = lawns['lawn_size']
-service = lawns['lawns_to_service']
-hrs = lawns['direct_labor_hrs']
-wage = lawns['avg_cost_labor_hr']
-
-s = []
-a = []
-w = []
-for x in range(len(lawns['lawn_size'])):
-  tl = service[x] * hrs[x]
-  a.append(tl)
+def service_enterprise( dict ):
   
-  size = sizes[x]
-  s.append(size)
+  sizes = lawns['lawn_size']
+  service = lawns['lawns_to_service']
+  hrs = lawns['direct_labor_hrs']
+  wage = lawns['avg_cost_labor_hr']
   
-  cost = tl * wage
-  w.append(cost)
-
-  print("Lawn size: {} \ntotal labor hours ..... {:,}".format( s[x], a[x] ))
-  print("Total direct labor cost ...... ${:,}".format(w[x]))
-
-print("\nTotal costs ..... ${:,}".format( sum(w)))
+  s = []
+  a = []
+  w = []
+  for x in range(len(lawns['lawn_size'])):
+    tl = service[x] * hrs[x]
+    a.append(tl)
+    
+    size = sizes[x]
+    s.append(size)
+    
+    cost = tl * wage
+    w.append(cost)
   
+    print("Lawn size: {} \ntotal labor hours ..... {:,}".format( s[x], a[x] ))
+    print("Total direct labor cost ...... ${:,}".format(w[x]))
+  
+  print("\nTotal costs ..... ${:,}".format( sum(w)))
+  
+
+service_enterprise( lawns )
 ```
 
 

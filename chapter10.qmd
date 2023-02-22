@@ -251,15 +251,19 @@ function for responsibility report
 ```{python}
 def responsibility_report( dict ):
   b = list(dict['budgeted'].values())
-  sb = b[0]
-  b_vc = b[1]
+  sb = b[0] # budgeted sales
+  b_vc = b[1] # budgeted variable costs
+  # budgeted contribution margin
   b_contrib_marg = sb - b_vc
+  # budgeted control margin
   b_ctrl_marg = b_contrib_marg - b[2]
   
   a = list(dict['actual'].values())
-  sa = a[0]
-  a_vc = a[1]
+  sa = a[0] # actual sales
+  a_vc = a[1] # actual variable costs
+  # actual contribution margin
   a_contrib_marg = sa - a_vc
+  # actual control margin
   a_ctrl_marg = a_contrib_marg - a[2]
   
   diff = sa - sb  - (a_contrib_marg - b_contrib_marg) 
@@ -313,6 +317,8 @@ print("Performance Return on Investment is {:.2f}%".format(roi))
 
 ```
 
+
+
 ### Improving ROI 
 
 There are various factors that affect ROI, there is an extended ROI formula to determine what
@@ -323,30 +329,36 @@ the driving factors are behind the ROI value.
 - `ROI` = (`profit margin`) x (`investment turnover`)
 
 
-
 ```{python}
-sales = 2e6 
-variable_costs = 1.1e6
-controllable_fixed_costs = 300e3
-avg_operating_assets = 5e6
-contribution_margin_prct = 0.45 # margin percent
+investment = {
+  'sales': 2e6 ,
+  'variable_costs' : 1.1e6,
+  'controllable_fixed_costs':  300e3,
+  'avg_operating_assets':  5e6,
+  'contribution_margin_prct': 0.45 # margin percent
+}
 
-contribution_margin = sales - variable_costs
-contrib_margin = sales * contribution_margin_prct
+def improve_roi( dict ):
+  vest = list( dict.values())
+  contribution_margin = vest[0] - vest[1] # sales - var_costs
+  contrib_margin = vest[0] * vest[-1] #sales * contribution_margin_prct
 
-# operating income
-controllable_margin = contribution_margin - controllable_fixed_costs
-roi = (controllable_margin / avg_operating_assets)*100
-print("Return on Investment : {:.2f}%".format(roi))
+  # operating income
+  controllable_margin = contribution_margin - vest[2] #controllable_fixed_costs
+  roi = (controllable_margin / vest[3])*100 # avg_operating_assets
+  print("Return on Investment : {:.2f}%".format(roi))
 
-# -- expanded
-profit_margin = controllable_margin/ sales
-investment_turnover = sales / avg_operating_assets
-roi_2 = (profit_margin * investment_turnover)*100
-
-print("\nROI expanded ....... {:.2f}%".format(roi_2))
-print("Profit Margin: ......{}%  ".format(profit_margin*100))
-print("Investment Turnover: {}%".format(investment_turnover*100))
+  # -- expanded
+  profit_margin = controllable_margin/ vest[0] #sales
+  investment_turnover = vest[0] / vest[3] #avg_operating_assets
+  roi_2 = (profit_margin * investment_turnover)*100
+  
+  print("\nROI expanded ....... {:.2f}%".format(roi_2))
+  print("Profit Margin: ......{}%  ".format(profit_margin*100))
+  print("Investment Turnover: {}%".format(investment_turnover*100))
+  
+  
+improve_roi( investment )
 ```
 
 ### ROI Example
@@ -427,12 +439,20 @@ minimum rate of return on a company's average operating assets.
 Formula 
 
 ```{python}
-avg_operating_assets = 2e6
-controllable_margin = 260e3
-min_rate_of_return = 0.10
+residual = {
+  'avg_operating_assets' : 2e6,
+  'controllable_margin' : 260e3,
+  'min_rate_of_return' : 0.10
+}
 
-residual_income = controllable_margin - (min_rate_of_return * avg_operating_assets)
-print("Residual income ... ${:,}".format(residual_income))
+def residual_income( dict ):
+  res = list(dict.values())
+  # controllable_margin - (min_rate_of_return * avg_operating_assets)
+  residual_income = res[1] - (res[-1] * res[0])
+  print("Residual income ... ${:,}".format(residual_income))
+  
+
+residual_income( residual )
 ```
 
 

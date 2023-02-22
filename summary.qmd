@@ -1,9 +1,9 @@
 # Summary
 
-In summary, this book has no content whatsoever.
+In summary, this book has covered a first year's undergraduate level of accounting topics, 
+and fused with Python programming.
 
 
-https://www.accountingtools.com/articles/what-is-standard-hours-allowed.html
 
-https://www.investopedia.com/terms/o/overhead-rate.asp
+
 

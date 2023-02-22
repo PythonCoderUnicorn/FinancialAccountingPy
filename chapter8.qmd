@@ -419,13 +419,10 @@ def transfer_pricing( dict ):
   opportunity_cost = 0
   capcity_min_price =  manufacture[1] + opportunity_cost
   
-
-  
   print("- Transfer Pricing - ")
   print("Assembly contribution margin ......... ${:,}".format(assembly_contrib_margin))
   print("Manufacture contribution margin ...... ${:,}".format(manuf_contrib_margin))
   print("Total contribution margin ............ ${:,}".format(total_contrib_margin))
-  
   print("min. transfer price to manufacturing ............ ${:,}".format(manuf_min_price))
   
   if manuf_min_price >= total_contrib_margin:

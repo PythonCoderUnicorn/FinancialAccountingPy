@@ -308,17 +308,28 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="cell" data-execution_count="1">
 <details>
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>investment <span class="op">=</span> <span class="fl">130e3</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>estimated_life <span class="op">=</span> <span class="dv">10</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>estimated_salvage <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>cash_inflow_customers <span class="op">=</span> <span class="fl">200e3</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>cash_outflow_operations <span class="op">=</span> <span class="fl">176e3</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>annual_cashflow <span class="op">=</span> cash_inflow_customers <span class="op">-</span> cash_outflow_operations</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Net annual cash flow ..... ${:,}"</span>.<span class="bu">format</span>(annual_cashflow))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>new_equipment <span class="op">=</span> {</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">'investment'</span> : <span class="fl">130e3</span>,</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">'estimated_life'</span> : <span class="dv">10</span>,</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">'estimated_salvage'</span> :  <span class="dv">0</span>,</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">'cash_inflow_customers'</span> :  <span class="fl">200e3</span>,</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="st">'cash_outflow_operations'</span> : <span class="fl">176e3</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> investment_cashflow( <span class="bu">dict</span> ):</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  annual_cashflow <span class="op">=</span> <span class="bu">dict</span>[<span class="st">'cash_inflow_customers'</span>] <span class="op">-</span> <span class="bu">dict</span>[<span class="st">'cash_outflow_operations'</span>]</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Net annual cash flow from investment ........... ${:,}"</span>.<span class="bu">format</span>(annual_cashflow))</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>  cpt <span class="op">=</span> <span class="bu">dict</span>[<span class="st">'investment'</span>] <span class="op">/</span> annual_cashflow</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>  useful_life <span class="op">=</span> cpt<span class="op">/</span> <span class="bu">dict</span>[<span class="st">'estimated_life'</span>]<span class="op">*</span><span class="dv">100</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Cash payback technique ....... </span><span class="sc">{:.2f}</span><span class="st"> years (</span><span class="sc">{:.2f}% o</span><span class="st">f asset's life)"</span>.<span class="bu">format</span>(cpt, useful_life ))</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>investment_cashflow( new_equipment)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
-<pre><code>Net annual cash flow ..... $24,000.0</code></pre>
+<pre><code>Net annual cash flow from investment ........... $24,000.0
+Cash payback technique ....... 5.42 years (54.17% of asset's life)</code></pre>
 </div>
 </div>
 <section id="cash-payback-technique" class="level2" data-number="13.1">
@@ -327,51 +338,40 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li>cash payback technique (<code>CPT</code>) = <code>(cost of capital investment) / (net annual cash flow)</code></li>
 </ul>
-<div class="cell" data-execution_count="2">
-<details>
-<summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>cpt <span class="op">=</span> investment <span class="op">/</span> annual_cashflow</span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>useful_life <span class="op">=</span> cpt<span class="op">/</span>estimated_life<span class="op">*</span><span class="dv">100</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Cash payback technique ....... </span><span class="sc">{:.2f}</span><span class="st"> years (</span><span class="sc">{:.2f}% o</span><span class="st">f asset's life)"</span>.<span class="bu">format</span>(cpt, useful_life ))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-<div class="cell-output cell-output-stdout">
-<pre><code>Cash payback technique ....... 5.42 years (54.17% of asset's life)</code></pre>
-</div>
-</div>
 <section id="example" class="level3" data-number="13.1.1">
 <h3 data-number="13.1.1" class="anchored" data-anchor-id="example"><span class="header-section-number">13.1.1</span> Example</h3>
 <p>A company is considering a new machine, the new machine would cost $900,000, with an estimated 6 years of life and no salvage value after 6 years.</p>
-<div class="cell" data-execution_count="3">
+<div class="cell" data-execution_count="2">
 <details>
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>cashback <span class="op">=</span> {</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">'investment_cost'</span>: <span class="fl">900e3</span>,</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">'estimated_life'</span> : <span class="dv">6</span>,</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">'estimated_salvage'</span> : <span class="dv">0</span>,</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">'cash_inflow_customers'</span> : <span class="fl">400e3</span>,</span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  <span class="st">'cash_outflow_operations'</span> : <span class="fl">190e3</span></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>cashback <span class="op">=</span> {</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">'investment_cost'</span>: <span class="fl">900e3</span>,</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">'estimated_life'</span> : <span class="dv">6</span>,</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">'estimated_salvage'</span> : <span class="dv">0</span>,</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">'cash_inflow_customers'</span> : <span class="fl">400e3</span>,</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="st">'cash_outflow_operations'</span> : <span class="fl">190e3</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <p>Function for cash payback period calculation</p>
-<div class="cell" data-execution_count="4">
+<div class="cell" data-execution_count="3">
 <details>
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> payback_period( <span class="bu">dict</span> ):</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  investment <span class="op">=</span> <span class="bu">dict</span>[<span class="st">'investment_cost'</span>]</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  estimated_life <span class="op">=</span> <span class="bu">dict</span>[<span class="st">'estimated_life'</span>]</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  cash_inflow_customers <span class="op">=</span> <span class="bu">dict</span>[<span class="st">'cash_inflow_customers'</span>]</span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  cash_outflow_operations <span class="op">=</span> <span class="bu">dict</span>[<span class="st">'cash_outflow_operations'</span>]</span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  annual_cashflow <span class="op">=</span> cash_inflow_customers <span class="op">-</span> cash_outflow_operations</span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Net annual cash flow ......... ${:,}"</span>.<span class="bu">format</span>(annual_cashflow))</span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>  cpt <span class="op">=</span> investment <span class="op">/</span> annual_cashflow</span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>  useful_life <span class="op">=</span> cpt<span class="op">/</span>estimated_life<span class="op">*</span><span class="dv">100</span></span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Cash payback technique ....... </span><span class="sc">{:.2f}</span><span class="st"> years (</span><span class="sc">{:.0f}% o</span><span class="st">f asset's life)"</span>.<span class="bu">format</span>(cpt, useful_life ))</span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>payback_period( cashback )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> payback_period( <span class="bu">dict</span> ):</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  investment <span class="op">=</span> <span class="bu">dict</span>[<span class="st">'investment_cost'</span>]</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  estimated_life <span class="op">=</span> <span class="bu">dict</span>[<span class="st">'estimated_life'</span>]</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  cash_inflow_customers <span class="op">=</span> <span class="bu">dict</span>[<span class="st">'cash_inflow_customers'</span>]</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  cash_outflow_operations <span class="op">=</span> <span class="bu">dict</span>[<span class="st">'cash_outflow_operations'</span>]</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  annual_cashflow <span class="op">=</span> cash_inflow_customers <span class="op">-</span> cash_outflow_operations</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Net annual cash flow ......... ${:,}"</span>.<span class="bu">format</span>(annual_cashflow))</span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>  cpt <span class="op">=</span> investment <span class="op">/</span> annual_cashflow</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>  useful_life <span class="op">=</span> cpt<span class="op">/</span>estimated_life<span class="op">*</span><span class="dv">100</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Cash payback technique ....... </span><span class="sc">{:.2f}</span><span class="st"> years (</span><span class="sc">{:.0f}% o</span><span class="st">f asset's life)"</span>.<span class="bu">format</span>(cpt, useful_life ))</span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>payback_period( cashback )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>Net annual cash flow ......... $210,000.0
@@ -394,22 +394,29 @@ Cash payback technique ....... 4.29 years (71% of asset's life)</code></pre>
 <li>Table: 10 periods, 12% = 5.65022</li>
 <li>Net cash flow is $24,000</li>
 </ul>
-<div class="cell" data-execution_count="5">
+<div class="cell" data-execution_count="4">
 <details>
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>investment <span class="op">=</span> <span class="fl">130e3</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>estimated_life <span class="op">=</span> <span class="dv">10</span></span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>estimated_salvage <span class="op">=</span> <span class="dv">0</span></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>cash_inflow_customers <span class="op">=</span> <span class="fl">200e3</span></span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>cash_outflow_operations <span class="op">=</span> <span class="fl">176e3</span></span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>annual_cashflow <span class="op">=</span> cash_inflow_customers <span class="op">-</span> cash_outflow_operations</span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Net annual cash flow ..... ${:,}"</span>.<span class="bu">format</span>(annual_cashflow))</span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>annuity_value <span class="op">=</span> <span class="fl">5.65022</span> <span class="co"># value from a table</span></span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>pv <span class="op">=</span> annual_cashflow <span class="op">*</span> annuity_value</span>
-<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>npv <span class="op">=</span> pv <span class="op">-</span> investment</span>
-<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Net present value ........ $</span><span class="sc">{:.2f}</span><span class="st">"</span>.<span class="bu">format</span>(npv))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>equal_cashflow <span class="op">=</span> {</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">'investment'</span>: <span class="fl">130e3</span>,</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">'estimated_life'</span> : <span class="dv">10</span>,</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">'estimated_salvage'</span>:  <span class="dv">0</span>,</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">'cash_inflow_customers'</span>: <span class="fl">200e3</span>,</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="st">'cash_outflow_operations'</span>: <span class="fl">176e3</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> equal_cashflows( annuity_value,  <span class="bu">dict</span> ):</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>  annual_cashflow <span class="op">=</span> <span class="bu">dict</span>[<span class="st">'cash_inflow_customers'</span>] <span class="op">-</span> <span class="bu">dict</span>[<span class="st">'cash_outflow_operations'</span>]</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Net annual cash flow ..... ${:,}"</span>.<span class="bu">format</span>(annual_cashflow))</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>  <span class="co"># annuity_value = 5.65022 # value from a table</span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>  pv <span class="op">=</span> annual_cashflow <span class="op">*</span> annuity_value</span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>  npv <span class="op">=</span> pv <span class="op">-</span> <span class="bu">dict</span>[<span class="st">'investment'</span>]</span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Net present value ........ $</span><span class="sc">{:.2f}</span><span class="st">"</span>.<span class="bu">format</span>(npv))</span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a>equal_cashflows( <span class="fl">5.65022</span>, equal_cashflow )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>Net annual cash flow ..... $24,000.0
@@ -426,37 +433,53 @@ Net present value ........ $5605.28</code></pre>
 <li>the discount factor annuities for 12% are found using a table (present value of a single sum)</li>
 <li>capital investment is $130,000</li>
 </ul>
-<div class="cell" data-execution_count="6">
+<p>This code is inside a function only to bring attention that the calculations are for <code>unequal_cashflows</code>. If you have the table values in an array as shown in the discount factor array. The <code>NumPy</code> library is used to quickly make an array list of integers from 0 to 9, instead of typing the numbers by hand.</p>
+<div class="cell" data-execution_count="5">
 <details>
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="co"># create an array 0 to 9</span></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>years <span class="op">=</span> np.arange(<span class="dv">10</span>)</span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="co"># assumed annual net cash flows 18,000 to 24,000 (for 10 years)</span></span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>yearly_cashflows <span class="op">=</span> [<span class="fl">34e3</span>, <span class="fl">30e3</span>, <span class="fl">27e3</span>,<span class="fl">25e3</span>,<span class="fl">24e3</span>,<span class="fl">22e3</span>,<span class="fl">21e3</span>,<span class="fl">20e3</span>,<span class="fl">19e3</span>, <span class="fl">18e3</span>]</span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="co"># discount_factor for 12% values from a table for 10 periods (n)</span></span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>discount_factor <span class="op">=</span> [<span class="fl">0.89286</span>, <span class="fl">0.79719</span>,<span class="fl">0.71178</span>,<span class="fl">0.63552</span>,<span class="fl">0.56743</span>,<span class="fl">0.50663</span>,<span class="fl">0.45235</span>,<span class="fl">0.40388</span>,<span class="fl">0.36061</span>,<span class="fl">0.32197</span>]</span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>capital_investment <span class="op">=</span> <span class="fl">130e3</span></span>
-<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a><span class="co"># present values</span></span>
-<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>pv <span class="op">=</span> []</span>
-<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> x <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(years)):</span>
-<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a>  PV <span class="op">=</span> yearly_cashflows[x] <span class="op">*</span> discount_factor[x]</span>
-<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a>  pv.append(PV)</span>
-<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a>  <span class="co"># print("Year: {} Present value @ 12% ... ${:.2f}".format(years[x]+1, pv[x]))</span></span>
-<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a>total_pv <span class="op">=</span> <span class="bu">sum</span>(pv)</span>
-<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a>npv <span class="op">=</span> total_pv <span class="op">-</span> capital_investment </span>
-<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Present value @ 12</span><span class="sc">% c</span><span class="st">ash flows ..... ${:,}"</span>.<span class="bu">format</span>( total_pv ))</span>
-<span id="cb10-25"><a href="#cb10-25" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Net present value .................. $</span><span class="sc">{:.2f}</span><span class="st">"</span>.<span class="bu">format</span>( npv ))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> unequal_cashflows():</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="co"># create an array 0 to 9</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  years <span class="op">=</span> np.arange(<span class="dv">10</span>)</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>  <span class="co"># assumed annual net cash flows 18,000 to 24,000 (for 10 years)</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>  yearly_cashflows <span class="op">=</span> [<span class="fl">34e3</span>, <span class="fl">30e3</span>, <span class="fl">27e3</span>,<span class="fl">25e3</span>,<span class="fl">24e3</span>,<span class="fl">22e3</span>,<span class="fl">21e3</span>,<span class="fl">20e3</span>,<span class="fl">19e3</span>, <span class="fl">18e3</span>]</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a>  <span class="co"># discount_factor for 12% values from a table for 10 periods (n)</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a>  discount_factor <span class="op">=</span> [<span class="fl">0.89286</span>, <span class="fl">0.79719</span>,<span class="fl">0.71178</span>,<span class="fl">0.63552</span>,<span class="fl">0.56743</span>,<span class="fl">0.50663</span>,<span class="fl">0.45235</span>,<span class="fl">0.40388</span>,<span class="fl">0.36061</span>,<span class="fl">0.32197</span>]</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>  capital_investment <span class="op">=</span> <span class="fl">130e3</span></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>  <span class="co"># present values</span></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a>  pv <span class="op">=</span> []</span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a>  <span class="cf">for</span> x <span class="kw">in</span> <span class="bu">range</span>(<span class="bu">len</span>(years)):</span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a>    PV <span class="op">=</span> yearly_cashflows[x] <span class="op">*</span> discount_factor[x]</span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a>    pv.append(PV)</span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a>    <span class="co"># comment out this line to only show the final total present value</span></span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Year: </span><span class="sc">{}</span><span class="st"> Present value @ 12% ... $</span><span class="sc">{:.2f}</span><span class="st">"</span>.<span class="bu">format</span>(years[x]<span class="op">+</span><span class="dv">1</span>, pv[x]))</span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a>  total_pv <span class="op">=</span> <span class="bu">sum</span>(pv)</span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a>  npv <span class="op">=</span> total_pv <span class="op">-</span> capital_investment </span>
+<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Present value @ 12</span><span class="sc">% c</span><span class="st">ash flows ..... ${:,}"</span>.<span class="bu">format</span>( total_pv ))</span>
+<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Net present value .................. $</span><span class="sc">{:.2f}</span><span class="st">"</span>.<span class="bu">format</span>( npv ))</span>
+<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a>unequal_cashflows()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
-<pre><code>Present value @ 12% cash flows ..... $144,367.18
+<pre><code>Year: 1 Present value @ 12% ... $30357.24
+Year: 2 Present value @ 12% ... $23915.70
+Year: 3 Present value @ 12% ... $19218.06
+Year: 4 Present value @ 12% ... $15888.00
+Year: 5 Present value @ 12% ... $13618.32
+Year: 6 Present value @ 12% ... $11145.86
+Year: 7 Present value @ 12% ... $9499.35
+Year: 8 Present value @ 12% ... $8077.60
+Year: 9 Present value @ 12% ... $6851.59
+Year: 10 Present value @ 12% ... $5795.46
+Present value @ 12% cash flows ..... $144,367.18
 Net present value .................. $14367.18</code></pre>
 </div>
 </div>
@@ -470,26 +493,26 @@ Net present value .................. $14367.18</code></pre>
 <li>investment $130,000</li>
 </ul>
 <p>This quick function has the 2 values for 10 periods and for 12% and 15% inside the function.</p>
-<div class="cell" data-execution_count="7">
+<div class="cell" data-execution_count="6">
 <details>
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> discount_rate(cashflow: <span class="bu">int</span>, investment: <span class="bu">int</span>):</span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  rate1 <span class="op">=</span> cashflow <span class="op">*</span> <span class="fl">5.65022</span>  <span class="co"># 12%</span></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  rate2 <span class="op">=</span> cashflow <span class="op">*</span> <span class="fl">5.01877</span>  <span class="co"># 15%</span></span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  npv1 <span class="op">=</span> <span class="bu">round</span>(rate1 <span class="op">-</span> investment, <span class="dv">2</span>)</span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>  npv2 <span class="op">=</span> <span class="bu">round</span>(rate2 <span class="op">-</span> investment, <span class="dv">2</span>)</span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">" - Discount Rate -"</span>)</span>
-<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Net present value for </span><span class="sc">{}</span><span class="st">% ..... ${:,}"</span>.<span class="bu">format</span>(<span class="dv">12</span>, npv1) )</span>
-<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Net present value for </span><span class="sc">{}</span><span class="st">% ..... ${:,}"</span>.<span class="bu">format</span>(<span class="dv">15</span>, npv2) )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> discount_rate(cashflow: <span class="bu">int</span>, investment: <span class="bu">int</span>):</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  rate1 <span class="op">=</span> cashflow <span class="op">*</span> <span class="fl">5.65022</span>  <span class="co"># 12%</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  rate2 <span class="op">=</span> cashflow <span class="op">*</span> <span class="fl">5.01877</span>  <span class="co"># 15%</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  npv1 <span class="op">=</span> <span class="bu">round</span>(rate1 <span class="op">-</span> investment, <span class="dv">2</span>)</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>  npv2 <span class="op">=</span> <span class="bu">round</span>(rate2 <span class="op">-</span> investment, <span class="dv">2</span>)</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">" - Discount Rate -"</span>)</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Net present value for </span><span class="sc">{}</span><span class="st">% ..... ${:,}"</span>.<span class="bu">format</span>(<span class="dv">12</span>, npv1) )</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Net present value for </span><span class="sc">{}</span><span class="st">% ..... ${:,}"</span>.<span class="bu">format</span>(<span class="dv">15</span>, npv2) )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <p>call function</p>
-<div class="cell" data-execution_count="8">
+<div class="cell" data-execution_count="7">
 <details>
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>discount_rate(<span class="fl">24e3</span>, <span class="fl">130e3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>discount_rate(<span class="fl">24e3</span>, <span class="fl">130e3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code> - Discount Rate -
@@ -500,47 +523,48 @@ Net present value for 15% ..... $-9,549.52</code></pre>
 <section id="example-1" class="level3" data-number="13.5.1">
 <h3 data-number="13.5.1" class="anchored" data-anchor-id="example-1"><span class="header-section-number">13.5.1</span> Example</h3>
 <p>This example is the extension of the cash payback, but now with the discount rate (rate of return) being 9%. The value is found by using the table present value of an ordinary annuity of 1. The period being 6 years and at 9% has the value of 4.48592.</p>
+<div class="cell" data-execution_count="8">
+<details>
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>cashback <span class="op">=</span> {</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">'investment_cost'</span>: <span class="fl">900e3</span>,</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">'estimated_life'</span> : <span class="dv">6</span>,</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">'estimated_salvage'</span> : <span class="dv">0</span>,</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">'cash_inflow_customers'</span> : <span class="fl">400e3</span>,</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  <span class="st">'cash_outflow_operations'</span> : <span class="fl">190e3</span>,</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>  <span class="st">'rate_of_return'</span>: <span class="fl">0.09</span> <span class="co"># discount rate</span></span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
+<p>a function for calculating present value for annuities</p>
 <div class="cell" data-execution_count="9">
 <details>
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>cashback <span class="op">=</span> {</span>
-<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">'investment_cost'</span>: <span class="fl">900e3</span>,</span>
-<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">'estimated_life'</span> : <span class="dv">6</span>,</span>
-<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">'estimated_salvage'</span> : <span class="dv">0</span>,</span>
-<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">'cash_inflow_customers'</span> : <span class="fl">400e3</span>,</span>
-<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>  <span class="st">'cash_outflow_operations'</span> : <span class="fl">190e3</span>,</span>
-<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>  <span class="st">'rate_of_return'</span>: <span class="fl">0.09</span> <span class="co"># discount rate</span></span>
-<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-</div>
-<div class="cell" data-execution_count="10">
-<details>
-<summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> present_value( annuity: <span class="bu">float</span>, <span class="bu">dict</span> ):</span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  investment <span class="op">=</span> <span class="bu">dict</span>[<span class="st">'investment_cost'</span>]</span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  estimated_life <span class="op">=</span> <span class="bu">dict</span>[<span class="st">'estimated_life'</span>]</span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>  cash_inflow_customers <span class="op">=</span> <span class="bu">dict</span>[<span class="st">'cash_inflow_customers'</span>]</span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>  cash_outflow_operations <span class="op">=</span> <span class="bu">dict</span>[<span class="st">'cash_outflow_operations'</span>]</span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>  annual_cashflow <span class="op">=</span> cash_inflow_customers <span class="op">-</span> cash_outflow_operations</span>
-<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Net annual cash flow ......... ${:,}"</span>.<span class="bu">format</span>(annual_cashflow))</span>
-<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>  cpt <span class="op">=</span> investment <span class="op">/</span> annual_cashflow</span>
-<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>  useful_life <span class="op">=</span> cpt<span class="op">/</span>estimated_life<span class="op">*</span><span class="dv">100</span></span>
-<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Cash payback technique ....... </span><span class="sc">{:.2f}</span><span class="st"> years (</span><span class="sc">{:.0f}% o</span><span class="st">f asset's life)"</span>.<span class="bu">format</span>(cpt, useful_life ))</span>
-<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a>  <span class="co"># annuity_value = 4.48592 # value from a table</span></span>
-<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a>  pv <span class="op">=</span> annual_cashflow <span class="op">*</span> annuity <span class="co">#annuity_value</span></span>
-<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a>  npv <span class="op">=</span> <span class="bu">round</span>(pv <span class="op">-</span> investment,<span class="dv">2</span>)</span>
-<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Net present value ............. ${:,}"</span>.<span class="bu">format</span>(npv))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> present_value( annuity: <span class="bu">float</span>, <span class="bu">dict</span> ):</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>  investment <span class="op">=</span> <span class="bu">dict</span>[<span class="st">'investment_cost'</span>]</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  estimated_life <span class="op">=</span> <span class="bu">dict</span>[<span class="st">'estimated_life'</span>]</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>  cash_inflow_customers <span class="op">=</span> <span class="bu">dict</span>[<span class="st">'cash_inflow_customers'</span>]</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>  cash_outflow_operations <span class="op">=</span> <span class="bu">dict</span>[<span class="st">'cash_outflow_operations'</span>]</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>  annual_cashflow <span class="op">=</span> cash_inflow_customers <span class="op">-</span> cash_outflow_operations</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Net annual cash flow ......... ${:,}"</span>.<span class="bu">format</span>(annual_cashflow))</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>  cpt <span class="op">=</span> investment <span class="op">/</span> annual_cashflow</span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>  useful_life <span class="op">=</span> cpt<span class="op">/</span>estimated_life<span class="op">*</span><span class="dv">100</span></span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Cash payback technique ....... </span><span class="sc">{:.2f}</span><span class="st"> years (</span><span class="sc">{:.0f}% o</span><span class="st">f asset's life)"</span>.<span class="bu">format</span>(cpt, useful_life ))</span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>  <span class="co"># annuity_value = 4.48592 # value from a table</span></span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a>  pv <span class="op">=</span> annual_cashflow <span class="op">*</span> annuity <span class="co">#annuity_value</span></span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a>  npv <span class="op">=</span> <span class="bu">round</span>(pv <span class="op">-</span> investment,<span class="dv">2</span>)</span>
+<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Net present value ............. ${:,}"</span>.<span class="bu">format</span>(npv))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <p>call function</p>
-<div class="cell" data-execution_count="11">
+<div class="cell" data-execution_count="10">
 <details>
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>present_value( <span class="fl">4.48592</span>, cashback )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>present_value( <span class="fl">4.48592</span>, cashback )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>Net annual cash flow ......... $210,000.0
@@ -561,24 +585,24 @@ Net present value ............. $42,043.2</code></pre>
 <li>estimated values of the intangible benefits are used in the NPV calculation</li>
 </ul>
 <p>A company example</p>
-<div class="cell" data-execution_count="12">
+<div class="cell" data-execution_count="11">
 <details>
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>robot_investment <span class="op">=</span> {</span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">'investment_cost'</span>: <span class="fl">200e3</span>,</span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">'estimated_life'</span> : <span class="dv">10</span>,</span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">'estimated_salvage'</span> : <span class="dv">0</span>,</span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">'cash_inflow_customers'</span> : <span class="fl">50e3</span>,</span>
-<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>  <span class="st">'cash_outflow_operations'</span> : <span class="fl">20e3</span>,</span>
-<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>  <span class="st">'rate_of_return'</span>: <span class="fl">0.12</span> <span class="co"># discount rate</span></span>
-<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>robot_investment <span class="op">=</span> {</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">'investment_cost'</span>: <span class="fl">200e3</span>,</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">'estimated_life'</span> : <span class="dv">10</span>,</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">'estimated_salvage'</span> : <span class="dv">0</span>,</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">'cash_inflow_customers'</span> : <span class="fl">50e3</span>,</span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>  <span class="st">'cash_outflow_operations'</span> : <span class="fl">20e3</span>,</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>  <span class="st">'rate_of_return'</span>: <span class="fl">0.12</span> <span class="co"># discount rate</span></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <p>Function to get the present value that takes the annuity value, assuming the user looks up the value for the function input.</p>
-<div class="cell" data-execution_count="13">
+<div class="cell" data-execution_count="12">
 <details>
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>present_value( <span class="fl">5.65022</span>, robot_investment )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>present_value( <span class="fl">5.65022</span>, robot_investment )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>Net annual cash flow ......... $30,000.0
@@ -587,23 +611,23 @@ Net present value ............. $-30,493.4</code></pre>
 </div>
 </div>
 <p>Staff at the company estimate that sales will increase of $10,000 annually due to the increase in quality from customers point of view. Staff also estimate the cost outflows will be reduced by 5,000 as a result from lower injury claims. Update the robot investment data and call the present value function with the annuity value.</p>
+<div class="cell" data-execution_count="13">
+<details>
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a>robot_investment2 <span class="op">=</span> {</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">'investment_cost'</span>: <span class="fl">200e3</span>,</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">'estimated_life'</span> : <span class="dv">10</span>,</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">'estimated_salvage'</span> : <span class="dv">0</span>,</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">'cash_inflow_customers'</span> : <span class="fl">60e3</span>,</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>  <span class="st">'cash_outflow_operations'</span> : <span class="fl">15e3</span>,</span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>  <span class="st">'rate_of_return'</span>: <span class="fl">0.12</span> <span class="co"># discount rate</span></span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
 <div class="cell" data-execution_count="14">
 <details>
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>robot_investment2 <span class="op">=</span> {</span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">'investment_cost'</span>: <span class="fl">200e3</span>,</span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">'estimated_life'</span> : <span class="dv">10</span>,</span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">'estimated_salvage'</span> : <span class="dv">0</span>,</span>
-<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">'cash_inflow_customers'</span> : <span class="fl">60e3</span>,</span>
-<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>  <span class="st">'cash_outflow_operations'</span> : <span class="fl">15e3</span>,</span>
-<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>  <span class="st">'rate_of_return'</span>: <span class="fl">0.12</span> <span class="co"># discount rate</span></span>
-<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-</div>
-<div class="cell" data-execution_count="15">
-<details>
-<summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>present_value( <span class="fl">5.65022</span>, robot_investment2 )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>present_value( <span class="fl">5.65022</span>, robot_investment2 )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>Net annual cash flow ......... $45,000.0
@@ -612,15 +636,15 @@ Net present value ............. $54,259.9</code></pre>
 </div>
 </div>
 <p>Business decision based on net present values. Ideally the conditional statement would be inside a function.</p>
-<div class="cell" data-execution_count="16">
+<div class="cell" data-execution_count="15">
 <details>
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>npv1 <span class="op">=</span> <span class="bu">abs</span>(<span class="op">-</span><span class="fl">30493.4</span>)</span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>npv2 <span class="op">=</span> <span class="fl">54259.9</span></span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> npv2 <span class="op">&gt;</span> npv1:</span>
-<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Company should accept project"</span>)</span>
-<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
-<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"do not accept project"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>npv1 <span class="op">=</span> <span class="bu">abs</span>(<span class="op">-</span><span class="fl">30493.4</span>)</span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>npv2 <span class="op">=</span> <span class="fl">54259.9</span></span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> npv2 <span class="op">&gt;</span> npv1:</span>
+<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Company should accept project"</span>)</span>
+<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
+<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"do not accept project"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>Company should accept project</code></pre>
@@ -633,79 +657,79 @@ Net present value ............. $54,259.9</code></pre>
 <ul>
 <li><code>profitability index = present value net cash flows / initial investment</code></li>
 </ul>
-<div class="cell" data-execution_count="17">
+<div class="cell" data-execution_count="16">
 <details>
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>projects <span class="op">=</span> {</span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">'project_A'</span>: {</span>
-<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">'investment'</span>: <span class="fl">40e3</span>,</span>
-<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">'annual_cash_inflow'</span>: <span class="fl">10e3</span>,</span>
-<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">'salvage_value'</span>: <span class="fl">5e3</span></span>
-<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>    },</span>
-<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>  <span class="st">'project_B'</span>: {</span>
-<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">'investment'</span>: <span class="fl">90e3</span>,</span>
-<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">'annual_cash_inflow'</span>: <span class="fl">19e3</span>,</span>
-<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">'salvage_value'</span>: <span class="fl">10e3</span></span>
-<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a>    }</span>
-<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>projects <span class="op">=</span> {</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">'project_A'</span>: {</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">'investment'</span>: <span class="fl">40e3</span>,</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">'annual_cash_inflow'</span>: <span class="fl">10e3</span>,</span>
+<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">'salvage_value'</span>: <span class="fl">5e3</span></span>
+<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a>    },</span>
+<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>  <span class="st">'project_B'</span>: {</span>
+<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a>    <span class="st">'investment'</span>: <span class="fl">90e3</span>,</span>
+<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a>    <span class="st">'annual_cash_inflow'</span>: <span class="fl">19e3</span>,</span>
+<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a>    <span class="st">'salvage_value'</span>: <span class="fl">10e3</span></span>
+<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <p>function to compare present value of net cash flows, a 12% discount rate. This function has profitability index inside.</p>
-<div class="cell" data-execution_count="18">
+<div class="cell" data-execution_count="17">
 <details>
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> exclusive_projects( annuity1: <span class="bu">float</span>, annuity2: <span class="bu">float</span>, <span class="bu">dict</span> ):</span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># project A</span></span>
-<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>  projA <span class="op">=</span> <span class="bu">list</span>(<span class="bu">dict</span>[<span class="st">'project_A'</span>].values())</span>
-<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>  investmentA <span class="op">=</span> projA[<span class="dv">0</span>]</span>
-<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>  cash_inflow_A <span class="op">=</span> projA[<span class="dv">1</span>]</span>
-<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>  salvage_A <span class="op">=</span> projA[<span class="dv">2</span>]</span>
-<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a>  <span class="co"># project B</span></span>
-<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a>  projB <span class="op">=</span> <span class="bu">list</span>(<span class="bu">dict</span>[<span class="st">'project_B'</span>].values())</span>
-<span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a>  investmentB <span class="op">=</span> projB[<span class="dv">0</span>]</span>
-<span id="cb28-12"><a href="#cb28-12" aria-hidden="true" tabindex="-1"></a>  cash_inflow_B <span class="op">=</span> projB[<span class="dv">1</span>]</span>
-<span id="cb28-13"><a href="#cb28-13" aria-hidden="true" tabindex="-1"></a>  salvage_B <span class="op">=</span> projB[<span class="dv">2</span>]</span>
-<span id="cb28-14"><a href="#cb28-14" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb28-15"><a href="#cb28-15" aria-hidden="true" tabindex="-1"></a>  pvA <span class="op">=</span> <span class="bu">round</span>( (cash_inflow_A <span class="op">*</span> annuity1) <span class="op">+</span> (salvage_A <span class="op">*</span> annuity2), <span class="dv">2</span>)</span>
-<span id="cb28-16"><a href="#cb28-16" aria-hidden="true" tabindex="-1"></a>  pvB <span class="op">=</span> <span class="bu">round</span>( (cash_inflow_B <span class="op">*</span> annuity1) <span class="op">+</span> (salvage_B <span class="op">*</span> annuity2), <span class="dv">2</span>)</span>
-<span id="cb28-17"><a href="#cb28-17" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb28-18"><a href="#cb28-18" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Project A : present value of net cash flows ............. ${:,}"</span>.<span class="bu">format</span>(pvA))</span>
-<span id="cb28-19"><a href="#cb28-19" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Project B : present value of net cash flows ............. ${:,}</span><span class="ch">\n</span><span class="st">"</span>.<span class="bu">format</span>(pvB))</span>
-<span id="cb28-20"><a href="#cb28-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-21"><a href="#cb28-21" aria-hidden="true" tabindex="-1"></a>  npvA <span class="op">=</span> <span class="bu">round</span>(pvA <span class="op">-</span> investmentA, <span class="dv">2</span>)</span>
-<span id="cb28-22"><a href="#cb28-22" aria-hidden="true" tabindex="-1"></a>  npvB <span class="op">=</span> <span class="bu">round</span>(pvB <span class="op">-</span> investmentB, <span class="dv">2</span>)</span>
-<span id="cb28-23"><a href="#cb28-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-24"><a href="#cb28-24" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Project A : Net present value ............. ${:,}"</span>.<span class="bu">format</span>(npvA))</span>
-<span id="cb28-25"><a href="#cb28-25" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Project B : Net present value ............. ${:,}"</span>.<span class="bu">format</span>(npvB))</span>
-<span id="cb28-26"><a href="#cb28-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-27"><a href="#cb28-27" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> npvA <span class="op">&gt;</span> npvB:</span>
-<span id="cb28-28"><a href="#cb28-28" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">" Project A has higher NPV"</span>, <span class="st">'</span><span class="ch">\U0001f7e1</span><span class="st">'</span>)</span>
-<span id="cb28-29"><a href="#cb28-29" aria-hidden="true" tabindex="-1"></a>  <span class="cf">else</span>:</span>
-<span id="cb28-30"><a href="#cb28-30" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">" Project B has higher NPV"</span>, <span class="st">'</span><span class="ch">\U0001f7e1</span><span class="st">'</span>)</span>
-<span id="cb28-31"><a href="#cb28-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-32"><a href="#cb28-32" aria-hidden="true" tabindex="-1"></a>  <span class="co"># -- profitability index </span></span>
-<span id="cb28-33"><a href="#cb28-33" aria-hidden="true" tabindex="-1"></a>  pindexA <span class="op">=</span> <span class="bu">round</span>(pvA <span class="op">/</span> investmentA, <span class="dv">2</span>)</span>
-<span id="cb28-34"><a href="#cb28-34" aria-hidden="true" tabindex="-1"></a>  pindexB <span class="op">=</span> <span class="bu">round</span>(pvB <span class="op">/</span> investmentB, <span class="dv">2</span>)</span>
-<span id="cb28-35"><a href="#cb28-35" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb28-36"><a href="#cb28-36" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">Project A : Profitability Index ............. </span><span class="sc">{:.2f}</span><span class="st">"</span>.<span class="bu">format</span>(pindexA))</span>
-<span id="cb28-37"><a href="#cb28-37" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Project B : Profitability Index ............. </span><span class="sc">{:.2f}</span><span class="st">"</span>.<span class="bu">format</span>(pindexB))</span>
-<span id="cb28-38"><a href="#cb28-38" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb28-39"><a href="#cb28-39" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> pindexA <span class="op">&gt;</span> pindexB:</span>
-<span id="cb28-40"><a href="#cb28-40" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">" Project A has higher profitability"</span>, <span class="st">'</span><span class="ch">\U0001f7e2</span><span class="st">'</span>)</span>
-<span id="cb28-41"><a href="#cb28-41" aria-hidden="true" tabindex="-1"></a>  <span class="cf">else</span>:</span>
-<span id="cb28-42"><a href="#cb28-42" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">" Project B has higher profitability"</span>, <span class="st">'</span><span class="ch">\U0001f7e2</span><span class="st">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> exclusive_projects( annuity1: <span class="bu">float</span>, annuity2: <span class="bu">float</span>, <span class="bu">dict</span> ):</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>  <span class="co"># project A</span></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>  projA <span class="op">=</span> <span class="bu">list</span>(<span class="bu">dict</span>[<span class="st">'project_A'</span>].values())</span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>  investmentA <span class="op">=</span> projA[<span class="dv">0</span>]</span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>  cash_inflow_A <span class="op">=</span> projA[<span class="dv">1</span>]</span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>  salvage_A <span class="op">=</span> projA[<span class="dv">2</span>]</span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a>  <span class="co"># project B</span></span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a>  projB <span class="op">=</span> <span class="bu">list</span>(<span class="bu">dict</span>[<span class="st">'project_B'</span>].values())</span>
+<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a>  investmentB <span class="op">=</span> projB[<span class="dv">0</span>]</span>
+<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a>  cash_inflow_B <span class="op">=</span> projB[<span class="dv">1</span>]</span>
+<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a>  salvage_B <span class="op">=</span> projB[<span class="dv">2</span>]</span>
+<span id="cb26-14"><a href="#cb26-14" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb26-15"><a href="#cb26-15" aria-hidden="true" tabindex="-1"></a>  pvA <span class="op">=</span> <span class="bu">round</span>( (cash_inflow_A <span class="op">*</span> annuity1) <span class="op">+</span> (salvage_A <span class="op">*</span> annuity2), <span class="dv">2</span>)</span>
+<span id="cb26-16"><a href="#cb26-16" aria-hidden="true" tabindex="-1"></a>  pvB <span class="op">=</span> <span class="bu">round</span>( (cash_inflow_B <span class="op">*</span> annuity1) <span class="op">+</span> (salvage_B <span class="op">*</span> annuity2), <span class="dv">2</span>)</span>
+<span id="cb26-17"><a href="#cb26-17" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb26-18"><a href="#cb26-18" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Project A : present value of net cash flows ............. ${:,}"</span>.<span class="bu">format</span>(pvA))</span>
+<span id="cb26-19"><a href="#cb26-19" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Project B : present value of net cash flows ............. ${:,}</span><span class="ch">\n</span><span class="st">"</span>.<span class="bu">format</span>(pvB))</span>
+<span id="cb26-20"><a href="#cb26-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-21"><a href="#cb26-21" aria-hidden="true" tabindex="-1"></a>  npvA <span class="op">=</span> <span class="bu">round</span>(pvA <span class="op">-</span> investmentA, <span class="dv">2</span>)</span>
+<span id="cb26-22"><a href="#cb26-22" aria-hidden="true" tabindex="-1"></a>  npvB <span class="op">=</span> <span class="bu">round</span>(pvB <span class="op">-</span> investmentB, <span class="dv">2</span>)</span>
+<span id="cb26-23"><a href="#cb26-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-24"><a href="#cb26-24" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Project A : Net present value ............. ${:,}"</span>.<span class="bu">format</span>(npvA))</span>
+<span id="cb26-25"><a href="#cb26-25" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Project B : Net present value ............. ${:,}"</span>.<span class="bu">format</span>(npvB))</span>
+<span id="cb26-26"><a href="#cb26-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-27"><a href="#cb26-27" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> npvA <span class="op">&gt;</span> npvB:</span>
+<span id="cb26-28"><a href="#cb26-28" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">" Project A has higher NPV"</span>, <span class="st">'</span><span class="ch">\U0001f7e1</span><span class="st">'</span>)</span>
+<span id="cb26-29"><a href="#cb26-29" aria-hidden="true" tabindex="-1"></a>  <span class="cf">else</span>:</span>
+<span id="cb26-30"><a href="#cb26-30" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">" Project B has higher NPV"</span>, <span class="st">'</span><span class="ch">\U0001f7e1</span><span class="st">'</span>)</span>
+<span id="cb26-31"><a href="#cb26-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-32"><a href="#cb26-32" aria-hidden="true" tabindex="-1"></a>  <span class="co"># -- profitability index </span></span>
+<span id="cb26-33"><a href="#cb26-33" aria-hidden="true" tabindex="-1"></a>  pindexA <span class="op">=</span> <span class="bu">round</span>(pvA <span class="op">/</span> investmentA, <span class="dv">2</span>)</span>
+<span id="cb26-34"><a href="#cb26-34" aria-hidden="true" tabindex="-1"></a>  pindexB <span class="op">=</span> <span class="bu">round</span>(pvB <span class="op">/</span> investmentB, <span class="dv">2</span>)</span>
+<span id="cb26-35"><a href="#cb26-35" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb26-36"><a href="#cb26-36" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">Project A : Profitability Index ............. </span><span class="sc">{:.2f}</span><span class="st">"</span>.<span class="bu">format</span>(pindexA))</span>
+<span id="cb26-37"><a href="#cb26-37" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Project B : Profitability Index ............. </span><span class="sc">{:.2f}</span><span class="st">"</span>.<span class="bu">format</span>(pindexB))</span>
+<span id="cb26-38"><a href="#cb26-38" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb26-39"><a href="#cb26-39" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> pindexA <span class="op">&gt;</span> pindexB:</span>
+<span id="cb26-40"><a href="#cb26-40" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">" Project A has higher profitability"</span>, <span class="st">'</span><span class="ch">\U0001f7e2</span><span class="st">'</span>)</span>
+<span id="cb26-41"><a href="#cb26-41" aria-hidden="true" tabindex="-1"></a>  <span class="cf">else</span>:</span>
+<span id="cb26-42"><a href="#cb26-42" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">" Project B has higher profitability"</span>, <span class="st">'</span><span class="ch">\U0001f7e2</span><span class="st">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <p>Project A has annuity of 5.65022 and Project B has annuity of 0.32197 at the 12% discount rate for 10 periods for both.</p>
-<div class="cell" data-execution_count="19">
+<div class="cell" data-execution_count="18">
 <details>
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>a12 <span class="op">=</span> <span class="fl">5.65022</span></span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>b12 <span class="op">=</span> <span class="fl">0.32197</span></span>
-<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>exclusive_projects(a12, b12, projects)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>a12 <span class="op">=</span> <span class="fl">5.65022</span></span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>b12 <span class="op">=</span> <span class="fl">0.32197</span></span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>exclusive_projects(a12, b12, projects)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>Project A : present value of net cash flows ............. $58,112.05
@@ -730,48 +754,48 @@ Project B : Profitability Index ............. 1.23
 else:
   Reject project</code></pre>
 <p>A company is pondering buying a new machine</p>
-<div class="cell" data-execution_count="20">
+<div class="cell" data-execution_count="19">
 <details>
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>machine_investment <span class="op">=</span> {</span>
-<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">'investment_cost'</span>: <span class="fl">900e3</span>,</span>
-<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">'estimated_life'</span> : <span class="dv">6</span>,</span>
-<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">'estimated_salvage'</span> : <span class="dv">0</span>,</span>
-<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">'cash_inflow_customers'</span> : <span class="fl">400e3</span>,</span>
-<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>  <span class="st">'cash_outflow_operations'</span> : <span class="fl">190e3</span>,</span>
-<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>  <span class="st">'rate_of_return'</span>: <span class="fl">0.09</span> <span class="co"># REQUIRED /discount rate</span></span>
-<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>machine_investment <span class="op">=</span> {</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">'investment_cost'</span>: <span class="fl">900e3</span>,</span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">'estimated_life'</span> : <span class="dv">6</span>,</span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">'estimated_salvage'</span> : <span class="dv">0</span>,</span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">'cash_inflow_customers'</span> : <span class="fl">400e3</span>,</span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>  <span class="st">'cash_outflow_operations'</span> : <span class="fl">190e3</span>,</span>
+<span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a>  <span class="st">'rate_of_return'</span>: <span class="fl">0.09</span> <span class="co"># REQUIRED /discount rate</span></span>
+<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <p>Internal rate of return function (changed <code>present_value()</code> function)</p>
-<div class="cell" data-execution_count="21">
+<div class="cell" data-execution_count="20">
 <details>
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> irr( annuity: <span class="bu">float</span>, <span class="bu">dict</span> ):</span>
-<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>  investment <span class="op">=</span> <span class="bu">dict</span>[<span class="st">'investment_cost'</span>]</span>
-<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>  estimated_life <span class="op">=</span> <span class="bu">dict</span>[<span class="st">'estimated_life'</span>]</span>
-<span id="cb33-4"><a href="#cb33-4" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb33-5"><a href="#cb33-5" aria-hidden="true" tabindex="-1"></a>  cash_inflow_customers <span class="op">=</span> <span class="bu">dict</span>[<span class="st">'cash_inflow_customers'</span>]</span>
-<span id="cb33-6"><a href="#cb33-6" aria-hidden="true" tabindex="-1"></a>  cash_outflow_operations <span class="op">=</span> <span class="bu">dict</span>[<span class="st">'cash_outflow_operations'</span>]</span>
-<span id="cb33-7"><a href="#cb33-7" aria-hidden="true" tabindex="-1"></a>  annual_cashflow <span class="op">=</span> cash_inflow_customers <span class="op">-</span> cash_outflow_operations</span>
-<span id="cb33-8"><a href="#cb33-8" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Net annual cash flow ....................... ${:,}"</span>.<span class="bu">format</span>(annual_cashflow))</span>
-<span id="cb33-9"><a href="#cb33-9" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb33-10"><a href="#cb33-10" aria-hidden="true" tabindex="-1"></a>  cpt <span class="op">=</span> investment <span class="op">/</span> annual_cashflow</span>
-<span id="cb33-11"><a href="#cb33-11" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Internal Rate of Return factor (IRR) ....... </span><span class="sc">{:.2f}</span><span class="st"> years "</span>.<span class="bu">format</span>(cpt  ))</span>
-<span id="cb33-12"><a href="#cb33-12" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb33-13"><a href="#cb33-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb33-14"><a href="#cb33-14" aria-hidden="true" tabindex="-1"></a>  pv <span class="op">=</span> annual_cashflow <span class="op">*</span> annuity <span class="co">#annuity_value</span></span>
-<span id="cb33-15"><a href="#cb33-15" aria-hidden="true" tabindex="-1"></a>  npv <span class="op">=</span> <span class="bu">round</span>(pv <span class="op">-</span> investment,<span class="dv">2</span>)</span>
-<span id="cb33-16"><a href="#cb33-16" aria-hidden="true" tabindex="-1"></a>  <span class="co"># print("Net present value .......................... ${:,}".format(npv))</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> irr( annuity: <span class="bu">float</span>, <span class="bu">dict</span> ):</span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>  investment <span class="op">=</span> <span class="bu">dict</span>[<span class="st">'investment_cost'</span>]</span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>  estimated_life <span class="op">=</span> <span class="bu">dict</span>[<span class="st">'estimated_life'</span>]</span>
+<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>  cash_inflow_customers <span class="op">=</span> <span class="bu">dict</span>[<span class="st">'cash_inflow_customers'</span>]</span>
+<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a>  cash_outflow_operations <span class="op">=</span> <span class="bu">dict</span>[<span class="st">'cash_outflow_operations'</span>]</span>
+<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a>  annual_cashflow <span class="op">=</span> cash_inflow_customers <span class="op">-</span> cash_outflow_operations</span>
+<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Net annual cash flow ....................... ${:,}"</span>.<span class="bu">format</span>(annual_cashflow))</span>
+<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a>  cpt <span class="op">=</span> investment <span class="op">/</span> annual_cashflow</span>
+<span id="cb31-11"><a href="#cb31-11" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Internal Rate of Return factor (IRR) ....... </span><span class="sc">{:.2f}</span><span class="st"> years "</span>.<span class="bu">format</span>(cpt  ))</span>
+<span id="cb31-12"><a href="#cb31-12" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb31-13"><a href="#cb31-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb31-14"><a href="#cb31-14" aria-hidden="true" tabindex="-1"></a>  pv <span class="op">=</span> annual_cashflow <span class="op">*</span> annuity <span class="co">#annuity_value</span></span>
+<span id="cb31-15"><a href="#cb31-15" aria-hidden="true" tabindex="-1"></a>  npv <span class="op">=</span> <span class="bu">round</span>(pv <span class="op">-</span> investment,<span class="dv">2</span>)</span>
+<span id="cb31-16"><a href="#cb31-16" aria-hidden="true" tabindex="-1"></a>  <span class="co"># print("Net present value .......................... ${:,}".format(npv))</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <p>Call the internal rate of return function with the annuity value, using the information of 6 years (<code>n</code> periods) and 9% for rate of return.</p>
-<div class="cell" data-execution_count="22">
+<div class="cell" data-execution_count="21">
 <details>
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Table : 6 periods, 9%</span></span>
-<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>annuity <span class="op">=</span> <span class="fl">4.48592</span> </span>
-<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>irr( annuity, machine_investment )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Table : 6 periods, 9%</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>annuity <span class="op">=</span> <span class="fl">4.48592</span> </span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>irr( annuity, machine_investment )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>Net annual cash flow ....................... $210,000.0
@@ -779,12 +803,12 @@ Internal Rate of Return factor (IRR) ....... 4.29 years </code></pre>
 </div>
 </div>
 <p>Now that we have the IRR value, we look up in a table for present value of ordinary annuity to find closest value. In this case, there are two numbers at the 10% and 11% place that when averaged equal the IRR. So the IRR is &gt; RRR (the 9%), the accept the project.</p>
-<div class="cell" data-execution_count="23">
+<div class="cell" data-execution_count="22">
 <details>
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co"># table values for 10% and 11%</span></span>
-<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>nums <span class="op">=</span> [<span class="fl">4.35526</span>, <span class="fl">4.23054</span>]</span>
-<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"IRR factors for 10% and 11% (averaged) = "</span>,<span class="bu">sum</span>(nums)<span class="op">/</span><span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># table values for 10% and 11%</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>nums <span class="op">=</span> [<span class="fl">4.35526</span>, <span class="fl">4.23054</span>]</span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"IRR factors for 10% and 11% (averaged) = "</span>,<span class="bu">sum</span>(nums)<span class="op">/</span><span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>IRR factors for 10% and 11% (averaged) =  4.2929</code></pre>
@@ -793,55 +817,55 @@ Internal Rate of Return factor (IRR) ....... 4.29 years </code></pre>
 </section>
 <section id="annual-rate-of-return" class="level2" data-number="13.9">
 <h2 data-number="13.9" class="anchored" data-anchor-id="annual-rate-of-return"><span class="header-section-number">13.9</span> Annual Rate of Return</h2>
-<p><code>Annual rate of return</code> method is based on directly on accrual accounting data <em>rather</em> than on cash flows. This annual rate of return indicates the profitability of a cpaital expenditure.</p>
+<p><code>Annual rate of return</code> method is based on directly on accrual accounting data <em>rather</em> than on cash flows. This annual rate of return indicates the profitability of a capital expenditure.</p>
 <ul>
 <li>annual rate of return (<code>ARR</code>) = <code>expected net income / annual average investment</code></li>
 </ul>
 <p>Company investment data</p>
-<div class="cell" data-execution_count="24">
+<div class="cell" data-execution_count="23">
 <details>
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>machine_investment2 <span class="op">=</span> {</span>
-<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">'sales'</span>: <span class="fl">200e3</span>,</span>
-<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">'investment_cost'</span>: <span class="fl">130e3</span>,</span>
-<span id="cb38-4"><a href="#cb38-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">'estimated_life'</span> : <span class="dv">5</span>,</span>
-<span id="cb38-5"><a href="#cb38-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">'estimated_salvage'</span> : <span class="dv">0</span>,</span>
-<span id="cb38-6"><a href="#cb38-6" aria-hidden="true" tabindex="-1"></a>  <span class="st">'manufacturing_costs'</span>: <span class="fl">132e3</span>,</span>
-<span id="cb38-7"><a href="#cb38-7" aria-hidden="true" tabindex="-1"></a>  <span class="st">'selling_admin'</span>: <span class="fl">22e3</span>,</span>
-<span id="cb38-8"><a href="#cb38-8" aria-hidden="true" tabindex="-1"></a>  <span class="st">'income_tax_expense'</span>: <span class="fl">7e3</span></span>
-<span id="cb38-9"><a href="#cb38-9" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a>machine_investment2 <span class="op">=</span> {</span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">'sales'</span>: <span class="fl">200e3</span>,</span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">'investment_cost'</span>: <span class="fl">130e3</span>,</span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">'estimated_life'</span> : <span class="dv">5</span>,</span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">'estimated_salvage'</span> : <span class="dv">0</span>,</span>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a>  <span class="st">'manufacturing_costs'</span>: <span class="fl">132e3</span>,</span>
+<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a>  <span class="st">'selling_admin'</span>: <span class="fl">22e3</span>,</span>
+<span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a>  <span class="st">'income_tax_expense'</span>: <span class="fl">7e3</span></span>
+<span id="cb36-9"><a href="#cb36-9" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <p>function for annual rate of return</p>
+<div class="cell" data-execution_count="24">
+<details>
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> annual_return( <span class="bu">dict</span> ):</span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>  sales <span class="op">=</span> <span class="bu">dict</span>[<span class="st">'sales'</span>]</span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>  manuf_costs <span class="op">=</span> <span class="bu">dict</span>[<span class="st">'manufacturing_costs'</span>]</span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>  depreciation <span class="op">=</span> <span class="bu">dict</span>[<span class="st">'investment_cost'</span>] <span class="op">/</span> <span class="bu">dict</span>[<span class="st">'estimated_life'</span>]</span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a>  sell_admin<span class="op">=</span> <span class="bu">dict</span>[<span class="st">'selling_admin'</span>]</span>
+<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a>  tax_exp <span class="op">=</span> <span class="bu">dict</span>[<span class="st">'income_tax_expense'</span>]</span>
+<span id="cb37-7"><a href="#cb37-7" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb37-8"><a href="#cb37-8" aria-hidden="true" tabindex="-1"></a>  cost_expenses <span class="op">=</span> manuf_costs <span class="op">+</span> depreciation <span class="op">+</span> sell_admin </span>
+<span id="cb37-9"><a href="#cb37-9" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Costs &amp; Expenses ........................ ${:,}"</span>.<span class="bu">format</span>(cost_expenses))</span>
+<span id="cb37-10"><a href="#cb37-10" aria-hidden="true" tabindex="-1"></a>  income_b4_tax <span class="op">=</span> sales <span class="op">-</span> cost_expenses</span>
+<span id="cb37-11"><a href="#cb37-11" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Income before income taxes .............. ${:,}"</span>.<span class="bu">format</span>(income_b4_tax))</span>
+<span id="cb37-12"><a href="#cb37-12" aria-hidden="true" tabindex="-1"></a>  net_income <span class="op">=</span> income_b4_tax <span class="op">-</span> tax_exp</span>
+<span id="cb37-13"><a href="#cb37-13" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Net income .............................. ${:,}"</span>.<span class="bu">format</span>(net_income))</span>
+<span id="cb37-14"><a href="#cb37-14" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb37-15"><a href="#cb37-15" aria-hidden="true" tabindex="-1"></a>  avg_investment <span class="op">=</span> (<span class="bu">dict</span>[<span class="st">'investment_cost'</span>] <span class="op">+</span> <span class="bu">dict</span>[<span class="st">'estimated_salvage'</span>])<span class="op">/</span><span class="dv">2</span></span>
+<span id="cb37-16"><a href="#cb37-16" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Average investment ...................... ${:,}"</span>.<span class="bu">format</span>(avg_investment))</span>
+<span id="cb37-17"><a href="#cb37-17" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb37-18"><a href="#cb37-18" aria-hidden="true" tabindex="-1"></a>  <span class="co"># expected annual rate of return on investment in new equipment/ machine</span></span>
+<span id="cb37-19"><a href="#cb37-19" aria-hidden="true" tabindex="-1"></a>  exp_return <span class="op">=</span> net_income <span class="op">/</span> avg_investment</span>
+<span id="cb37-20"><a href="#cb37-20" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Expected annual rate of return ...................... {:,}%"</span>.<span class="bu">format</span>(exp_return <span class="op">*</span><span class="dv">100</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
 <div class="cell" data-execution_count="25">
 <details>
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> annual_return( <span class="bu">dict</span> ):</span>
-<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>  sales <span class="op">=</span> <span class="bu">dict</span>[<span class="st">'sales'</span>]</span>
-<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>  manuf_costs <span class="op">=</span> <span class="bu">dict</span>[<span class="st">'manufacturing_costs'</span>]</span>
-<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>  depreciation <span class="op">=</span> <span class="bu">dict</span>[<span class="st">'investment_cost'</span>] <span class="op">/</span> <span class="bu">dict</span>[<span class="st">'estimated_life'</span>]</span>
-<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a>  sell_admin<span class="op">=</span> <span class="bu">dict</span>[<span class="st">'selling_admin'</span>]</span>
-<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a>  tax_exp <span class="op">=</span> <span class="bu">dict</span>[<span class="st">'income_tax_expense'</span>]</span>
-<span id="cb39-7"><a href="#cb39-7" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb39-8"><a href="#cb39-8" aria-hidden="true" tabindex="-1"></a>  cost_expenses <span class="op">=</span> manuf_costs <span class="op">+</span> depreciation <span class="op">+</span> sell_admin </span>
-<span id="cb39-9"><a href="#cb39-9" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Costs &amp; Expenses ........................ ${:,}"</span>.<span class="bu">format</span>(cost_expenses))</span>
-<span id="cb39-10"><a href="#cb39-10" aria-hidden="true" tabindex="-1"></a>  income_b4_tax <span class="op">=</span> sales <span class="op">-</span> cost_expenses</span>
-<span id="cb39-11"><a href="#cb39-11" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Income before income taxes .............. ${:,}"</span>.<span class="bu">format</span>(income_b4_tax))</span>
-<span id="cb39-12"><a href="#cb39-12" aria-hidden="true" tabindex="-1"></a>  net_income <span class="op">=</span> income_b4_tax <span class="op">-</span> tax_exp</span>
-<span id="cb39-13"><a href="#cb39-13" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Net income .............................. ${:,}"</span>.<span class="bu">format</span>(net_income))</span>
-<span id="cb39-14"><a href="#cb39-14" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb39-15"><a href="#cb39-15" aria-hidden="true" tabindex="-1"></a>  avg_investment <span class="op">=</span> (<span class="bu">dict</span>[<span class="st">'investment_cost'</span>] <span class="op">+</span> <span class="bu">dict</span>[<span class="st">'estimated_salvage'</span>])<span class="op">/</span><span class="dv">2</span></span>
-<span id="cb39-16"><a href="#cb39-16" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Average investment ...................... ${:,}"</span>.<span class="bu">format</span>(avg_investment))</span>
-<span id="cb39-17"><a href="#cb39-17" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb39-18"><a href="#cb39-18" aria-hidden="true" tabindex="-1"></a>  <span class="co"># expected annual rate of return on investment in new equipment/ machine</span></span>
-<span id="cb39-19"><a href="#cb39-19" aria-hidden="true" tabindex="-1"></a>  exp_return <span class="op">=</span> net_income <span class="op">/</span> avg_investment</span>
-<span id="cb39-20"><a href="#cb39-20" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Expected annual rate of return ...................... {:,}%"</span>.<span class="bu">format</span>(exp_return <span class="op">*</span><span class="dv">100</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-</div>
-<div class="cell" data-execution_count="26">
-<details>
-<summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>annual_return( machine_investment2 )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>annual_return( machine_investment2 )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>Costs &amp; Expenses ........................ $180,000.0
@@ -853,56 +877,56 @@ Expected annual rate of return ...................... 20.0%</code></pre>
 </div>
 <section id="example-2" class="level3" data-number="13.9.1">
 <h3 data-number="13.9.1" class="anchored" data-anchor-id="example-2"><span class="header-section-number">13.9.1</span> Example</h3>
-<div class="cell" data-execution_count="27">
+<div class="cell" data-execution_count="26">
 <details>
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>machine_investment <span class="op">=</span> {</span>
-<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">'investment_cost'</span>: <span class="fl">900e3</span>,</span>
-<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">'estimated_life'</span> : <span class="dv">6</span>,</span>
-<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">'estimated_salvage'</span> : <span class="dv">0</span>,</span>
-<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">'cash_inflow_customers'</span> : <span class="fl">400e3</span>,</span>
-<span id="cb42-6"><a href="#cb42-6" aria-hidden="true" tabindex="-1"></a>  <span class="st">'cash_outflow_operations'</span> : <span class="fl">190e3</span>,</span>
-<span id="cb42-7"><a href="#cb42-7" aria-hidden="true" tabindex="-1"></a>  <span class="st">'rate_of_return'</span>: <span class="fl">0.09</span> <span class="co"># REQUIRED /discount rate</span></span>
-<span id="cb42-8"><a href="#cb42-8" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>machine_investment <span class="op">=</span> {</span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>  <span class="st">'investment_cost'</span>: <span class="fl">900e3</span>,</span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>  <span class="st">'estimated_life'</span> : <span class="dv">6</span>,</span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>  <span class="st">'estimated_salvage'</span> : <span class="dv">0</span>,</span>
+<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a>  <span class="st">'cash_inflow_customers'</span> : <span class="fl">400e3</span>,</span>
+<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a>  <span class="st">'cash_outflow_operations'</span> : <span class="fl">190e3</span>,</span>
+<span id="cb40-7"><a href="#cb40-7" aria-hidden="true" tabindex="-1"></a>  <span class="st">'rate_of_return'</span>: <span class="fl">0.09</span> <span class="co"># REQUIRED /discount rate</span></span>
+<span id="cb40-8"><a href="#cb40-8" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 </div>
 <p>A function for annual rate of return</p>
+<div class="cell" data-execution_count="27">
+<details>
+<summary>Show the code</summary>
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> annual_return2( <span class="bu">dict</span> ):</span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>  revenue <span class="op">=</span> <span class="bu">dict</span>[<span class="st">'cash_inflow_customers'</span>]</span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a>  expenses <span class="op">=</span> <span class="bu">dict</span>[<span class="st">'cash_outflow_operations'</span>]</span>
+<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a>  depreciation <span class="op">=</span> <span class="bu">dict</span>[<span class="st">'investment_cost'</span>] <span class="op">/</span><span class="bu">dict</span>[<span class="st">'estimated_life'</span>]</span>
+<span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a>  cost_expenses <span class="op">=</span> expenses <span class="op">+</span> depreciation </span>
+<span id="cb41-7"><a href="#cb41-7" aria-hidden="true" tabindex="-1"></a>  net_income <span class="op">=</span> revenue <span class="op">-</span> cost_expenses</span>
+<span id="cb41-8"><a href="#cb41-8" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb41-9"><a href="#cb41-9" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Revenue ................................. ${:,}"</span>.<span class="bu">format</span>(revenue))</span>
+<span id="cb41-10"><a href="#cb41-10" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Costs &amp; Expenses ........................ ${:,}"</span>.<span class="bu">format</span>(cost_expenses))</span>
+<span id="cb41-11"><a href="#cb41-11" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Annual net income ....................... ${:,}"</span>.<span class="bu">format</span>(net_income))</span>
+<span id="cb41-12"><a href="#cb41-12" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb41-13"><a href="#cb41-13" aria-hidden="true" tabindex="-1"></a>  avg_investment <span class="op">=</span> (<span class="bu">dict</span>[<span class="st">'investment_cost'</span>] <span class="op">+</span> <span class="bu">dict</span>[<span class="st">'estimated_salvage'</span>])<span class="op">/</span><span class="dv">2</span></span>
+<span id="cb41-14"><a href="#cb41-14" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Average investment ...................... ${:,}"</span>.<span class="bu">format</span>(avg_investment))</span>
+<span id="cb41-15"><a href="#cb41-15" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb41-16"><a href="#cb41-16" aria-hidden="true" tabindex="-1"></a>  <span class="co"># expected annual rate of return on investment in new equipment/ machine</span></span>
+<span id="cb41-17"><a href="#cb41-17" aria-hidden="true" tabindex="-1"></a>  exp_return <span class="op">=</span> <span class="bu">round</span>(net_income <span class="op">/</span> avg_investment, <span class="dv">2</span>)<span class="op">*</span><span class="dv">100</span></span>
+<span id="cb41-18"><a href="#cb41-18" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Expected annual rate of return (ARR) ...................... {:,}%"</span>.<span class="bu">format</span>(exp_return ))</span>
+<span id="cb41-19"><a href="#cb41-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-20"><a href="#cb41-20" aria-hidden="true" tabindex="-1"></a>  RRR <span class="op">=</span> <span class="bu">dict</span>[<span class="st">'rate_of_return'</span>] <span class="op">*</span><span class="dv">100</span></span>
+<span id="cb41-21"><a href="#cb41-21" aria-hidden="true" tabindex="-1"></a>  <span class="co"># print(RRR)</span></span>
+<span id="cb41-22"><a href="#cb41-22" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb41-23"><a href="#cb41-23" aria-hidden="true" tabindex="-1"></a>  <span class="co"># if ARR &gt; RRR</span></span>
+<span id="cb41-24"><a href="#cb41-24" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> exp_return <span class="op">&gt;</span> RRR:</span>
+<span id="cb41-25"><a href="#cb41-25" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">" project should go ahead (ARR &gt; RRR) "</span>, <span class="st">'</span><span class="ch">\U0001f7e2</span><span class="st">'</span>)</span>
+<span id="cb41-26"><a href="#cb41-26" aria-hidden="true" tabindex="-1"></a>  <span class="cf">else</span>:</span>
+<span id="cb41-27"><a href="#cb41-27" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">" project should not go ahead (ARR &lt; RRR) "</span>, <span class="st">'</span><span class="ch">\U0001f7e0</span><span class="st">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+</div>
 <div class="cell" data-execution_count="28">
 <details>
 <summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> annual_return2( <span class="bu">dict</span> ):</span>
-<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>  revenue <span class="op">=</span> <span class="bu">dict</span>[<span class="st">'cash_inflow_customers'</span>]</span>
-<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a>  expenses <span class="op">=</span> <span class="bu">dict</span>[<span class="st">'cash_outflow_operations'</span>]</span>
-<span id="cb43-5"><a href="#cb43-5" aria-hidden="true" tabindex="-1"></a>  depreciation <span class="op">=</span> <span class="bu">dict</span>[<span class="st">'investment_cost'</span>] <span class="op">/</span><span class="bu">dict</span>[<span class="st">'estimated_life'</span>]</span>
-<span id="cb43-6"><a href="#cb43-6" aria-hidden="true" tabindex="-1"></a>  cost_expenses <span class="op">=</span> expenses <span class="op">+</span> depreciation </span>
-<span id="cb43-7"><a href="#cb43-7" aria-hidden="true" tabindex="-1"></a>  net_income <span class="op">=</span> revenue <span class="op">-</span> cost_expenses</span>
-<span id="cb43-8"><a href="#cb43-8" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb43-9"><a href="#cb43-9" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Revenue ................................. ${:,}"</span>.<span class="bu">format</span>(revenue))</span>
-<span id="cb43-10"><a href="#cb43-10" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Costs &amp; Expenses ........................ ${:,}"</span>.<span class="bu">format</span>(cost_expenses))</span>
-<span id="cb43-11"><a href="#cb43-11" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Annual net income ....................... ${:,}"</span>.<span class="bu">format</span>(net_income))</span>
-<span id="cb43-12"><a href="#cb43-12" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb43-13"><a href="#cb43-13" aria-hidden="true" tabindex="-1"></a>  avg_investment <span class="op">=</span> (<span class="bu">dict</span>[<span class="st">'investment_cost'</span>] <span class="op">+</span> <span class="bu">dict</span>[<span class="st">'estimated_salvage'</span>])<span class="op">/</span><span class="dv">2</span></span>
-<span id="cb43-14"><a href="#cb43-14" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Average investment ...................... ${:,}"</span>.<span class="bu">format</span>(avg_investment))</span>
-<span id="cb43-15"><a href="#cb43-15" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb43-16"><a href="#cb43-16" aria-hidden="true" tabindex="-1"></a>  <span class="co"># expected annual rate of return on investment in new equipment/ machine</span></span>
-<span id="cb43-17"><a href="#cb43-17" aria-hidden="true" tabindex="-1"></a>  exp_return <span class="op">=</span> <span class="bu">round</span>(net_income <span class="op">/</span> avg_investment, <span class="dv">2</span>)<span class="op">*</span><span class="dv">100</span></span>
-<span id="cb43-18"><a href="#cb43-18" aria-hidden="true" tabindex="-1"></a>  <span class="bu">print</span>(<span class="st">"Expected annual rate of return (ARR) ...................... {:,}%"</span>.<span class="bu">format</span>(exp_return ))</span>
-<span id="cb43-19"><a href="#cb43-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb43-20"><a href="#cb43-20" aria-hidden="true" tabindex="-1"></a>  RRR <span class="op">=</span> <span class="bu">dict</span>[<span class="st">'rate_of_return'</span>] <span class="op">*</span><span class="dv">100</span></span>
-<span id="cb43-21"><a href="#cb43-21" aria-hidden="true" tabindex="-1"></a>  <span class="co"># print(RRR)</span></span>
-<span id="cb43-22"><a href="#cb43-22" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb43-23"><a href="#cb43-23" aria-hidden="true" tabindex="-1"></a>  <span class="co"># if ARR &gt; RRR</span></span>
-<span id="cb43-24"><a href="#cb43-24" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> exp_return <span class="op">&gt;</span> RRR:</span>
-<span id="cb43-25"><a href="#cb43-25" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">" project should go ahead (ARR &gt; RRR) "</span>, <span class="st">'</span><span class="ch">\U0001f7e2</span><span class="st">'</span>)</span>
-<span id="cb43-26"><a href="#cb43-26" aria-hidden="true" tabindex="-1"></a>  <span class="cf">else</span>:</span>
-<span id="cb43-27"><a href="#cb43-27" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">" project should not go ahead (ARR &lt; RRR) "</span>, <span class="st">'</span><span class="ch">\U0001f7e0</span><span class="st">'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
-</div>
-<div class="cell" data-execution_count="29">
-<details>
-<summary>Show the code</summary>
-<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>annual_return2( machine_investment )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>annual_return2( machine_investment )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div class="cell-output cell-output-stdout">
 <pre><code>Revenue ................................. $400,000.0
