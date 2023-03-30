@@ -3,7 +3,7 @@ project:
   output-dir: docs
 
 book:
-  title: "AccountingPy"
+  title: "FinancialAccountingPy"
   author: "Zane Dax (She/They)"
   date: "12/19/2022"
   chapters:
